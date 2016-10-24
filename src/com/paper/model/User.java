@@ -3,6 +3,7 @@ package com.paper.model;
 public class User {
 	private String username;
 	private String password;
+	private String nickname;
 	/**
 	 * @return the username
 	 */
@@ -26,5 +27,17 @@ public class User {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	/**
+	 * @return the nickname
+	 */
+	public String getNickname() {
+		return nickname;
+	}
+	/**
+	 * @param nickname the nickname to set
+	 */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }
