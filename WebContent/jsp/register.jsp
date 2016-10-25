@@ -3,12 +3,12 @@
 <html>
   <head>
     <meta http-equiv="Content-Type"  charset="utf-8">
-    <title>登录</title>
-    <link href="./login_lib/login.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <title>用户注册</title>
+    <link href="./register_lib/login.css" rel="stylesheet" type="text/css" charset="utf-8">
     
-    <script type="text/javascript" src="./login_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
     
-    <script type="text/javascript" src="./login_lib/login.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./register_lib/login.js" charset="utf-8"></script>
     
     <script type="text/javascript">
       var markme_msg = "under construction";
@@ -18,7 +18,7 @@
   <body style="padding-top : 30px;">
     <div class="Head">
       <div class="logo">
-        <img src="./login_lib/logo.gif">
+        <img src="./register_lib/logo.gif">
       </div>
       <div class="Links">
         <a herf="javascript:bookmarkMe()">收藏本站 </a>|
@@ -34,47 +34,39 @@
           <div class="MainR">
 
             <div class="Header">
-              <div class="title">用户登录</div>              
+              <div class="title">用户注册</div>              
             </div>
             <br>
 
             <div id="logArea">
               <div class="inptr'">
                 
-                <input type="text" name="userEmail" class="inpUser inped" placeholder="email" ></input>
+                <input type="text" name="userEmail" class="inpUser inped" placeholder="email"></input>
                 <br><br>
 
                 <input type="password" name="password" class="inpPW" value="" autocomplete="off" placeholder="password"></input>
                 <br><br>
+
+                 <input type="password" name="password" class="inpPW" value="" autocomplete="off" placeholder="Confirm password"></input>
               </div>
 
-              <div class="inplist">
-                  <label for="autoLogin">
-                    <input type="checkbox">
-                    自动登录
-                  </label>
-              </div>
-              <br><br>
+              <br><br><br><br>
 
               <div class="inpB">
                 <div>
                     <button name="action:login" type="submit" class="Button">
-                      登录
+                      注册
                   </button>
                 </div>
               </div>
-              
-              <br><br><br><br><br>
-
+              <br>
               <div class="1Links">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">忘记密码? </a>|
-                <a href="./register.jsp">免费注册 </a>|
-                <a href="#">意见反馈 </a>
-                <a herf="#"></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                已有账号，
+                <a href="./login.jsp"><u>直接登录</u></a>
               </div>
 
           </div>
