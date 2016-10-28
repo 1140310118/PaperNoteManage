@@ -16,4 +16,19 @@
             <result name="registererror">/register.jsp</result>
         </action>
     </package>
+    <package name="uploadfile" extends="struts-default">
+		<action name="uploadFile" class="updownloadfile.upaction">
+			<!-- name="success" -->
+			<result name="success">/uploadfile.jsp</result>
+			<result name="input">/uploadfile.jsp</result>
+		</action>
+		<action name="download_*" class="updownloadfile.downaction">
+			<param name="filename">{1}</param>
+			<result name="input">/download.jsp</result>
+			<result name="success" type="stream">
+				<param name="inputName">targetInputStream</param>
+				<param name="contentDispsition"> filename="{1}"</param>
+			</result>
+		</action>
+	</package>
 </struts>
