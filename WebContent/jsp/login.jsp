@@ -39,7 +39,7 @@
             <br>
 
             <div id="logArea">
-              <div class="inptr'">
+              <div class="inptr">
                 
                 <input type="text" name="userEmail" class="inpUser inped" placeholder="email" ></input>
                 <br><br>
@@ -48,6 +48,8 @@
                 <br><br>
               </div>
 
+
+              <br><br><br><br>
               <div class="inplist">
                   <label for="autoLogin">
                     <input type="checkbox">
