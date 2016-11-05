@@ -10,14 +10,26 @@
 	<link rel="stylesheet" href="./read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
 	<link rel="stylesheet" href="./read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
 	<link rel="Shortcut Icon" href="#">
+
+	<!-- Iconos -->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./read_and_manage_lib/css/style.css" media="screen" type="text/css" />
+
+    <!--文件列表-->
+    <link href="./read_and_manage_lib/css/file_list.css" rel="stylesheet" type="text/css" media="screen" />	
+    <link href="./read_and_manage_lib/css/simple.css" rel="stylesheet" type="text/css" media="screen"/>	
+    <link href="./read_and_manage_lib/css/table.css" rel="stylesheet" type="text/css" media="screen"/>	
+
+	<script src="./read_and_manage_lib/js/simple.js"></script>
+
 </head>
 
 
 <body>  
 
-<!--导航-->  
 <div id="container">  
 <div id="hw1_masthead">
+<!--导航--> 
     <div id="hw1_masthead_wrap" class="hw1_skinny">
       
         <div id="hw1_global_nav" class="lg-container">
@@ -37,13 +49,148 @@
             </nav>
         </div>
     </div>
+<!---->
 
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
+
+
+<!--左侧菜单-->
+	<ul id="accordion" class="accordion">
+	<li>
+		<div class="link"><i class="fa fa-paint-brush"></i>新建论文<i class="fa fa-chevron-down"></i></div>
+		<ul class="submenu">
+			<li><a href="#">从本地上传</a></li>
+			<li><a href="#">导入URL链接</a></li>
+		</ul>
+	</li>
+	<li>
+		<div class="link"><i class="fa fa-mobile"></i>所有论文</div>
+	</li>
+	<li>
+		<div class="link"><i class="fa fa-code"></i>文件分类树<i class="fa fa-chevron-down"></i></div>
+		<ul class="submenu">
+			<li><a href="#">查看</a></li>
+			<li><a href="#">编辑</a></li>
+		</ul>
+	</li>
+	<li><div class="link"><i class="fa fa-globe"></i>文件操作记录<i class="fa fa-chevron-down"></i></div>
+		<ul class="submenu">
+			<li><a href="#">查看我的Log</a></li>
+			<li><a href="#">导出我的Log</a></li>
+			<li><a href="#">分享我的Log</a></li>
+		</ul>
+	</li>
+
+	<li>
+		<div class="link"><i class="fa fa-mobile"></i>回收站</div>
+	</li>
+	<li>
+		<div class="link"><i class="fa fa-mobile"></i>阅读时间线</div>
+	</li>
+	</ul>
+	<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+	<script src="./read_and_manage_lib/js/index.js"></script>
+<!---->
+
+
+
+<!--遮挡层和弹出窗口-->
+	<script src="./read_and_manage_lib/src/jquery.js"></script>
+	<script>
+	function deTail()
+	{
+	    // if ($(".mask").css("display")=='none')
+	    {
+	    	$(".mask").show();
+	    	$(".centerWindow").show();
+			$('body').css("overflow","hidden");
+	    }
+	}
+	function backNormal()
+	{
+	    	$(".mask").hide();
+	    	$(".centerWindow").hide();
+			$('body').css("overflow","visible");
+	    
+	}
+	</script>
+	<div class="mask"></div>
+	<div class="centerWindow">
+		<table class="bordered">
+		    <tr><th colspan="2">论文详情</th></tr>
+		    <tr>
+		        <td>论文名称</th>
+		        <td>K-partion</td>
+		    </tr>
+		    <tr>
+		        <td>文件名</th>
+		        <td>K-partion.pdf</td>
+		    </tr>
+		    <tr>
+		        <td>分类目录</th>
+		        <td>数据结构/哈希</td>
+		    </tr>
+		    <tr>
+		        <td>论文来源</th>
+		        <td></td>
+		    </tr>
+		    <tr>
+		        <td>添加日期</th>
+		        <td>2016/11/5</td>
+		    </tr>
+		    <tr>
+		        <td>备注</th>
+		        <td>算法设计与分析大作业</td>
+		    </tr>
+		</table>
+		<center>
+			<button onClick="backNormal()">确定</button>
+		</center>
+	</div>
+<!---->
+
+
+
+<!--文件列表-->
+	<br><br><br>
+	<ol class="rounded-list">
+				<!--以下四行是 为了便于展示，在实际过程中，使用s:property-->
+				<li><a href="#">KD树异常检测</a>
+					<div style="float:right;">
+						<a href="#" >修改&nbsp;&nbsp;</a>
+						<a href="#" id="detail" onClick="deTail()">详情&nbsp;&nbsp;</a>
+						<a href="#" onClick="delcfm()">删除&nbsp;&nbsp;</a>
+					</div>
+				</li>	
+				<li><a href="#">感知哈希综述</a>
+					<div style="float:right;">
+						<a href="#" >修改&nbsp;&nbsp;</a>
+						<a href="#" >详情&nbsp;&nbsp;</a>
+						<a href="#" >删除&nbsp;&nbsp;</a>
+					</div>
+				</li>	
+				<li><a href="#">k-partion</a>
+					<div style="float:right;">
+						<a href="#" >修改&nbsp;&nbsp;</a>
+						<a href="#" >详情&nbsp;&nbsp;</a>
+						<a href="#" >删除&nbsp;&nbsp;</a>
+					</div>
+				</li>	
+				<li><a href="#">mixed tabulation</a>
+					<div style="float:right;">
+						<a href="#" >修改&nbsp;&nbsp;</a>
+						<a href="#" >详情&nbsp;&nbsp;</a>
+						<a href="#" >删除&nbsp;&nbsp;</a>
+					</div>
+				</li>						
+	</ol>
+<!---->
+
+
+
 <br><br><br><br><br><br><br><br><br>
 
 <!--底部-->
-<div id="footer" class="winwin-footer" style="top: initial;">
+	<div id="footer" class="winwin-footer" style="top: initial;">
     <div class="container">
     <div class="top">
     <div class="row">
@@ -98,7 +245,13 @@
 	    </div>
 	    </div>
 	</div>
+	</div>
+<!---->
+
+
 </div>
+</div>
+
 
 </body>
 </html>

@@ -36,12 +36,18 @@
         </div>
     </div>
 
+
+
+
 <!--pdf-->
 <center>
  <!--<embed width="800" height="600" src="test.pdf"></embed>-->
  <!--<iframe width="800" height="600" src="test.pdf"></iframe>-->
- <object width="800" height="600" data="test.pdf"></object>>
+ <object width="800" height="600" data="../../file-/zzh19971968@foxmail.com/test/test.pdf"></object>
 </center>
+
+
+
 
 <!--底部-->
 <div id="footer" class="winwin-footer" style="top: initial;">
