@@ -9,3 +9,5 @@
 添加 read.jsp 和  manage.jsp
 ##2016.11.5
 完善 manage.jsp
+##2016.11.6
+验证登陆与注册方法正确性 by ZorenV
