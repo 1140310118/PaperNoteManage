@@ -7,3 +7,5 @@
 添加 login.jsp 和 register.jsp
 ##2016.11.4
 添加 read.jsp 和  manage.jsp
+##2016.11.5
+完善 manage.jsp
