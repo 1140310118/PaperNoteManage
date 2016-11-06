@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0025)http://www.huawei.com/cn/ -->
 <html xmlns="http://www.w3.org/1999/xhtml" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
 <head>
 	<title>
@@ -19,8 +18,10 @@
     <link href="./read_and_manage_lib/css/file_list.css" rel="stylesheet" type="text/css" media="screen" />	
     <link href="./read_and_manage_lib/css/simple.css" rel="stylesheet" type="text/css" media="screen"/>	
     <link href="./read_and_manage_lib/css/table.css" rel="stylesheet" type="text/css" media="screen"/>	
+    <link href="./read_and_manage_lib/css/form.css" rel="stylesheet" type="text/css" media="screen"/> 
 
 	<script src="./read_and_manage_lib/js/simple.js"></script>
+	<script src="./read_and_manage_lib/src/jquery.js"></script>
 
 </head>
 
@@ -58,12 +59,12 @@
 	<li>
 		<div class="link"><i class="fa fa-paint-brush"></i>新建论文<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a href="#">从本地上传</a></li>
-			<li><a href="#">导入URL链接</a></li>
+			<li><a href="#" id="newPaperFromLocal_Show">从本地上传</a></li>
+			<li><a href="#" id="newPaperByURL_Show">导入URL链接</a></li>
 		</ul>
 	</li>
 	<li>
-		<div class="link"><i class="fa fa-mobile"></i>所有论文</div>
+		<div class="link" id="allPaperShow_Show"><i class="fa fa-mobile"></i>所有论文</div>
 	</li>
 	<li>
 		<div class="link"><i class="fa fa-code"></i>文件分类树<i class="fa fa-chevron-down"></i></div>
@@ -89,12 +90,94 @@
 	</ul>
 	<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
 	<script src="./read_and_manage_lib/js/index.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#newPaperFromLocal_Show").click(function(){
+			$("#newPaperFromLocal").show();
+			$("#allPaperShow").hide();
+			$("#newPaperByURL").hide();
+		});
+		
+		$("#allPaperShow_Show").click(function(){
+			$("#newPaperFromLocal").hide();
+			$("#newPaperByURL").hide();
+			$("#allPaperShow").show();
+		});
+		
+		$("#newPaperByURL_Show").click(function(){
+			$("#newPaperByURL").show();
+			$("#allPaperShow").hide();
+			$("#newPaperFromLocal").hide();
+		});
+		
+	});
+	</script>
 <!---->
 
 
 
-<!--遮挡层和弹出窗口-->
-	<script src="./read_and_manage_lib/src/jquery.js"></script>
+<!-- 新建论文  从本地上传-->
+	<div class="form_container" id="newPaperFromLocal" style="display:none;">  
+	<br><br>
+	<form id="paperForm" action="" method="post">
+	    <h3>新建论文</h3>
+	    <h4>从本地上传</h4>
+	    <fieldset>
+	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" required autofocus>
+	    </fieldset>
+	    <fieldset>
+	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" >
+	    </fieldset>
+	    
+	    <fieldset>
+	        <input type="text" id="filename" placeholder="*" readonly="readonly"
+	        style="float: left;width: 270px;">
+	        &nbsp;
+	        <input type="file" id="button" style="outline: 0px;width:70px;" required>
+	        
+
+	    </fieldset>
+
+	    <fieldset>
+	      <textarea placeholder="备注" id="tmp" tabindex="5" ></textarea>
+	    </fieldset>
+	    <fieldset>
+	      <button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending">Submit</button>
+	    </fieldset>
+	</form>
+  </div> 
+<!---->
+
+<!-- 新建论文 导入URL链接-->
+	<div class="form_container" id="newPaperByURL" style="display:none;">  
+	<br><br>
+	<form id="paperForm" action="" method="post">
+	    <h3>新建论文</h3>
+	    <h4>导入URL链接</h4>
+	    <fieldset>
+	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" required autofocus>
+	    </fieldset>
+
+	    <fieldset>
+	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" >
+	    </fieldset>
+	  
+	    <fieldset>
+	        <input type="text" placeholder="*URL" readonly="readonly" required>
+	    </fieldset>
+
+	    <fieldset>
+	      <textarea placeholder="备注" id="tmp" tabindex="5" ></textarea>
+	    </fieldset>
+	    <fieldset>
+	      <button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending">Submit</button>
+	    </fieldset>
+	</form>
+  </div> 
+<!---->
+
+
+<!--遮挡层和弹出窗口 详情 修改-->
 	<script>
 	function deTail()
 	{
@@ -152,36 +235,36 @@
 
 <!--文件列表-->
 	<br><br><br>
-	<ol class="rounded-list">
-				<!--以下四行是 为了便于展示，在实际过程中，使用s:property-->
-				<li><a href="#">KD树异常检测</a>
-					<div style="float:right;">
-						<a href="#" >修改&nbsp;&nbsp;</a>
-						<a href="#" id="detail" onClick="deTail()">详情&nbsp;&nbsp;</a>
-						<a href="#" onClick="delcfm()">删除&nbsp;&nbsp;</a>
-					</div>
-				</li>	
-				<li><a href="#">感知哈希综述</a>
-					<div style="float:right;">
-						<a href="#" >修改&nbsp;&nbsp;</a>
-						<a href="#" >详情&nbsp;&nbsp;</a>
-						<a href="#" >删除&nbsp;&nbsp;</a>
-					</div>
-				</li>	
-				<li><a href="#">k-partion</a>
-					<div style="float:right;">
-						<a href="#" >修改&nbsp;&nbsp;</a>
-						<a href="#" >详情&nbsp;&nbsp;</a>
-						<a href="#" >删除&nbsp;&nbsp;</a>
-					</div>
-				</li>	
-				<li><a href="#">mixed tabulation</a>
-					<div style="float:right;">
-						<a href="#" >修改&nbsp;&nbsp;</a>
-						<a href="#" >详情&nbsp;&nbsp;</a>
-						<a href="#" >删除&nbsp;&nbsp;</a>
-					</div>
-				</li>						
+	<ol class="rounded-list" id="allPaperShow">
+		<!--以下四行是 为了便于展示，在实际过程中，使用s:property-->
+		<li><a href="#">KD树异常检测</a>
+			<div style="float:right;">
+				<a href="#" >修改&nbsp;&nbsp;</a>
+				<a href="#" id="detail" onClick="deTail()">详情&nbsp;&nbsp;</a>
+				<a href="#" onClick="delcfm()">删除&nbsp;&nbsp;</a>
+			</div>
+		</li>	
+		<li><a href="#">感知哈希综述</a>
+			<div style="float:right;">
+				<a href="#" >修改&nbsp;&nbsp;</a>
+				<a href="#" >详情&nbsp;&nbsp;</a>
+				<a href="#" >删除&nbsp;&nbsp;</a>
+			</div>
+		</li>	
+		<li><a href="#">k-partion</a>
+			<div style="float:right;">
+				<a href="#" >修改&nbsp;&nbsp;</a>
+				<a href="#" >详情&nbsp;&nbsp;</a>
+				<a href="#" >删除&nbsp;&nbsp;</a>
+			</div>
+		</li>	
+		<li><a href="#">mixed tabulation</a>
+			<div style="float:right;">
+				<a href="#" >修改&nbsp;&nbsp;</a>
+				<a href="#" >详情&nbsp;&nbsp;</a>
+				<a href="#" >删除&nbsp;&nbsp;</a>
+			</div>
+		</li>						
 	</ol>
 <!---->
 

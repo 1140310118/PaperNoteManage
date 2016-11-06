@@ -1,94 +1,55 @@
 <!DOCTYPE html>
-<!-- saved from url=(0025)http://www.huawei.com/cn/ -->
-<html xmlns="http://www.w3.org/1999/xhtml" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<html>
+
 <head>
-	<title>
-		就叫2333 - 文献阅读管理系统
-	</title>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="./read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
-	<link rel="stylesheet" href="./read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
-	<link rel="Shortcut Icon" href="#">
+  <meta charset="UTF-8">
 
-	<!-- Iconos -->
-	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./read_and_manage_lib/css/style.css" media="screen" type="text/css" />
+  <title>HTML5/CSS3简易联系表单DEMO演示</title>
 
-    <!--文件列表-->
-    <link href="./read_and_manage_lib/css/file_list.css" rel="stylesheet" type="text/css" media="screen" />	
-    <link href="./read_and_manage_lib/css/simple.css" rel="stylesheet" type="text/css" media="screen"/>	
-    <link href="./read_and_manage_lib/css/table.css" rel="stylesheet" type="text/css" media="screen"/>	
-
-	<script src="./read_and_manage_lib/js/simple.js"></script>
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+    <script src="./read_and_manage_lib/src/jquery.js"></script>
+    <link href="./read_and_manage_lib/css/simple.css" rel="stylesheet" type="text/css" media="screen"/> 
 
 </head>
 
+<body>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#button").change(function(){
+            $("#filename").val($("#button").val());
+        });
+    });
+    </script>
+  <div class="container">  
+  <form id="contact" action="" method="post">
+    <h3>新建论文</h3>
+    <h4>从本地上传</h4>
+    <fieldset>
+      <input placeholder="*论文名称 nickname" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="论文来源" type="text" tabindex="2" >
+    </fieldset>
+    
+    <fieldset>
+        <input type="text" id="filename" placeholder="*" readonly="readonly"
+        style="float: left;width: 270px;">
+        &nbsp;
+        <input type="file" id="button" style="outline: 0px;width:70px;" required>
+        
 
-<body>  
+    </fieldset>
 
-<div id="container">  
-<div id="hw1_masthead">
-<!--导航--> 
-    <div id="hw1_masthead_wrap" class="hw1_skinny">
-      
-        <div id="hw1_global_nav" class="lg-container">
-            <nav>
-                <div id="hw1_logo">
-                	<a href="#">
-                	<img alt="就叫2333" src="./read_and_manage_lib/logo.gif">
-                	</a>
-                </div>
-                <ul class="nav_ul hw1_masthead_cata hidden-sm hidden-xs">
-                 	<celin>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</celin>
-                    <li><a href="./read.jsp">论文阅读</a></li>
-                    
-                    <li><a href="./manage.jsp">论文管理</a></li>
-                	
-                </ul>
-            </nav>
-        </div>
-    </div>
-<!---->
+    <fieldset>
+      <textarea placeholder="备注" id="tmp" tabindex="5" ></textarea>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+  </form>
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<form mothod="POST" id="search_form">
-　　<div class="cf">
-   　　<label class="search-bar">
-      　　<input id="keyword" placeholder="请输入搜索关键词" name="user_info_keyword" type="text" value="" class="input-search">
-      　　<a id="search" class="btn-search"><i class="icon-search"></i></a>
-      　　<a href="javascript:;" class="btn-more"></a>
-      </label>
-　　</div>
-</form>
-<script type="text/javascript">
-jQuery(document).ready(function (){
-   jQuery('#search_form').bind("submit", function(){
-         var key_word = jQuery("#keyword").val();
-         if(key_word == ""){ return false; }
-
-         var options = {
-                url: '/portrait/user_info_display?user_info_keyword=' + key_word,
-                type: 'post',
-                dataType: 'text',
-                data: $("#search_form").serialize(),
-                success: function (data) {
-                    if (data.length > 0)
-                        jQuery("#user_info").html(data);
-                }
-         };
-         $.ajax(options);
-         return false;
-   })
-
-   $('#search').click(function(){
-        $('#search_form').submit();
-   })
-});
-</script>
 </div>
-</div>
-
-
 </body>
+
 </html>
