@@ -116,46 +116,62 @@
 <!---->
 
 
-
+<!--paperNickName paperOrigin paperLocalFilePath paperRemark-->
 <!-- 新建论文  从本地上传-->
-	<div class="form_container" id="newPaperFromLocal" style="display:none;">  
+	<div class="form_container" id="newPaperFromLocal" style="display:none;">
 	<br><br>
 	<form id="paperForm" action="" method="post">
 	    <h3>新建论文</h3>
 	    <h4>从本地上传</h4>
 	    <fieldset>
-	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" required autofocus>
+	      <input placeholder="*论文名称 nickname" type="text" id="newPaperFromLocal_name"tabindex="1" name="paperNickName"
+	      required autofocus>
 	    </fieldset>
 	    <fieldset>
-	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" >
+	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" name="paperOrigin">
 	    </fieldset>
 	    
 	    <fieldset>
-	        <input type="text" id="filename" placeholder="*" readonly="readonly"
+	        <input type="text" id="newPaperFromLocal_fileName" placeholder="*" readonly="readonly" name="paperLocalFilePath"
 	        style="float: left;width: 270px;">
 	        &nbsp;
-	        <input type="file" id="file_select" style="outline: 0px;width:70px;" required>
+	        <input type="file" id="newPaperFromLocal_fileSelect" style="outline: 0px;width:70px;" required tabindex="3">
 	        
 
 	    </fieldset>
 
 	    <fieldset>
-	      <textarea placeholder="备注" id="tmp" tabindex="5" ></textarea>
+	      <textarea placeholder="备注" id="tmp" tabindex="4" ></textarea>
 	    </fieldset>
 	    <fieldset>
-	      <button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending">Submit</button>
+	      <button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending" name="paperRemark">Submit</button>
 	    </fieldset>
 	</form>
   </div> 
-  <script type="text/javascript">
-	$(document).ready(function(){
-		$("#file_select").change(function(){
-			$("#filename").val($("#file_select").val());
+  	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#newPaperFromLocal_fileSelect").change(function(){
+				$("#newPaperFromLocal_fileName").val(
+					$("#newPaperFromLocal_fileSelect").val()
+				);
+			});
+			$("#newPaperFromLocal_Submit").click(function(){
+				if($("#newPaperFromLocal_name").val() && 
+				   $("#newPaperFromLocal_fileName").val()){
+					alert("提交啦！");
+				}
+			});
+		// $("#newPaperFromLocal").submit(function(e){
+  //   		e.preventDefault();
+  //   		alert("Submit prevented");
+  // 		});
 		});
-	});
+
 	</script>
 <!---->
 
+
+<!--paperNickName paperOrigin paperExteriorURL paperRemark-->
 <!-- 新建论文 导入URL链接-->
 	<div class="form_container" id="newPaperByURL" style="display:none;">  
 	<br><br>
@@ -163,24 +179,69 @@
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>
 	    <fieldset>
-	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" required autofocus>
+	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" name="paperNickName" id="newPaperByURL_name" required autofocus>
 	    </fieldset>
 
 	    <fieldset>
-	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" >
+	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2"
+	      name="paperOrigin" 
+	      >
 	    </fieldset>
 	  
 	    <fieldset>
-	        <input type="text" placeholder="*URL" readonly="readonly" required>
+	        <input type="text" placeholder="*URL"  name="paperExteriorURL" id="newPaperByURL_url" required>
 	    </fieldset>
 
 	    <fieldset>
-	      <textarea placeholder="备注" id="tmp" tabindex="5" ></textarea>
+	      <textarea placeholder="备注" id="tmp" tabindex="5" name="paperRemark"></textarea>
 	    </fieldset>
 	    <fieldset>
-	      <button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending">Submit</button>
+	      <button name="submit" type="submit" id="newPaperByURL_Submit" data-submit="...Sending">Submit</button>
 	    </fieldset>
 	</form>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#newPaperByURL_Submit").click(function(submitEvent){
+				if(	$("#newPaperByURL_name").val() && 
+				   	$("#newPaperByURL_url").val()){
+					var URL=$("#newPaperByURL_url").val();
+					var flag;
+					alert("URL:"+URL);
+					$.ajax({
+						url: URL,
+						type: 'GET',
+						complete: function(response,submitEvent) {
+							alert("URL_and_result:"+URL+""+response.status);
+							if(response.status == 404) {
+								alert("无效");
+								flag=false;
+								}
+							else {
+								alert("有效");
+								flag=true;
+							}
+						}
+					});
+					alert("flag:"+flag);
+				}
+			});
+		});
+		function NetPing(URL) {
+		   $.ajax({
+				url: URL,
+				type: 'GET',
+				complete: function(response) {
+					alert(URL+""+response.status);
+					if(response.status == 404) {
+						return 1;
+						} 
+					else {
+						return 2;
+					}
+				}
+			});
+		}
+	</script>
   </div> 
 <!---->
 
