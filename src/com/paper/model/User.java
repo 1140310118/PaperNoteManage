@@ -1,7 +1,7 @@
 package com.paper.model;
 
 public class User {
-	private String email;
+	public String email;
 	private String password;
 	private String nickname;
 	/**
@@ -40,11 +40,22 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public String ToSelectSql() {
 		String sql="select * from user " 
 				+"where email='" + this.email + "' "
 				+"and password ='" + this.password
 				+ "'";
+		return sql;
+	}
+	
+	public String ToInsertSql() {
+		String sql = "insert into user " 
+				+ "(email,password,nickname) values('" 
+				+ this.email + 	"','" 
+				+ this.password+"','" 
+				+ this.nickname 
+				+ "')";
 		return sql;
 	}
 }

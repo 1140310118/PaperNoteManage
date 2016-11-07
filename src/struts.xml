@@ -12,7 +12,7 @@
             <result name="loginerror">/jsp/login.jsp</result>
         </action>
         <action name="register" class="com.paper.action.LoginAndRegisterAction" method="register">
-            <result name="registersuccess">/index.jsp</result>
+            <result name="registersuccess" type="redirect">login.action</result>
             <result name="registererror">/jsp/register.jsp</result>
         </action>
     </package>

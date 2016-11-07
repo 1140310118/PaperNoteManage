@@ -14,6 +14,7 @@ public class LoginAndRegisterAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private User user = new User();
 	private DAO dao = new DAO();
+	private String registeringFlag = "0";
 	//private static DAO dao = new DAO();//验证方法正确性
 
 	/*
@@ -59,31 +60,38 @@ public class LoginAndRegisterAction extends ActionSupport{
 		String sql = this.user.ToSelectSql();
 		//String sql = "select * from " + userTable + " where email='zorenv@163.com' and password ='4321005'";
 		ResultSet rS = dao.executeQuery(sql);
-		System.out.println(sql);
-		System.out.println("rS:"+rS);
-		if (rS!=null){
-			try {
-				if (rS.next()) {
-					return "loginsuccess";
+		System.out.println(registeringFlag);
+		if (registeringFlag=="0")
+		{
+			if (rS!=null){
+				try {
+					if (rS.next()) {
+						return "loginsuccess";
+					}
+					return "loginerror";
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "loginerror";
 				}
-				return "loginerror";
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return "loginerror";
 			}
 		}
-		else{
-			return "loginerror";
-		}
+		return "loginerror";
+		
 	}
 
 	public String register() {
-		String sql = "insert into " + userTable + "(email,password,nickname) values('" + getUser().getEmail() + "','" + getUser().getPassword()
-				+ "','" + getUser().getNickname() + "')";
-		int i = dao.executeUpdate(sql);
-		if (i > -1) {
-			return "registersuccess";
+//		String sql = "insert into " + userTable + "(email,password,nickname) values('" + getUser().getEmail() + "','" + getUser().getPassword()
+//				+ "','" + getUser().getNickname() + "')";
+
+		System.out.println(user.email);
+		if (user.email!=null){
+			String sql = user.ToInsertSql();
+			System.out.println(sql);
+			int i = dao.executeUpdate(sql);
+			if (i > -1) {
+				return "registersuccess";
+			}
 		}
 		return "registererror";
 	}
@@ -94,6 +102,13 @@ public class LoginAndRegisterAction extends ActionSupport{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public String getRegisteringFlag() {
+		return registeringFlag;
+	}
+
+	public void setRegisteringFlag(String registeringFlag) {
+		this.registeringFlag = registeringFlag;
 	}
 
 }
