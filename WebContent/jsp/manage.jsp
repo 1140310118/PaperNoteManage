@@ -1,3 +1,10 @@
+
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%  String path = request.getContextPath();  String basePath = request.getScheme() + "://"    + request.getServerName() + ":" + request.getServerPort()   
++ path + "/"; 
+%>
+
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -6,22 +13,22 @@
 	</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="./read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
-	<link rel="stylesheet" href="./read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
+	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
+	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
 	<link rel="Shortcut Icon" href="#">
 
 	<!-- Iconos -->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./read_and_manage_lib/css/style.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/css/style.css" media="screen" type="text/css" />
 
     <!--文件列表-->
-    <link href="./read_and_manage_lib/css/file_list.css" rel="stylesheet" type="text/css" media="screen" />	
-    <link href="./read_and_manage_lib/css/simple.css" rel="stylesheet" type="text/css" media="screen"/>	
-    <link href="./read_and_manage_lib/css/table.css" rel="stylesheet" type="text/css" media="screen"/>	
-    <link href="./read_and_manage_lib/css/form.css" rel="stylesheet" type="text/css" media="screen"/> 
+    <link href="<%=basePath%>jsp/read_and_manage_lib/css/file_list.css" rel="stylesheet" type="text/css" media="screen" />	
+    <link href="<%=basePath%>jsp/read_and_manage_lib/css/simple.css" rel="stylesheet" type="text/css" media="screen"/>	
+    <link href="<%=basePath%>jsp/read_and_manage_lib/css/table.css" rel="stylesheet" type="text/css" media="screen"/>	
+    <link href="<%=basePath%>jsp/read_and_manage_lib/css/form.css" rel="stylesheet" type="text/css" media="screen"/> 
 
-	<script src="./read_and_manage_lib/js/simple.js"></script>
-	<script src="./read_and_manage_lib/src/jquery.js"></script>
+	<script src="<%=basePath%>jsp/read_and_manage_lib/js/simple.js"></script>
+	<script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
 
 </head>
 
@@ -38,14 +45,14 @@
             <nav>
                 <div id="hw1_logo">
                 	<a href="#">
-                	<img alt="就叫2333" src="./read_and_manage_lib/logo.gif">
+                	<img alt="就叫2333" src="<%=basePath%>jsp/read_and_manage_lib/logo.gif">
                 	</a>
                 </div>
                 <ul class="nav_ul hw1_masthead_cata hidden-sm hidden-xs">
                  	<celin>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</celin>
-                    <li><a href="./read.jsp">论文阅读</a></li>
+                    <li><a href="<%=basePath%>jsp/read.jsp">论文阅读</a></li>
                     
-                    <li><a href="./manage.jsp">论文管理</a></li>
+                    <li><a href="<%=basePath%>jsp/manage.jsp">论文管理</a></li>
                 	
                 </ul>
             </nav>
@@ -90,7 +97,7 @@
 	</li>
 	</ul>
 	<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
-	<script src="./read_and_manage_lib/js/index.js"></script>
+	<script src="<%=basePath%>jsp/read_and_manage_lib/js/index.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#newPaperFromLocal_Show").click(function(){
@@ -120,33 +127,32 @@
 <!-- 新建论文  从本地上传-->
 	<div class="form_container" id="newPaperFromLocal" style="display:none;">
 	<br><br>
-	<form id="paperForm" action="" method="post">
-	    <h3>新建论文</h3>
+	<s:form id="paperForm" action="manage" method="post" enctype="multipart/form-data">
+	  	 <h3>新建论文</h3>
 	    <h4>从本地上传</h4>
 	    <fieldset>
-	      <input placeholder="*论文名称 nickname" type="text" id="newPaperFromLocal_name"tabindex="1" name="paperNickName"
-	      required autofocus>
+	      <input placeholder="*论文名称 nickname" type="text" id="newPaperFromLocal_name"tabindex="1" name="paper.paperNickName"
+	      required autofocus/>
 	    </fieldset>
 	    <fieldset>
-	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" name="paperOrigin">
+	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" name="paper.paperOrigin">
 	    </fieldset>
 	    
 	    <fieldset>
-	        <input type="text" id="newPaperFromLocal_fileName" placeholder="*" readonly="readonly" name="paperLocalFilePath"
-	        style="float: left;width: 270px;">
+	        <input type="text" id="newPaperFromLocal_fileName" placeholder="*" style="float: left;width: 270px;">
 	        &nbsp;
-	        <input type="file" id="newPaperFromLocal_fileSelect" style="outline: 0px;width:70px;" required tabindex="3">
+	        <input type="file" id="newPaperFromLocal_fileSelect" name="resume" style="outline: 0px;width:70px;" required tabindex="3">
 	        
 
 	    </fieldset>
 
 	    <fieldset>
-	      <textarea placeholder="备注" id="tmp" tabindex="4" ></textarea>
+	      <textarea placeholder="备注" id="tmp" tabindex="4" name="paper.paperRemark"></textarea>
 	    </fieldset>
 	    <fieldset>
-	      <button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending" name="paperRemark">Submit</button>
+	      <button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending" >Submit</button>
 	    </fieldset>
-	</form>
+	</s:form>
   </div> 
   	<script type="text/javascript">
 		$(document).ready(function(){
@@ -179,21 +185,20 @@
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>
 	    <fieldset>
-	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" name="paperNickName" id="newPaperByURL_name" required autofocus>
+	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" name="paper.paperNickName" id="newPaperByURL_name" required autofocus>
 	    </fieldset>
 
 	    <fieldset>
-	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2"
-	      name="paperOrigin" 
+	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" name="paper.paperOrigin" 
 	      >
 	    </fieldset>
 	  
 	    <fieldset>
-	        <input type="text" placeholder="*URL"  name="paperExteriorURL" id="newPaperByURL_url" required>
+	        <input type="text" placeholder="*URL"  name="paper.paperExteriorURL" id="newPaperByURL_url" required>
 	    </fieldset>
 
 	    <fieldset>
-	      <textarea placeholder="备注" id="tmp" tabindex="5" name="paperRemark"></textarea>
+	      <textarea placeholder="备注" id="tmp" tabindex="5" name="paper.paperRemark"></textarea>
 	    </fieldset>
 	    <fieldset>
 	      <button name="submit" type="submit" id="newPaperByURL_Submit" data-submit="...Sending">Submit</button>
