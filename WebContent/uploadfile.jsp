@@ -13,5 +13,10 @@
 	<s:submit value="提交" />
 </s:form>
 
+<s:form action="uploadFile" enctype="multipart/form-data">
+	<input type="file" name="resume" label="上传文件" />
+	<input type="submit" value="提交">
+</s:form>
+
 </body>
 </html>
