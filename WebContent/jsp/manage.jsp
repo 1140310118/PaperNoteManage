@@ -181,7 +181,7 @@
 <!-- 新建论文 导入URL链接-->
 	<div class="form_container" id="newPaperByURL" style="display:none;">  
 	<br><br>
-	<form id="paperForm" action="" method="post">
+	<form id="paperForm" action="manage" method="post">
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>
 	    <fieldset>

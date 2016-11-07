@@ -6,14 +6,14 @@
 	<!-- 
     <package name="default" namespace="/" extends="struts-default">
      -->
-    <package name="user" namespace="/user" extends="struts-default">
+    <package name="user" extends="struts-default">
         <action name="login" class="com.paper.action.LoginAndRegisterAction" method="login">
-            <result name="loginsuccess">/index.jsp</result>
-            <result name="loginerror">/login.jsp</result>
+            <result name="loginsuccess" type="redirect">manage.action</result>
+            <result name="loginerror">/jsp/login.jsp</result>
         </action>
         <action name="register" class="com.paper.action.LoginAndRegisterAction" method="register">
             <result name="registersuccess">/index.jsp</result>
-            <result name="registererror">/register.jsp</result>
+            <result name="registererror">/jsp/register.jsp</result>
         </action>
     </package>
     <package name="uploadfile" extends="struts-default">

@@ -12,7 +12,7 @@ public class LoginAndRegisterAction extends ActionSupport{
     String userTable = "user";  
     String paperTable = "paper";
 	private static final long serialVersionUID = 1L;
-	private User user;
+	private User user = new User();
 	private DAO dao = new DAO();
 	//private static DAO dao = new DAO();//验证方法正确性
 
@@ -56,19 +56,24 @@ public class LoginAndRegisterAction extends ActionSupport{
 	 */
 	
 	public String login() {
-		String sql = "select * from " + userTable +" where email='" + getUser().getEmail() + "' and password ='" + getUser().getPassword()
-				+ "'";
+		String sql = this.user.ToSelectSql();
 		//String sql = "select * from " + userTable + " where email='zorenv@163.com' and password ='4321005'";
 		ResultSet rS = dao.executeQuery(sql);
-		//System.out.println(rS);
-		try {
-			if (rS.next()) {
-				return "loginsuccess";
+		System.out.println(sql);
+		System.out.println("rS:"+rS);
+		if (rS!=null){
+			try {
+				if (rS.next()) {
+					return "loginsuccess";
+				}
+				return "loginerror";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "loginerror";
 			}
-			return "loginerror";
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		else{
 			return "loginerror";
 		}
 	}
