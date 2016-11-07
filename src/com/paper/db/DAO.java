@@ -15,9 +15,16 @@ public class DAO {
 	 */
 	String URL = "jdbc:mysql://localhost:3306/papermanage";
 	String USER = "root"; // 数据库用户名
-	String PASS = "112122"; // 数据库密码
+	String PASS = "123456"; // 数据库密码
 
 	public DAO() {
+		
+//		String initSql = "create database papermanage if not exist;";
+//		executeUpdate(initSql);
+//		initSql = "use papermanage;";
+//		executeUpdate(initSql);
+//		initSql = "create table paper if not exist values();";
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			// 2.获得数据库连接
