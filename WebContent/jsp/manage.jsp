@@ -30,6 +30,7 @@
 
 <div id="container">  
 <div id="hw1_masthead">
+
 <!--导航--> 
     <div id="hw1_masthead_wrap" class="hw1_skinny">
       
@@ -133,7 +134,7 @@
 	        <input type="text" id="filename" placeholder="*" readonly="readonly"
 	        style="float: left;width: 270px;">
 	        &nbsp;
-	        <input type="file" id="button" style="outline: 0px;width:70px;" required>
+	        <input type="file" id="file_select" style="outline: 0px;width:70px;" required>
 	        
 
 	    </fieldset>
@@ -146,6 +147,13 @@
 	    </fieldset>
 	</form>
   </div> 
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$("#file_select").change(function(){
+			$("#filename").val($("#file_select").val());
+		});
+	});
+	</script>
 <!---->
 
 <!-- 新建论文 导入URL链接-->
