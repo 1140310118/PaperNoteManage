@@ -22,6 +22,13 @@
 			<result name="success">/uploadfile.jsp</result>
 			<result name="input">/uploadfile.jsp</result>
 		</action>
+		
+		<action name="manage" class="updownloadfile.upaction">
+			<!-- name="success" -->
+			<result name="success">/jsp/manage.jsp</result>
+			<result name="input">/jsp/manage.jsp</result>
+		</action>
+		
 		<action name="download_*" class="updownloadfile.downaction">
 			<param name="filename">{1}</param>
 			<result name="input">/download.jsp</result>
