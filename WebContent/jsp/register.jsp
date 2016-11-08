@@ -7,9 +7,9 @@
   <head>
     <meta http-equiv="Content-Type"  charset="utf-8">
     <title>用户注册</title>
-    <link href="<%=basePath%>jsp/login_and_register_lib/register.css" rel="stylesheet" type="text/css">
+    <link href="<%=basePath%>jsp/login_and_register_lib/login.css" rel="stylesheet" type="text/css">
     
-    <script type="text/javascript" src="<%=basePath %>jsp/login_and_register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=basePath %>jsp/ssslogin_and_register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
     
     <script type="text/javascript" src="<%=basePath %>jsp/login_and_register_lib/login.js" charset="utf-8"></script>
     
@@ -37,13 +37,13 @@
           <div class="MainR">
 
             <div class="Header">
-              <div class="title">用户注册</div>              
+              <div class="title">用户 注册</div>              
             </div>
             <br>
+
             <div id="logArea">
               <div class="inptr">
-                <input type="text" name="user.nickname" class="inpUser inped" placeholder="nickname"></input>
-                <br><br>
+                
                 <input type="text" name="user.email" class="inpUser inped" placeholder="email"></input>
                 <br><br>
 
@@ -51,15 +51,18 @@
                 <br><br>
 
                  <input type="password" class="inpPW" value="" autocomplete="off" placeholder="Confirm password"></input>
+                 <br><br>
+                 <input type="text" name="user.nickname" class="inpUser inped" placeholder="nickname"></input>
+                
               	<input name="registeringFlag" value="1" style="display:none;"></input>
              
               </div>
 
-              <br><br><br><br><br><br><br><br><br><br><br><br>
+              <br><br>
 
               <div class="inpB">
                 <div>
-                    <button type="submit" class="Button">
+                    <button name="action:login" type="submit" class="Button">
                      	 注册
                   </button>
                 </div>
