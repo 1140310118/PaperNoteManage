@@ -240,7 +240,7 @@ margin-bottom: 5px;
 }
 #logArea .inpUser {
 width:268px;
-height:27px;
+height:27px;/**/
 background:url("bg.gif") 0 0;
 border:1px solid #B8B8B8;
 border-radius: 2px;

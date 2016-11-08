@@ -6,6 +6,7 @@
 	<!-- 
     <package name="default" namespace="/" extends="struts-default">
      -->
+    <constant name="struts.i18n.reload" value="true"/>
     <package name="user" extends="struts-default">
         <action name="login" class="com.paper.action.LoginAndRegisterAction" method="login">
             <result name="loginsuccess" type="redirect">manage.action</result>
