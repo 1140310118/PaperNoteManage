@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en" class=" is-copy-enabled">
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
-    <meta charset='utf-8'>
     <meta content="origin-when-cross-origin" name="referrer" />
 
     <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-b58c080c9d900217a5669b54b61c1609c56789944a064e7a027acd88c75c761e.css" integrity="sha256-tYwIDJ2QAhelZptUthwWCcVniZRKBk56AnrNiMdcdh4=" media="all" rel="stylesheet" />
@@ -139,8 +138,8 @@
 </a>      </nav>
 
       <div class="site-header-actions">
-            <a class="btn btn-primary site-header-actions-btn" href="/join?source=header-home" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
-          <a class="btn site-header-actions-btn mr-1" href="/login" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+            <a class="btn btn-primary site-header-actions-btn" href="/join?source=header-home" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">注册</a>
+          <a class="btn site-header-actions-btn mr-1" href="/login" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">登陆</a>
       </div>
 
         <nav class="site-header-nav site-header-nav-secondary mr-md-3">
@@ -184,32 +183,32 @@
   <div class="container-responsive">
     <div class="columns">
       <div class="homepage-hero-intro column">
-        <h1 class="alt-h1 text-white text-shadow-dark lh-condensed mb-3">How&nbsp;people build&nbsp;software</h1>
-        <p class="alt-lead text-white text-shadow-dark">Millions of developers use GitHub to build personal projects, support their businesses, and&nbsp;work together on open source technologies.</p>
+        <h1 class="alt-h1 text-white text-shadow-dark lh-condensed mb-3">2333文献管理</h1>
+        <p class="alt-lead text-white text-shadow-dark">高效的文献管理方法。</p>
       </div>
       <div class="homepage-hero-signup column">
           <div class="d-none-sm-dn">
             <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/join" autocomplete="off" class="home-hero-signup js-signup-form" data-form-nonce="939caedd8957ce01591cfe0ae6d0b394e85a348d" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="sVYX3dnQ1FUn5c/oH/76v/MD1QVgAE9OYET6ENnWlx7PMC21biuiLYFGLfdVnoKRf2d7LRZEaseDxivmoXYpLg==" /></div>              <dl class="form">
                 <dd>
                   <label class="form-label text-shadow-light sr-only" for="user[login]">Pick a username</label>
-                  <input type="text" name="user[login]" id="user[login]" class="form-control form-control-lg input-block" placeholder="Pick a username" data-autocheck-url="/signup_check/username" autofocus>
+                  <input type="text" name="user[login]" id="user[login]" class="form-control form-control-lg input-block" placeholder="输入昵称" data-autocheck-url="/signup_check/username" autofocus>
                 </dd>
               </dl>
               <dl class="form">
                 <dd>
                   <label class="form-label text-shadow-light sr-only" for="user[email]">Enter your email address</label>
-                  <input type="text" name="user[email]" id="user[email]" class="form-control form-control-lg input-block js-email-notice-trigger" placeholder="Your email address" data-autocheck-url="/signup_check/email">
+                  <input type="text" name="user[email]" id="user[email]" class="form-control form-control-lg input-block js-email-notice-trigger" placeholder="输入邮箱地址" data-autocheck-url="/signup_check/email">
                 </dd>
               </dl>
               <dl class="form">
                 <dd>
                   <label class="form-label text-shadow-light sr-only" for="user[password]">Create a password</label>
-                  <input type="password" name="user[password]" id="user[password]" class="form-control form-control-lg input-block" placeholder="Create a password" data-autocheck-url="/signup_check/password">
+                  <input type="password" name="user[password]" id="user[password]" class="form-control form-control-lg input-block" placeholder="输入密码" data-autocheck-url="/signup_check/password">
                 </dd>
-                <p class="form-control-note">Use at least one letter, one numeral, and seven characters.</p>
+                <p class="form-control-note">长度至少为7, 且包含一个字母, 一个数字。</p>
               </dl>
               <input type="hidden" name="source" class="js-signup-source" value="form-home">
-              <button class="btn btn-primary btn-large f3 btn-block" type="submit">Sign up for GitHub</button>
+              <button class="btn btn-primary btn-large f3 btn-block" type="submit">立即注册</button>
               <p class="form-control-note text-center">
                 By clicking "Sign up for GitHub", you agree to our
                 <a class="text-white" href="https://help.github.com/terms" target="_blank">terms of service</a> and
@@ -217,7 +216,7 @@
               </p>
 </form>          </div>
           <div class="d-sm-none">
-            <a href="/join?source=button-home" class="btn btn-primary btn-large" rel="nofollow">Sign up for GitHub</a>
+            <a href="/join?source=button-home" class="btn btn-primary btn-large" rel="nofollow">立即注册</a>
           </div>
       </div>
     </div>
@@ -290,7 +289,7 @@
   <div class="container-responsive">
     <div class="pricing-card pricing-card-horizontal">
       <div class="pricing-card-cta">
-        <a href="/join?source=button-home" class="btn btn-block btn-primary btn-large" rel="nofollow">Sign up for GitHub</a>
+        <a href="/join?source=button-home" class="btn btn-block btn-primary btn-large" rel="nofollow">立即注册</a>
       </div>
       <div class="pricing-card-text alt-h3 mb-0 text-thin">
         Public projects are always free. Work together across unlimited private repositories for $7 / month.
