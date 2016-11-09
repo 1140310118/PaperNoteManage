@@ -32,12 +32,12 @@
     <div class="Main">
       <div class="MainBg">
           <s:form method="post">
-          <div class="MainL">
-          </div>
+          <!-- <div class="MainL">
+          </div> -->
           <div class="MainR">
 
             <div class="Header">
-              <div class="title">用户 注册</div>              
+              <div class="title">用户-注册</div>              
             </div>
             <br>
 
@@ -52,13 +52,13 @@
 
                  <input type="password" class="inpPW" value="" autocomplete="off" placeholder="Confirm password"></input>
                  <br><br>
-                 <input type="text" name="user.nickname" class="inpUser inped" placeholder="nickname"></input>
+                 <input type="text" name="user.nickname" class="inpUser" placeholder="nickname"></input>
                 
               	<input name="registeringFlag" value="1" style="display:none;"></input>
              
               </div>
 
-              <br><br>
+              <br><br><br><br><br><br><br><br><br><br><br><br>
 
               <div class="inpB">
                 <div>
