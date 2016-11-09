@@ -15,3 +15,5 @@
 在 manage.jsp 上添加新建论文模块 by 张义策
 ##2016.11.7
 整合前端与后端 by 三人
+##2016.11.9
+index.jsp_ver_0.2 by ZorenV
