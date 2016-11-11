@@ -1,14 +1,14 @@
 package com.paper.action;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ActionContext;
 
 public class UpdateNote extends ActionSupport {
+
+	private static final long serialVersionUID = 1L;
 	String update=null;
 	Connection conn = com.paper.db.DbConn.getConn();
 

@@ -5,6 +5,8 @@ import java.io.*;
 
 public class DownloadFileAction extends ActionSupport
 {
+
+	private static final long serialVersionUID = 1L;
 	private String filename;
     
 	public String getFilename() {
