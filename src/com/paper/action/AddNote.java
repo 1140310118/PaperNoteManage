@@ -1,11 +1,11 @@
-package action;
+package com.paper.action;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class add {
+public class AddNote {
 	String writer_name=null;
 	Connection conn = com.paper.db.DbConn.getConn();
 	public String add_start() {

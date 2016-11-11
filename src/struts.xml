@@ -44,26 +44,26 @@
 		</action>
 	</package>
 	<package name="actions" extends="struts-default">
-		<action name="selectbytype" class="action.BookAction" method ="selectbytype">
+		<action name="selectbytype" class="com.paper.action.BookAction" method ="selectbytype">
 			<!-- name="success" -->
 			<result name="success">/book.jsp</result>
 			
 		</action>
-		<action name="selectbyid" class="action.BookAction" method ="selectbyid">
+		<action name="selectbyid" class="com.paper.action.BookAction" method ="selectbyid">
 			<!-- name="success" -->
 			<result name="success">/update.jsp</result>
 			
 		</action>
 
 	  
-		<action name="deleteByType" class="action.BookAction" method ="deleteByType" >
+		<action name="deleteByType" class="com.paper.action.BookAction" method ="deleteByType" >
 			<result name="delete" type="redirectAction" >selectbytype.action</result>
 		</action>
 		
-		<action name="add" class="action.add" method ="add" >
+		<action name="add" class="com.paper.action.AddNote" method ="add" >
 			<result name="success"  >/index.jsp</result>
 		</action>
-		<action name="update" class="action.update" method ="update" >
+		<action name="update" class="com.paper.action.UpdateNote" method ="update" >
 			<result name="success"  >/index.jsp</result>
 		</action>
 	</package>

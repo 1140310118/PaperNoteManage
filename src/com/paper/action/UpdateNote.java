@@ -1,4 +1,4 @@
-package action;
+package com.paper.action;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ActionContext;
 
-public class update extends ActionSupport {
+public class UpdateNote extends ActionSupport {
 	String update=null;
 	Connection conn = com.paper.db.DbConn.getConn();
 

@@ -1,4 +1,4 @@
-package action;
+package com.paper.action;
 
 import com.paper.action.BookOper;
 import com.paper.model.Book;
