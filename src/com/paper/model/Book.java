@@ -1,4 +1,4 @@
-package po; //图书的数据类 
+package com.paper.model; 
 
 public class Book {
 	
