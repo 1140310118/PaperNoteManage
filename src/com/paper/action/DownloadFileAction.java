@@ -1,9 +1,9 @@
-package updownloadfile;
+package com.paper.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
 
-public class downaction extends ActionSupport
+public class DownloadFileAction extends ActionSupport
 {
 	private String filename;
     

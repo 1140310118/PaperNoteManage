@@ -1,15 +1,13 @@
-package updownloadfile;
+package com.paper.action;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.paper.db.DAO;
 import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
-import java.sql.ResultSet;
+import com.paper.model.file;
 
-import model.file;
-
-public class upaction extends ActionSupport implements
+public class UploadFileAction extends ActionSupport implements
 		ModelDriven<file>
 {
 	private static final long serialVersionUID = 1L;
