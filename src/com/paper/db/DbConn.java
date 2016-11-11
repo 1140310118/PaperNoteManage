@@ -1,4 +1,4 @@
-package db;
+package com.paper.db;
 
 import java.sql.*;
 

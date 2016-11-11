@@ -1,16 +1,16 @@
-package oper;
+package com.paper.action;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import po.Book;
+import com.paper.model.Book;
 
 
 public class BookOper {
 	public List<Book> selectByType(String type) {
 	
-		Connection conn = db.DbConn.getConn();
+		Connection conn = com.paper.db.DbConn.getConn();
 		java.sql.PreparedStatement pstmt = null;
 
 		java.sql.ResultSet rs = null;
@@ -60,7 +60,7 @@ public class BookOper {
 	
 	public List<Book> selectByid(int id) {
 		
-		Connection conn = db.DbConn.getConn();
+		Connection conn = com.paper.db.DbConn.getConn();
 		java.sql.PreparedStatement pstmt = null;
 
 		java.sql.ResultSet rs = null;
@@ -110,7 +110,7 @@ public class BookOper {
 	public int update(int id,String name,String text){
 		int jg=0;
 		//Connection conn = DB.createConn();
-		Connection conn = db.DbConn.getConn();
+		Connection conn = com.paper.db.DbConn.getConn();
 		java.sql.PreparedStatement pstmt = null;
 		//java.sql.ResultSet rs = null;
 		try{
@@ -145,7 +145,7 @@ public class BookOper {
 	public int deleteByType(String text){
 	int jg=0;
 	//Connection conn = DB.createConn();
-	Connection conn = db.DbConn.getConn();
+	Connection conn = com.paper.db.DbConn.getConn();
 	java.sql.PreparedStatement pstmt = null;
 	//java.sql.ResultSet rs = null;
 	try{
