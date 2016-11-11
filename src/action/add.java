@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class add {
 	String writer_name=null;
-	Connection conn = db.DbConn.getConn();
+	Connection conn = com.paper.db.DbConn.getConn();
 	public String add_start() {
 		return "success";
 }

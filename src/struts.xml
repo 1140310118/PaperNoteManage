@@ -18,13 +18,13 @@
         </action>
     </package>
     <package name="uploadfile" extends="struts-default">
-		<action name="uploadFile" class="updownloadfile.upaction">
+		<action name="uploadFile" class="com.paper.action.UploadFileAction">
 			<!-- name="success" -->
 			<result name="success">/uploadfile.jsp</result>
 			<result name="input">/uploadfile.jsp</result>
 		</action>
 		
-		<action name="manage" class="updownloadfile.upaction">
+		<action name="manage" class="com.paper.action.UploadFileAction">
 			<!-- name="success" -->
 			<result name="success">/jsp/manage.jsp</result>
 			<result name="input">/jsp/manage.jsp</result>
@@ -34,7 +34,7 @@
 			<result name="success">/jsp/read.jsp</result>
 		</action>
 		
-		<action name="download_*" class="updownloadfile.downaction">
+		<action name="download_*" class="com.paper.action.DownloadFileAction">
 			<param name="filename">{1}</param>
 			<result name="input">/download.jsp</result>
 			<result name="success" type="stream">

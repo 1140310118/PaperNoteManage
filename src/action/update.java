@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class update extends ActionSupport {
 	String update=null;
-	Connection conn = db.DbConn.getConn();
+	Connection conn = com.paper.db.DbConn.getConn();
 
 	public String getType() {
 		return update;

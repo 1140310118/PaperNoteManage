@@ -1,7 +1,7 @@
 package action;
 
-import oper.BookOper;
-import po.Book;
+import com.paper.action.BookOper;
+import com.paper.model.Book;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class BookAction extends ActionSupport {
 	private String type; 
-	private BookOper bo = new BookOper(); // ²éÑ¯Àà
+	private BookOper bo = new BookOper(); // ï¿½ï¿½Ñ¯ï¿½ï¿½
 	private List<Book> data;
 	private String text;
 	private int id;
@@ -71,18 +71,18 @@ public class BookAction extends ActionSupport {
 	
 	public String selectbytype () {
 		// TODO Auto-generated method stub
-		// ²éÑ¯½á¹û·ÅÔÚrequestÖÐ
+		// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½requestï¿½ï¿½
 		System.out.println(type);
 		ActionContext.getContext().put("booklist", bo.selectByType(type));
-		// ·µ»ØsuccessÖ¸¶¨µÄÒ³Ãæ
+		// ï¿½ï¿½ï¿½ï¿½successÖ¸ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 		return SUCCESS; // "success"
 	}
 	public String selectbyid () {
 		// TODO Auto-generated method stub
-		// ²éÑ¯½á¹û·ÅÔÚrequestÖÐ
+		// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½requestï¿½ï¿½
 		//System.out.println(type);
 		ActionContext.getContext().put("booklist", bo.selectByid(id));
-		// ·µ»ØsuccessÖ¸¶¨µÄÒ³Ãæ
+		// ï¿½ï¿½ï¿½ï¿½successÖ¸ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 		return SUCCESS; // "success"
 	}
 	
