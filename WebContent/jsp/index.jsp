@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%  String path = request.getContextPath();  String basePath = request.getScheme() + "://"    + request.getServerName() + ":" + request.getServerPort()   
++ path + "/"; %>
 <!DOCTYPE html>
 <html lang="en" class=" is-copy-enabled">
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
@@ -138,8 +140,8 @@
 </a>      </nav>
 
       <div class="site-header-actions">
-            <a class="btn btn-primary site-header-actions-btn" href="/join?source=header-home" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">注册</a>
-          <a class="btn site-header-actions-btn mr-1" href="/login" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">登陆</a>
+            <a class="btn btn-primary site-header-actions-btn" href="<%=basePath%>" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">注册</a>
+          <a class="btn site-header-actions-btn mr-1" href="<%=basePath%>login" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">登录</a>
       </div>
 
         <nav class="site-header-nav site-header-nav-secondary mr-md-3">
@@ -216,7 +218,7 @@
               </p>
 </form>          </div>
           <div class="d-sm-none">
-            <a href="/join?source=button-home" class="btn btn-primary btn-large" rel="nofollow">立即注册</a>
+            <a href="<%=basePath%>register" class="btn btn-primary btn-large" rel="nofollow">立即注册</a>
           </div>
       </div>
     </div>

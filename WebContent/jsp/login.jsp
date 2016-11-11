@@ -68,7 +68,7 @@
 	                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                <a href="#">忘记密码? </a>|
-	                <a href="./register.jsp">免费注册 </a>|
+	                <a href="<%=basePath%>register">免费注册 </a>|
 	                <a href="#">意见反馈 </a>
 	                <a href="#"></a>
 	            </div>
