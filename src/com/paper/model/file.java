@@ -1,4 +1,4 @@
-package model;
+package com.paper.model;
 
 import java.io.*;
 
