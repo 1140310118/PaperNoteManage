@@ -7,11 +7,11 @@
   <head>
     <meta http-equiv="Content-Type"  charset="utf-8">
     <title>用户注册</title>
-    <link href="<%=basePath %>jsp/register_lib/login.css" rel="stylesheet" type="text/css">
+    <link href="<%=basePath%>jsp/login_and_register_lib/login.css" rel="stylesheet" type="text/css">
     
-    <script type="text/javascript" src="<%=basePath %>jsp/register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=basePath %>jsp/ssslogin_and_register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
     
-    <script type="text/javascript" src="<%=basePath %>jsp/register_lib/login.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=basePath %>jsp/login_and_register_lib/login.js" charset="utf-8"></script>
     
     <script type="text/javascript">
       var markme_msg = "under construction";
@@ -21,7 +21,7 @@
   <body style="padding-top : 30px;">
     <div class="Head">
       <div class="logo">
-        <img src="./register_lib/logo.gif">
+        <img src="<%=basePath %>jsp/login_and_register_lib/logo.gif">
       </div>
       <div class="Links">
         <a href="">收藏本站 </a>|
@@ -32,17 +32,17 @@
     <div class="Main">
       <div class="MainBg">
           <s:form method="post">
-          <div class="MainL">
-          </div>
+          <!-- <div class="MainL">
+          </div> -->
           <div class="MainR">
 
             <div class="Header">
-              <div class="title">用户注册</div>              
+              <div class="title">用户-注册</div>              
             </div>
             <br>
 
             <div id="logArea">
-              <div class="inptr'">
+              <div class="inptr">
                 
                 <input type="text" name="user.email" class="inpUser inped" placeholder="email"></input>
                 <br><br>
@@ -51,11 +51,14 @@
                 <br><br>
 
                  <input type="password" class="inpPW" value="" autocomplete="off" placeholder="Confirm password"></input>
+                 <br><br>
+                 <input type="text" name="user.nickname" class="inpUser" placeholder="nickname"></input>
+                
               	<input name="registeringFlag" value="1" style="display:none;"></input>
              
               </div>
 
-              <br><br><br><br>
+              <br><br><br><br><br><br><br><br><br><br><br><br>
 
               <div class="inpB">
                 <div>
