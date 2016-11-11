@@ -10,13 +10,10 @@
     <link href="<%=basePath%>jsp/login_and_register_lib/login.css" rel="stylesheet" type="text/css">
     
     <script type="text/javascript" src="<%=basePath %>jsp/ssslogin_and_register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
-    
     <script type="text/javascript" src="<%=basePath %>jsp/login_and_register_lib/login.js" charset="utf-8"></script>
-    
-	<script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
-    
-
+    <script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
   </head>
+
   <body style="padding-top : 30px;">
     <div class="Head">
       <div class="logo">
@@ -29,59 +26,50 @@
     </div>
 
     <div class="Main">
-      <div class="MainBg">
-          <s:form method="post" id="registerForm">
-          <!-- <div class="MainL">
-          </div> -->
-          <div class="MainR">
-
-            <div class="Header">
-              <div class="title">用户注册</div>              
-            </div>
-            <br>
-
-            <div id="logArea">
-              <div class="inptr">
-                
-                <input type="text" name="user.email" id="userEmail" class="inpUser inped" placeholder="email" required></input>
-                <br><br>
-
-                <input type="password" name="user.password" id="userPassword" class="inpPW" value="" autocomplete="off" placeholder="password" required></input>
-                <br><br>
-
-                 <input type="password" class="inpPW" value="" id="userPasswordConfirm" autocomplete="off" placeholder="Confirm password" required></input>
-                 <br><br>
-                 <input type="text" name="user.nickname" id="userNickname" class="inpUser" placeholder="nickname" required></input>
-                
-              	<input name="registeringFlag" value="1" style="display:none;"></input>
-             
-              </div>
-
-              <br><br><br><br><br><br><br><br><br><br><br><br>
-
-              <div class="inpB">
-                <div>
-                    <button name="action:login" id="registerButton" type="submit" class="Button">
-                     	 注册
-                  </button>
-                </div>
-              </div>
-              <br>
-              <div class="1Links">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                	已有账号，
-                <a href="<%=basePath %>login"><u>直接登录</u></a>
-              </div>
-
+    <div class="MainBg">
+      <s:form method="post" id="registerForm">    
+      <div class="MainR">
+          <div class="Header">
+            <div class="title">用户注册</div>              
           </div>
-        </div>
+          <br>
 
-        </s:form>
+          <div id="logArea">
+            <div class="inptr">
+              <input type="text" name="user.email" id="userEmail" class="inpUser inped" placeholder="email" required>
+              <br><br>
+              <input type="password" name="user.password" id="userPassword" class="inpPW" value="" autocomplete="off" placeholder="password" required>
+              <br><br>
+              <input type="password" class="inpPW" value="" id="userPasswordConfirm" autocomplete="off" placeholder="Confirm password" required>
+              <br><br>
+              <input type="text" name="user.nickname" id="userNickname" class="inpUser" placeholder="nickname" required></input>
+              <input name="registeringFlag" value="1" style="display:none;">
+            </div>
+
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+
+            <div class="inpB">
+              <div>
+              <button name="action:login" id="registerButton" type="submit" class="Button">
+                       	 注册
+              </button>
+              </div>
+            </div>
+
+            <br>
+            <div class="1Links">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              已有账号，
+              <a href="<%=basePath %>login"><u>直接登录</u></a>
+            </div>
+          </div>
+      </div>
+      </s:form>
     </div>
-  </div>
+    </div>
   <script type="text/javascript">
     $("#registerButton").click(function(event){
         var userEmail=$("#userEmail").val();
@@ -139,9 +127,6 @@
       }
       return 1;
     }
-    
-    
-    
   </script>
   </body>
 </html>

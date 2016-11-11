@@ -1,55 +1,42 @@
-<!DOCTYPE html>
 <html>
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <title>HTML5/CSS3简易联系表单DEMO演示</title>
-
-    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
-    <script src="./read_and_manage_lib/src/jquery.js"></script>
-    <link href="./read_and_manage_lib/css/simple.css" rel="stylesheet" type="text/css" media="screen"/> 
-
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>test cookie</title>
+<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+<script src="Scripts/jquery.cookie.js" type="text/javascript"></script>
+<script type="text/javascript">
+ 
+  $(document).ready(function () {
+    if ($.cookie("rmbUser") == "true") {
+    $("#ck_rmbUser").attr("checked", true);
+    $("#txt_username").val($.cookie("username"));
+    $("#txt_password").val($.cookie("password"));
+    }
+  });
+ 
+  //记住用户名密码
+  function Save() {
+    if ($("#ck_rmbUser").attr("checked")) {
+      var str_username = $("#txt_username").val();
+      var str_password = $("#txt_password").val();
+      $.cookie("rmbUser", "true", { expires: 7 }); //存储一个带7天期限的cookie
+      $.cookie("username", str_username, { expires: 7 });
+      $.cookie("password", str_password, { expires: 7 });
+    }
+    else {
+      $.cookie("rmbUser", "false", { expire: -1 });
+      $.cookie("username", "", { expires: -1 });
+      $.cookie("password", "", { expires: -1 });
+    }
+  };
+</script>
 </head>
-
 <body>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#button").change(function(){
-            $("#filename").val($("#button").val());
-        });
-    });
-    </script>
-  <div class="container">  
-  <form id="contact" action="" method="post">
-    <h3>新建论文</h3>
-    <h4>从本地上传</h4>
-    <fieldset>
-      <input placeholder="*论文名称 nickname" type="text" tabindex="1" required autofocus>
-    </fieldset>
-    <fieldset>
-      <input placeholder="论文来源" type="text" tabindex="2" >
-    </fieldset>
-    
-    <fieldset>
-        <input type="text" id="filename" placeholder="*" readonly="readonly"
-        style="float: left;width: 270px;">
-        &nbsp;
-        <input type="file" id="button" style="outline: 0px;width:70px;" required>
-        
-
-    </fieldset>
-
-    <fieldset>
-      <textarea placeholder="备注" id="tmp" tabindex="5" ></textarea>
-    </fieldset>
-    <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
-    </fieldset>
-  </form>
-
-</div>
+  <div>
+    用户名：<input type="text" id="txt_username"/><br />
+    密码：<input type="text" id="txt_password"/><br />
+    <input type="checkbox" id="ck_rmbUser"/>记住用户名和密码<br />
+    <input type="submit" id="sub" value="登录" onclick="Save()"/>
+  </div>
 </body>
-
 </html>
