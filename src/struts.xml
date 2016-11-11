@@ -30,6 +30,10 @@
 			<result name="input">/jsp/manage.jsp</result>
 		</action>
 		
+		<action name="read" class="">
+			<result name="success">/jsp/read.jsp</result>
+		</action>
+		
 		<action name="download_*" class="updownloadfile.downaction">
 			<param name="filename">{1}</param>
 			<result name="input">/download.jsp</result>

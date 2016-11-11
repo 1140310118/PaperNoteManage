@@ -1,3 +1,10 @@
+
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%  String path = request.getContextPath();  String basePath = request.getScheme() + "://"    + request.getServerName() + ":" + request.getServerPort()   
++ path + "/"; 
+%>
+
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <!-- saved from url=(0025)http://www.huawei.com/cn/ -->
 <html xmlns="http://www.w3.org/1999/xhtml" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
@@ -7,8 +14,8 @@
 	</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="./read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
-	<link rel="stylesheet" href="./read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
+	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
+	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
 	<link rel="Shortcut Icon" href="#">
 </head>
 
@@ -24,13 +31,13 @@
             <nav>
                 <div id="hw1_logo">
                 	<a href="#">
-                	<img alt="就叫2333" src="./read_and_manage_lib/logo.gif">
+                	<img alt="就叫2333" src="<%=basePath%>jsp/read_and_manage_lib/logo.gif">
                 	</a>
                 </div>
                 <ul class="nav_ul hw1_masthead_cata hidden-sm hidden-xs">
                  	<celin>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</celin>
-                    <li><a href="./read.jsp">论文阅读</a></li>
-                    <li><a href="./manage.jsp">论文管理</a></li>
+                    <li><a href="<%=basePath%>jsp/read">论文阅读</a></li>
+                    <li><a href="<%=basePath%>jsp/manage">论文管理</a></li>
                 </ul>
             </nav>
         </div>
@@ -41,9 +48,9 @@
 
 <!--pdf-->
 <center>
- <!--<embed width="800" height="600" src="test.pdf"></embed>-->
- <!--<iframe width="800" height="600" src="test.pdf"></iframe>-->
- <object width="800" height="600" data="../../file-/zzh19971968@foxmail.com/test/test.pdf"></object>
+<!-- embed width="800" height="600" src="./test.pdf"-->
+ <!--iframe width="800" height="600" src="./test.pdf"></iframe-->
+ <object width="800" height="600" data="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></object>
 </center>
 
 
