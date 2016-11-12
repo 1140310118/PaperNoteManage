@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
 	<link rel="Shortcut Icon" href="#">
+    <script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
 </head>
 
 
@@ -53,7 +54,53 @@
  <object width="800" height="600" data="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></object>
 </center>
 
+<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
 
+<%int i=0;%>
+<div id="noteArea">
+	<s:iterator value="notes" id="note">
+		<%i++;%>
+		<textarea placeholder="笔记" id="note<%=i%>">
+		<s:property value="note"/>
+		</textarea>
+	</s:iterator>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		//var path="<%=basePath%>file/zzh19971968@foxmail.com/test/note1.txt";
+	    //LoadNote(path);
+	    //alert("");
+        addNote();
+	    //NoteWrite();
+	});
+	function addNote(){
+		$("#addNoteButton").click(function(){
+			$.post( "<%=basePath%>read",
+				    {addNoteFlag:"true"},
+				    function(){
+				    	alert("添加笔记");
+				    	$("#noteArea").append("<textarea></textarea>");
+				    });
+			
+		});
+		
+	}
+	function LoadNote(path){
+        $("#note").load(path);
+	}
+	function NoteWrite(id){
+		$("#"+id).change(function(){
+	    	$.post(   "<%=basePath%>read",
+	    		     {note:$("#note").val()},
+    			     function(){
+	    			    //alert("ok");
+	    		     }
+	    		   );
+	    });
+	}
+    
+</script>
 
 
 <!--底部-->

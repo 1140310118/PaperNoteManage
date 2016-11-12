@@ -30,7 +30,7 @@
 			<result name="input">/jsp/manage.jsp</result>
 		</action>
 		
-		<action name="read" class="">
+		<action name="read" class="testForJsp.action.Note" method="execute">
 			<result name="success">/jsp/read.jsp</result>
 		</action>
 		
@@ -43,6 +43,7 @@
 			</result>
 		</action>
 	</package>
+	
 	<package name="actions" extends="struts-default">
 		<action name="selectbytype" class="com.paper.action.BookAction" method ="selectbytype">
 			<!-- name="success" -->
