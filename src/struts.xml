@@ -30,7 +30,7 @@
 			<result name="input">/jsp/manage.jsp</result>
 		</action>
 		
-		<action name="read" class="testForJsp.action.Note" method="execute">
+		<action name="read" class="testForJsp.action.NoteManage" method="execute">
 			<result name="success">/jsp/read.jsp</result>
 		</action>
 		

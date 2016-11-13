@@ -57,13 +57,16 @@
 
 
 <div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;">
-<iframe src="http://www.iciba.com/"></iframe>
+	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
 	<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
 	<%int i=0;%>
 	<div id="noteArea">
-		<s:iterator value="notes" id="note">
+		<s:iterator value="notes">
 			<%i++;%>
-			<textarea placeholder="笔记" id="note_<%=i%>" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="note"/></textarea>
+			<textarea placeholder="笔记" id="note_<%=i%>" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;">
+				<s:property value="content"/>
+			</textarea>
+			<button class="note_delete_button_class" id="note_delete_button_<%=i%>">删除笔记</button>
 		</s:iterator>
 	</div>
 </div>
@@ -88,32 +91,80 @@
 <script type="text/javascript">
 	$(document).ready(function(){
         addNote();
-        NoteWrite();
-	});
+        modifyNote();
+        deleteNote();
+    });
+	function modifyNote(){
+		$(".note_class").change(function(){
+        	var id = $(this).attr("id");
+			$.post("<%=basePath%>read",
+			   		{
+					 	modifyNoteListID: ""+parseInt(id.substring(5)),
+						modifyNoteContent:$("#"+id).val()
+					},
+			   		function(){
+			   			alert(parseInt(id.substring(5))+":already post");
+			   		}
+			);
+		});
+	}
+	
+	function modifyNote_by_id(id){
+		$("#"+id).change(function(){
+        	$.post("<%=basePath%>read",
+			   		{
+					 	modifyNoteListID: ""+parseInt(id.substring(5)),
+						modifyNoteContent:$("#"+id).val()
+					},
+			   		function(){
+			   			alert(parseInt(id.substring(5))+":already post");
+			   		}
+			);
+		});
+	}
+	
 	function addNote(){
 		$("#addNoteButton").click(function(){
 			$.post( "<%=basePath%>read",
 				    {addNoteFlag:"true"},
 				    function(){
 				    	<%i++;%>
-				    	$("#noteArea").append("<textarea placeholder=\"笔记\" id=\"note_<%=i%>\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"></textarea>");
+				    	$("#noteArea").append("<textarea placeholder=\"笔记\" id=\"note_<%=i%>\" class=\"note_class\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"/>\
+										<button class=\"note_delete_button_class\" id=\"note_delete_button_<%=i%>\">删除笔记</button>");
+				    	modifyNote_by_id("note_<%=i%>");
+				    	deleteNote_by_id("note_<%=i%>");
 				    });
 		});
-		
 	}
-	function NoteWrite(){
-		for (var id=1;id <= <%=i%>;id++){
-			$("#note_"+id).change(function(){
-				_NoteWriteSpecity(id);
-			});
-		}
+	function deleteNote(){
+		$(".note_delete_button_class").click(function(){
+        	var id = $(this).attr("id");
+        	alert(id.substring(19));
+        	$.post("<%=basePath%>read",
+			   		{
+					 	deleteNoteListID: id.substring(19)
+					},
+			   		function(){
+						$("#note_"+id.substring(19)).hide();// hide 输入框
+						$("#"+id).hide();//hide 删除按钮
+			   			alert(id.substring(19)+":删除成功！");			   			
+			   		}
+			);
+		});
 	}
-	function _NoteWriteSpecify(id){
-	    $.post("<%=basePath%>read",
-	    		{modifyNoteID:id,modifyNoteContent:$("#note_"+id)},
-	    		function(){
-	    			//
-	    		});
+	function deleteNote_by_id(id){
+		$("#"+id).click(function(){
+        	$.post("<%=basePath%>read",
+			   		{
+					 	deleteNoteListID: id.substring(19)
+					},
+			   		function(){
+						$("#note_"+id.substring(19)).hide();// hide 输入框
+						$("#"+id).hide();//hide 删除按钮
+			   			alert(id.substring(19)+":删除成功！");			   			
+			   		}
+			);
+		});
 	}
     
 </script>
