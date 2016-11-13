@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 
+    <package name="default" namespace="/" extends="struts-default">
+     -->
+    <constant name="struts.i18n.reload" value="true"/>
+    <package name="user" extends="struts-default">
+        <action name="login" class="com.paper.action.LoginAndRegisterAction" method="login">
+            <result name="loginsuccess" type="redirect">manage.action</result>
+            <result name="loginerror">/jsp/login.jsp</result>
+        </action>
+        <action name="register" class="com.paper.action.LoginAndRegisterAction" method="register">
+            <result name="registersuccess" type="redirect">login.action</result>
+            <result name="registererror">/jsp/register.jsp</result>
+        </action>
+    </package>
+    <package name="uploadfile" extends="struts-default">
+		<action name="uploadFile" class="com.paper.action.UploadFileAction">
+			<!-- name="success" -->
+			<result name="success">/uploadfile.jsp</result>
+			<result name="input">/uploadfile.jsp</result>
+		</action>
+		
+		<action name="manage" class="com.paper.action.UploadFileAction">
+			<!-- name="success" -->
+			<result name="success">/jsp/manage.jsp</result>
+			<result name="input">/jsp/manage.jsp</result>
+		</action>
+		
+		<action name="read" class="testForJsp.action.Note" method="execute">
+			<result name="success">/jsp/read.jsp</result>
+		</action>
+		
+		<action name="download_*" class="com.paper.action.DownloadFileAction">
+			<param name="filename">{1}</param>
+			<result name="input">/download.jsp</result>
+			<result name="success" type="stream">
+				<param name="inputName">targetInputStream</param>
+				<param name="contentDispsition"> filename="{1}"</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="actions" extends="struts-default">
+		<action name="selectbytype" class="com.paper.action.BookAction" method ="selectbytype">
+			<!-- name="success" -->
+			<result name="success">/book.jsp</result>
+			
+		</action>
+		<action name="selectbyid" class="com.paper.action.BookAction" method ="selectbyid">
+			<!-- name="success" -->
+			<result name="success">/update.jsp</result>
+			
+		</action>
+
+	  
+		<action name="deleteByType" class="com.paper.action.BookAction" method ="deleteByType" >
+			<result name="delete" type="redirectAction" >selectbytype.action</result>
+		</action>
+		
+		<action name="add" class="com.paper.action.AddNote" method ="add" >
+			<result name="success"  >/index.jsp</result>
+		</action>
+		<action name="update" class="com.paper.action.UpdateNote" method ="update" >
+			<result name="success"  >/index.jsp</result>
+		</action>
+	</package>
+</struts>
