@@ -15,7 +15,8 @@ public class Note {
 	
 	
 	public String execute(){
-		System.out.println(tmpPath);
+		//System.out.println(tmpPath);
+		
 		if(addNoteFlag!="false"){
 			System.out.println("in");
 			addNoteFile("9.txt");

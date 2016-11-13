@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
 	<link rel="Shortcut Icon" href="#">
     <script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
+    <script type="text/javascript" src="http://open.iciba.com/ds_open.php?id=53648&name=2333&auth=AEE55034FB1F422E38947BDF265B7A17" charset="utf-8"></script>
 </head>
 
 
@@ -48,23 +49,41 @@
 
 
 <!--pdf-->
-<center>
-<!-- embed width="800" height="600" src="./test.pdf"-->
- <!--iframe width="800" height="600" src="./test.pdf"></iframe-->
+<!-- embed width="800" height="600" src="./test.pdf">
+<iframe width="800" height="600" src="./test.pdf"></iframe-->
+ <div style="float:left;margin-left:200px;margin-top: 50px;">
  <object width="800" height="600" data="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></object>
-</center>
+</div>
 
+
+<div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;">
+<iframe src="http://www.iciba.com/"></iframe>
 <button id="addNoteButton" name="addNoteFlag">添加笔记</button>
-
 <%int i=0;%>
 <div id="noteArea">
 	<s:iterator value="notes" id="note">
 		<%i++;%>
-		<textarea placeholder="笔记" id="note<%=i%>">
-		<s:property value="note"/>
-		</textarea>
+		<textarea placeholder="笔记" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="note"/></textarea>
 	</s:iterator>
 </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -79,7 +98,7 @@
 			$.post( "<%=basePath%>read",
 				    {addNoteFlag:"true"},
 				    function(){
-				    	alert("添加笔记");
+				    	//alert("添加笔记");
 				    	$("#noteArea").append("<textarea></textarea>");
 				    });
 			
@@ -102,7 +121,7 @@
     
 </script>
 
-
+<br><br><br><br><br><br><br><br><br>
 <!--底部-->
 <div id="footer" class="winwin-footer" style="top: initial;">
     <div class="container">

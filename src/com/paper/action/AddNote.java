@@ -25,7 +25,6 @@ public class AddNote {
 		System.out.println(str[1]+"+++");
 		try{
 			
-			
 			String sql = "insert into papernote ( name,text ) value (?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1,str[0]);
