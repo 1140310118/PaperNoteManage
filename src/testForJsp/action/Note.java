@@ -3,8 +3,6 @@ package testForJsp.action;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import org.apache.commons.io.FileUtils;
@@ -14,8 +12,11 @@ public class Note {
 	private ArrayList<String> notes=new ArrayList<String>();
 	private String addNoteFlag = "false";
 	private String testtext="最后一个";
-	private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
-	private String con="D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/config";
+	//private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
+	//private String con="D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/config";
+	private String tmpPath = "M:/myGithub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
+	private String con="M:/myGithub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/config";
+		
 	
 	public String execute(){
 		//System.out.println(tmpPath);

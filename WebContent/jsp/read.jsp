@@ -18,7 +18,8 @@
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
 	<link rel="Shortcut Icon" href="#">
     <script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
-    <script type="text/javascript" src="http://open.iciba.com/ds_open.php?id=53648&name=2333&auth=AEE55034FB1F422E38947BDF265B7A17" charset="utf-8"></script>
+    
+   
 </head>
 
 
@@ -57,7 +58,9 @@
 
 
 <div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;">
-<iframe src="http://www.iciba.com/"></iframe>
+<iframe src="http://cn.bing.com/dict/"></iframe>
+<input id="dictWord"></input>
+<button id="dictClick">查询</button>
 <button id="addNoteButton" name="addNoteFlag">添加笔记</button>
 <%int i=0;%>
 <div id="noteArea">
@@ -67,7 +70,6 @@
 	</s:iterator>
 </div>
 </div>
-
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
@@ -85,7 +87,64 @@
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 
+<!--  http://dict-co.iciba.com/api/dictionary.php?w=go&key=574912FE50E41DF3EE2CE7F826A792E7&type=json -->
 <script type="text/javascript">
+	$(document).ready(function(){
+		$("#dictClick").click(function(){
+			alert("查-- 询");
+			dictQuery();
+			// $.post("http://dict-co.iciba.com/api/dictionary.php?w=go&key=574912FE50E41DF3EE2CE7F826A792E7&type=json",
+			// 	{},
+			// 	function(result){
+			// 		alert(result.word_name);
+			// 	});
+		});
+	})
+	function dictQuery3(){
+		var xhrurl = "http://dict-co.iciba.com/api/dictionary.php?type=json&key=574912FE50E41DF3EE2CE7F826A792E7&w=go";
+		$.getJSON(xhrurl,function(){alert("das");});
+	}
+	function dictQuery(){
+		var xhrurl = "http://dict-co.iciba.com/api/dictionary.php?type=json&key=574912FE50E41DF3EE2CE7F826A792E7&w=go";
+		$.ajax({
+	        type : "post",
+	        async : true,
+	        url :xhrurl, 
+	        cache : false,
+	        data : "{}",
+	        dataType : "jsonp",
+	        jsonp: "callbackparam",
+	        success : function(json){
+	            alert("成功");
+	        },
+	         error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 alert(XMLHttpRequest.status+" "+XMLHttpRequest.readyState+" "+textStatus);
+        	}
+    	});
+	}
+	function jsonpCallback1(result){
+		alert("你调我了");
+	}
+	function dictQuery2(){
+		var xhrurl = "http://dict-co.iciba.com/api/dictionary.php?type=json&key=574912FE50E41DF3EE2CE7F826A792E7&w=go";
+		$.ajax({
+	        type : "post",
+	        async : false,
+	        url :xhrurl, 
+	        cache : false,
+	        dataType : "jsonp",
+	        jsonp: "callbackparam",
+	        jsonpCallback:"jsonpCallback1",
+	        success : function(json){
+	            alert("成功");
+	        },
+	         error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 alert(XMLHttpRequest.status);
+				 alert(XMLHttpRequest.readyState);
+				 alert(textStatus);
+        	}
+    	});
+	}
 	$(document).ready(function(){
 		//var path="<%=basePath%>file/zzh19971968@foxmail.com/test/note1.txt";
 	    //LoadNote(path);
