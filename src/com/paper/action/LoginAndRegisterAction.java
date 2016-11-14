@@ -2,7 +2,9 @@ package com.paper.action;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.paper.model.*;
 import com.paper.db.DAO;
@@ -58,14 +60,29 @@ public class LoginAndRegisterAction extends ActionSupport{
 	
 	public String login() {
 		String sql = this.user.ToSelectSql();
+		//String sqlforNickname = this.user.ToSelectNickname();
+		String USER_Nickname = "user_nickname";
 		//String sql = "select * from " + userTable + " where email='zorenv@163.com' and password ='4321005'";
 		ResultSet rS = dao.executeQuery(sql);
+		//System.out.println(rS);
+		//USER_Nickname = rS.getString(1);
+		
 		System.out.println(registeringFlag);
 		if (registeringFlag=="0")
 		{
 			if (rS!=null){
 				try {
-					if (rS.next()) {
+					//if (rS.next()) {
+//						System.out.println("登陆成功");
+//						System.out.println(rS);
+						while (rS.next()) {
+							USER_Nickname = rS.getString(3);
+							ActionContext actionContext = ActionContext.getContext();
+							Map session = actionContext.getSession();
+							session.put("USER_Nickname", USER_Nickname);
+							//System.out.println(session.get(USER_Nickname));
+						//}
+						System.out.println(USER_Nickname);
 						return "loginsuccess";
 					}
 					return "loginerror";
