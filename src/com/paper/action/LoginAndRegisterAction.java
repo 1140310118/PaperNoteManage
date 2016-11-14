@@ -62,6 +62,7 @@ public class LoginAndRegisterAction extends ActionSupport{
 		String sql = this.user.ToSelectSql();
 		//String sqlforNickname = this.user.ToSelectNickname();
 		String USER_Nickname = "user_nickname";
+		String USER_Email = "user_email";
 		//String sql = "select * from " + userTable + " where email='zorenv@163.com' and password ='4321005'";
 		ResultSet rS = dao.executeQuery(sql);
 		//System.out.println(rS);
@@ -77,9 +78,11 @@ public class LoginAndRegisterAction extends ActionSupport{
 //						System.out.println(rS);
 						while (rS.next()) {
 							USER_Nickname = rS.getString(3);
+							USER_Email = rS.getString(1);
 							ActionContext actionContext = ActionContext.getContext();
 							Map session = actionContext.getSession();
 							session.put("USER_Nickname", USER_Nickname);
+							session.put("USER_Email", USER_Email);
 							//System.out.println(session.get(USER_Nickname));
 						//}
 						System.out.println(USER_Nickname);

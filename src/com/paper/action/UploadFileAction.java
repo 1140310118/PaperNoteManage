@@ -3,8 +3,11 @@ package com.paper.action;
 import com.opensymphony.xwork2.ModelDriven;
 import com.paper.db.DAO;
 import com.paper.model.Paper;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
+import java.util.Map;
+
 import com.paper.model.file;
 
 public class UploadFileAction extends ActionSupport implements
@@ -14,6 +17,15 @@ public class UploadFileAction extends ActionSupport implements
 	private file singleFile = new file();
 	private Paper paper=new Paper();
 	private DAO dao = new DAO();
+	private String userEmail = null;
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 
 	public file getModel()
 	{
@@ -43,18 +55,26 @@ public class UploadFileAction extends ActionSupport implements
     		addFieldError("resume", "只璇蜂笂浼爓ord鏂囨。.");
     	}    	
     }
+    
+    ////////////////////////////////////
 	public String execute() throws Exception
 	{
+		// 所有论文 根据userEmail
+		//
 		String root = "d:\\upload\\";
 		String paperWebFilePath=fileUp(root);
 		insertNewPaper(paperWebFilePath);
 		return "success";
 	} 
+	/////////////////////////////////////
+	
+	
 	
 	// 向数据库中插入 paper 对象	
 	private void insertNewPaper(String paperWebFilePath) {
 		String sql=this.paper.toInsertSql(paperWebFilePath);
 		System.out.println(sql);
+		//sql += " "
 		int rs=dao.executeUpdate(sql);//"insert into paper values('fasfsdf','','null','null','null','null')");
 		System.out.println(rs);
 	}
