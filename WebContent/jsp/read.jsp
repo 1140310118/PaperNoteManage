@@ -55,7 +55,7 @@
  <object width="800" height="600" data="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></object>
 </div>
 
-
+<div id="already_saved" style="display: none;z-index: 9999;background: #eee;position: absolute;left:80%">已经保存</div>
 <div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;">
 	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
 	<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
@@ -63,23 +63,12 @@
 	<div id="noteArea">
 		<s:iterator value="notes">
 			<%i++;%>
-			<textarea placeholder="笔记" id="note_<%=i%>" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;">
-				<s:property value="content"/>
-			</textarea>
+			<textarea placeholder="笔记" id="note_<%=i%>" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea>
 			<button class="note_delete_button_class" id="note_delete_button_<%=i%>">删除笔记</button>
 		</s:iterator>
 	</div>
 </div>
 
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
@@ -103,7 +92,8 @@
 						modifyNoteContent:$("#"+id).val()
 					},
 			   		function(){
-			   			alert(parseInt(id.substring(5))+":already post");
+			   			//alert(parseInt(id.substring(5))+":already post");
+			   			showAlreadySaved();
 			   		}
 			);
 		});
@@ -117,7 +107,9 @@
 						modifyNoteContent:$("#"+id).val()
 					},
 			   		function(){
-			   			alert(parseInt(id.substring(5))+":already post");
+			   			//alert(parseInt(id.substring(5))+":already post");
+			   			///////////
+			   			showAlreadySaved();
 			   		}
 			);
 		});
@@ -166,7 +158,19 @@
 			);
 		});
 	}
-    
+	function showAlreadySaved(){
+		if ($("#already_saved").css('display')=='none'){
+			 $('#already_saved').css({display:'block', top:'-100px'}).animate({top: '+100'}, 500, function(){ 
+                        		setTimeout(outAlreadySaved, 750); 
+            					}
+            ); 
+		}
+	}
+	function outAlreadySaved(){
+		$('#already_saved').animate({top:'0'}, 200, function(){ 
+                $(this).css({display:'none', top:'-100px'}); 
+            }); 
+	}
 </script>
 
 <br><br><br><br><br><br><br><br><br>
