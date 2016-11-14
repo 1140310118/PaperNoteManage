@@ -14,8 +14,17 @@ public class Paper {
 	public String paperExteriorURL;
 	public String paperRemark;
 	public String uploadDate;
+	public String paperUserEmail;
 	
 	
+	public String getPaperUserEmail() {
+		return paperUserEmail;
+	}
+
+	public void setPaperUserEmail(String paperUserEmail) {
+		this.paperUserEmail = paperUserEmail;
+	}
+
 	public String getPaperNickName() {
 		return paperNickName;
 	}
@@ -73,13 +82,14 @@ public class Paper {
 		String date = df.format(new Date());
 		
 		sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
-				+ "paperExteriorURL,paperRemark,uploadDate) "
+				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail) "
 				+ "values('" + this.paperNickName 
 				+ "','" +this.paperOrigin
 				+ "','" +paperWebFilePath 
 				+ "','" +this.paperExteriorURL
 				+ "','" +this.paperRemark 
 				+ "','" +date
+				+ "','" +this.paperUserEmail
 				+ "');";
 		
 		return sql;

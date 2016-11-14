@@ -409,6 +409,7 @@
 </div>
 </div>
 
-
+<p name="paper.paperUserEmail"><s:property value="#session.USER_Email"  /></p>
+<%-- <s:property value="#session.USER_Email" name="userEmail"/> --%>
 </body>
 </html>
