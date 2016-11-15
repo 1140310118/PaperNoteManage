@@ -1,33 +1,68 @@
-package com.paper.model; 
+package com.paper.model;
 
 public class Book {
 	
-	private String type;
-	private String text;
-	private int id;
+	public String paperNickName;
+	public String paperOrigin;
+	public String paperWebFilePath;
+	public String paperExteriorURL;
+	public String paperRemark;
+	public String uploadDate;
+	public String paperUserEmail;
 	
-	public int getId() {
-		return id;
+	public String getPaperWebFilePath() {
+		return paperWebFilePath;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPaperWebFilePath(String paperWebFilePath) {
+		this.paperWebFilePath = paperWebFilePath;
 	}
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-	
-	
-	public String getType() {
-		return type;
+	public String getPaperUserEmail() {
+		return paperUserEmail;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setPaperUserEmail(String paperUserEmail) {
+		this.paperUserEmail = paperUserEmail;
+	}
+
+	public String getPaperNickName() {
+		return paperNickName;
+	}
+
+	public void setPaperNickName(String paperNickName) {
+		this.paperNickName = paperNickName;
+	}
+
+	public String getPaperOrigin() {
+		return paperOrigin;
+	}
+
+	public void setPaperOrigin(String paperOrigin) {
+		this.paperOrigin = paperOrigin;
+	}
+
+	public String getPaperExteriorURL() {
+		return paperExteriorURL;
+	}
+
+	public void setPaperExteriorURL(String paperExteriorURL) {
+		this.paperExteriorURL = paperExteriorURL;
+	}
+
+	public String getPaperRemark() {
+		return paperRemark;
+	}
+
+	public void setPaperRemark(String paperRemark) {
+		this.paperRemark = paperRemark;
+	}
+
+	public String getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(String uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 
 }

@@ -4,6 +4,7 @@
 + path + "/"; 
 %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
@@ -322,6 +323,21 @@
 
 
 <!--文件列表-->
+<%-- <c:forEach var="book" items="${booklist}"> --%>
+<!-- 			<tr> -->
+
+<%-- 				<td><a href="${book.paperWebFilePath}"> ${book.paperNickName }</a></td> --%>
+<!-- 			<!--   -->
+<!-- 				<td><a href='<s:url action="deleteByType" > -->
+<!-- 				<s:param name="type" value="type"></s:param> -->
+<!-- 				</s:url>'> 删除</a></td> -->
+<!-- 			--> -->
+<%-- 			<td><a href="selectbyid?type=${book.paperNickName }"> 修改</a></td> --%>
+<%-- 			<td><a href="selectbyid1?type=${book.paperNickName }"> 详情</a></td> --%>
+<%-- 			<td><a href="deleteByType?type=${book.paperNickName } "> 删除</a></td> --%>
+<!-- 			</tr> -->
+<!-- 		</c:forEach> -->
+
 	<br><br><br>
 	<ol class="rounded-list" id="allPaperShow">
 		<!--以下四行是 为了便于展示，在实际过程中，使用s:property-->
@@ -332,11 +348,35 @@
 				<a href="#" onClick="delcfm()">删除&nbsp;&nbsp;</a>
 			</div>
 		</li>	
-		<s:iterator value="existPapers">
-			<s:property value="paperNickName"></s:property>
-		</s:iterator>			
+		
+		<%int paperIndex=0; %>
+		<c:forEach var="paper" items="${paperList}">
+			<% paperIndex++; %>
+			<div id="paperE_<%=paperIndex%>">
+				<div  id="paperNickName_forDelete_<%=paperIndex%>">
+					<li><a href="${book.paperWebFilePath}"> ${book.paperNickName }</a></li>
+				</div>
+				<div style="float:right;">
+					<a href="#" >修改&nbsp;&nbsp;</a>
+					<a href="#" id="detail" onClick="deTail()">详情&nbsp;&nbsp;</a>
+					<a href="#" onClick="deletePaper(<%=paperIndex%>)">删除&nbsp;&nbsp;</a>
+				</div>
+			</div>
+		</c:forEach>			
 	</ol>
 <!---->
+<script type="text/javascript">
+	function deletePaper(Index){
+		$("#paperE_"+Index).hide();
+		var name = $("#paperNickName_forDelete_"+Index).val();
+		$.post("<%=basePath%>manage",
+				{
+					deletePaperNickName:name
+				},
+				function(){alert(name+" 删除成功");}
+		);
+	}
+</script>
 
 
 

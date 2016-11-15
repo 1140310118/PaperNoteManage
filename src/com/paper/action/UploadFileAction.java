@@ -6,11 +6,15 @@ import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.paper.model.file;
+import com.paper.paperManage_tmp.BookOper;
 
 public class UploadFileAction extends ActionSupport implements
 		ModelDriven<file>
@@ -20,12 +24,38 @@ public class UploadFileAction extends ActionSupport implements
 	private Paper paper=new Paper();
 	private String userEmailGetFlag = "false";//;(String) ServletActionContext.getRequest().getSession().getAttribute("USER_Email");;
 	private String fileUpFlag;
+	
+	//////
+	//paperList
+	private String deletePaperNickName = null;
+	private String updatePaperFlag = "false";
+	private Paper updatedPaper = new Paper();
+	/////
+	
+	Connection conn = com.paper.db.DbConn.getConn();
+	public String getUpdatePaperFlag() {
+		return updatePaperFlag;
+	}
+
+	public void setUpdatePaperFlag(String updatePaperFlag) {
+		this.updatePaperFlag = updatePaperFlag;
+	}
+
+	public Paper getUpdatedPaper() {
+		return updatedPaper;
+	}
+
+	public void setUpdatedPaper(Paper updatedPaper) {
+		this.updatedPaper = updatedPaper;
+	}
 
 	
 	private DAO dao = new DAO();
 	ActionContext actionContext = ActionContext.getContext();
 	Map session = actionContext.getSession();
 	private String userEmail = (String) session.get("USER_Nickname");
+	// panwei
+	private BookOper bo = new BookOper(); // 查询类
 	
 	public String getFileUpFlag() {
 		return fileUpFlag;
@@ -90,7 +120,7 @@ public class UploadFileAction extends ActionSupport implements
 	////////////////////////////////////
 	
 ////////////////////////////////////////	
-////////////////////////////////////
+///////////////////////////////////////
 public String paperManage() throws Exception
 {
 	// 所有论文 根据userEmail
@@ -99,6 +129,13 @@ public String paperManage() throws Exception
 	
 	//System.out.println("userEmail:"+userEmail);
 	getAllPaperExistedByEmail();
+	if (deletePaperNickName!=null){
+		deletePaperByNickname(deletePaperNickName);
+	}
+	if (updatePaperFlag!="false"){
+		updatePaper(updatedPaper);
+	}
+	
 	String root = "d:\\upload\\";
 	if (fileUpFlag!="false"){
 		String paperWebFilePath=fileUp(root);
@@ -109,8 +146,30 @@ public String paperManage() throws Exception
 	}
 	return "success";
 } 
+private void updatePaper(Paper paper) {
+	try{
+		
+		String sql = "update paper set paperOrigin=?,paperWebFilePath=?,paperRemark=?,uploadDate=? where paperNickName=?";
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		pStmt.setString(1,paper.paperOrigin);
+		pStmt.setString(2,paper.paperWebFilePath);
+		pStmt.setString(3,paper.paperRemark);
+		pStmt.setString(4,paper.uploadDate);
+		pStmt.setString (5,paper.paperNickName);
+		pStmt.executeUpdate();
+	}
+	catch(SQLException e){
+		e.printStackTrace();
+	}
+}
+
+private void deletePaperByNickname(String dPaperNickName) {
+	bo.deleteByType(dPaperNickName);
+}
+
 private void getAllPaperExistedByEmail() {
-		/////userEmail;
+	System.out.println(userEmail);
+	ActionContext.getContext().put("paperList", bo.selectByType(userEmail));
 	}
 
 ////////////////////////////////////
