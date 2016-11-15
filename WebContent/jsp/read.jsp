@@ -63,6 +63,7 @@
 	<div id="noteArea">
 		<s:iterator value="notes">
 			<%i++;%>
+			<center><s:property value="noteID"/></center>
 			<textarea placeholder="笔记" id="note_<%=i%>" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea>
 			<button class="note_delete_button_class" id="note_delete_button_<%=i%>">删除笔记</button>
 		</s:iterator>
