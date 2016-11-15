@@ -50,10 +50,7 @@ public class UploadFileAction extends ActionSupport implements
     	{
     		addFieldError("resume", "璇蜂笂浼犳枃浠?");
     	}
-    	else if(!filename.toLowerCase().endsWith(".doc"))
-    	{
-    		addFieldError("resume", "只璇蜂笂浼爓ord鏂囨。.");
-    	}    	
+    	  	
     }
     
     ////////////////////////////////////
