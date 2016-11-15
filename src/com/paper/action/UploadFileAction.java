@@ -170,6 +170,7 @@ public String paperManage() throws Exception{
 		if (fileUpFlag!="false"){
 			System.out.println("新建文件 从本地");
 			String paperWebFilePath=fileUp(root);
+//			System.out.println(paperWebFilePath);
 			insertNewPaper(paperWebFilePath);
 		}
 		
@@ -225,7 +226,8 @@ private void getAllPaperExistedByEmail() {
 		{
 			rootFile.mkdir();
 		}
-		String filename = root + singleFile.getResumeFileName();		
+		String filename = root + singleFile.getResumeFileName();
+		System.out.println("filename:"+filename);
 		FileInputStream fis = new FileInputStream(singleFile.getResume());
 		FileOutputStream fos = new FileOutputStream(filename);
 		byte[] buffer = new byte[8192];
@@ -239,7 +241,7 @@ private void getAllPaperExistedByEmail() {
 		System.out.println( singleFile.getResumeFileName());
 		System.out.println( singleFile.getResumeContentType());
 		filename = filename.replaceAll("\\\\","/");
-//		System.out.println("反倒是"+filename);
+		System.out.println("反倒是"+filename);
 		return filename;
 	}
 
