@@ -389,7 +389,7 @@
 	</ol>
 	<!-- <div style="position: absolute;left: 55%;top: 10%;margin-left: width/2;margin-height: height/2;width: 320px;"> -->
 	<div id="updatePaperWindow" class="centerWindow">
-		<form  action="<%=basePath%>manage" method="post">
+		<form  action="<%=basePath%>manage?updatePaperFlag=true" method="post">
 			<table class="bordered">
 			    <tr><th colspan="2">修改论文信息</th></tr>
 			    <tr>

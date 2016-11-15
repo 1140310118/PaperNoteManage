@@ -45,7 +45,7 @@ public class UploadFileAction extends ActionSupport implements
 	}
 
 	private String updatePaperFlag = "false";
-	private Paper updatedPaper = null;//new Paper();
+	private Paper updatedPaper = new Paper();
 	/////
 	private String newPaperFlag = "false";
 //	
@@ -144,6 +144,13 @@ public String paperManage() throws Exception{
 	// 所有论文 根据userEmail
 	//
 	System.out.println("userEmail:"+userEmail);
+	
+	System.out.println("updatePaperFlag："+updatePaperFlag);
+	if (updatePaperFlag!="false"){
+		updatePaper(updatedPaper);
+	
+	}
+	
 	getAllPaperExistedByEmail();
 	
 	if (deletePaperNickName!=null){
@@ -151,10 +158,6 @@ public String paperManage() throws Exception{
 		deletePaperByNickname(deletePaperNickName);
 	}
 	
-	System.out.println("updatedPaper："+updatedPaper);
-	if (updatedPaper!=null){
-		updatePaper(updatedPaper);
-	}
 	
 	String root = "d:\\upload\\";
 	if (newPaperFlag!="false"){
