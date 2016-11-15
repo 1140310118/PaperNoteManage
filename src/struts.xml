@@ -35,7 +35,7 @@
 			<result name="input">/uploadfile.jsp</result>
 		</action>
 
-		<action name="manage" class="com.paper.action.UploadFileAction">
+		<action name="manage" class="com.paper.action.UploadFileAction" >
 			<!-- name="success" -->
 			<result name="success">/jsp/manage.jsp</result>
 			<result name="input">/jsp/manage.jsp</result>

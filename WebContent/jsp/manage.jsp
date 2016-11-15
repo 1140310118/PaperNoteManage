@@ -29,7 +29,14 @@
 
 	<script src="<%=basePath%>jsp/read_and_manage_lib/js/simple.js"></script>
 	<script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
-
+	<script type="text/javascript">
+	alert("开始加载页面");
+	var s="<%=session.getAttribute("USER_Email")%>";
+	alert(s);
+		$.post("<%=basePath%>manage",
+			{userEmail: s},
+			function(){});
+	</script>
 </head>
 
 
@@ -132,10 +139,12 @@
 <!-- 新建论文  从本地上传-->
 	<div class="form_container" id="newPaperFromLocal" style="display:none;">
 	<br><br>
-	<s:form id="paperForm" action="manage" method="post" enctype="multipart/form-data">
+	<s:form id="paperForm" action="manage?fileUpFlag=true" method="post" enctype="multipart/form-data">
 	  	 <h3>新建论文</h3>
 	    <h4>从本地上传</h4>
-	    <input name="paper.paperUserEmail" style="display: none;"><s:property value="#session.USER_Email"  /></input>
+	    <fieldset>
+	   	<input id="newPaperFromLocal_userEmail" value='<%=session.getAttribute("USER_Email")%>' name="paper.paperUserEmail" style="display: none;"></input>
+	   	</fieldset>
 	    <fieldset>
 	      <input placeholder="*论文名称 nickname" type="text" id="newPaperFromLocal_name"tabindex="1" name="paper.paperNickName"
 	      required autofocus/>
@@ -170,6 +179,7 @@
 			$("#newPaperFromLocal_Submit").click(function(){
 				if($("#newPaperFromLocal_name").val() && 
 				   $("#newPaperFromLocal_fileName").val()){
+				   	alert($("#newPaperFromLocal_userEmail").val());
 					alert("提交啦！");
 				}
 			});
@@ -190,8 +200,12 @@
 	<form id="paperForm" action="manage" method="post">
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>
-	    <input name="paper.paperUserEmail" style="display: none;"><s:property value="#session.USER_Email"  /></input>
+	    
 	    <fieldset>
+	   	<input id="newPaperFromLocal_userEmail" value='<%=session.getAttribute("USER_Email")%>' name="paper.paperUserEmail" style="display: none;"></input>
+	   	</fieldset>
+	   	
+		<fieldset>
 	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" name="paper.paperNickName" id="newPaperByURL_name" required autofocus>
 	    </fieldset>
 
@@ -201,43 +215,43 @@
 	    </fieldset>
 	  
 	    <fieldset>
-	        <input type="text" placeholder="*URL"  name="paper.paperExteriorURL" id="newPaperByURL_url" required>
+	        <input type="text" placeholder="*URL"  name="paper.paperExteriorURL" tabindex="3" id="newPaperByURL_url" required>
 	    </fieldset>
 
 	    <fieldset>
-	      <textarea placeholder="备注" id="tmp" tabindex="5" name="paper.paperRemark"></textarea>
+	      <textarea placeholder="备注" id="tmp" tabindex="4" name="paper.paperRemark"></textarea>
 	    </fieldset>
 	    <fieldset>
 	      <button name="submit" type="submit" id="newPaperByURL_Submit" data-submit="...Sending">Submit</button>
 	    </fieldset>
 	</form>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#newPaperByURL_Submit").click(function(submitEvent){
-				if(	$("#newPaperByURL_name").val() && 
-				   	$("#newPaperByURL_url").val()){
-					var URL=$("#newPaperByURL_url").val();
-					var flag;
-					alert("URL:"+URL);
-					$.ajax({
-						url: URL,
-						type: 'GET',
-						complete: function(response,submitEvent) {
-							alert("URL_and_result:"+URL+""+response.status);
-							if(response.status == 404) {
-								alert("无效");
-								flag=false;
-								}
-							else {
-								alert("有效");
-								flag=true;
-							}
-						}
-					});
-					alert("flag:"+flag);
-				}
-			});
-		});
+		// $(document).ready(function(){
+		// 	$("#newPaperByURL_Submit").click(function(submitEvent){
+		// 		// if(	$("#newPaperByURL_name").val() && 
+		// 		//    	$("#newPaperByURL_url").val()){
+		// 		// 	// var URL=$("#newPaperByURL_url").val();
+		// 		// 	// var flag;
+		// 		// 	// alert("URL:"+URL);
+		// 		// 	// // $.ajax({
+		// 		// 	// // 	url: URL,
+		// 		// 	// // 	type: 'GET',
+		// 		// 	// 	complete: function(response,submitEvent) {
+		// 		// 	// 		alert("URL_and_result:"+URL+""+response.status);
+		// 		// 	// 		if(response.status == 404) {
+		// 		// 	// 			alert("无效");
+		// 		// 	// 			flag=false;
+		// 		// 	// 			}
+		// 		// 	// 		else {
+		// 		// 	// 			alert("有效");
+		// 		// 	// 			flag=true;
+		// 		// 	// 		}
+		// 		// 	// 	}
+		// 		// 	// });
+		// 		// 	// alert("flag:"+flag);
+		// 		// }
+		// 	});
+		// });
 		function NetPing(URL) {
 		   $.ajax({
 				url: URL,
@@ -398,9 +412,9 @@
 </div>
 </div>
 
-<div style="display: none;">
-<p name="userEmail"><s:property value="#session.USER_Email"  /></p>
-</div>
+<!-- <div style="display: none;"> -->
+<!-- <p name="userEmail"><s:property value="#session.USER_Email"  /></p> -->
+<!-- </div> -->
 
 <!-- <input type="button" action="logout" value="退出" > -->
 <!-- onclick="close();document.write('<n>')"> -->

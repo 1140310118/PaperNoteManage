@@ -19,7 +19,17 @@ public class UploadFileAction extends ActionSupport implements
 	private file singleFile = new file();
 	private Paper paper=new Paper();
 	private DAO dao = new DAO();
-	private String userEmail = (String) ServletActionContext.getRequest().getSession().getAttribute("USER_Email");;
+	private String userEmail = null;
+	private String userEmailGetFlag = "false";//;(String) ServletActionContext.getRequest().getSession().getAttribute("USER_Email");;
+	private String fileUpFlag;
+
+	public String getFileUpFlag() {
+		return fileUpFlag;
+	}
+
+	public void setFileUpFlag(String fileUpFlag) {
+		this.fileUpFlag = fileUpFlag;
+	}
 
 	public String getUserEmail() {
 		return userEmail;
@@ -54,17 +64,24 @@ public class UploadFileAction extends ActionSupport implements
     	}
     	  	
     }
-    
     ////////////////////////////////////
 	public String execute() throws Exception
 	{
 		// 所有论文 根据userEmail
 		//
 		System.out.println("userEmail:"+userEmail);
+		if (userEmail!=null){
+			userEmailGetFlag="true";
+		}
 		
 		String root = "d:\\upload\\";
-		String paperWebFilePath=fileUp(root);
-		insertNewPaper(paperWebFilePath);
+		if (fileUpFlag!="false"){
+			String paperWebFilePath=fileUp(root);
+			insertNewPaper(paperWebFilePath);
+		}
+		else{
+			insertNewPaper("");
+		}
 		return "success";
 	} 
 	////////////////////////////////////
@@ -104,5 +121,13 @@ public class UploadFileAction extends ActionSupport implements
 		filename = filename.replaceAll("\\\\","/");
 //		System.out.println("反倒是"+filename);
 		return filename;
+	}
+
+	public String getUserEmailGetFlag() {
+		return userEmailGetFlag;
+	}
+
+	public void setUserEmailGetFlag(String userEmailGetFlag) {
+		this.userEmailGetFlag = userEmailGetFlag;
 	} 
 }
