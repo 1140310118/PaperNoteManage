@@ -18,11 +18,15 @@ public class UploadFileAction extends ActionSupport implements
 	private static final long serialVersionUID = 1L;
 	private file singleFile = new file();
 	private Paper paper=new Paper();
-	private DAO dao = new DAO();
-	private String userEmail = null;
 	private String userEmailGetFlag = "false";//;(String) ServletActionContext.getRequest().getSession().getAttribute("USER_Email");;
 	private String fileUpFlag;
 
+	
+	private DAO dao = new DAO();
+	ActionContext actionContext = ActionContext.getContext();
+	Map session = actionContext.getSession();
+	private String userEmail = (String) session.get("USER_Nickname");
+	
 	public String getFileUpFlag() {
 		return fileUpFlag;
 	}
@@ -30,7 +34,6 @@ public class UploadFileAction extends ActionSupport implements
 	public void setFileUpFlag(String fileUpFlag) {
 		this.fileUpFlag = fileUpFlag;
 	}
-
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -69,11 +72,11 @@ public class UploadFileAction extends ActionSupport implements
 	{
 		// 所有论文 根据userEmail
 		//
-		System.out.println("userEmail:"+userEmail);
-		if (userEmail!=null){
-			userEmailGetFlag="true";
-		}
+
+//		System.out.println(session.get("USER_Nickname"));
 		
+		//System.out.println("userEmail:"+userEmail);
+
 		String root = "d:\\upload\\";
 		if (fileUpFlag!="false"){
 			String paperWebFilePath=fileUp(root);
@@ -85,6 +88,33 @@ public class UploadFileAction extends ActionSupport implements
 		return "success";
 	} 
 	////////////////////////////////////
+	
+////////////////////////////////////////	
+////////////////////////////////////
+public String paperManage() throws Exception
+{
+	// 所有论文 根据userEmail
+	//
+	
+	
+	//System.out.println("userEmail:"+userEmail);
+	getAllPaperExistedByEmail();
+	String root = "d:\\upload\\";
+	if (fileUpFlag!="false"){
+		String paperWebFilePath=fileUp(root);
+		insertNewPaper(paperWebFilePath);
+	}
+	else{
+		insertNewPaper("");
+	}
+	return "success";
+} 
+private void getAllPaperExistedByEmail() {
+		/////userEmail;
+	}
+
+////////////////////////////////////
+////////////////////////////////////
 	
 	
 	

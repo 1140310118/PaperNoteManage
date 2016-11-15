@@ -29,14 +29,7 @@
 
 	<script src="<%=basePath%>jsp/read_and_manage_lib/js/simple.js"></script>
 	<script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
-	<script type="text/javascript">
-	alert("开始加载页面");
-	var s="<%=session.getAttribute("USER_Email")%>";
-	alert(s);
-		$.post("<%=basePath%>manage",
-			{userEmail: s},
-			function(){});
-	</script>
+	
 </head>
 
 
