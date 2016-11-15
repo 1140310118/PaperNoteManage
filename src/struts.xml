@@ -8,13 +8,22 @@
 	<package name="user" extends="struts-default">
 		<action name="login" class="com.paper.action.LoginAndRegisterAction"
 			method="login">
-			<result name="loginsuccess" type="redirect">manage.action</result>
+<!-- 			<result name="loginsuccess" type="redirect">manage.action</result> -->
+<!-- 			<result name="loginsuccess" type="redirectAction">manage.action</result> -->
+			<result name="loginsuccess" type="chain">manage</result>
+<!-- 			<result name="loginsuccess" type="dispatcher">/jsp/manage.jsp</result> -->
+<!-- 			<result name="loginsuccess">/jsp/login.jsp</result> -->
 			<result name="loginerror">/jsp/login.jsp</result>
 		</action>
 		<action name="register" class="com.paper.action.LoginAndRegisterAction"
 			method="register">
 			<result name="registersuccess" type="redirect">login.action</result>
 			<result name="registererror">/jsp/register.jsp</result>
+		</action>
+		<action name="logout" class="com.paper.action.LoginAndRegisterAction"
+			method="logout">
+			<result name="logoutsuccess">/jsp/login.jsp</result>
+<!-- 			<result name="logoutsuccess" type="redirectAction">login</result> -->
 		</action>
 	</package>
 	<package name="uploadfile" extends="struts-default">

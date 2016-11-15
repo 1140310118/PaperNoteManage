@@ -4,91 +4,80 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.paper.model.*;
 import com.paper.db.DAO;
 
-public class LoginAndRegisterAction extends ActionSupport{
-    //表名   
-    String userTable = "user";  
-    String paperTable = "paper";
+public class LoginAndRegisterAction extends ActionSupport {
+	// 表名
+	String userTable = "user";
+	String paperTable = "paper";
 	private static final long serialVersionUID = 1L;
 	private User user = new User();
 	private DAO dao = new DAO();
 	private String registeringFlag = "0";
-	//private static DAO dao = new DAO();//验证方法正确性
+	ActionContext actionContext = ActionContext.getContext();
+	Map session = actionContext.getSession();
+	// private static DAO dao = new DAO();//验证方法正确性
 
 	/*
-	 * 验证登陆方法正确性
-	public static void main(String[] args){
-		//String sql = "select * from " + userTable +" where email='" + getUser().getEmail() + "' and password ='" + getUser().getPassword()
-		//		+ "'";
-		String sql = "select * from user where email='zorenv@163.com' and password ='4321005'";
-		ResultSet rS = dao.executeQuery(sql);
-		System.out.println(rS);
-		try {
-			if (rS.next()) {
-				//return "loginsuccess";
-				System.out.println("user中有此用户");
-			}
-			//return "loginerror";
-			//System.out.println("user中没有此用户");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			//return "loginerror";
-		}
-	}
-	*/
-	
-	/*
-	 * 验证注册方法正确性
-	public static void main(String[] args){
-		//String sql = "insert into " + userTable + "(email,password,nickname) values('" + getUser().getEmail() + "','" + getUser().getPassword()
-		//		+ "','" + getUser().getNickname() + "')";
-		String sql = "insert into user(email,password,nickname) values('test@test.com','testpassword','testnickname')";
-		int i = dao.executeUpdate(sql);
-		if (i > -1) {
-			//return "registersuccess";
-			System.out.println("添加用户成功");
-		}
-		//return "registererror";	
-		System.out.println("添加用户失败");
-	}
+	 * 验证登陆方法正确性 public static void main(String[] args){ //String sql =
+	 * "select * from " + userTable +" where email='" + getUser().getEmail() +
+	 * "' and password ='" + getUser().getPassword() // + "'"; String sql =
+	 * "select * from user where email='zorenv@163.com' and password ='4321005'"
+	 * ; ResultSet rS = dao.executeQuery(sql); System.out.println(rS); try { if
+	 * (rS.next()) { //return "loginsuccess"; System.out.println("user中有此用户"); }
+	 * //return "loginerror"; //System.out.println("user中没有此用户"); } catch
+	 * (SQLException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); //return "loginerror"; } }
 	 */
-	
+
+	/*
+	 * 验证注册方法正确性 public static void main(String[] args){ //String sql =
+	 * "insert into " + userTable + "(email,password,nickname) values('" +
+	 * getUser().getEmail() + "','" + getUser().getPassword() // + "','" +
+	 * getUser().getNickname() + "')"; String sql =
+	 * "insert into user(email,password,nickname) values('test@test.com','testpassword','testnickname')"
+	 * ; int i = dao.executeUpdate(sql); if (i > -1) { //return
+	 * "registersuccess"; System.out.println("添加用户成功"); } //return
+	 * "registererror"; System.out.println("添加用户失败"); }
+	 */
+
 	public String login() {
 		String sql = this.user.ToSelectSql();
-		//String sqlforNickname = this.user.ToSelectNickname();
+		System.out.println(sql);
+		// String sqlforNickname = this.user.ToSelectNickname();
 		String USER_Nickname = "user_nickname";
 		String USER_Email = "user_email";
-		//String sql = "select * from " + userTable + " where email='zorenv@163.com' and password ='4321005'";
+		// String sql = "select * from " + userTable + " where
+		// email='zorenv@163.com' and password ='4321005'";
 		ResultSet rS = dao.executeQuery(sql);
-		//System.out.println(rS);
-		//USER_Nickname = rS.getString(1);
-		
+		// System.out.println(rS);
+		// USER_Nickname = rS.getString(1);
+
 		System.out.println(registeringFlag);
-		if (registeringFlag=="0")
-		{
-			if (rS!=null){
+		if (registeringFlag == "0") {
+			System.out.println(rS);
+			if (rS != null) {
 				try {
-					//if (rS.next()) {
-//						System.out.println("登陆成功");
-//						System.out.println(rS);
-						while (rS.next()) {
-							USER_Nickname = rS.getString(3);
-							USER_Email = rS.getString(1);
-							ActionContext actionContext = ActionContext.getContext();
-							Map session = actionContext.getSession();
-							session.put("USER_Nickname", USER_Nickname);
-							session.put("USER_Email", USER_Email);
-							//System.out.println(session.get(USER_Nickname));
-						//}
-						System.out.println(USER_Nickname);
-						return "loginsuccess";
+					// if (rS.next()) {
+					System.out.println("登陆成功");
+					System.out.println(rS);
+					while (rS.next()) {
+						USER_Nickname = rS.getString(3);
+						USER_Email = rS.getString(1);
+						session.put("USER_Nickname", USER_Nickname);
+						session.put("USER_Email", USER_Email);
+						// System.out.println(session.get(USER_Nickname));
 					}
-					return "loginerror";
+					System.out.println(USER_Nickname);
+					System.out.println(USER_Email);
+					return "loginsuccess";
+					// }
+					// return "loginerror";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -97,15 +86,16 @@ public class LoginAndRegisterAction extends ActionSupport{
 			}
 		}
 		return "loginerror";
-		
+
 	}
 
 	public String register() {
-//		String sql = "insert into " + userTable + "(email,password,nickname) values('" + getUser().getEmail() + "','" + getUser().getPassword()
-//				+ "','" + getUser().getNickname() + "')";
+		// String sql = "insert into " + userTable + "(email,password,nickname)
+		// values('" + getUser().getEmail() + "','" + getUser().getPassword()
+		// + "','" + getUser().getNickname() + "')";
 
 		System.out.println(user.email);
-		if (user.email!=null){
+		if (user.email != null) {
 			String sql = user.ToInsertSql();
 			System.out.println(sql);
 			int i = dao.executeUpdate(sql);
@@ -116,6 +106,15 @@ public class LoginAndRegisterAction extends ActionSupport{
 		return "registererror";
 	}
 
+	public String logout() {
+		System.out.println("退出登录");
+		session.remove("buser");
+		session.remove("guser"); 
+		session.remove("fuser");
+		System.out.println("退出成功");
+		return "logoutsuccess";
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -123,6 +122,7 @@ public class LoginAndRegisterAction extends ActionSupport{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public String getRegisteringFlag() {
 		return registeringFlag;
 	}

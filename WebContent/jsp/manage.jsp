@@ -410,6 +410,11 @@
 </div>
 
 <p name="paper.paperUserEmail"><s:property value="#session.USER_Email"  /></p>
+<s:form action="logout">
+   <s:submit name="method:logout" value="退出"></s:submit>
+</s:form>
+<!-- <input type="button" action="logout" value="退出" > -->
+<!-- onclick="close();document.write('<n>')"> -->
 <%-- <s:property value="#session.USER_Email" name="userEmail"/> --%>
 </body>
 </html>

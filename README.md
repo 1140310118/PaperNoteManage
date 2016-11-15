@@ -20,3 +20,5 @@ index.jsp_ver_0.2 by ZorenV
 ##2016.11.14
 登陆后返回昵称字段
 完成发送文字邮件 by ZorenV
+##2016.11.15
+paper结构设计改进 by 三人
