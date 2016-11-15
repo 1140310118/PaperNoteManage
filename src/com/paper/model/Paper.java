@@ -11,12 +11,20 @@ public class Paper {
 	public String paperNickName;
 	public String paperOrigin;
 	public String paperWebFilePath;
+
+
 	public String paperExteriorURL;
 	public String paperRemark;
 	public String uploadDate;
 	public String paperUserEmail;
 	
-	
+	public String getPaperWebFilePath() {
+		return paperWebFilePath;
+	}
+
+	public void setPaperWebFilePath(String paperWebFilePath) {
+		this.paperWebFilePath = paperWebFilePath;
+	}
 	public String getPaperUserEmail() {
 		return paperUserEmail;
 	}
