@@ -69,6 +69,8 @@ public class LoginAndRegisterAction extends ActionSupport {
 					while (rS.next()) {
 						USER_Nickname = rS.getString(3);
 						USER_Email = rS.getString(1);
+						//ActionContext.getContext.getSession.put("USER_Nickname", USER_Nickname);
+						//ActionContext.getContext.getSession.put("USER_Email", USER_Email);
 						session.put("USER_Nickname", USER_Nickname);
 						session.put("USER_Email", USER_Email);
 						// System.out.println(session.get(USER_Nickname));
