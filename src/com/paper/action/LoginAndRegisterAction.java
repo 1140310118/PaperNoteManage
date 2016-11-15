@@ -66,13 +66,14 @@ public class LoginAndRegisterAction extends ActionSupport {
 		// String sql = "select * from " + userTable + " where
 		// email='zorenv@163.com' and password ='4321005'";
 		ResultSet rS = dao.executeQuery(sql);
+		System.out.println(rS);
 		// System.out.println(rS);
 		// USER_Nickname = rS.getString(1);
 
 		if (relogin!="false"){
 			return logout();
 		}
-		System.out.println(registeringFlag);
+		//System.out.println(registeringFlag);
 		if (registeringFlag == "0") {
 			System.out.println(rS);
 			if (rS != null) {

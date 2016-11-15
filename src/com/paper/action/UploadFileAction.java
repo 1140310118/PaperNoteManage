@@ -8,6 +8,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.paper.model.file;
 
 public class UploadFileAction extends ActionSupport implements
@@ -17,7 +19,7 @@ public class UploadFileAction extends ActionSupport implements
 	private file singleFile = new file();
 	private Paper paper=new Paper();
 	private DAO dao = new DAO();
-	private String userEmail = null;
+	private String userEmail = (String) ServletActionContext.getRequest().getSession().getAttribute("USER_Email");;
 
 	public String getUserEmail() {
 		return userEmail;
@@ -58,12 +60,14 @@ public class UploadFileAction extends ActionSupport implements
 	{
 		// 所有论文 根据userEmail
 		//
+		System.out.println("userEmail:"+userEmail);
+		
 		String root = "d:\\upload\\";
 		String paperWebFilePath=fileUp(root);
 		insertNewPaper(paperWebFilePath);
 		return "success";
 	} 
-	/////////////////////////////////////
+	////////////////////////////////////
 	
 	
 	

@@ -398,7 +398,9 @@
 </div>
 </div>
 
-<!-- <p name="paper.paperUserEmail"><s:property value="#session.USER_Email"  /></p> -->
+<div style="display: none;">
+<p name="userEmail"><s:property value="#session.USER_Email"  /></p>
+</div>
 
 <!-- <input type="button" action="logout" value="退出" > -->
 <!-- onclick="close();document.write('<n>')"> -->
