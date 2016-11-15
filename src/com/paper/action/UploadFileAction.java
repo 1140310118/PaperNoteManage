@@ -8,6 +8,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.paper.model.file;
 
 public class UploadFileAction extends ActionSupport implements
@@ -20,6 +22,7 @@ public class UploadFileAction extends ActionSupport implements
 	private String userEmail = null;
 	ActionContext actionContext = ActionContext.getContext();
 	Map session = actionContext.getSession();
+	
 
 	public String getUserEmail() {
 		return userEmail;
@@ -60,13 +63,17 @@ public class UploadFileAction extends ActionSupport implements
 	{
 		// 所有论文 根据userEmail
 		//
+
 		System.out.println(session.get("USER_Nickname"));
+
+		System.out.println("userEmail:"+userEmail);
+
 		String root = "d:\\upload\\";
 		String paperWebFilePath=fileUp(root);
 		insertNewPaper(paperWebFilePath);
 		return "success";
 	} 
-	/////////////////////////////////////
+	////////////////////////////////////
 	
 	
 	

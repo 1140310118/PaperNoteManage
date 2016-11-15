@@ -21,6 +21,7 @@ public class LoginAndRegisterAction extends ActionSupport {
 	private String registeringFlag = "0";
 	ActionContext actionContext = ActionContext.getContext();
 	Map session = actionContext.getSession();
+	private String relogin = "false";
 	// private static DAO dao = new DAO();//验证方法正确性
 
 	/*
@@ -46,19 +47,33 @@ public class LoginAndRegisterAction extends ActionSupport {
 	 * "registererror"; System.out.println("添加用户失败"); }
 	 */
 
+	public String getRelogin() {
+		return relogin;
+	}
+
+	public void setRelogin(String relogin) {
+		this.relogin = relogin;
+	}
+
 	public String login() {
 		String sql = this.user.ToSelectSql();
 		System.out.println(sql);
 		// String sqlforNickname = this.user.ToSelectNickname();
 		String USER_Nickname = "user_nickname";
 		String USER_Email = "user_email";
+		session.put("USER_Nickname", USER_Nickname);
+		session.put("USER_Email", USER_Email);
 		// String sql = "select * from " + userTable + " where
 		// email='zorenv@163.com' and password ='4321005'";
 		ResultSet rS = dao.executeQuery(sql);
+		System.out.println(rS);
 		// System.out.println(rS);
 		// USER_Nickname = rS.getString(1);
 
-		System.out.println(registeringFlag);
+		if (relogin!="false"){
+			return logout();
+		}
+		//System.out.println(registeringFlag);
 		if (registeringFlag == "0") {
 			System.out.println(rS);
 			if (rS != null) {
@@ -110,6 +125,7 @@ public class LoginAndRegisterAction extends ActionSupport {
 
 	public String logout() {
 		System.out.println("退出登录");
+		
 		session.remove("buser");
 		session.remove("guser"); 
 		session.remove("fuser");

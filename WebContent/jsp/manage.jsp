@@ -53,9 +53,14 @@
                     <li><a href="<%=basePath%>read">论文阅读</a></li>
                     
                     <li><a href="<%=basePath%>manage">论文管理</a></li>
-                	
                 </ul>
             </nav>
+            <div style="float: right;font-size: 14px;margin-right: 30px;">
+            	<!-- <s:form action="login?relogin=true"> -->
+   				<!-- <s:submit name="method:logout" value="退出登录"></s:submit> -->
+				<!-- </s:form> -->
+				<s:property value="#session.USER_Nickname"/> | <a href="<%=basePath%>login?relogin=true">退出登录</a>
+            </div>
         </div>
     </div>
 <!---->
@@ -130,6 +135,7 @@
 	<s:form id="paperForm" action="manage" method="post" enctype="multipart/form-data">
 	  	 <h3>新建论文</h3>
 	    <h4>从本地上传</h4>
+	    <input name="paper.paperUserEmail" style="display: none;"><s:property value="#session.USER_Email"  /></input>
 	    <fieldset>
 	      <input placeholder="*论文名称 nickname" type="text" id="newPaperFromLocal_name"tabindex="1" name="paper.paperNickName"
 	      required autofocus/>
@@ -184,6 +190,7 @@
 	<form id="paperForm" action="manage" method="post">
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>
+	    <input name="paper.paperUserEmail" style="display: none;"><s:property value="#session.USER_Email"  /></input>
 	    <fieldset>
 	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" name="paper.paperNickName" id="newPaperByURL_name" required autofocus>
 	    </fieldset>
@@ -318,27 +325,9 @@
 				<a href="#" onClick="delcfm()">删除&nbsp;&nbsp;</a>
 			</div>
 		</li>	
-		<li><a href="#">感知哈希综述</a>
-			<div style="float:right;">
-				<a href="#" >修改&nbsp;&nbsp;</a>
-				<a href="#" >详情&nbsp;&nbsp;</a>
-				<a href="#" >删除&nbsp;&nbsp;</a>
-			</div>
-		</li>	
-		<li><a href="#">k-partion</a>
-			<div style="float:right;">
-				<a href="#" >修改&nbsp;&nbsp;</a>
-				<a href="#" >详情&nbsp;&nbsp;</a>
-				<a href="#" >删除&nbsp;&nbsp;</a>
-			</div>
-		</li>	
-		<li><a href="#">mixed tabulation</a>
-			<div style="float:right;">
-				<a href="#" >修改&nbsp;&nbsp;</a>
-				<a href="#" >详情&nbsp;&nbsp;</a>
-				<a href="#" >删除&nbsp;&nbsp;</a>
-			</div>
-		</li>						
+		<s:iterator value="existPapers">
+			<s:property value="paperNickName"></s:property>
+		</s:iterator>			
 	</ol>
 <!---->
 
@@ -409,10 +398,10 @@
 </div>
 </div>
 
-<p name="paper.paperUserEmail"><s:property value="#session.USER_Email"  /></p>
-<s:form action="logout">
-   <s:submit name="method:logout" value="退出"></s:submit>
-</s:form>
+<div style="display: none;">
+<p name="userEmail"><s:property value="#session.USER_Email"  /></p>
+</div>
+
 <!-- <input type="button" action="logout" value="退出" > -->
 <!-- onclick="close();document.write('<n>')"> -->
 <%-- <s:property value="#session.USER_Email" name="userEmail"/> --%>
