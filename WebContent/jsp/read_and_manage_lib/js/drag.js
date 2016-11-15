@@ -1,7 +1,7 @@
 
 $.fn.extend({
 		//---元素拖动插件
-    dragging:function(data){   
+    w:function(data){   
 		var $this = $(this);
 		var xPage;
 		var yPage;

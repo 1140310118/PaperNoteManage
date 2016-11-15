@@ -246,21 +246,21 @@
 		// 		// }
 		// 	});
 		// });
-		function NetPing(URL) {
-		   $.ajax({
-				url: URL,
-				type: 'GET',
-				complete: function(response) {
-					alert(URL+""+response.status);
-					if(response.status == 404) {
-						return 1;
-						} 
-					else {
-						return 2;
-					}
-				}
-			});
-		}
+		// function NetPing(URL) {
+		//    $.ajax({
+		// 		url: URL,
+		// 		type: 'GET',
+		// 		complete: function(response) {
+		// 			alert(URL+""+response.status);
+		// 			if(response.status == 404) {
+		// 				return 1;
+		// 				} 
+		// 			else {
+		// 				return 2;
+		// 			}
+		// 		}
+		// 	});
+		// }
 	</script>
   </div> 
 <!---->
@@ -354,16 +354,75 @@
 			<% paperIndex++; %>
 			<div id="paperE_<%=paperIndex%>">
 				<div  id="paperNickName_forDelete_<%=paperIndex%>">
-					<li><a href="${book.paperWebFilePath}"> ${book.paperNickName }</a></li>
+					<li><a href="${book.paperWebFilePath}"> ${paper.paperNickName }</a></li>
 				</div>
 				<div style="float:right;">
-					<a href="#" >修改&nbsp;&nbsp;</a>
-					<a href="#" id="detail" onClick="deTail()">详情&nbsp;&nbsp;</a>
+					<a href="#" onClick="paperUpdate(<%=paperIndex%>)">修改&nbsp;&nbsp;</a>
+					<a href="#" id="detail" onClick="paperDetail(<%=paperIndex%>)">详情&nbsp;&nbsp;</a>
 					<a href="#" onClick="deletePaper(<%=paperIndex%>)">删除&nbsp;&nbsp;</a>
+				</div>
+
+				<div style="display: none;" id="paperDetail_<%=paperIndex%>">
+					<div class="paperDetail_window" id="paperDetail_<%=paperIndex%>">
+						<table class="bordered">
+						    <tr><th colspan="2">论文详情</th></tr>
+						    <tr>
+						        <td>论文名称</th>
+						        <td id="paperName_<%=Index%>">${paper.paperNickName }</td>
+						    </tr>
+						    <tr>
+						        <td>分类目录</th>
+						        <td></td>
+						    </tr>
+						    <tr>
+						        <td>论文来源</th>
+						        <td id="paperOrigin_<%=Index%>">${paper.paperOrigin }</td>
+						    </tr>
+						    <tr>
+						        <td>添加日期</th>
+						        <td id="paperUploadDate_<%=Index%>">${paper.uploadDate }</td>
+						    </tr>
+						    <tr>
+						        <td>备注</th>
+						        <td id="paperRemark_<%=Index%>">${paper.paperRemark }</td>
+						    </tr>
+						</table>
+						<center>
+							<button onClick="paperDetailClose()">确定</button>
+						</center>
+					</div>
 				</div>
 			</div>
 		</c:forEach>			
 	</ol>
+	<div id="updatePaperWindow" style="display: none;">
+		<form  action="manage" method="post">
+			<table class="bordered">
+			    <tr><th colspan="2">修改论文信息</th></tr>
+			    <tr>
+			        <td>论文名称</th>
+			        <td><input id="updatedPaperName" name="updatedPaper.paperNickName" readonly></td>
+			    </tr>
+			    <tr>
+			        <td>分类目录</th>
+			        <td></td>
+			    </tr>
+			    <tr>
+			        <td>论文来源</th>
+			        <td><input id="updatedPaperOrigin" name="updatedPaper.paperOrigin"></input></td>
+			    </tr>
+			    <tr>
+			        <td>添加日期</th>
+			        <td><input id="updatedPaperUploadDate" name="updatedPaper.uploadDate" readonly></input></td>
+			    </tr>
+			    <tr>
+			        <td>备注</th>
+			        <td><input id="updatedPaperRemark" name="updatedPaper.paperRemark"></td>
+			    </tr>
+			</table>
+	      	<button type="submit" onClick="paperUpdateClose()">确定</button>
+		</form>
+	</div>
 <!---->
 <script type="text/javascript">
 	function deletePaper(Index){
@@ -375,6 +434,33 @@
 				},
 				function(){alert(name+" 删除成功");}
 		);
+	}
+
+	function paperDetail(Index){
+		$("#paperDetail_"+Index).show();
+		$(".mask").show();
+		$('body').css("overflow","hidden");
+	}
+
+	function paperUpdate(Index){
+		$("#updatedPaperName").val($("#paperName_"+Index).val());
+		$("#updatedPaperOrigin").val($("#paperOrigin_"+Index).val());
+		$("#updatedPaperUploadDate").val($("#paperUploadDate_"+Index).val());
+		$("#updatedPaperRemark").val($("#paperRemark_"+Index).val());
+		$("#updatePaperWindow").show();
+		$(".mask").show();
+		$('body').css("overflow","hidden");
+	}
+	function paperUpdateClose(){
+		$("#updatePaperWindow").hide();
+		$(".mask").hide();
+		$('body').css("overflow","visible");
+	}
+
+	function paperDetailClose(){
+		$(".paperDetail_window").hide();
+		$(".mask").hide();
+		$('body').css("overflow","visible");
 	}
 </script>
 
