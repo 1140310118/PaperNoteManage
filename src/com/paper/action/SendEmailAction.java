@@ -9,7 +9,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SendEmail extends ActionSupport {
+public class SendEmailAction extends ActionSupport {
 	private String from;
 	private String password;
 	private String to;
@@ -90,6 +90,6 @@ public class SendEmail extends ActionSupport {
 	}
 
 	public static void setProperties(Properties properties) {
-		SendEmail.properties = properties;
+		SendEmailAction.properties = properties;
 	}
 }

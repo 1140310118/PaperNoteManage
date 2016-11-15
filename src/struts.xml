@@ -76,15 +76,15 @@
 			<result name="delete" type="redirectAction">selectbytype.action</result>
 		</action>
 
-		<action name="add" class="com.paper.action.AddNote" method="add">
+		<action name="add" class="com.paper.action.AddNoteAction" method="add">
 			<result name="success">/index.jsp</result>
 		</action>
-		<action name="update" class="com.paper.action.UpdateNote"
+		<action name="update" class="com.paper.action.UpdateNoteAction"
 			method="update">
 			<result name="success">/index.jsp</result>
 		</action>
 
-		<action name="emailer" class="com.paper.action.SendEmail" method="execute">
+		<action name="emailer" class="com.paper.action.SendEmailAction" method="execute">
 			<result name="success">/SendEmailSuccess.jsp</result>
 			<result name="error">/SendEmailError.jsp</result>
 		</action>

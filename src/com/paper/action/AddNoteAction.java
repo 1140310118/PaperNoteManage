@@ -4,39 +4,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.opensymphony.xwork2.ActionSupport;
 
-public class UpdateNote extends ActionSupport {
-
-	private static final long serialVersionUID = 1L;
-	String update=null;
+public class AddNoteAction {
+	String writer_name=null;
 	Connection conn = com.paper.db.DbConn.getConn();
-
+	public String add_start() {
+		return "success";
+}
 	public String getType() {
-		return update;
+		return writer_name;
 	}
-	public void setType(String update) {
-		System.out.println(update);
-		this.update=update;
+	public void setType(String writer_name) {
+		this.writer_name=writer_name;
 	}
-	public String update() throws SQLException {
+	public String add() throws SQLException {
+		//String str[]=null;
 		String str[]=null;
-		str=update.split(",");
+		str=writer_name.split(",");
 		System.out.println(str[0]+"///");
 		System.out.println(str[1]+"+++");
 		try{
 			
-			
-			String sql = "update papernote set text=? where id=?";
+			String sql = "insert into papernote ( name,text ) value (?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1,str[1]);
-			pStmt.setString (2,str[0]);
+			pStmt.setString(1,str[0]);
+			pStmt.setString (2,str[1]);
 			pStmt.executeUpdate();
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
 		return "success";
-	
 }
 }
