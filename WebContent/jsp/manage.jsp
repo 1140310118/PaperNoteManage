@@ -123,7 +123,6 @@
 			$("#allPaperShow").hide();
 			$("#newPaperFromLocal").hide();
 		});
-		
 	});
 	</script>
 <!---->
@@ -191,7 +190,7 @@
 <!-- 新建论文 导入URL链接-->
 	<div class="form_container" id="newPaperByURL" style="display:none;">  
 	<br><br>
-	<form id="paperForm" action="manage?newPaperFlag=true&fileUpFlag=false" method="post">
+	<form id="paperForm" action="manage?newPaperFlag=true&newPaperByURLFlag=true" method="post" enctype="multipart/form-data">
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>
 	    
@@ -335,28 +334,27 @@
 	<br><br><br>
 	<ol class="rounded-list" id="allPaperShow">
 		<!--以下四行是 为了便于展示，在实际过程中，使用s:property-->
-		<li><a href="#">KD树异常检测</a>
+		<!-- <li><a href="#">KD树异常检测</a>
 			<div style="float:right;">
 				<a href="#" >修改&nbsp;&nbsp;</a>
 				<a href="#" id="detail" onClick="deTail()">详情&nbsp;&nbsp;</a>
 				<a href="#" onClick="delcfm()">删除&nbsp;&nbsp;</a>
 			</div>
-		</li>	
+		</li>	 -->
 		
 		<%int paperIndex=0; %>
 		<c:forEach var="paper" items="${paperList}">
 			<% paperIndex++; %>
 			<div id="paperE_<%=paperIndex%>">
-				<div  id="paperNickName_forDelete_<%=paperIndex%>">
-					<li><a href="${book.paperWebFilePath}"> ${paper.paperNickName }</a></li>
-				</div>
-				<div style="float:right;">
-					<a href="#" onClick="paperUpdate(<%=paperIndex%>)">修改&nbsp;&nbsp;</a>
-					<a href="#" id="detail" onClick="paperDetail(<%=paperIndex%>)">详情&nbsp;&nbsp;</a>
-					<a href="#" onClick="deletePaper(<%=paperIndex%>)">删除&nbsp;&nbsp;</a>
-				</div>
-
-				<div style="display: none;" id="paperDetail_<%=paperIndex%>">
+				<li>
+					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${book.paperWebFilePath}">${paper.paperNickName }</a>
+					<div style="float:right;">
+						<a href="#" onClick="paperUpdate(<%=paperIndex%>)">修改&nbsp;&nbsp;</a>
+						<a href="#" id="detail" onClick="paperDetail(<%=paperIndex%>)">详情&nbsp;&nbsp;</a>
+						<a href="#" onClick="deletePaper(<%=paperIndex%>)">删除&nbsp;&nbsp;</a>
+					</div>
+				</li>
+				<div style="display: none;z-index: 1000;" id="paperDetail_<%=paperIndex%>">
 					<div class="paperDetail_window" id="paperDetail_<%=paperIndex%>">
 						<table class="bordered">
 						    <tr><th colspan="2">论文详情</th></tr>
@@ -381,82 +379,97 @@
 						        <td id="paperRemark_<%=paperIndex%>">${paper.paperRemark }</td>
 						    </tr>
 						</table>
-						<center>
-							<button onClick="paperDetailClose()">确定</button>
-						</center>
+						<!-- <center>
+							<button onClick="paperDetailClose(<%=paperIndex%>)">确定</button>
+						</center> -->
 					</div>
 				</div>
 			</div>
-		</c:forEach>			
+		</c:forEach>
 	</ol>
-	<div id="updatePaperWindow" style="display: none;">
+	<!-- <div style="position: absolute;left: 55%;top: 10%;margin-left: width/2;margin-height: height/2;width: 320px;"> -->
+	<div id="updatePaperWindow" class="centerWindow">
 		<form  action="<%=basePath%>manage" method="post">
 			<table class="bordered">
 			    <tr><th colspan="2">修改论文信息</th></tr>
 			    <tr>
-			        <td>论文名称</th>
-			        <td><input id="updatedPaperName" name="updatedPaper.paperNickName" readonly></td>
+			        <td>论文名称</td>
+			        <td><input id="updatedPaperName" name="updatedPaper.paperNickName" readonly style="border: none;"/></td>
 			    </tr>
 			    <tr>
-			        <td>分类目录</th>
+			        <td>分类目录</td>
 			        <td></td>
 			    </tr>
 			    <tr>
-			        <td>论文来源</th>
-			        <td><input id="updatedPaperOrigin" name="updatedPaper.paperOrigin"></input></td>
+			        <td>论文来源</td>
+			        <td><input id="updatedPaperOrigin" name="updatedPaper.paperOrigin"/></td>
 			    </tr>
 			    <tr>
-			        <td>添加日期</th>
-			        <td><input id="updatedPaperUploadDate" name="updatedPaper.uploadDate" readonly></input></td>
+			        <td>添加日期</td>
+			        <td><input id="updatedPaperUploadDate" name="updatedPaper.uploadDate" readonly style="border: none;"/></td>
 			    </tr>
 			    <tr>
-			        <td>备注</th>
-			        <td><input id="updatedPaperRemark" name="updatedPaper.paperRemark"></td>
+			        <td>备注</td>
+			        <td><input id="updatedPaperRemark" name="updatedPaper.paperRemark"/></td>
 			    </tr>
+			    	<!-- <td><input name="updatePaperFlag" value="true" style="display: none;"></td> -->
 			</table>
-	      	<button type="submit" onClick="paperUpdateClose()">确定</button>
+	      	<center>
+	      		<button type="submit" style="width: 100px;">确定</button>
+	      	</center>
 		</form>
 	</div>
+	<!-- </div> -->
 <!---->
 <script type="text/javascript">
 	function deletePaper(Index){
 		$("#paperE_"+Index).hide();
-		var name = $("#paperNickName_forDelete_"+Index).val();
+		var name = $("#paperNickName_forDelete_"+Index).html();
 		$.post("<%=basePath%>manage",
 				{
-					deletePaperNickName:name
+					deletePaperNickName :name
 				},
-				function(){alert(name+" 删除成功");}
+				function(){alert(name+":删除成功");}
 		);
 	}
-
+	var paperDetailOpen = false;
 	function paperDetail(Index){
+		if (!paperDetailOpen){
+			paperDetailShow(Index);
+		}
+		else{
+			paperDetailClose(Index);
+		}
+		paperDetailOpen=!paperDetailOpen;
+	}
+	function paperDetailShow(Index){
 		$("#paperDetail_"+Index).show();
-		$(".mask").show();
-		$('body').css("overflow","hidden");
+		//$(".mask").show();
+		//$('body').css("overflow","hidden");
 	}
-
+	function paperDetailClose(Index){
+		$("#paperDetail_"+Index).hide();
+		// $(".mask").hide();
+		// $('body').css("overflow","visible");
+	}
 	function paperUpdate(Index){
-		$("#updatedPaperName").val($("#paperName_"+Index).val());
-		$("#updatedPaperOrigin").val($("#paperOrigin_"+Index).val());
-		$("#updatedPaperUploadDate").val($("#paperUploadDate_"+Index).val());
-		$("#updatedPaperRemark").val($("#paperRemark_"+Index).val());
-		$("#updatePaperWindow").show();
+		$("#updatedPaperName").val($("#paperName_"+Index).html());
+		$("#updatedPaperOrigin").val($("#paperOrigin_"+Index).html());
+		$("#updatedPaperUploadDate").val($("#paperUploadDate_"+Index).html());
+		$("#updatedPaperRemark").val($("#paperRemark_"+Index).html());
 		$(".mask").show();
+		$("#updatePaperWindow").show();
 		$('body').css("overflow","hidden");
 	}
-	function paperUpdateClose(){
-		$("#updatePaperWindow").hide();
-		$(".mask").hide();
-		$('body').css("overflow","visible");
-		$.post("<%=basePath%>manage",{updatePaperFlag:"true"},function(){});
-	}
+	// function paperUpdateClose(){
+	// 	$("#updatePaperWindow").hide();
+	// 	$(".mask").hide();
+	// 	$('body').css("overflow","visible");
+	// 	alert(true);
+	// 	$.post("<%=basePath%>manage",{updatePaperFlag:"true"},function(){});
+	// }
 
-	function paperDetailClose(){
-		$(".paperDetail_window").hide();
-		$(".mask").hide();
-		$('body').css("overflow","visible");
-	}
+	
 </script>
 
 

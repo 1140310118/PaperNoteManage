@@ -12,14 +12,14 @@ display: none;
 .centerWindow{
 margin:0 auto 0 10px;
 z-index: 1000;
-/*display: none;*/
+display: none;
 background: #fff;
 position: absolute;
 left: 55%;
 top: 10%;
 margin-left: width/2;
 margin-height: height/2;
-display: none;
+/*display: none;*/
 width: 320px;
 }
 

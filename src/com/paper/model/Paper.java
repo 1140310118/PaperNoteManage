@@ -103,6 +103,21 @@ public class Paper {
 		return sql;
 		
 	}
+
+	public void show() {
+		// TODO Auto-generated method stub
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
+		String s="PAPER:"
+			+this.paperNickName 
+			+ "','" +this.paperOrigin
+			+ "','" +paperWebFilePath 
+			+ "','" +this.paperExteriorURL
+			+ "','" +this.paperRemark 
+			+ "','" +date
+			+ "','" +this.paperUserEmail;
+		System.out.println(s);
+	}
 	
 
 }

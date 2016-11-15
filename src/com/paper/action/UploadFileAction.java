@@ -22,16 +22,40 @@ public class UploadFileAction extends ActionSupport implements
 	private static final long serialVersionUID = 1L;
 	private file singleFile = new file();
 	private Paper paper=new Paper();
-	private String userEmailGetFlag = "false";//;(String) ServletActionContext.getRequest().getSession().getAttribute("USER_Email");;
-	private String fileUpFlag;
+	private String fileUpFlag = "false";
+	private String newPaperByURLFlag="false";
 	
+	public String getNewPaperByURLFlag() {
+		return newPaperByURLFlag;
+	}
+
+	public void setNewPaperByURLFlag(String newPaperByURLFlag) {
+		this.newPaperByURLFlag = newPaperByURLFlag;
+	}
+
 	//////
 	//paperList
 	private String deletePaperNickName = null;
+	public String getDeletePaperNickName() {
+		return deletePaperNickName;
+	}
+
+	public void setDeletePaperNickName(String deletePaperNickName) {
+		this.deletePaperNickName = deletePaperNickName;
+	}
+
 	private String updatePaperFlag = "false";
-	private Paper updatedPaper = new Paper();
+	private Paper updatedPaper = null;//new Paper();
 	/////
 	private String newPaperFlag = "false";
+//	
+	ActionContext actionContext = ActionContext.getContext();
+	Map session = actionContext.getSession();
+	private String userEmail = (String) session.get("USER_Email");
+	private DAO dao = new DAO();
+	// panwei
+	private BookOper bo = new BookOper(); // 查询类
+
 	
 	Connection conn = com.paper.db.DbConn.getConn();
 	public String getUpdatePaperFlag() {
@@ -49,14 +73,6 @@ public class UploadFileAction extends ActionSupport implements
 	public void setUpdatedPaper(Paper updatedPaper) {
 		this.updatedPaper = updatedPaper;
 	}
-
-	
-	private DAO dao = new DAO();
-	ActionContext actionContext = ActionContext.getContext();
-	Map session = actionContext.getSession();
-	private String userEmail = (String) session.get("USER_Nickname");
-	// panwei
-	private BookOper bo = new BookOper(); // 查询类
 	
 	public String getFileUpFlag() {
 		return fileUpFlag;
@@ -88,16 +104,17 @@ public class UploadFileAction extends ActionSupport implements
 		this.paper=paper;
 	}
 	
-    public void validate()
-    {
-    	String filename = singleFile.getResumeFileName();
-    	//System.out.println( singleFile.getResumeFileName()+"3333");
-    	if(filename == null)
-    	{
-    		addFieldError("resume", "璇蜂笂浼犳枃浠?");
-    	}
-    	  	
-    }
+//	11/16 bug调试的 罪魁祸首
+//    public void validate()
+//    {
+//    	String filename = singleFile.getResumeFileName();
+//    	//System.out.println( singleFile.getResumeFileName()+"3333");
+//    	if(filename == null)
+//    	{
+//    		addFieldError("resume", "璇蜂笂浼犳枃浠?");
+//    	}
+//    }
+    
     ////////////////////////////////////
 	public String execute() throws Exception
 	{
@@ -126,27 +143,33 @@ public String paperManage() throws Exception{
 	
 	// 所有论文 根据userEmail
 	//
-	//System.out.println("userEmail:"+userEmail);
+	System.out.println("userEmail:"+userEmail);
 	getAllPaperExistedByEmail();
+	
 	if (deletePaperNickName!=null){
+		System.out.println("删除的文件："+deletePaperNickName);
 		deletePaperByNickname(deletePaperNickName);
 	}
-	if (updatePaperFlag!="false"){
+	
+	System.out.println("updatedPaper："+updatedPaper);
+	if (updatedPaper!=null){
 		updatePaper(updatedPaper);
 	}
 	
 	String root = "d:\\upload\\";
 	if (newPaperFlag!="false"){
 		System.out.println("新建文件");
+		if (newPaperByURLFlag!="false")
+		{
+			System.out.println("新建文件 从URL");
+			insertNewPaper("");
+		}
 		if (fileUpFlag!="false"){
 			System.out.println("新建文件 从本地");
 			String paperWebFilePath=fileUp(root);
 			insertNewPaper(paperWebFilePath);
 		}
-		else{
-			System.out.println("新建文件 从URL");
-			insertNewPaper("");
-		}
+		
 	}
 	return "success";
 } 
@@ -217,13 +240,7 @@ private void getAllPaperExistedByEmail() {
 		return filename;
 	}
 
-	public String getUserEmailGetFlag() {
-		return userEmailGetFlag;
-	}
-
-	public void setUserEmailGetFlag(String userEmailGetFlag) {
-		this.userEmailGetFlag = userEmailGetFlag;
-	}
+	
 
 	public String getNewPaperFlag() {
 		return newPaperFlag;

@@ -18,7 +18,10 @@ public class BookOper {
 		try {
 			pstmt = conn.prepareStatement("select paperNickName, paperOrigin, paperWebFilePath, paperRemark, uploadDate, paperUserEmail  from paper where paperUserEmail=?");
 			pstmt.setString(1, type);
+			
 			rs = pstmt.executeQuery();
+			System.out.println(pstmt.toString());
+			System.out.println("rs:"+rs);
 			//Book book = new Book();
 			while (rs.next()) {
 				Paper book = new Paper();
@@ -28,12 +31,9 @@ public class BookOper {
 				book.setPaperRemark(rs.getString(4));
 				book.setUploadDate(rs.getString(5));
 				book.setPaperUserEmail(rs.getString(6));
-				data.add(book);
-				
+				data.add(book);	
+//				book.show();
 			}
-			
-
-			
 		} catch (SQLException e) {
 			System.out.println("flase");
 			e.printStackTrace();
