@@ -31,6 +31,7 @@ public class UploadFileAction extends ActionSupport implements
 	private String updatePaperFlag = "false";
 	private Paper updatedPaper = new Paper();
 	/////
+	private String newPaperFlag = "false";
 	
 	Connection conn = com.paper.db.DbConn.getConn();
 	public String getUpdatePaperFlag() {
@@ -121,12 +122,10 @@ public class UploadFileAction extends ActionSupport implements
 	
 ////////////////////////////////////////	
 ///////////////////////////////////////
-public String paperManage() throws Exception
-{
+public String paperManage() throws Exception{
+	
 	// 所有论文 根据userEmail
 	//
-	
-	
 	//System.out.println("userEmail:"+userEmail);
 	getAllPaperExistedByEmail();
 	if (deletePaperNickName!=null){
@@ -137,12 +136,17 @@ public String paperManage() throws Exception
 	}
 	
 	String root = "d:\\upload\\";
-	if (fileUpFlag!="false"){
-		String paperWebFilePath=fileUp(root);
-		insertNewPaper(paperWebFilePath);
-	}
-	else{
-		insertNewPaper("");
+	if (newPaperFlag!="false"){
+		System.out.println("新建文件");
+		if (fileUpFlag!="false"){
+			System.out.println("新建文件 从本地");
+			String paperWebFilePath=fileUp(root);
+			insertNewPaper(paperWebFilePath);
+		}
+		else{
+			System.out.println("新建文件 从URL");
+			insertNewPaper("");
+		}
 	}
 	return "success";
 } 
@@ -189,6 +193,7 @@ private void getAllPaperExistedByEmail() {
 	// 将文件上传到 root 目录	
 	public String fileUp(String root) throws Exception
 	{
+		System.out.println("194");
 		File rootFile = new File(root);
 		if(!rootFile.exists())
 		{
@@ -218,5 +223,13 @@ private void getAllPaperExistedByEmail() {
 
 	public void setUserEmailGetFlag(String userEmailGetFlag) {
 		this.userEmailGetFlag = userEmailGetFlag;
+	}
+
+	public String getNewPaperFlag() {
+		return newPaperFlag;
+	}
+
+	public void setNewPaperFlag(String newPaperFlag) {
+		this.newPaperFlag = newPaperFlag;
 	} 
 }

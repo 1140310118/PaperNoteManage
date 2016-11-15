@@ -41,8 +41,7 @@
 			<result name="input">/jsp/manage.jsp</result>
 		</action>
 
-		<action name="read" class="testForJsp.action.NoteManage"
-			method="execute">
+		<action name="read" class="testForJsp.action.NoteManage" method="execute">
 			<result name="success">/jsp/read.jsp</result>
 		</action>
 
@@ -57,13 +56,13 @@
 	</package>
 
 	<package name="actions" extends="struts-default">
-		<action name="selectbytype" class="com.paper.action.BookAction"
+		<action name="selectbytype" class="com.paper.paperManage_tmp.BookAction"
 			method="selectbytype">
 			<!-- name="success" -->
 			<result name="success">/book.jsp</result>
 
 		</action>
-		<action name="selectbyid" class="com.paper.action.BookAction"
+		<action name="selectbyid" class="com.paper.paperManage_tmp.BookAction"
 			method="selectbyid">
 			<!-- name="success" -->
 			<result name="success">/update.jsp</result>
@@ -71,7 +70,7 @@
 		</action>
 
 
-		<action name="deleteByType" class="com.paper.action.BookAction"
+		<action name="deleteByType" class="com.paper.paperManage_tmp.BookAction"
 			method="deleteByType">
 			<result name="delete" type="redirectAction">selectbytype.action</result>
 		</action>
@@ -79,7 +78,7 @@
 		<action name="add" class="com.paper.action.AddNoteAction" method="add">
 			<result name="success">/index.jsp</result>
 		</action>
-		<action name="update" class="com.paper.action.UpdateNoteAction"
+		<action name="update" class="com.paper.paperManage_tmp.UpdateNote"
 			method="update">
 			<result name="success">/index.jsp</result>
 		</action>

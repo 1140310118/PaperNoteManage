@@ -133,7 +133,7 @@
 <!-- 新建论文  从本地上传-->
 	<div class="form_container" id="newPaperFromLocal" style="display:none;">
 	<br><br>
-	<s:form id="paperForm" action="manage?fileUpFlag=true" method="post" enctype="multipart/form-data">
+	<s:form id="paperForm" action="manage?fileUpFlag=true&newPaperFlag=true" method="post" enctype="multipart/form-data">
 	  	 <h3>新建论文</h3>
 	    <h4>从本地上传</h4>
 	    <fieldset>
@@ -191,12 +191,12 @@
 <!-- 新建论文 导入URL链接-->
 	<div class="form_container" id="newPaperByURL" style="display:none;">  
 	<br><br>
-	<form id="paperForm" action="manage" method="post">
+	<form id="paperForm" action="manage?newPaperFlag=true&fileUpFlag=false" method="post">
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>
 	    
 	    <fieldset>
-	   	<input id="newPaperFromLocal_userEmail" value='<%=session.getAttribute("USER_Email")%>' name="paper.paperUserEmail" style="display: none;"></input>
+	   	<input id="newPaperByURL_userEmail" value='<%=session.getAttribute("USER_Email")%>' name="paper.paperUserEmail" style="display: none;"></input>
 	   	</fieldset>
 	   	
 		<fieldset>
@@ -220,6 +220,13 @@
 	    </fieldset>
 	</form>
 	<script type="text/javascript">
+		$("#newPaperByURL_Submit").click(function(){
+				if($("#newPaperByURL_name").val() && 
+				   $("#newPaperByURL_url").val()){
+				   	alert($("#newPaperByURL_userEmail").val());
+					alert("提交啦！");
+				}
+			});
 		// $(document).ready(function(){
 		// 	$("#newPaperByURL_Submit").click(function(submitEvent){
 		// 		// if(	$("#newPaperByURL_name").val() && 
@@ -323,20 +330,7 @@
 
 
 <!--文件列表-->
-<%-- <c:forEach var="book" items="${booklist}"> --%>
-<!-- 			<tr> -->
 
-<%-- 				<td><a href="${book.paperWebFilePath}"> ${book.paperNickName }</a></td> --%>
-<!-- 			<!--   -->
-<!-- 				<td><a href='<s:url action="deleteByType" > -->
-<!-- 				<s:param name="type" value="type"></s:param> -->
-<!-- 				</s:url>'> 删除</a></td> -->
-<!-- 			--> -->
-<%-- 			<td><a href="selectbyid?type=${book.paperNickName }"> 修改</a></td> --%>
-<%-- 			<td><a href="selectbyid1?type=${book.paperNickName }"> 详情</a></td> --%>
-<%-- 			<td><a href="deleteByType?type=${book.paperNickName } "> 删除</a></td> --%>
-<!-- 			</tr> -->
-<!-- 		</c:forEach> -->
 
 	<br><br><br>
 	<ol class="rounded-list" id="allPaperShow">
@@ -367,24 +361,24 @@
 						<table class="bordered">
 						    <tr><th colspan="2">论文详情</th></tr>
 						    <tr>
-						        <td>论文名称</th>
-						        <td id="paperName_<%=Index%>">${paper.paperNickName }</td>
+						        <td>论文名称</td>
+						        <td id="paperName_<%=paperIndex%>">${paper.paperNickName }</td>
 						    </tr>
 						    <tr>
-						        <td>分类目录</th>
+						        <td>分类目录</td>
 						        <td></td>
+						  	</tr>
+						    <tr>
+						        <td>论文来源</td>
+						        <td id="paperOrigin_<%=paperIndex%>">${paper.paperOrigin }</td>
 						    </tr>
 						    <tr>
-						        <td>论文来源</th>
-						        <td id="paperOrigin_<%=Index%>">${paper.paperOrigin }</td>
+						        <td>添加日期</td>
+						        <td id="paperUploadDate_<%=paperIndex%>">${paper.uploadDate }</td>
 						    </tr>
 						    <tr>
-						        <td>添加日期</th>
-						        <td id="paperUploadDate_<%=Index%>">${paper.uploadDate }</td>
-						    </tr>
-						    <tr>
-						        <td>备注</th>
-						        <td id="paperRemark_<%=Index%>">${paper.paperRemark }</td>
+						        <td>备注</td>
+						        <td id="paperRemark_<%=paperIndex%>">${paper.paperRemark }</td>
 						    </tr>
 						</table>
 						<center>
@@ -396,7 +390,7 @@
 		</c:forEach>			
 	</ol>
 	<div id="updatePaperWindow" style="display: none;">
-		<form  action="manage" method="post">
+		<form  action="<%=basePath%>manage" method="post">
 			<table class="bordered">
 			    <tr><th colspan="2">修改论文信息</th></tr>
 			    <tr>
@@ -455,6 +449,7 @@
 		$("#updatePaperWindow").hide();
 		$(".mask").hide();
 		$('body').css("overflow","visible");
+		$.post("<%=basePath%>manage",{updatePaperFlag:"true"},function(){});
 	}
 
 	function paperDetailClose(){
