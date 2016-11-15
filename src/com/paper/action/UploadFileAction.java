@@ -18,6 +18,8 @@ public class UploadFileAction extends ActionSupport implements
 	private Paper paper=new Paper();
 	private DAO dao = new DAO();
 	private String userEmail = null;
+	ActionContext actionContext = ActionContext.getContext();
+	Map session = actionContext.getSession();
 
 	public String getUserEmail() {
 		return userEmail;
@@ -58,6 +60,7 @@ public class UploadFileAction extends ActionSupport implements
 	{
 		// 所有论文 根据userEmail
 		//
+		System.out.println(session.get("USER_Nickname"));
 		String root = "d:\\upload\\";
 		String paperWebFilePath=fileUp(root);
 		insertNewPaper(paperWebFilePath);
