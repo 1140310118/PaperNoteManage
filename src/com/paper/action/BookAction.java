@@ -82,7 +82,7 @@ public class BookAction extends ActionSupport {
 		// TODO Auto-generated method stub
 		// ��ѯ�������request��
 		//System.out.println(type);
-		ActionContext.getContext().put("booklist", bo.selectByid(id));
+		//ActionContext.getContext().put("booklist", bo.selectByid(id));
 		// ����successָ����ҳ��
 		return SUCCESS; // "success"
 	}

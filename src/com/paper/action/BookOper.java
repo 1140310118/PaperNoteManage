@@ -16,7 +16,7 @@ public class BookOper {
 		java.sql.ResultSet rs = null;
 		List<Book> data = new ArrayList<Book>();
 		try {
-			pstmt = conn.prepareStatement("select id, text from papernote where name=?");
+			pstmt = conn.prepareStatement("select paperNickName, paperOrgin, paperWebFilePath, paperRemark, uploadDate, paperUserEmail  from paper where name=?");
 			pstmt.setString(1, type);
 			rs = pstmt.executeQuery();
 			//Book book = new Book();
@@ -58,55 +58,55 @@ public class BookOper {
 		return data;
 	}
 	
-	public List<Book> selectByid(int id) {
-		
-		Connection conn = com.paper.db.DbConn.getConn();
-		java.sql.PreparedStatement pstmt = null;
-
-		java.sql.ResultSet rs = null;
-		List<Book> data = new ArrayList<Book>();
-		try {
-			pstmt = conn.prepareStatement("select id, name, text from papernote where id=?");
-			pstmt.setInt(1, id);
-			rs = pstmt.executeQuery();
-			//Book book = new Book();
-			while (rs.next()) {
-				Book book = new Book();
-				book.setType(rs.getString(2));
-				book.setText(rs.getString(3));
-				book.setId(rs.getInt(1));
-				data.add(book);
-				
-			}
-			
-
-			
-		} catch (SQLException e) {
-			System.out.println("flase");
-			e.printStackTrace();
-			// TODO Auto-generated catch block e.printStackTrace();
-		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block e.printStackTrace();
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block e.printStackTrace();
-				}
-		}
-		return data;
-	}
+//	public List<Book> selectByid(int id) {
+//		
+//		Connection conn = com.paper.db.DbConn.getConn();
+//		java.sql.PreparedStatement pstmt = null;
+//
+//		java.sql.ResultSet rs = null;
+//		List<Book> data = new ArrayList<Book>();
+//		try {
+//			pstmt = conn.prepareStatement("select id, name, text from papernote where id=?");
+//			pstmt.setInt(1, id);
+//			rs = pstmt.executeQuery();
+//			//Book book = new Book();
+//			while (rs.next()) {
+//				Book book = new Book();
+//				book.setType(rs.getString(2));
+//				book.setText(rs.getString(3));
+//				book.setId(rs.getInt(1));
+//				data.add(book);
+//				
+//			}
+//			
+//
+//			
+//		} catch (SQLException e) {
+//			System.out.println("flase");
+//			e.printStackTrace();
+//			// TODO Auto-generated catch block e.printStackTrace();
+//		} finally {
+//			if (rs != null)
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block e.printStackTrace();
+//				}
+//			if (pstmt != null)
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block e.printStackTrace();
+//				}
+//			if (conn != null)
+//				try {
+//					conn.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block e.printStackTrace();
+//				}
+//		}
+//		return data;
+//	}
 	public int update(int id,String name,String text){
 		int jg=0;
 		//Connection conn = DB.createConn();
