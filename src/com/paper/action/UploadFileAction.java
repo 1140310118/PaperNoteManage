@@ -151,7 +151,6 @@ public String paperManage() throws Exception{
 	
 	}
 	
-	getAllPaperExistedByEmail();
 	
 	if (deletePaperNickName!=null){
 		System.out.println("删除的文件："+deletePaperNickName);
@@ -175,6 +174,8 @@ public String paperManage() throws Exception{
 		}
 		
 	}
+
+	getAllPaperExistedByEmail();
 	return "success";
 } 
 private void updatePaper(Paper paper) {
