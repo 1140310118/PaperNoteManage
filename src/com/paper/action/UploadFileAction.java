@@ -164,7 +164,7 @@ public String paperManage() throws Exception{
 		if (newPaperByURLFlag!="false")
 		{
 			System.out.println("新建文件 从URL");
-			insertNewPaper("");
+			insertNewPaper(paper.paperExteriorURL);
 		}
 		if (fileUpFlag!="false"){
 			System.out.println("新建文件 从本地");

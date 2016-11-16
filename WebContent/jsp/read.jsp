@@ -52,13 +52,13 @@
 <!-- embed width="800" height="600" src="./test.pdf">
 <iframe width="800" height="600" src="./test.pdf"></iframe-->
  <div style="float:left;margin-left:200px;margin-top: 50px;">
- <object width="800" height="600" data="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></object>
+ <iframe width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe>
 </div>
 
 <div id="already_saved" style="display: none;z-index: 9999;background: #eee;position: absolute;left:80%">已经保存</div>
-<div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;">
+<div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#111;">
 	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
-	<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
+	<button id="addNoteButton" name="addNoteFlag">添加 笔记</button>
 	<%int i=0;%>
 	<div id="noteArea">
 		<s:iterator value="notes">

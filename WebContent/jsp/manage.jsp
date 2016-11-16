@@ -370,6 +370,11 @@
 						        <td>论文来源</td>
 						        <td id="paperOrigin_<%=paperIndex%>">${paper.paperOrigin }</td>
 						    </tr>
+						    
+						    <tr id="paperExteriorURL_tr_<%=paperIndex%>">
+						        <td>论文URL</td>
+						        <td id="paperExteriorURL_<%=paperIndex%>">${paper.paperExteriorURL }</td>
+						    </tr>
 						    <tr>
 						        <td>添加日期</td>
 						        <td id="paperUploadDate_<%=paperIndex%>">${paper.uploadDate }</td>
