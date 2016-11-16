@@ -172,8 +172,8 @@
 			$("#newPaperFromLocal_Submit").click(function(){
 				if($("#newPaperFromLocal_name").val() && 
 				   $("#newPaperFromLocal_fileName").val()){
-				   	alert($("#newPaperFromLocal_userEmail").val());
-					alert("提交啦！");
+				   	//alert($("#newPaperFromLocal_userEmail").val());
+					alert("上传成功！");
 				}
 			});
 		// $("#newPaperFromLocal").submit(function(e){
@@ -222,8 +222,8 @@
 		$("#newPaperByURL_Submit").click(function(){
 				if($("#newPaperByURL_name").val() && 
 				   $("#newPaperByURL_url").val()){
-				   	alert($("#newPaperByURL_userEmail").val());
-					alert("提交啦！");
+				   	//alert($("#newPaperByURL_userEmail").val());
+					alert("上传成功！");
 				}
 			});
 		// $(document).ready(function(){
@@ -347,7 +347,7 @@
 			<% paperIndex++; %>
 			<div id="paperE_<%=paperIndex%>">
 				<li>
-					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${book.paperWebFilePath}">${paper.paperNickName }</a>
+					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="view_window">${paper.paperNickName }</a>
 					<div style="float:right;">
 						<a href="#" onClick="paperUpdate(<%=paperIndex%>)">修改&nbsp;&nbsp;</a>
 						<a href="#" id="detail" onClick="paperDetail(<%=paperIndex%>)">详情&nbsp;&nbsp;</a>
