@@ -128,6 +128,6 @@
         }
     });
   	</script>
-  	<s:property value="#session.USER_Nickname" />
+<%--   	<s:property value="#session.USER_Nickname" /> --%>
 	</body>
 </html>

@@ -63,7 +63,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;
               已有账号，
-              <a href="<%=basePath %>login"><u>直接登录</u></a>
+              <a href="<%=basePath %>login?relogin=true"><u>直接登录</u></a>
             </div>
           </div>
       </div>

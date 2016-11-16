@@ -140,8 +140,8 @@
 </a>      </nav>
 
       <div class="site-header-actions">
-            <a class="btn btn-primary site-header-actions-btn" href="<%=basePath%>" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">注册</a>
-          <a class="btn site-header-actions-btn mr-1" href="<%=basePath%>login" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">登录</a>
+            <a class="btn btn-primary site-header-actions-btn" href="<%=basePath%>register" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">注册</a>
+          <a class="btn site-header-actions-btn mr-1" href="<%=basePath%>login?relogin=true" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">登录</a>
       </div>
 
         <nav class="site-header-nav site-header-nav-secondary mr-md-3">
