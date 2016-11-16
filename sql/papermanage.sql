@@ -39,7 +39,7 @@ CREATE TABLE `paper` (
 
 LOCK TABLES `paper` WRITE;
 /*!40000 ALTER TABLE `paper` DISABLE KEYS */;
-INSERT INTO `paper` VALUES ('bu规范dfg达哥否','哈尔滨工业大学','d:\\upload\\1140310115-Lab2-report.doc','null','梵蒂冈和对方回复的恢复规划规范','2016-11-07 20:31:47',NULL),('规范dfg达哥否','哈尔滨工业大学','d:/upload/1140310115-Lab2-report.doc','null','梵蒂冈和对方回复的恢复规划规范','2016-11-07 20:37:22',NULL),('dfg达哥否否','曹德福','d:/upload/1140310115-Lab2-report.doc','null','阿斯顿发生打发打发','2016-11-07 20:37:46',NULL);
+INSERT INTO `paper` VALUES ('bu规范dfg达哥否','哈尔滨工业大学','d:\\upload\\1140310115-Lab2-report.doc','null','梵蒂冈和对方回复的恢复规划规范','2016-11-07 20:31:47','user_email'),('规范dfg达哥否','哈尔滨工业大学','d:/upload/1140310115-Lab2-report.doc','null','梵蒂冈和对方回复的恢复规划规范','2016-11-07 20:37:22',NULL),('dfg达哥否否','曹德福','d:/upload/1140310115-Lab2-report.doc','null','阿斯顿发生打发打发','2016-11-07 20:37:46',NULL),('百度','','http://www.baidu.com','http://www.baidu.com','','2016-11-16 11:31:47','zorenv@163.com'),('zhihu','','http://www.zhihu.com','http://www.zhihu.com','','2016-11-16 11:32:16','zorenv@163.com'),('sina','','http://http://www.sina.com','http://http://www.sina.com','','2016-11-16 11:33:28','zorenv@163.com'),('2333','','http://baidu.com','http://baidu.com','','2016-11-16 11:39:08','zorenv@163.com');
 /*!40000 ALTER TABLE `paper` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-15 22:14:06
+-- Dump completed on 2016-11-16 11:40:52
