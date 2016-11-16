@@ -19,7 +19,8 @@
 		</action>
 		<action name="register" class="com.paper.action.LoginAndRegisterAction"
 			method="register">
-			<result name="registersuccess" type="redirect">login.action</result>
+<!-- 			<result name="registersuccess" type="redirect">login.action</result> -->
+			<result name="registersuccess" type="redirect">jsp/index.jsp</result>
 			<result name="registererror">/jsp/register.jsp</result>
 		</action>
 		<action name="logout" class="com.paper.action.LoginAndRegisterAction"
