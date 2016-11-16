@@ -38,8 +38,8 @@
                 </div>
                 <ul class="nav_ul hw1_masthead_cata hidden-sm hidden-xs">
                  	<celin>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</celin>
-                    <li><a href="<%=basePath%>jsp/read">论文阅读</a></li>
-                    <li><a href="<%=basePath%>jsp/manage">论文管理</a></li>
+                    <li><a href="<%=basePath%>read">论文阅读</a></li>
+                    <li><a href="<%=basePath%>manage">论文管理</a></li>
                 </ul>
             </nav>
         </div>
