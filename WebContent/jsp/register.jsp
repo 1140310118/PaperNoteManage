@@ -27,7 +27,7 @@
 
     <div class="Main">
     <div class="MainBg">
-      <s:form method="post" id="registerForm">    
+      <form method="post" id="registerForm" action="<%=basePath %>register">    
       <div class="MainR">
           <div class="Header">
             <div class="title">用户注册</div>              
@@ -67,7 +67,7 @@
             </div>
           </div>
       </div>
-      </s:form>
+      </form>
     </div>
     </div>
   <script type="text/javascript">

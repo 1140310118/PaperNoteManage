@@ -178,7 +178,7 @@ public String paperManage() throws Exception{
 		if (fileUpFlag!="false"){
 			System.out.println("新建文件 从本地");
 			String paperWebFilePath=fileUp(root);
-//			System.out.println(paperWebFilePath);
+			System.out.println(paperWebFilePath);
 			insertNewPaper(paperWebFilePath);
 		}
 		

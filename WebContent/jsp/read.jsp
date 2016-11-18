@@ -63,7 +63,7 @@
 	<div id="noteArea">
 		<s:iterator value="notes">
 			<%i++;%>
-			<center><s:property value="noteID"/></center>
+<%-- 			<div id="noteID_<%=i%>"></div><center><s:property value="noteID"/></center></div> --%>
 			<textarea placeholder="笔记" id="note_<%=i%>" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea>
 			<button class="note_delete_button_class" id="note_delete_button_<%=i%>">删除笔记</button>
 		</s:iterator>
@@ -122,10 +122,12 @@
 				    {addNoteFlag:"true"},
 				    function(){
 				    	<%i++;%>
-				    	$("#noteArea").append("<textarea placeholder=\"笔记\" id=\"note_<%=i%>\" class=\"note_class\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"/>\
+				    	$("#noteArea").append("\
+				    			<textarea placeholder=\"笔记\" id=\"note_<%=i%>\" class=\"note_class\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"/>\
 										<button class=\"note_delete_button_class\" id=\"note_delete_button_<%=i%>\">删除笔记</button>");
 				    	modifyNote_by_id("note_<%=i%>");
 				    	deleteNote_by_id("note_<%=i%>");
+			   			alert("笔记"+$("#noteID_"+id.substring(19)).html()+":删除成功！");		
 				    });
 		});
 	}
@@ -138,9 +140,10 @@
 					 	deleteNoteListID: id.substring(19)
 					},
 			   		function(){
+						//$("#noteID_"+id.substring(19)).hide();// 
 						$("#note_"+id.substring(19)).hide();// hide 输入框
 						$("#"+id).hide();//hide 删除按钮
-			   			alert(id.substring(19)+":删除成功！");			   			
+			   			alert("删除成功！");			   			
 			   		}
 			);
 		});
@@ -152,9 +155,10 @@
 					 	deleteNoteListID: id.substring(19)
 					},
 			   		function(){
+						//$("#noteID_"+id.substring(19)).hide();
 						$("#note_"+id.substring(19)).hide();// hide 输入框
 						$("#"+id).hide();//hide 删除按钮
-			   			alert(id.substring(19)+":删除成功！");			   			
+			   			alert("删除成功！");			   			
 			   		}
 			);
 		});
