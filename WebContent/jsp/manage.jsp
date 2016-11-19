@@ -56,12 +56,16 @@
                     <li><a href="<%=basePath%>manage">论文管理</a></li>
                 </ul>
             </nav>
-            <div style="float: right;font-size: 14px;margin-right: 30px;">
-            	<!-- <s:form action="login?relogin=true"> -->
-   				<!-- <s:submit name="method:logout" value="退出登录"></s:submit> -->
-				<!-- </s:form> -->
-				<s:property value="#session.USER_Nickname"/> | <a href="<%=basePath%>login?relogin=true">退出登录</a>
+             <div style="float: right;font-size: 14px;margin-right: 50px;">
+            	<celin id="userName"><s:property value="#session.USER_Nickname"/></celin> | <celin id="ID_logout"><a href="<%=basePath%>login?relogin=true">退出登录</a></celin>
             </div>
+             <script type="text/javascript">
+    	     	var name=$("#userName").html();
+    	     	if(name=="user_nickname"){
+    	     		$("#userName").html("尚未登录");
+    	     		$("#ID_logout").html("去<font color=\"blue\"><a href=\"<%=basePath%>login?relogin=true\">登录</a></font>");
+    	     	}
+            </script> 
         </div>
     </div>
 <!---->
@@ -347,7 +351,7 @@
 			<% paperIndex++; %>
 			<div id="paperE_<%=paperIndex%>">
 				<li>
-					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="view_window">${paper.paperNickName }</a>
+					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
 					<div style="float:right;">
 						<a href="#" onClick="paperUpdate(<%=paperIndex%>)">修改&nbsp;&nbsp;</a>
 						<a href="#" id="detail" onClick="paperDetail(<%=paperIndex%>)">详情&nbsp;&nbsp;</a>

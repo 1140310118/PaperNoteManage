@@ -42,6 +42,16 @@
                     <li><a href="<%=basePath%>manage">论文管理</a></li>
                 </ul>
             </nav>
+            <div style="float: right;font-size: 14px;margin-right: 50px;">
+            	<celin id="userName"><s:property value="#session.USER_Nickname"/></celin> | <celin id="ID_logout"><a href="<%=basePath%>login?relogin=true">退出登录</a></celin>
+            </div>
+             <script type="text/javascript">
+    	     	var name=$("#userName").html();
+    	     	if(name=="user_nickname"){
+    	     		$("#userName").html("尚未登录");
+    	     		$("#ID_logout").html("去<font color=\"blue\"><a href=\"<%=basePath%>login?relogin=true\">登录</a></font>");
+    	     	}
+            </script> 
         </div>
     </div>
 
@@ -55,7 +65,7 @@
  <iframe width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe>
 </div>
 
-<div id="already_saved" style="display: none;z-index: 9999;background: #eee;position: absolute;left:80%">已经保存</div>
+<div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
 <div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#111;">
 	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
 	<button id="addNoteButton" name="addNoteFlag">添加 笔记</button>
