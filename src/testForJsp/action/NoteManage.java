@@ -16,11 +16,12 @@ public class NoteManage{
 	
 	//添加笔记
 	private String addNoteFlag = "false";
+	private String addNoteID = null;
 	//修改笔记
 	private String modifyNoteContent=new String(); //修改后的内容
-	private String modifyNoteListID = null;//待修改的笔记id
+	private String modifyNoteID = null;//待修改的笔记id
 	//删除笔记
-	private String deleteNoteListID = null;
+	private String deleteNoteID = null;
 
 // 根据情况修改
 //	private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
@@ -30,36 +31,44 @@ public class NoteManage{
 	
 	
 	public String execute() throws IOException{
-		//System.out.println(tmpPath);
 		
-		// 新建文件
-		if(addNoteFlag!="false"){
-			//System.out.println("in");
-			int num;
-			addconfig(con);
-			num=readconfig(con);
-			String txt=num+".txt";
-			addNoteFile(txt);
-		}
-		
-		// 获得所有文件
+		// 笔记的各种操作
+		// 包括从磁盘中       获得用户的所有笔记，新建笔记，删除笔记，修改笔记
+		NoteOpeartion();
+		return "success";
+	}
+
+
+	private void NoteOpeartion() throws IOException {
+		// 获得所有笔记
 		getAllExistedNotes();
 		
-		// 删除文件
-		if(deleteNoteListID!=null){
-			String deleteNoteID= ""+notes.get(Integer.parseInt(deleteNoteListID)-1).noteID;
+		// 新建笔记
+		if(addNoteFlag!="false"){
+			addNoteID=addNoteFile();
+		}
+		
+		// 删除笔记
+		if(deleteNoteID!=null){
 			deleteFile(deleteNoteID,tmpPath);
 			System.out.println("被删除的笔记:"+deleteNoteID);
 		}
 		
-		// 修改文件
-		if(modifyNoteListID!=null){
-			String modifyNoteID= ""+notes.get(Integer.parseInt(modifyNoteListID)-1).noteID;
+		// 修改笔记
+		if(modifyNoteID!=null){
 			writeFile(modifyNoteContent,modifyNoteID+".txt",tmpPath);
 			System.out.println("被修改的笔记:"+modifyNoteID);
 //			System.out.println(modifyNoteContent);
 		}
-		return "success";
+		
+	}
+
+
+	private int nextNoteID() {
+		int num;
+		addconfig(con);
+		num=readconfig(con);
+		return num;
 	}
 
 
@@ -125,17 +134,19 @@ public class NoteManage{
 	}
 
 
-	private void addNoteFile(String filename) {
-		
-		
+	private String addNoteFile() {
+		int NoteID = nextNoteID();
+		String filename = NoteID + ".txt";
 		File path = new File(tmpPath);
 		File dir=new File(path,filename);
 		try {
 			dir.createNewFile();
 			System.out.println("创建成功");
+			return ""+NoteID;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.print("创建失败");
+			return null;
 		}
 	}
 
@@ -181,12 +192,12 @@ public class NoteManage{
 
 
 	public String getDeleteNoteListID() {
-		return deleteNoteListID;
+		return deleteNoteID;
 	}
 
 
 	public void setDeleteNoteListID(String deleteNoteListID) {
-		this.deleteNoteListID = deleteNoteListID;
+		this.deleteNoteID = deleteNoteListID;
 	}
 
 
@@ -207,6 +218,16 @@ public class NoteManage{
 
 	public void setModifyNoteContent(String modifyNoteContent) {
 		this.modifyNoteContent = modifyNoteContent;
+	}
+
+
+	public String getAddNoteID() {
+		return addNoteID;
+	}
+
+
+	public void setAddNoteID(String addNoteID) {
+		this.addNoteID = addNoteID;
 	}
 	
 }

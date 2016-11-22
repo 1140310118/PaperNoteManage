@@ -44,7 +44,6 @@
             </nav>
             <div style="float: right;font-size: 14px;margin-right: 50px;">
             	<celin id="userName"><s:property value="#session.USER_Nickname"/></celin> | <celin id="ID_logout"><a href="<%=basePath%>login?relogin=true">退出登录</a></celin>
-            </div>
              <script type="text/javascript">
     	     	var name=$("#userName").html();
     	     	if(name=="user_nickname"){
@@ -53,6 +52,7 @@
     	     	}
             </script> 
         </div>
+    </div>
     </div>
 
 
@@ -66,7 +66,7 @@
 </div>
 
 <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
-<div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#111;">
+<div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#eee;">
 	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
 	<button id="addNoteButton" name="addNoteFlag">添加 笔记</button>
 	<%int i=0;%>
@@ -80,10 +80,6 @@
 	</div>
 </div>
 
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
@@ -132,12 +128,10 @@
 				    {addNoteFlag:"true"},
 				    function(){
 				    	<%i++;%>
-				    	$("#noteArea").append("\
-				    			<textarea placeholder=\"笔记\" id=\"note_<%=i%>\" class=\"note_class\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"/>\
+				    	$("#noteArea").append("<textarea placeholder=\"笔记\" id=\"note_<%=i%>\" class=\"note_class\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"/>\
 										<button class=\"note_delete_button_class\" id=\"note_delete_button_<%=i%>\">删除笔记</button>");
 				    	modifyNote_by_id("note_<%=i%>");
 				    	deleteNote_by_id("note_<%=i%>");
-			   			alert("笔记"+$("#noteID_"+id.substring(19)).html()+":删除成功！");		
 				    });
 		});
 	}
@@ -150,10 +144,9 @@
 					 	deleteNoteListID: id.substring(19)
 					},
 			   		function(){
-						//$("#noteID_"+id.substring(19)).hide();// 
 						$("#note_"+id.substring(19)).hide();// hide 输入框
 						$("#"+id).hide();//hide 删除按钮
-			   			alert("删除成功！");			   			
+			   			alert(id.substring(19)+":删除成功！");			   			
 			   		}
 			);
 		});
@@ -165,10 +158,9 @@
 					 	deleteNoteListID: id.substring(19)
 					},
 			   		function(){
-						//$("#noteID_"+id.substring(19)).hide();
 						$("#note_"+id.substring(19)).hide();// hide 输入框
 						$("#"+id).hide();//hide 删除按钮
-			   			alert("删除成功！");			   			
+			   			alert(id.substring(19)+":删除成功！");			   			
 			   		}
 			);
 		});
@@ -188,7 +180,6 @@
 	}
 </script>
 
-<br><br><br><br><br><br><br><br><br>
 <!--底部-->
 <div id="footer" class="winwin-footer" style="top: initial;">
     <div class="container">
@@ -245,6 +236,8 @@
 	    </div>
 	    </div>
 	</div>
+</div>
+</div>
 </div>
 
 </body>
