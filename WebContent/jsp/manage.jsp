@@ -296,38 +296,6 @@
 	}
 	</script>
 	<div class="mask"></div>
-	<div class="centerWindow">
-		<table class="bordered">
-		    <tr><th colspan="2">论文详情</th></tr>
-		    <tr>
-		        <td>论文名称</th>
-		        <td>K-partion</td>
-		    </tr>
-		    <tr>
-		        <td>文件名</th>
-		        <td>K-partion.pdf</td>
-		    </tr>
-		    <tr>
-		        <td>分类目录</th>
-		        <td>数据结构/哈希</td>
-		    </tr>
-		    <tr>
-		        <td>论文来源</th>
-		        <td></td>
-		    </tr>
-		    <tr>
-		        <td>添加日期</th>
-		        <td>2016/11/5</td>
-		    </tr>
-		    <tr>
-		        <td>备注</th>
-		        <td>算法设计与分析大作业</td>
-		    </tr>
-		</table>
-		<center>
-			<button onClick="backNormal()">确定</button>
-		</center>
-	</div>
 <!---->
 
 

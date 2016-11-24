@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
 	<link rel="Shortcut Icon" href="#">
     <script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
+    <script src="<%=basePath%>jsp/read_and_manage_lib/js/jquery.jsonp.js"></script>
     <script type="text/javascript" src="http://open.iciba.com/ds_open.php?id=53648&name=2333&auth=AEE55034FB1F422E38947BDF265B7A17" charset="utf-8"></script>
 </head>
 
@@ -68,6 +69,8 @@
 
 <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
 <div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#eee;">
+	<input type="text" style="width: 250px;" />
+	<button id="dictS_button">查询</button>
 	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
 	<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
 	<c:set var="i" value="0"></c:set>
@@ -88,10 +91,46 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		//dictSearch();
         addNote();
         modifyNote();
         deleteNote();
     });
+	//reference: http://www.cnblogs.com/sunxucool/p/3433992.html
+    function dictSearch(){
+    	$("#dictS_button").click(function(){
+    		alert("dict");
+			/* $.jsonp({
+			          "url": "http://xtk.azurewebsites.net/BingDictService.aspx?Word=welcome",
+			          "success": function (result) {
+			        	  alert(result);
+			              alert(result.word_name);
+			          },
+			          "error": function (e) {
+			        	  alert("dd")
+			          }
+			          //,
+			          //async: true,
+			          //cache: false
+			      }); */
+    		$.ajax({
+	          url: "http://xtk.azurewebsites.net/BingDictService.aspx?Word=welcome",
+	          dataType:'jsonp',
+	          processData : false,
+	          type:'get',
+	          success: function (result) {
+	        	  alert(result);
+	              alert(result.word_name);
+	          },
+	          error: function(XMLHttpRequest, textStatus, errorThrown) {
+	              alert(XMLHttpRequest.status);
+	              alert(XMLHttpRequest.readyState);
+	              alert(textStatus);
+	          }
+	      	}); 
+    	});
+    }
+    
 	function addNote(){
 		$("#addNoteButton").click(function(){
 			$.post("<%=basePath%>newNote",
