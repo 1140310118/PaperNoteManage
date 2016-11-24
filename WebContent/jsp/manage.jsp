@@ -30,6 +30,7 @@
 
 	<script src="<%=basePath%>jsp/read_and_manage_lib/js/simple.js"></script>
 	<script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
+	<link href="<%=basePath%>jsp/read_and_manage_lib/css/select.css" rel="stylesheet" />
 	
 </head>
 
@@ -319,8 +320,19 @@
 			<% paperIndex++; %>
 			<div id="paperE_<%=paperIndex%>">
 				<li>
+					<select class="RC_select" id="Reading_Conditions_select_<%=paperIndex%>" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:13px;">
+							<option>&nbsp;*   未阅读</option>
+							<option>&nbsp;/   已粗读</option>
+							<option>&nbsp;#   已精读</option>
+							<option style="display:none;">*</option>
+							<option style="display:none;">/</option>
+							<option style="display:none;">#</option>
+					</select>
+					&nbsp;
 					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
+					
 					<div style="float:right;">
+						
 						<a href="#" onClick="paperUpdate(<%=paperIndex%>)">修改&nbsp;&nbsp;</a>
 						<a href="#" id="detail" onClick="paperDetail(<%=paperIndex%>)">详情&nbsp;&nbsp;</a>
 						<a href="#" onClick="deletePaper(<%=paperIndex%>)">删除&nbsp;&nbsp;</a>
