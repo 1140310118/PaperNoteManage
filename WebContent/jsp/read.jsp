@@ -47,7 +47,7 @@
             	<celin id="userName"><s:property value="#session.USER_Nickname"/></celin> | <celin id="ID_logout"><a href="<%=basePath%>login?relogin=true">退出登录</a></celin>
              <script type="text/javascript">
     	     	var name=$("#userName").html();
-    	     	if(name=="user_nickname"){
+    	     	if(name=="user_nickname" || name==""){
     	     		$("#userName").html("尚未登录");
     	     		$("#ID_logout").html("去<font color=\"blue\"><a href=\"<%=basePath%>login?relogin=true\">登录</a></font>");
     	     	}
