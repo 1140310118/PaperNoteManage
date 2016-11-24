@@ -88,5 +88,6 @@
 			<result name="success">/SendEmailSuccess.jsp</result>
 			<result name="error">/SendEmailError.jsp</result>
 		</action>
+		<action name="newNote" class="testForJsp.action.NoteManage" method="newNote"/>
 	</package>
 </struts>

@@ -1,13 +1,21 @@
 package testForJsp.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 
 public class NoteManage{
 	
@@ -16,12 +24,16 @@ public class NoteManage{
 	
 	//添加笔记
 	private String addNoteFlag = "false";
-	private String addNoteID = null;
+	//private String addNoteID = null;
+	//private Map responseJson;
+	//private InputStream inputStream = null;
+	
 	//修改笔记
 	private String modifyNoteContent=new String(); //修改后的内容
 	private String modifyNoteID = null;//待修改的笔记id
 	//删除笔记
 	private String deleteNoteID = null;
+	
 
 // 根据情况修改
 //	private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
@@ -33,20 +45,23 @@ public class NoteManage{
 	public String execute() throws IOException{
 		
 		// 笔记的各种操作
-		// 包括从磁盘中       获得用户的所有笔记，新建笔记，删除笔记，修改笔记
+		// 包括        从磁盘中获得用户的所有笔记，新建笔记，删除笔记，修改笔记
 		NoteOpeartion();
+		
 		return "success";
 	}
-
 
 	private void NoteOpeartion() throws IOException {
 		// 获得所有笔记
 		getAllExistedNotes();
 		
 		// 新建笔记
-		if(addNoteFlag!="false"){
-			addNoteID=addNoteFile();
-		}
+		// if(addNoteFlag!="false"){
+		// 	String addNoteID=addNoteFile();
+		// 	//Map<String,String> map = new HashMap<String,String>();
+		// 	//map.put("addNoteID", addNoteID);
+		// 	//this.setResponseJson(map);//返回json数据
+		// }
 		
 		// 删除笔记
 		if(deleteNoteID!=null){
@@ -60,7 +75,26 @@ public class NoteManage{
 			System.out.println("被修改的笔记:"+modifyNoteID);
 //			System.out.println(modifyNoteContent);
 		}
+	}
+	public void newNote() throws IOException{
+		// 新建笔记 
+		String addNoteID=addNoteFile();
 		
+		
+		HttpServletResponse response=ServletActionContext.getResponse();
+		/* 
+	     * 在调用getWriter之前未设置编码(既调用setContentType或者setCharacterEncoding方法设置编码), 
+	     * HttpServletResponse则会返回一个用默认的编码(既ISO-8859-1)编码的PrintWriter实例。这样就会 
+	     * 造成中文乱码。而且设置编码时必须在调用getWriter之前设置,不然是无效的。 
+	     * */  
+		response.setContentType("text/html;charset=utf-8");  
+	    //response.setCharacterEncoding("UTF-8");  
+	    PrintWriter out = response.getWriter();  
+	    //JSON在传递过程中是普通字符串形式传递的，这里简单拼接一个做测试  
+	    String jsonString=addNoteID;  
+	    out.println(jsonString);  
+	    out.flush();  
+	    out.close();  
 	}
 
 
@@ -107,21 +141,21 @@ public class NoteManage{
 		String filename = noteID +".txt"; 
 		File file = new File(tmpPath+"/"+filename);
 		if(file.exists()){
-		    //file.delete();
-		    modifyCon_when_deleteFile(noteID);
+		    file.delete();
+		    //modifyCon_when_deleteFile(noteID);
 		}
 	}
 	
 	// 例如 config aaaaa -> aabaa 删除笔记3
- 	private void modifyCon_when_deleteFile(String noteID) throws IOException{
-		File file = new File(con);
-		String filecontent = org.apache.commons.io.FileUtils.readFileToString(file, "utf8");
-		System.out.println(filecontent);
-		int pos = Integer.parseInt(noteID)-1;
-		filecontent=  filecontent.substring(0,pos)+"b"+filecontent.substring(pos+1);
-		System.out.println(filecontent);
-		writeFile(filecontent,"note.config",tmpPath);
-	}
+// 	private void modifyCon_when_deleteFile(String noteID) throws IOException{
+//		File file = new File(con);
+//		String filecontent = org.apache.commons.io.FileUtils.readFileToString(file, "utf8");
+//		System.out.println(filecontent);
+//		int pos = Integer.parseInt(noteID)-1;
+//		filecontent=  filecontent.substring(0,pos)+"b"+filecontent.substring(pos+1);
+//		System.out.println(filecontent);
+//		writeFile(filecontent,"note.config",tmpPath);
+//	}
 
 	private void writeFile(String testtext, String filename, String tmpPath) {
 		File file = new File(tmpPath+"/"+filename);
@@ -156,10 +190,12 @@ public class NoteManage{
 		File[] tempList = file.listFiles();
 		File confile = new File(con);
 		char[] confilecontent = org.apache.commons.io.FileUtils.readFileToString(confile, "utf8").toCharArray();
+		String filename = null;
 		for (int i=0;i<tempList.length-1;i++){
 			if (confilecontent[i]=='a'){
 				String fileString=getFileString(tempList[i]);
-				Note note = new Note(i+1,fileString);
+				filename=tempList[i].toString().substring(tempList[i].toString().lastIndexOf("\\")+1);
+				Note note = new Note(filename.substring(0,filename.length()-4),fileString);
 				notes.add(note);
 			}
 		}
@@ -201,13 +237,23 @@ public class NoteManage{
 	}
 
 
-	public String getModifyNoteListID() {
-		return modifyNoteListID;
+	public String getModifyNoteID() {
+		return modifyNoteID;
 	}
 
 
-	public void setModifyNoteListID(String modifyNoteListID) {
-		this.modifyNoteListID = modifyNoteListID;
+	public void setModifyNoteID(String modifyNoteID) {
+		this.modifyNoteID = modifyNoteID;
+	}
+
+
+	public String getDeleteNoteID() {
+		return deleteNoteID;
+	}
+
+
+	public void setDeleteNoteID(String deleteNoteID) {
+		this.deleteNoteID = deleteNoteID;
 	}
 
 
@@ -218,16 +264,6 @@ public class NoteManage{
 
 	public void setModifyNoteContent(String modifyNoteContent) {
 		this.modifyNoteContent = modifyNoteContent;
-	}
-
-
-	public String getAddNoteID() {
-		return addNoteID;
-	}
-
-
-	public void setAddNoteID(String addNoteID) {
-		this.addNoteID = addNoteID;
 	}
 	
 }

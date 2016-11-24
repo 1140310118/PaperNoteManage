@@ -5,6 +5,7 @@
 %>
 
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <!-- saved from url=(0025)http://www.huawei.com/cn/ -->
 <html xmlns="http://www.w3.org/1999/xhtml" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
@@ -68,14 +69,15 @@
 <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
 <div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#eee;">
 	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
-	<button id="addNoteButton" name="addNoteFlag">添加 笔记</button>
-	<%int i=0;%>
+	<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
+	<c:set var="i" value="0"></c:set>
 	<div id="noteArea">
 		<s:iterator value="notes">
-			<%i++;%>
-<%-- 			<div id="noteID_<%=i%>"></div><center><s:property value="noteID"/></center></div> --%>
-			<textarea placeholder="笔记" id="note_<%=i%>" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea>
-			<button class="note_delete_button_class" id="note_delete_button_<%=i%>">删除笔记</button>
+			<div id="note_${notes[i].noteID}">	
+				<c:set var="i" value="${i+1}"></c:set>
+				<textarea placeholder="笔记" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea>
+				<button class="note_delete_button_class">删除笔记</button>
+			</div>
 		</s:iterator>
 	</div>
 </div>
@@ -90,86 +92,71 @@
         modifyNote();
         deleteNote();
     });
-	function modifyNote(){
-		$(".note_class").change(function(){
-        	var id = $(this).attr("id");
-			$.post("<%=basePath%>read",
-			   		{
-					 	modifyNoteListID: ""+parseInt(id.substring(5)),
-						modifyNoteContent:$("#"+id).val()
-					},
-			   		function(){
-			   			//alert(parseInt(id.substring(5))+":already post");
-			   			showAlreadySaved();
-			   		}
-			);
-		});
-	}
-	
-	function modifyNote_by_id(id){
-		$("#"+id).change(function(){
-        	$.post("<%=basePath%>read",
-			   		{
-					 	modifyNoteListID: ""+parseInt(id.substring(5)),
-						modifyNoteContent:$("#"+id).val()
-					},
-			   		function(){
-			   			//alert(parseInt(id.substring(5))+":already post");
-			   			///////////
-			   			showAlreadySaved();
-			   		}
-			);
-		});
-	}
-	
 	function addNote(){
 		$("#addNoteButton").click(function(){
-			$.post( "<%=basePath%>read",
-				    {addNoteFlag:"true"},
-				    function(){
-				    	<%i++;%>
-				    	$("#noteArea").append("<textarea placeholder=\"笔记\" id=\"note_<%=i%>\" class=\"note_class\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"/>\
-										<button class=\"note_delete_button_class\" id=\"note_delete_button_<%=i%>\">删除笔记</button>");
-				    	modifyNote_by_id("note_<%=i%>");
-				    	deleteNote_by_id("note_<%=i%>");
-				    });
+			$.post("<%=basePath%>newNote",
+			   		{
+						addNoteFlag : true
+					},
+			   		function(newNoteID){
+						newNoteID=newNoteID.substring(0,newNoteID.length-2);
+						$("#noteArea").append("");
+						$("#noteArea").append("<div id=\"note_"+newNoteID+"\">"
+												+"<textarea placeholder=\"笔记\" class=\"note_class\" spellcheck=\"false\" style=\"font-size:12px;width:200px;height:100px;line-height:18px;\"></textarea>"
+												+"\n<button class=\"note_delete_button_class\">删除笔记</button>"
+												+"</div>");
+						$("#note_"+newNoteID+" textarea").change(function(){
+				        	var id = $(this).parent().attr("id");
+							_modifyNote(id);
+						});
+						$("#note_"+newNoteID+" button").click(function(){
+				        	var id = $(this).parent().attr("id");
+				        	_deleteNote(id);
+						});
+						
+			   		}
+			);
 		});
+	}
+	function modifyNote(){
+		$(".note_class").change(function(){
+        	var id = $(this).parent().attr("id");
+			_modifyNote(id);
+		});
+	}
+	function _modifyNote(id){
+		$.post("<%=basePath%>read",
+		   		{
+				 	modifyNoteID: id.substring(5),
+					modifyNoteContent:$("#"+id+" textarea").val()
+				},
+		   		function(){
+		   			showAlreadySaved();
+		   		}
+		);
 	}
 	function deleteNote(){
 		$(".note_delete_button_class").click(function(){
-        	var id = $(this).attr("id");
-        	alert(id.substring(19));
-        	$.post("<%=basePath%>read",
-			   		{
-					 	deleteNoteListID: id.substring(19)
-					},
-			   		function(){
-						$("#note_"+id.substring(19)).hide();// hide 输入框
-						$("#"+id).hide();//hide 删除按钮
-			   			alert(id.substring(19)+":删除成功！");			   			
-			   		}
-			);
+        	var id = $(this).parent().attr("id");
+        	_deleteNote(id);
 		});
 	}
-	function deleteNote_by_id(id){
-		$("#"+id).click(function(){
-        	$.post("<%=basePath%>read",
-			   		{
-					 	deleteNoteListID: id.substring(19)
-					},
-			   		function(){
-						$("#note_"+id.substring(19)).hide();// hide 输入框
-						$("#"+id).hide();//hide 删除按钮
-			   			alert(id.substring(19)+":删除成功！");			   			
-			   		}
-			);
-		});
+	function _deleteNote(id){
+		$.post("<%=basePath%>read",
+		   		{
+				 	deleteNoteID: id.substring(5)
+				},
+		   		function(){
+					$("#"+id).hide();//hide 删除按钮
+		   			alert("删除成功！");		   			
+		   		}
+		);
 	}
 	function showAlreadySaved(){
 		if ($("#already_saved").css('display')=='none'){
 			 $('#already_saved').css({display:'block', top:'-100px'}).animate({top: '+100'}, 500, function(){ 
-                        		setTimeout(outAlreadySaved, 750); 
-            					}
+                        setTimeout(outAlreadySaved, 750); 
+            			}
             ); 
 		}
 	}

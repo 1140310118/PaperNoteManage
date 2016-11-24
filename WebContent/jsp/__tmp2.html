@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>tmp</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="./read_and_manage_lib/src/jquery.js"></script>
+</head>
+<body>
+	<div id="test">
+		<textarea>我是something</textarea>
+		<button>点我咯</button>
+	</div>
+	<script type="text/javascript">
+		//$("#test").setAttribute("id","test1");
+		$("#test button").click(function(){
+			alert($(this).parent().attr("id"));
+			$("#test textarea").html("不是");
+		});
+		$("#test1 button").click(function(){
+			$("#test1 textarea").html("是啥");
+		});
+	</script>
+</body>
+</html>
