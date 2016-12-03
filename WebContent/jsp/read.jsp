@@ -17,13 +17,58 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/bootstrap.min.css" type="text/css" media="screen, project, print">
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/main-cn.css" type="text/css" media="screen, project, print">
-	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/zTreeStyle.css" type="text/css" media="screen, project, print">
+	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/css/zTreeStyle.css" type="text/css">
+	
 
 	<link rel="Shortcut Icon" href="#">
     <script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
     <script src="<%=basePath%>jsp/read_and_manage_lib/js/jquery.jsonp.js"></script>
-    <script src="<%=basePath%>jsp/read_and_manage_lib/js/jquery.ztree.core-3.5.js"></script>
-    <script language="javascript" type="text/javascript" src="<%=basePath%>jsp/read_and_manage_lib/js//jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jsp/read_and_manage_lib/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>jsp/read_and_manage_lib/js/jquery.ztree.core-3.5.js"></script>
+    <!-- <script language="javascript" type="text/javascript" src="<%=basePath%>jsp/read_and_manage_lib/js//jquery.ztree.excheck-3.5.js"></script> -->
+    <script type="text/javascript" language="javascript">
+		var setting = {
+					data: {
+						simpleData: {
+							enable: true
+						}
+					}
+				};
+
+		var zNodes =[
+				{ id:1, pId:0, name:"父节点1 - 展开", open:true},
+				{ id:11, pId:1, name:"父节点11 - 折叠"},
+				{ id:111, pId:11, name:"叶子节点111"},
+				{ id:112, pId:11, name:"叶子节点112"},
+				{ id:113, pId:11, name:"叶子节点113"},
+				{ id:114, pId:11, name:"叶子节点114"},
+				{ id:12, pId:1, name:"父节点12 - 折叠"},
+				{ id:121, pId:12, name:"叶子节点121"},
+				{ id:122, pId:12, name:"叶子节点122"},
+				{ id:123, pId:12, name:"叶子节点123"},
+				{ id:124, pId:12, name:"叶子节点124"},
+				{ id:2, pId:0, name:"父节点2 - 折叠"},
+				{ id:21, pId:2, name:"父节点21 - 展开", open:true},
+				{ id:211, pId:21, name:"叶子节点211"},
+				{ id:212, pId:21, name:"叶子节点212"},
+				{ id:213, pId:21, name:"叶子节点213"},
+				{ id:214, pId:21, name:"叶子节点214"},
+				{ id:22, pId:2, name:"父节点22 - 折叠"},
+				{ id:221, pId:22, name:"叶子节点221"},
+				{ id:222, pId:22, name:"叶子节点222"},
+				{ id:223, pId:22, name:"叶子节点223"},
+				{ id:224, pId:22, name:"叶子节点224"},
+				{ id:23, pId:2, name:"父节点23 - 折叠"},
+				{ id:231, pId:23, name:"叶子节点231"},
+				{ id:232, pId:23, name:"叶子节点232"},
+				{ id:233, pId:23, name:"叶子节点233"},
+				{ id:234, pId:23, name:"叶子节点234"}
+			];
+
+			$(document).ready(function(){
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			});
+	</script>  
 </head>
 
 <body>  
@@ -58,87 +103,21 @@
         </div>
     </div>
     </div>
-<div style="magrin-top:300px;float:left;margin-left:30px;margin-top:100px;position: absolute;background:#eee;">
-<ul id="cityTree" class="zTree"></ul>
-sdfadfsdfsdafsd
+
+
+
+<div style="magrin-top:300px;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
+	<ul id="treeDemo" class="ztree"></ul>
 </div>
-
-<script type="text/javascript" language="javascript">
-/**ztree的参数配置，setting主要是设置一些tree的属性，是本地数据源，还是远程，动画效果，是否含有复选框等等**/  
-var setting = {
- check: { /**复选框**/
-  enable: false,
-  chkboxType: {"Y":"", "N":""}
- },
- view: {                                  
-  //dblClickExpand: false,
-  expandSpeed: 300 //设置树展开的动画速度，IE6下面没效果，
- },                          
- data: {                                  
-  simpleData: {   //简单的数据源，一般开发中都是从数据库里读取，API有介绍，这里只是本地的                         
-   enable: true,
-   idKey: "id",  //id和pid，这里不用多说了吧，树的目录级别
-   pIdKey: "pId",
-   rootPId: 0   //根节点
-  }                          
- },                         
- callback: {     /**回调函数的设置，随便写了两个**/
-  beforeClick: beforeClick,                                  
-  onCheck: onCheck                          
- }
-};
-function beforeClick(treeId, treeNode) {
- alert("beforeClick");
-}
-function onCheck(e, treeId, treeNode) {
- alert("onCheck");
-}     
-
-var citynodes = [      /**自定义的数据源，ztree支持json,数组，xml等格式的**/
- {id:0, pId:-1, name:"中国"},
- {id:1, pId:0, name:"北京"}, 
- {id:2, pId:0, name:"天津"},
- {id:3, pId:0, name:"上海"}, 
- {id:6, pId:0, name:"重庆"}, 
- {id:4, pId:0, name:"河北省", open:false, nocheck:true}, 
- {id:41, pId:4, name:"石家庄"}, 
- {id:42, pId:4, name:"保定"}, 
- {id:43, pId:4, name:"邯郸"}, 
- {id:44, pId:4, name:"承德"}, 
- {id:5, pId:0, name:"广东省", open:false, nocheck:true}, 
- {id:51, pId:5, name:"广州"}, 
- {id:52, pId:5, name:"深圳"}, 
- {id:53, pId:5, name:"东莞"}, 
- {id:54, pId:5, name:"佛山"}, 
- {id:6, pId:0, name:"福建省", open:false, nocheck:true}, 
- {id:61, pId:6, name:"福州"}, 
- {id:62, pId:6, name:"厦门"}, 
- {id:63, pId:6, name:"泉州"}, 
- {id:64, pId:6, name:"三明"},
- {id:7, pId:0, name:"四川省", open:true, nocheck:true},
- {id:71, pId:7, name:"成都"},
- {id:72, pId:7, name:"绵阳"},
- {id:73, pId:7, name:"自贡"},
- {id:711, pId:71, name:"金牛区"},
- {id:712, pId:71, name:"锦江区"},
- {id:7111, pId:711, name:"九里堤"},
- {id:7112, pId:711, name:"火车北站"}
-];
-
-$(document).ready(function(){//初始化ztree对象   
-  var zTreeDemo = $.fn.zTree.init($("#cityTree"),setting, citynodes);
-});
-</script>  
-
 <!--pdf-->
 <!-- embed width="800" height="600" src="./test.pdf">
 <iframe width="800" height="600" src="./test.pdf"></iframe-->
- <div style="float:left;margin-left:200px;margin-top: 50px;">
+ <div style="float:left;margin-left:230px;margin-top: 50px;">
  <iframe width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe>
 </div>
 
 <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
-<div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#eee;">
+<div style="magrin-top:300px;float:left;margin-left:1030px;margin-top:100px;position: absolute;background:#fff;">
 	<input type="text" style="width: 210px;" id="wordT"/>
 	<button id="dictS_button">查询</button>
 	<div id="translateResult"></div>
@@ -186,7 +165,7 @@ $(document).ready(function(){//初始化ztree对象
 			   		function(data){
 						//alert(data);
 						var json = strToJson(data);
-// 						alert(json["basic"]["explains"]);
+						//alert(json["basic"]["explains"]);
 						$("#translateResult").html("<div class=\"translationResultContent\">"
 													+json["basic"]["explains"]
 													+"<br>"
