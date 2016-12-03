@@ -69,9 +69,10 @@
 
 <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
 <div style="magrin-top:300px;float:left;margin-left:1000px;margin-top:100px;position: absolute;background:#eee;">
-	<input type="text" style="width: 250px;" />
+	<input type="text" style="width: 210px;" id="wordT"/>
 	<button id="dictS_button">查询</button>
-	<!--  <iframe src="http://cn.bing.com/dict/"></iframe>-->
+	<div id="translateResult"></div>
+	<br>
 	<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
 	<c:set var="i" value="0"></c:set>
 	<div id="noteArea">
@@ -91,45 +92,54 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		//dictSearch();
+		dictSearch();
         addNote();
         modifyNote();
         deleteNote();
     });
-	//reference: http://www.cnblogs.com/sunxucool/p/3433992.html
-    function dictSearch(){
+	function strToJson(str){ 
+		var json = eval('(' + str + ')'); 
+		return json; 
+		} 
+	
+	function dictSearch(){
     	$("#dictS_button").click(function(){
-    		alert("dict");
-			/* $.jsonp({
-			          "url": "http://xtk.azurewebsites.net/BingDictService.aspx?Word=welcome",
-			          "success": function (result) {
-			        	  alert(result);
-			              alert(result.word_name);
-			          },
-			          "error": function (e) {
-			        	  alert("dd")
-			          }
-			          //,
-			          //async: true,
-			          //cache: false
-			      }); */
-    		$.ajax({
-	          url: "http://xtk.azurewebsites.net/BingDictService.aspx?Word=welcome",
-	          dataType:'jsonp',
-	          processData : false,
-	          type:'get',
-	          success: function (result) {
-	        	  alert(result);
-	              alert(result.word_name);
-	          },
-	          error: function(XMLHttpRequest, textStatus, errorThrown) {
-	              alert(XMLHttpRequest.status);
-	              alert(XMLHttpRequest.readyState);
-	              alert(textStatus);
-	          }
+    		var wordT = $("#wordT").val(); 
+    		if (!wordT){
+    			alert("请输入您要查询的单词。");
+    			return;
+    		}
+    		$.post("<%=basePath%>wordTranslate",
+			   		{
+						wordT : wordT
+					},
+			   		function(data){
+						//alert(data);
+						var json = strToJson(data);
+// 						alert(json["basic"]["explains"]);
+						$("#translateResult").html("<div class=\"translationResultContent\">"
+													+json["basic"]["explains"]
+													+"<br>"
+													+"<a id=\"tDetail\" style=\"cursor:pointer\"><font color=\"blue\">去有道，查看详情</font></a>|"
+													+"<a class=\"hideTR\" style=\"cursor:pointer\"><font color=\"blue\">关闭</font></a>"
+													+"</div>");
+						translateDetail(wordT);
+						hideTranslationR();
 	      	}); 
     	});
     }
+	function hideTranslationR(){
+		$(".hideTR").click(function(){
+			$(".translationResultContent").hide();
+		});
+	}
+	function translateDetail(wordT){
+		$("#tDetail").click(function(){
+			var url="http://simsent.youdao.com/search?q="+wordT;
+			//window.location.href=url;
+			window.open(url);
+		});
+	}
     
 	function addNote(){
 		$("#addNoteButton").click(function(){

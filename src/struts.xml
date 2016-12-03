@@ -89,5 +89,6 @@
 			<result name="error">/SendEmailError.jsp</result>
 		</action>
 		<action name="newNote" class="testForJsp.action.NoteManage" method="newNote"/>
+		<action name="wordTranslate" class="testForJsp.action.NoteManage" method="wordTranslate"/>
 	</package>
 </struts>

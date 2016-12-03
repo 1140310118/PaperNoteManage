@@ -17,6 +17,8 @@ import javax.xml.ws.Response;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import base.translate;
+
 public class NoteManage{
 	
 	//所有笔记
@@ -24,15 +26,14 @@ public class NoteManage{
 	
 	//添加笔记
 	private String addNoteFlag = "false";
-	//private String addNoteID = null;
-	//private Map responseJson;
-	//private InputStream inputStream = null;
 	
 	//修改笔记
 	private String modifyNoteContent=new String(); //修改后的内容
 	private String modifyNoteID = null;//待修改的笔记id
 	//删除笔记
 	private String deleteNoteID = null;
+	//要翻译的单词
+	private String wordT = null;
 	
 
 // 根据情况修改
@@ -55,14 +56,6 @@ public class NoteManage{
 		// 获得所有笔记
 		getAllExistedNotes();
 		
-		// 新建笔记
-		// if(addNoteFlag!="false"){
-		// 	String addNoteID=addNoteFile();
-		// 	//Map<String,String> map = new HashMap<String,String>();
-		// 	//map.put("addNoteID", addNoteID);
-		// 	//this.setResponseJson(map);//返回json数据
-		// }
-		
 		// 删除笔记
 		if(deleteNoteID!=null){
 			deleteFile(deleteNoteID,tmpPath);
@@ -80,7 +73,6 @@ public class NoteManage{
 		// 新建笔记 
 		String addNoteID=addNoteFile();
 		
-		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 
 	     * 在调用getWriter之前未设置编码(既调用setContentType或者setCharacterEncoding方法设置编码), 
@@ -96,7 +88,25 @@ public class NoteManage{
 	    out.flush();  
 	    out.close();  
 	}
-
+	
+	public void wordTranslate() throws IOException{
+		translate t = new translate();
+		String resultT = t.translateWord(wordT);
+		HttpServletResponse response=ServletActionContext.getResponse();
+		/* 
+	     * 在调用getWriter之前未设置编码(既调用setContentType或者setCharacterEncoding方法设置编码), 
+	     * HttpServletResponse则会返回一个用默认的编码(既ISO-8859-1)编码的PrintWriter实例。这样就会 
+	     * 造成中文乱码。而且设置编码时必须在调用getWriter之前设置,不然是无效的。 
+	     * */  
+		response.setContentType("text/html;charset=utf-8");  
+	    //response.setCharacterEncoding("UTF-8");  
+	    PrintWriter out = response.getWriter();  
+	    //JSON在传递过程中是普通字符串形式传递的，这里简单拼接一个做测试  
+	    String jsonString=resultT;  
+	    out.println(jsonString);  
+	    out.flush();  
+	    out.close();  
+	}
 
 	private int nextNoteID() {
 		int num;
@@ -264,6 +274,14 @@ public class NoteManage{
 
 	public void setModifyNoteContent(String modifyNoteContent) {
 		this.modifyNoteContent = modifyNoteContent;
+	}
+
+	public String getWordT() {
+		return wordT;
+	}
+
+	public void setWordT(String wordT) {
+		this.wordT = wordT;
 	}
 	
 }
