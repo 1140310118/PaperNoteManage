@@ -140,15 +140,13 @@
 
 <div style="magrin-top:300px;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
 	<ul id="treeDemo" class="ztree"></ul>
-	sdafds
-<div id="YOUDAO_SELECTOR_WRAPPER" style="display:none; margin:0; border:0; padding:0; width:320px; height:240px;"></div>
-<script type="text/javascript" src="http://fanyi.youdao.com/openapi.do?keyfrom=paperReader&key=1378222737&type=selector&version=1.2&translate=on" charset="utf-8"></script>
 </div>
 <!--pdf-->
 <!-- embed width="800" height="600" src="./test.pdf">
 <iframe width="800" height="600" src="./test.pdf"></iframe-->
- <div style="float:left;margin-left:230px;margin-top: 50px;">
- <embed width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></embed>
+ <div style="float:left;margin-left:230px;margin-top: 60px;">
+<%--  <iframe width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe> --%>
+<iframe width="800" height="600" src="<%=basePath%>jsp/read_and_manage_lib\pdfjs-1.5.188-dist\web\viewer.html?file=<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe>
 </div>
 
 <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
