@@ -34,7 +34,6 @@
 						}
 					}
 				};
-
 		var zNodes =[
 				{ id:1, pId:0, name:"父节点1 - 展开", open:true},
 				{ id:11, pId:1, name:"父节点11 - 折叠"},
@@ -63,11 +62,44 @@
 				{ id:232, pId:23, name:"叶子节点232"},
 				{ id:233, pId:23, name:"叶子节点233"},
 				{ id:234, pId:23, name:"叶子节点234"}
-			];
+		];
 
-			$(document).ready(function(){
-				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-			});
+		
+		var EventUtil = {
+	    addHandler: function (element, type, handler) {
+	        if (element.addEventListener) {
+	            element.addEventListener(type, handler, false);
+	        } else if (element.attachEvent) {
+	            element.attachEvent("on" + type, handler);
+	        } else {
+	            element["on" + type] = handler;
+	        }
+	    },
+	    getEvent: function (event) {
+	        return event ? event : window.event;
+	    },
+	    getClipboardText: function (event) {
+	        var clipboardData = (event.clipboardData || window.clipboardData);
+	        return clipboardData.getData("text");
+	    },
+	    setClipboardText: function (event, value) {
+	        if (event.clipboardData) {
+	            return event.clipboardData.setData("text/plain", value);
+	        } else if (window.clipboardData) {
+	            return window.clipboardData.setData("text", value);
+	        }
+	    },
+	    preventDefault: function (event) {
+	        if (event.preventDefault) {
+	            event.preventDefault();
+	        } else {
+	            event.returnValue = false;
+	        }
+	    }
+		};
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		});
 	</script>  
 </head>
 
@@ -108,12 +140,15 @@
 
 <div style="magrin-top:300px;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
 	<ul id="treeDemo" class="ztree"></ul>
+	sdafds
+<div id="YOUDAO_SELECTOR_WRAPPER" style="display:none; margin:0; border:0; padding:0; width:320px; height:240px;"></div>
+<script type="text/javascript" src="http://fanyi.youdao.com/openapi.do?keyfrom=paperReader&key=1378222737&type=selector&version=1.2&translate=on" charset="utf-8"></script>
 </div>
 <!--pdf-->
 <!-- embed width="800" height="600" src="./test.pdf">
 <iframe width="800" height="600" src="./test.pdf"></iframe-->
  <div style="float:left;margin-left:230px;margin-top: 50px;">
- <iframe width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe>
+ <embed width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></embed>
 </div>
 
 <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
@@ -134,6 +169,7 @@
 		</s:iterator>
 	</div>
 </div>
+
 
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
