@@ -17,7 +17,7 @@ public class Paper {
 	public String paperRemark;
 	public String uploadDate;
 	public String paperUserEmail;
-	public String paperReadSituation;
+	public int paperReadSituation;
 	
 	
 	public String getPaperReadSituation() {
