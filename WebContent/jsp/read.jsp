@@ -136,9 +136,11 @@
     </div>
     </div>
 
-
-
-<div style="magrin-top:300px;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
+<!-- <div style="width: 500px;height: 250px;overflow: hidden;"> -->
+<!-- <div style="width: 530px;height: 250px;overflow-y: auto;"> -->
+<!-- <p style="height: 900px;">我是内容</p></div> -->
+<!-- </div> -->
+<div style="width: 200px;height: 400px;overflow-y: auto;overflow-x: auto;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
 	<ul id="treeDemo" class="ztree"></ul>
 </div>
 <!--pdf-->
