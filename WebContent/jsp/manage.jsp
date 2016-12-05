@@ -30,6 +30,7 @@
 
 	<script src="<%=basePath%>jsp/read_and_manage_lib/js/simple.js"></script>
 	<script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
+	<link href="<%=basePath%>jsp/read_and_manage_lib/css/select.css" rel="stylesheet" />
 	
 </head>
 
@@ -56,12 +57,16 @@
                     <li><a href="<%=basePath%>manage">论文管理</a></li>
                 </ul>
             </nav>
-            <div style="float: right;font-size: 14px;margin-right: 30px;">
-            	<!-- <s:form action="login?relogin=true"> -->
-   				<!-- <s:submit name="method:logout" value="退出登录"></s:submit> -->
-				<!-- </s:form> -->
-				<s:property value="#session.USER_Nickname"/> | <a href="<%=basePath%>login?relogin=true">退出登录</a>
+             <div style="float: right;font-size: 14px;margin-right: 50px;">
+            	<celin id="userName"><s:property value="#session.USER_Nickname"/></celin> | <celin id="ID_logout"><a href="<%=basePath%>login?relogin=true">退出登录</a></celin>
             </div>
+             <script type="text/javascript">
+    	     	var name=$("#userName").html();
+    	     	if(name=="user_nickname" || name==""){
+    	     		$("#userName").html("尚未登录");
+    	     		$("#ID_logout").html("去<font color=\"blue\"><a href=\"<%=basePath%>login?relogin=true\">登录</a></font>");
+    	     	}
+            </script> 
         </div>
     </div>
 <!---->
@@ -292,38 +297,6 @@
 	}
 	</script>
 	<div class="mask"></div>
-	<div class="centerWindow">
-		<table class="bordered">
-		    <tr><th colspan="2">论文详情</th></tr>
-		    <tr>
-		        <td>论文名称</th>
-		        <td>K-partion</td>
-		    </tr>
-		    <tr>
-		        <td>文件名</th>
-		        <td>K-partion.pdf</td>
-		    </tr>
-		    <tr>
-		        <td>分类目录</th>
-		        <td>数据结构/哈希</td>
-		    </tr>
-		    <tr>
-		        <td>论文来源</th>
-		        <td></td>
-		    </tr>
-		    <tr>
-		        <td>添加日期</th>
-		        <td>2016/11/5</td>
-		    </tr>
-		    <tr>
-		        <td>备注</th>
-		        <td>算法设计与分析大作业</td>
-		    </tr>
-		</table>
-		<center>
-			<button onClick="backNormal()">确定</button>
-		</center>
-	</div>
 <!---->
 
 
@@ -347,8 +320,19 @@
 			<% paperIndex++; %>
 			<div id="paperE_<%=paperIndex%>">
 				<li>
-					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="view_window">${paper.paperNickName }</a>
+					<select class="RC_select" id="Reading_Conditions_select_<%=paperIndex%>" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:13px;">
+							<option>&nbsp;*   未阅读</option>
+							<option>&nbsp;/   已粗读</option>
+							<option>&nbsp;#   已精读</option>
+							<option style="display:none;">*</option>
+							<option style="display:none;">/</option>
+							<option style="display:none;">#</option>
+					</select>
+					&nbsp;
+					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
+					
 					<div style="float:right;">
+						
 						<a href="#" onClick="paperUpdate(<%=paperIndex%>)">修改&nbsp;&nbsp;</a>
 						<a href="#" id="detail" onClick="paperDetail(<%=paperIndex%>)">详情&nbsp;&nbsp;</a>
 						<a href="#" onClick="deletePaper(<%=paperIndex%>)">删除&nbsp;&nbsp;</a>
@@ -369,6 +353,11 @@
 						    <tr>
 						        <td>论文来源</td>
 						        <td id="paperOrigin_<%=paperIndex%>">${paper.paperOrigin }</td>
+						    </tr>
+						    
+						    <tr id="paperExteriorURL_tr_<%=paperIndex%>">
+						        <td>论文URL</td>
+						        <td id="paperExteriorURL_<%=paperIndex%>">${paper.paperExteriorURL }</td>
 						    </tr>
 						    <tr>
 						        <td>添加日期</td>
