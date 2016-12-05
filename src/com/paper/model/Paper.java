@@ -20,11 +20,13 @@ public class Paper {
 	public int paperReadSituation;
 	
 	
-	public String getPaperReadSituation() {
+
+
+	public int getPaperReadSituation() {
 		return paperReadSituation;
 	}
 
-	public void setPaperReadSituation(String paperReadSituation) {
+	public void setPaperReadSituation(int paperReadSituation) {
 		this.paperReadSituation = paperReadSituation;
 	}
 
