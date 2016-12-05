@@ -30,8 +30,12 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 
     <link rel="stylesheet" href="viewer.css">
+    <!-- <link rel="stylesheet" href="css/roundedOne.css"> -->
+    <link rel="stylesheet" href="css/roundedOne.css">
 
     <script src="compatibility.js"></script>
+
+    <script src="../../js/jquery-1.4.4.min.js"></script>
 
 
 
@@ -40,18 +44,20 @@ See https://github.com/adobe-type-tools/cmap-resources
 <script src="l10n.js"></script>
 <script src="../build/pdf.js"></script>
 
-
-
     <script src="debugger.js"></script>
     <script src="viewer.js"></script>
-
+	
   </head>
 
   <body tabindex="1" class="loadingInProgress">
-<div id="youdao">
-<div id="YOUDAO_SELECTOR_WRAPPER" style="display:none; margin:0; border:0; padding:0; width:320px; height:240px;z-index:10000;"></div>
+<div id="youdao_father">
+	<div id="youdao">
+		<div id="YOUDAO_SELECTOR_WRAPPER" style="display:none; margin:0; border:0; padding:0; width:320px; height:240px;z-index:10000;"></div>
+		<script type="text/javascript" src="http://fanyi.youdao.com/openapi.do?keyfrom=paperReader&key=1378222737&type=selector&version=1.2&translate=on" charset="utf-8"></script>
+	</div>
 </div>
 <script type="text/javascript" src="http://fanyi.youdao.com/openapi.do?keyfrom=paperReader&key=1378222737&type=selector&version=1.2&translate=on" charset="utf-8"></script>
+
     <div id="outerContainer">
       <div id="sidebarContainer">
         <div id="toolbarSidebar">
@@ -177,8 +183,31 @@ See https://github.com/adobe-type-tools/cmap-resources
                 <span id="numPages" class="toolbarLabel"></span>
               </div>
               <div id="toolbarViewerRight">
-              	<label id="gdgfd" class="toolbarLabel">划词翻译</label>
-              	 <input type="checkbox">
+	            <label class="toolbarLabel">划词翻译</label>
+              	<div style="margin-right:10px;">
+    	          	<div class="roundedOne">
+						<input type="checkbox" value="None" id="roundedOne" name="roundedOne" onclick="youdao_open()" checked/>
+						<label for="roundedOne"></label>
+					</div>
+				</div>
+				<script type="text/javascript">
+					function youdao_open(){
+						var checked =document.getElementsByName("roundedOne")[0].checked;
+						//alert(checked);
+						if (checked){
+							var new_html="<div id=\"youdao\"><div id=\"YOUDAO_SELECTOR_WRAPPER\" style=\"display: none; margin: 0px; border: 0px; padding: 0px; width: 320px; height: 100px; z-index: 10000; position: absolute; left: 624px; top: 68px;\"><iframe id=\"YOUDAO_SELECTOR_IFRAME\" frameborder=\"0\" src=\"about:blank\" style=\"border: 0px; width: 320px; height: 100px; background-color: white;\"></iframe></div></div>";
+							var script = document.createElement('script');
+						    script.setAttribute('type', 'text/javascript');
+						    script.setAttribute('src', 'http://fanyi.youdao.com/openapi.do?keyfrom=paperReader&key=1378222737&type=selector&version=1.2&translate=on');
+						    script.setAttribute('charset','utf-8');
+						    $("#youdao_father").html(new_html);
+						    $("#youdao_father").append(script);
+						}
+						else{
+							$("#youdao_father").html("");
+						}
+					}
+				</script>
                 <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView" title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode">
                   <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                 </button>
