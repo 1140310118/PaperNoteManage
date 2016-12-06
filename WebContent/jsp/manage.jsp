@@ -96,7 +96,7 @@
 		<ul class="submenu">
 			<li><a href="#">查看我的Log</a></li>
 			<li><a href="#">导出我的Log</a></li>
-			<li><a href="#">分享我的Log</a></li>
+			<li><a href="#" id="share_my_log">分享我的Log</a></li>
 		</ul>
 	</li>
 
@@ -121,6 +121,9 @@
 		
 		$("#newPaperByURL_Show").click(function(){
 			$("#mainShow").attr("src","<%=basePath%>newPaperURL");
+		});
+		$("#share_my_log").click(function(){
+			$("#mainShow").attr("src","<%=basePath%>email.jsp");
 		});
 	});
 	</script>
