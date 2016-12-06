@@ -1,41 +1,16 @@
 
-.mask{
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.6);
-position: fixed;
-top: 0;
-left: 0;
-z-index: 998;
-display: none;
-}
 .centerWindow{
-margin:0 auto 0 10px;
+margin:0px 0px;
 z-index: 1000;
 display: none;
 background: #fff;
 position: absolute;
 left: 55%;
 top: 10%;
-margin-left: width/2;
-margin-height: height/2;
 /*display: none;*/
 width: 320px;
 }
 
-.div1{
-float: left;
-height: 41px;
-background: #f5696c;
-width: 144px;
-position:relative;
-}
-.div2{
-text-align:center;
-padding-top:12px;
-font-size:15px;
-font-weight:800
-}
 .inputstyle{
     width: 144px;
     height: 41px;
