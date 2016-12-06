@@ -406,7 +406,7 @@
 				{
 					deletePaperNickName :name
 				},
-				function(){alert(name+":删除成功");}
+				function(){alert("删除 "+name+" 成功");}
 		);
 	}
 	var paperDetailOpen = false;

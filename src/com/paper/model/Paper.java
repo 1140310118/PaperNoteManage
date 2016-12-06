@@ -17,7 +17,19 @@ public class Paper {
 	public String paperRemark;
 	public String uploadDate;
 	public String paperUserEmail;
+	public int paperReadSituation;
 	
+	
+
+
+	public int getPaperReadSituation() {
+		return paperReadSituation;
+	}
+
+	public void setPaperReadSituation(int paperReadSituation) {
+		this.paperReadSituation = paperReadSituation;
+	}
+
 	public String getPaperWebFilePath() {
 		return paperWebFilePath;
 	}
