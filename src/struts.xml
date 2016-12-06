@@ -43,13 +43,13 @@
 		</action>
 		
 		<action name="fileList" class="com.paper.action.UploadFileAction" method="paperManage">
-			<result name="success">/jsp/read_and_mange_jsp/file_list.jsp</result>
+			<result name="success">/jsp/read_and_manage_jsp/file_list.jsp</result>
 		</action>
 		<action name="newPaperLocal" class="com.paper.action.UploadFileAction" method="paperManage">
-			<result name="success">/jsp/read_and_mange_jsp/newPaperLocal.jsp</result>
+			<result name="success">/jsp/read_and_manage_jsp/newPaperLocal.jsp</result>
 		</action>
 		<action name="newPaperURL" class="com.paper.action.UploadFileAction" method="paperManage">
-			<result name="success">/jsp/read_and_mange_jsp/newPaperURL.jsp</result>
+			<result name="success">/jsp/read_and_manage_jsp/newPaperURL.jsp</result>
 		</action>
 		
 

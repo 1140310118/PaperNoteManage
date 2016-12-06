@@ -88,8 +88,8 @@
 	<li>
 		<div class="link"><i class="fa fa-code"></i>文件分类树<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a href="#">查看</a></li>
-			<li><a href="#">编辑</a></li>
+			<li><a href="#" id="file_tree_view">查看</a></li>
+			<li><a href="#" id="file_tree_edit">编辑</a></li>
 		</ul>
 	</li>
 	<li><div class="link"><i class="fa fa-globe"></i>文件操作记录<i class="fa fa-chevron-down"></i></div>
@@ -124,6 +124,12 @@
 		});
 		$("#share_my_log").click(function(){
 			$("#mainShow").attr("src","<%=basePath%>email.jsp");
+		});
+		$("#file_tree_view").click(function(){
+			$("#mainShow").attr("src","<%=basePath%>jsp/read_and_manage_jsp/fileTree.jsp");
+		});
+		$("#file_tree_edit").click(function(){
+			$("#mainShow").attr("src","<%=basePath%>jsp/read_and_manage_jsp/fileTree.jsp");
 		});
 	});
 	</script>
