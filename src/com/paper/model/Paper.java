@@ -18,6 +18,9 @@ public class Paper {
 	public String uploadDate;
 	public String paperUserEmail;
 	public int paperReadSituation;
+	public int paperID;
+	public int paperPID;
+	
 	
 	
 
