@@ -40,7 +40,6 @@
 <!--paperNickName paperOrigin paperExteriorURL paperRemark-->
 <!-- 新建论文 导入URL链接-->
 	<div class="form_container" id="newPaperByURL">  
-	<br><br>
 	<form id="paperForm" action="manage?newPaperFlag=true&newPaperByURLFlag=true" method="post" enctype="multipart/form-data">
 	    <h3>新建论文</h3>
 	    <h4>导入URL链接</h4>

@@ -112,77 +112,23 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#newPaperFromLocal_Show").click(function(){
-			$("#newPaperFromLocal").show();
-			$("#allPaperShow").hide();
-			$("#newPaperByURL").hide();
+			$("#mainShow").attr("src","<%=basePath%>newPaperLocal");
 		});
 		
 		$("#allPaperShow_Show").click(function(){
-			$("#newPaperFromLocal").hide();
-			$("#newPaperByURL").hide();
-			$("#allPaperShow").show();
+			$("#mainShow").attr("src","<%=basePath%>fileList");
 		});
 		
 		$("#newPaperByURL_Show").click(function(){
-			$("#newPaperByURL").show();
-			$("#allPaperShow").hide();
-			$("#newPaperFromLocal").hide();
+			$("#mainShow").attr("src","<%=basePath%>newPaperURL");
 		});
 	});
 	</script>
 <!---->
 
 
-<!--paperNickName paperOrigin paperExteriorURL paperRemark-->
-<!-- 新建论文 导入URL链接-->
-	<div class="form_container" id="newPaperByURL" style="display:none;">  
-	<br><br>
-	<form id="paperForm" action="manage?newPaperFlag=true&newPaperByURLFlag=true" method="post" enctype="multipart/form-data">
-	    <h3>新建论文</h3>
-	    <h4>导入URL链接</h4>
-	    
-	    <fieldset>
-	   	<input id="newPaperByURL_userEmail" value='<%=session.getAttribute("USER_Email")%>' name="paper.paperUserEmail" style="display: none;"></input>
-	   	</fieldset>
-	   	
-		<fieldset>
-	      <input placeholder="*论文名称 nickname" type="text" tabindex="1" name="paper.paperNickName" id="newPaperByURL_name" required autofocus>
-	    </fieldset>
 
-	    <fieldset>
-	      <input placeholder="论文来源，如中国知网" type="text" tabindex="2" name="paper.paperOrigin" 
-	      >
-	    </fieldset>
-	  
-	    <fieldset>
-	        <input type="text" placeholder="*URL"  name="paper.paperExteriorURL" tabindex="3" id="newPaperByURL_url" required>
-	    </fieldset>
-
-	    <fieldset>
-	      <textarea placeholder="备注" id="tmp" tabindex="4" name="paper.paperRemark"></textarea>
-	    </fieldset>
-	    <fieldset>
-	      <button name="submit" type="submit" id="newPaperByURL_Submit" data-submit="...Sending">Submit</button>
-	    </fieldset>
-	</form>
-	<script type="text/javascript">
-		$("#newPaperByURL_Submit").click(function(){
-				if($("#newPaperByURL_name").val() && 
-				   $("#newPaperByURL_url").val()){
-				   	//alert($("#newPaperByURL_userEmail").val());
-					alert("上传成功！");
-				}
-			});
-	</script>
-  </div> 
-<!---->
-
-
-
-
-
-
-<iframe id="mainShow" src="<%=basePath%>fileList" style="width:850px;height:450px;display: block;margin: 80px 340px;position: block;border:none;"></iframe>
+<iframe id="mainShow" src="<%=basePath%>fileList" style="width:850px;height:500px;display: block;margin: 80px 340px;position: block;border:none;"></iframe>
 
 
 
