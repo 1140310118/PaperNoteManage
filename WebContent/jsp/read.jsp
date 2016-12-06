@@ -34,6 +34,7 @@
 						}
 					}
 				};
+	
 		var zNodes =[
 				{ id:1, pId:0, name:"父节点1 - 展开", open:true},
 				{ id:11, pId:1, name:"父节点11 - 折叠"},
@@ -63,40 +64,6 @@
 				{ id:233, pId:23, name:"叶子节点233"},
 				{ id:234, pId:23, name:"叶子节点234"}
 		];
-
-		
-		var EventUtil = {
-	    addHandler: function (element, type, handler) {
-	        if (element.addEventListener) {
-	            element.addEventListener(type, handler, false);
-	        } else if (element.attachEvent) {
-	            element.attachEvent("on" + type, handler);
-	        } else {
-	            element["on" + type] = handler;
-	        }
-	    },
-	    getEvent: function (event) {
-	        return event ? event : window.event;
-	    },
-	    getClipboardText: function (event) {
-	        var clipboardData = (event.clipboardData || window.clipboardData);
-	        return clipboardData.getData("text");
-	    },
-	    setClipboardText: function (event, value) {
-	        if (event.clipboardData) {
-	            return event.clipboardData.setData("text/plain", value);
-	        } else if (window.clipboardData) {
-	            return window.clipboardData.setData("text", value);
-	        }
-	    },
-	    preventDefault: function (event) {
-	        if (event.preventDefault) {
-	            event.preventDefault();
-	        } else {
-	            event.returnValue = false;
-	        }
-	    }
-		};
 		$(document).ready(function(){
 			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 		});
@@ -136,10 +103,7 @@
     </div>
     </div>
 
-<!-- <div style="width: 500px;height: 250px;overflow: hidden;"> -->
-<!-- <div style="width: 530px;height: 250px;overflow-y: auto;"> -->
-<!-- <p style="height: 900px;">我是内容</p></div> -->
-<!-- </div> -->
+
 <div style="width: 200px;height: 400px;overflow-y: auto;overflow-x: auto;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
 	<ul id="treeDemo" class="ztree"></ul>
 </div>

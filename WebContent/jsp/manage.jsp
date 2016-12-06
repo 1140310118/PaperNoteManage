@@ -303,17 +303,8 @@
 
 <!--文件列表-->
 
-
 	<br><br><br>
 	<ol class="rounded-list" id="allPaperShow">
-		<!--以下四行是 为了便于展示，在实际过程中，使用s:property-->
-		<!-- <li><a href="#">KD树异常检测</a>
-			<div style="float:right;">
-				<a href="#" >修改&nbsp;&nbsp;</a>
-				<a href="#" id="detail" onClick="deTail()">详情&nbsp;&nbsp;</a>
-				<a href="#" onClick="delcfm()">删除&nbsp;&nbsp;</a>
-			</div>
-		</li>	 -->
 		
 		<%int paperIndex=0; %>
 		<c:forEach var="paper" items="${paperList}">
@@ -321,12 +312,9 @@
 			<div id="paperE_<%=paperIndex%>">
 				<li>
 					<select class="RC_select" id="Reading_Conditions_select_<%=paperIndex%>" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:13px;">
-							<option>&nbsp;*   未阅读</option>
+							<option  style="padding : 40px 100px 40px 100px;font-weight: normal;">&nbsp;*   未阅读</option>
 							<option>&nbsp;/   已粗读</option>
 							<option>&nbsp;#   已精读</option>
-							<option style="display:none;">*</option>
-							<option style="display:none;">/</option>
-							<option style="display:none;">#</option>
 					</select>
 					&nbsp;
 					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
@@ -463,7 +451,7 @@
 
 
 
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
 
 <!--底部-->
 	<div id="footer" class="winwin-footer" style="top: initial;">
