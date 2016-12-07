@@ -4,6 +4,13 @@ public class User {
 	public String email;
 	private String password;
 	private String nickname;
+	private String MaxpaperID;
+	public String getMaxpaperID() {
+		return MaxpaperID;
+	}
+	public void setMaxpaperID(String maxpaperID) {
+		MaxpaperID = maxpaperID;
+	}
 	/**
 	 * @return the password
 	 */
