@@ -8,7 +8,9 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.paper.db.DAO;
+
 import com.paper.model.User;
+
 
 
 public class ReadSituationAction {
@@ -20,10 +22,13 @@ public class ReadSituationAction {
 	private addlog add = new addlog();
 	
 
+
 	public String changeReadSituation(String paperNickName, String paperReadSituation) throws SQLException {
 		
 		
+
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+		// 0 未阅读；1 已粗读；2已精读。
 		String sql = "UPDATE paper SET paperReadSituation = " + paperReadSituation + "WHERE paperNickName = "
 				+ paperNickName;
 		ResultSet rS = dao.executeQuery(sql);
@@ -37,4 +42,5 @@ public class ReadSituationAction {
 			return "changeReadSituationsuccess";
 		return "changeReadSituationfail";
 	}
+	
 }

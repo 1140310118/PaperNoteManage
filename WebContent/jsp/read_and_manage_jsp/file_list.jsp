@@ -25,68 +25,60 @@
 	<!-- button -->
 	<link href="<%=basePath%>jsp/read_and_manage_lib/css/button/bootstrap.css" rel="stylesheet">
 	<link href="<%=basePath%>jsp/read_and_manage_lib/css/button/style.css" rel="stylesheet">
-		
 </head>
+
 <body>
 <!--文件列表-->
 <div style="float:left;">
 	<ol class="rounded-list" id="allPaperShow">
-		
-		<%int paperIndex=0; %>
 		<c:forEach var="paper" items="${paperList}">
-			<% paperIndex++; %>
-			<div id="paperE_<%=paperIndex%>">
+			<div id="paperE_${paper.paperID}">
 				<li>
-					<select class="RC_select" id="Reading_Conditions_select_<%=paperIndex%>" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:13px;">
-							<option  style="padding : 40px 100px 40px 100px;font-weight: normal;">&nbsp;*   未阅读</option>
-							<option>&nbsp;/   已粗读</option>
-							<option>&nbsp;#   已精读</option>
+					<select class="RC_select" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:11px;">
+							<option value="1">*   未阅读</option>
+							<option value="2">/   已粗读</option>
+							<option value="3">#   已精读</option>
 					</select>
 					&nbsp;
-					<a id="paperNickName_forDelete_<%=paperIndex%>" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
+					<a class="paperID" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
 					
 					<div style="float:right;">
 						
-						<a onClick="paperUpdate(<%=paperIndex%>)" style="cursor: pointer;">修改&nbsp;&nbsp;</a>
-						<a id="detail" onClick="paperDetail(<%=paperIndex%>)" style="cursor: pointer;">详情&nbsp;&nbsp;</a>
-						<a onClick="deletePaper(<%=paperIndex%>)" style="cursor: pointer;">删除&nbsp;&nbsp;</a>
+						<a class="paperUpdate" style="cursor: pointer;">修改&nbsp;&nbsp;</a>
+						<a class="paperDetail" style="cursor: pointer;">详情&nbsp;&nbsp;</a>
+						<a class="paperDelete" style="cursor: pointer;">删除&nbsp;&nbsp;</a>
 					</div>
 				</li>
-				<div style="display: none;z-index: 1000;" id="paperDetail_<%=paperIndex%>">
+				<div style="display: none;z-index: 1000;" class="paperDetail_window">
 					<p style="display:none;">false</p>
-					<div class="paperDetail_window">
-						<table class="bordered">
-						    <tr><th colspan="2">论文详情</th></tr>
-						    <tr>
-						        <td>论文名称</td>
-						        <td id="paperName_<%=paperIndex%>">${paper.paperNickName }</td>
-						    </tr>
-						    <tr>
-						        <td>分类目录</td>
-						        <td></td>
-						  	</tr>
-						    <tr>
-						        <td>论文来源</td>
-						        <td id="paperOrigin_<%=paperIndex%>">${paper.paperOrigin }</td>
-						    </tr>
-						    
-						    <tr id="paperExteriorURL_tr_<%=paperIndex%>">
-						        <td>论文URL</td>
-						        <td id="paperExteriorURL_<%=paperIndex%>">${paper.paperExteriorURL }</td>
-						    </tr>
-						    <tr>
-						        <td>添加日期</td>
-						        <td id="paperUploadDate_<%=paperIndex%>">${paper.uploadDate }</td>
-						    </tr>
-						    <tr>
-						        <td>备注</td>
-						        <td id="paperRemark_<%=paperIndex%>">${paper.paperRemark }</td>
-						    </tr>
-						</table>
-						<!-- <center>
-							<button onClick="paperDetailClose(<%=paperIndex%>)">确定</button>
-						</center> -->
-					</div>
+					<table class="bordered">
+					    <tr><th colspan="2">论文详情</th></tr>
+					    <tr>
+					        <td>论文名称</td>
+					        <td class="paperName">${paper.paperNickName }</td>
+					    </tr>
+					    <tr>
+					        <td>分类目录</td>
+					        <td></td>
+					  	</tr>
+					    <tr>
+					        <td>论文来源</td>
+					        <td class="paperOrigin">${paper.paperOrigin }</td>
+					    </tr>
+					    
+					    <tr class="paperExteriorURL_tr">
+					        <td>论文URL</td>
+					        <td class="paperExteriorURL">${paper.paperExteriorURL }</td>
+					    </tr>
+					    <tr>
+					        <td>添加日期</td>
+					        <td class="paperUploadDate">${paper.uploadDate }</td>
+					    </tr>
+					    <tr>
+					        <td>备注</td>
+					        <td class="paperRemark_">${paper.paperRemark }</td>
+					    </tr>
+					</table>
 				</div>
 			</div>
 		</c:forEach>
@@ -129,41 +121,72 @@
 		</form>
 </div>
 <script type="text/javascript">
-	function deletePaper(Index){
-		$("#paperE_"+Index).hide();
-		var name = $("#paperNickName_forDelete_"+Index).html();
+	$(document).ready(function(){
+		modifyReadSituation();
+		showPaperDetail();
+		deletePaper();
+		updatePaper();
+	});
+	function modifyReadSituation(){
+		$(".RC_select").change(function(){
+			var modifyPaperID=$(this).parent().parent().attr("id").substring(7);
+			var readSituation = $(this).val();
+			$.post("<%=basePath%>modifyPape",
+			   		{
+						modifyPaperID : modifyPaperID,
+						readSituation : readSituation
+					},
+			   		function(){
+	      	}); 
+		});
+	}
+	function showPaperDetail(){
+		$(".paperDetail").click(function(){
+			var id=$(this).parent().parent().parent().attr("id").substring(7);
+			_showPaperDetail(id);
+		});
+	}
+	function deletePaper(){
+		$(".paperDelete").click(function(){
+			var id=$(this).parent().parent().parent().attr("id").substring(7);
+			_deletePaper(id);
+		});
+	}
+	function updatePaper(){
+		$(".paperUpdate").click(function(){
+			var id=$(this).parent().parent().parent().attr("id").substring(7);
+			_updatePaper(id);
+		});
+	}
+	function _deletePaper(id){
+		$("#paperE_"+id).hide();
 		$.post("<%=basePath%>manage",
 				{
-					deletePaperNickName :name
+					deletePaperID :id
 				},
-				function(){alert("删除 "+name+" 成功");}
+				function(){alert("删除的论文将被放入回收站中。");}
 		);
 	}
-	//var paperDetailOpen =paperIndex;
-	function paperDetail(Index){
+	function _showPaperDetail(id){
 		//heightAdjust();
-		if ($("#paperDetail_"+Index+" p").html()=="false"){
-			paperDetailShow(Index);
-			$("#paperDetail_"+Index+" p").html("true")
+		var w=$("#paperE_"+id+" .paperDetail_window");
+		var display=$("#paperE_"+id+" .paperDetail_window p");
+		if (display.html()=="false"){
+			w.show();
+			display.html("true");
 		}
 		else{
-			paperDetailClose(Index);
-			$("#paperDetail_"+Index+" p").html("false")
+			w.hide();
+			display.html("false");
 		}
-		//paperDetailOpen=!paperDetailOpen;
 	}
-	function paperDetailShow(Index){
-		$("#paperDetail_"+Index).show();
-	}
-	function paperDetailClose(Index){
-		$("#paperDetail_"+Index).hide();
-	}
-	function paperUpdate(Index){
+	
+	function _updatePaper(id){
 		if ($("#updatePaperWindow p").html()=="false"){
-			$("#updatedPaperName").val($("#paperName_"+Index).html());
-			$("#updatedPaperOrigin").val($("#paperOrigin_"+Index).html());
-			$("#updatedPaperUploadDate").val($("#paperUploadDate_"+Index).html());
-			$("#updatedPaperRemark").val($("#paperRemark_"+Index).html());
+			$("#updatedPaperName").val($("#paperE_"+id+" .paperDetail_window .paperName").html());
+			$("#updatedPaperOrigin").val($("#paperE_"+id+" .paperDetail_window .paperOrigin_").html());
+			$("#updatedPaperUploadDate").val($("#paperE_"+id+" .paperDetail_window .paperUploadDate_").html());
+			$("#updatedPaperRemark").val($("#paperE_"+id+" .paperDetail_window .paperRemark").html());
 			$("#updatePaperWindow").show();
 			$("#updatePaperWindow p").html("true");
 		}
@@ -172,14 +195,5 @@
 			$("#updatePaperWindow p").html("false");
 		}
 	}
-	function heightAdjust(){
-		var main = $(window.parent.document).find("#mainShow");
-		//var thisHeight = $(document).height() + 50;
-		thisHeight=$(document).outerHeight()+50;
-		main.height(thisHeight);
-		//alert(thisHeight);
-	}
-	//heightAdjust();
-	//});
 </script>
 </body>
