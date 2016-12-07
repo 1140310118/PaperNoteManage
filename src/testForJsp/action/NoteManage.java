@@ -1,14 +1,10 @@
 package testForJsp.action;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,10 +31,10 @@ public class NoteManage{
 	
 
 //根据情况修改
-	private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
-	private String con="D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
-//	private String tmpPath = "M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
-//	private String con="M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
+//	private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
+//	private String con="D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
+	private String tmpPath = "M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
+	private String con="M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
 	
 	
 	public String execute() throws IOException{

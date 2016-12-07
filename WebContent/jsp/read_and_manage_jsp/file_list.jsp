@@ -25,8 +25,8 @@
 	<!-- button -->
 	<link href="<%=basePath%>jsp/read_and_manage_lib/css/button/bootstrap.css" rel="stylesheet">
 	<link href="<%=basePath%>jsp/read_and_manage_lib/css/button/style.css" rel="stylesheet">
-		
 </head>
+
 <body>
 <!--文件列表-->
 <div style="float:left;">
@@ -34,10 +34,10 @@
 		<c:forEach var="paper" items="${paperList}">
 			<div id="paperE_${paper.paperID}">
 				<li>
-					<select class="RC_select" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:13px;">
-							<option value="1">&nbsp;*   未阅读</option>
-							<option value="2">&nbsp;/   已粗读</option>
-							<option value="3">&nbsp;#   已精读</option>
+					<select class="RC_select" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:11px;">
+							<option value="1">*   未阅读</option>
+							<option value="2">/   已粗读</option>
+							<option value="3">#   已精读</option>
 					</select>
 					&nbsp;
 					<a class="paperID" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
@@ -131,7 +131,7 @@
 		$(".RC_select").change(function(){
 			var modifyPaperID=$(this).parent().parent().attr("id").substring(7);
 			var readSituation = $(this).val();
-			$.post("<%=basePath%>modifyPaper",
+			$.post("<%=basePath%>modifyPape",
 			   		{
 						modifyPaperID : modifyPaperID,
 						readSituation : readSituation
@@ -195,14 +195,5 @@
 			$("#updatePaperWindow p").html("false");
 		}
 	}
-	// unused
-	// function heightAdjust(){
-	// 	var main = $(window.parent.document).find("#mainShow");
-	// 	//var thisHeight = $(document).height() + 50;
-	// 	thisHeight=$(document).outerHeight()+50;
-	// 	main.height(thisHeight);
-	// 	//alert(thisHeight);
-	// }
-	//heightAdjust();
 </script>
 </body>

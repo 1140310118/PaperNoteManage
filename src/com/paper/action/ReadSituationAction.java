@@ -13,6 +13,7 @@ public class ReadSituationAction {
 
 	public String changeReadSituation(String paperNickName, String paperReadSituation) {
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+		// 0 未阅读；1 已粗读；2已精读。
 		String sql = "UPDATE paper SET paperReadSituation = " + paperReadSituation + "WHERE paperNickName = "
 				+ paperNickName;
 		ResultSet rS = dao.executeQuery(sql);
