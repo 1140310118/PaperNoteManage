@@ -41,6 +41,17 @@
 			<result name="success">/jsp/manage.jsp</result>
 			<result name="input">/jsp/manage.jsp</result>
 		</action>
+		
+		<action name="fileList" class="com.paper.action.UploadFileAction" method="paperManage">
+			<result name="success">/jsp/read_and_manage_jsp/file_list.jsp</result>
+		</action>
+		<action name="newPaperLocal" class="com.paper.action.UploadFileAction" method="paperManage">
+			<result name="success">/jsp/read_and_manage_jsp/newPaperLocal.jsp</result>
+		</action>
+		<action name="newPaperURL" class="com.paper.action.UploadFileAction" method="paperManage">
+			<result name="success">/jsp/read_and_manage_jsp/newPaperURL.jsp</result>
+		</action>
+		
 
 		<action name="read" class="testForJsp.action.NoteManage" method="execute">
 			<result name="success">/jsp/read.jsp</result>

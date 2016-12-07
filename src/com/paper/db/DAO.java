@@ -21,6 +21,12 @@ public class DAO {
 	//String PASS = "Aa123456"; // 数据库密码
 
 
+	//String PASS = "Aa123456"; // 数据库密码
+	String PASS = "123456"; // 数据库密码
+
+	//String PASS = "Aa123456"; // 数据库密码
+	String PASS = "123456"; // 数据库密码
+
 	public DAO() {
 		
 //		String initSql = "create database papermanage if not exist;";

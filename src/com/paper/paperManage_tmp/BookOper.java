@@ -11,6 +11,7 @@ public class BookOper {
 	public List<Paper> selectByType(String type) {
 	
 		Connection conn = com.paper.db.DbConn.getConn();
+		System.out.println(conn);
 		java.sql.PreparedStatement pstmt = null;
 
 		java.sql.ResultSet rs = null;

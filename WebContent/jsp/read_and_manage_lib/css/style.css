@@ -38,9 +38,9 @@ h1 a {
  .accordion {
  	width: 100%;
  	max-width: 200px;
- 	margin: 80px 20px;/*上 左 下 右*/
+ 	margin: 0px 20px;/*涓� 宸� 涓� 鍙�*/
  	position: fixed;
- 	background: #EEE;/*左侧导航背景色*/
+ 	background: #EEE;/*宸︿晶瀵艰埅鑳屾櫙鑹�*/
  	-webkit-border-radius: 4px;
  	-moz-border-radius: 4px;
  	border-radius: 4px;
@@ -50,7 +50,7 @@ h1 a {
 	cursor: pointer;
 	display: block;
 	padding: 10px 15px 15px 42px;
-	color: #4D4D4D;/*文字颜色*/
+	color: #4D4D4D;/*鏂囧瓧棰滆壊*/
 	font-size: 14px;
 	font-weight: 700;
 	border-bottom: 1px solid #CCC;
@@ -100,7 +100,7 @@ h1 a {
  -----------------------------*/
  .submenu {
  	display: none;
- 	background:#FAFAFA;/*444359 子菜单背景颜色*/
+ 	background:#FAFAFA;/*444359 瀛愯彍鍗曡儗鏅鑹�*/
  	font-size: 14px;
  }
 
@@ -111,7 +111,7 @@ h1 a {
  .submenu a {
  	display: block;
  	text-decoration: none;
- 	color: #333;/*d9d9d9 字体颜色*/
+ 	color: #333;/*d9d9d9 瀛椾綋棰滆壊*/
  	padding: 12px;
  	padding-left: 42px;
  	-webkit-transition: all 0.25s ease;

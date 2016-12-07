@@ -1,7 +1,7 @@
 /* ------------------------------- */
 
 ol{
-	margin: auto;
+	margin: auto 20px;
 	width: 500px;
 	counter-reset: li;
 	list-style: none;
