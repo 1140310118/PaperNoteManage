@@ -18,9 +18,28 @@ public class Paper {
 	public String uploadDate;
 	public String paperUserEmail;
 	public int paperReadSituation;
+	public int paperID;
+	public int paperPID;
+	
 	
 	
 
+
+	public int getPaperID() {
+		return paperID;
+	}
+
+	public void setPaperID(int paperID) {
+		this.paperID = paperID;
+	}
+
+	public int getPaperPID() {
+		return paperPID;
+	}
+
+	public void setPaperPID(int paperPID) {
+		this.paperPID = paperPID;
+	}
 
 	public int getPaperReadSituation() {
 		return paperReadSituation;
