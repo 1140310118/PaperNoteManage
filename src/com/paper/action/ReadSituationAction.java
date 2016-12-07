@@ -20,4 +20,5 @@ public class ReadSituationAction {
 			return "changeReadSituationsuccess";
 		return "changeReadSituationfail";
 	}
+	
 }
