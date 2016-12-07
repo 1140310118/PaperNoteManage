@@ -16,16 +16,9 @@ public class DAO {
 	String URL = "jdbc:mysql://localhost:3306/papermanage";
 	String USER = "root"; // 数据库用户名
 
-	String PASS = "112122"; // 数据库密码
-
-	//String PASS = "Aa123456"; // 数据库密码
-
-
-	//String PASS = "Aa123456"; // 数据库密码
-	String PASS = "123456"; // 数据库密码
-
-	//String PASS = "Aa123456"; // 数据库密码
-	String PASS = "123456"; // 数据库密码
+	//String PASS = "112122"; // 数据库密码
+	//String PASS = "123456"; // 数据库密码
+	String PASS = "Aa123456"; // 数据库密码
 
 	public DAO() {
 		

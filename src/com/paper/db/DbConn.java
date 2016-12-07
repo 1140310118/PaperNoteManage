@@ -9,11 +9,7 @@ public class DbConn {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(
-<<<<<<< HEAD
-					"jdbc:mysql://localhost:3306/papermanage", "root","112122");
-=======
 					"jdbc:mysql://localhost:3306/papermanage", "root","123456");
->>>>>>> branch 'master' of https://github.com/zorenv/PaperNoteManage.git
 		} catch (ClassNotFoundException e) {
 			System.out.println("11111");
 			// TODO Auto-generated catch block e.printStackTrace();
