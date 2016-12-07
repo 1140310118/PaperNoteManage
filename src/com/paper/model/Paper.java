@@ -20,10 +20,20 @@ public class Paper {
 	public int paperReadSituation;
 	public int paperID;
 	public int paperPID;
+	public int paperIsDeleted;
+	
 	
 	
 	
 
+
+	public int getPaperIsDeleted() {
+		return paperIsDeleted;
+	}
+
+	public void setPaperIsDeleted(int paperIsDeleted) {
+		this.paperIsDeleted = paperIsDeleted;
+	}
 
 	public int getPaperID() {
 		return paperID;
