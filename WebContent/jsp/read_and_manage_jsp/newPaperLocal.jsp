@@ -40,7 +40,7 @@
 <!--paperNickName paperOrigin paperLocalFilePath paperRemark-->
 <!-- 新建论文  从本地上传-->
 	<div class="form_container" id="newPaperFromLocal">
-	<s:form id="paperForm" action="manage?fileUpFlag=true&newPaperFlag=true" method="post" enctype="multipart/form-data">
+	<s:form id="paperForm" action="newPaperLocal?fileUpFlag=true&newPaperFlag=true" method="post" enctype="multipart/form-data">
 	  	 <h3>新建论文</h3>
 	    <h4>从本地上传</h4>
 	    <fieldset>
