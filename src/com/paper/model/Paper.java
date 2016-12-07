@@ -131,16 +131,14 @@ public class Paper {
 		String date = df.format(new Date());
 		
 		sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
-				+ "paperExteriorURL,paperRemark,uploadDate,paperReadSituation,paperUserEmail,paperID) "
+				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail) "
 				+ "values('" + this.paperNickName 
 				+ "','" +this.paperOrigin
 				+ "','" +paperWebFilePath 
 				+ "','" +this.paperExteriorURL
 				+ "','" +this.paperRemark 
 				+ "','" +date
-				+ "','" +0
 				+ "','" +this.paperUserEmail
-				+ "','" +getMaxpaperID(this.paperUserEmail)
 				+ "');";
 		
 		return sql;

@@ -9,6 +9,8 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
@@ -238,13 +240,44 @@ private void getAllPaperExistedByEmail() {
 	// 将文件上传到 root 目录	
 	public String fileUp(String root) throws Exception
 	{
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
+		
 		System.out.println("194");
 		File rootFile = new File(root);
 		if(!rootFile.exists())
 		{
 			rootFile.mkdir();
 		}
-		String filename = root + singleFile.getResumeFileName();
+
+		String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
+		File rootFile1 = new File(root1);
+		if(!rootFile1.exists())
+		{
+			rootFile1.mkdir();
+			String filename3 = "log.txt";
+			File path1 = new File(root1);
+			File dir1=new File(path1,filename3);
+			dir1.createNewFile();
+			String shangchuan = root1+"\\"+"log.txt";
+			FileWriter writer = new FileWriter(shangchuan, true);
+			writer.write(date +"	"+ "上传系统" + "	" +"||"); 
+			 writer.close();
+			String root2=root1+"\\note\\";
+			File rootFile2 = new File(root2);
+			if(!rootFile2.exists())
+			{
+				rootFile2.mkdir();
+				String filename2 = "note.config";
+				File path = new File(root2);
+				File dir=new File(path,filename2);
+				dir.createNewFile();
+			}
+			
+		}
+		
+		String filename = root1+"\\" + singleFile.getResumeFileName();
+
 		System.out.println("filename:"+filename);
 		FileInputStream fis = new FileInputStream(singleFile.getResume());
 		FileOutputStream fos = new FileOutputStream(filename);
