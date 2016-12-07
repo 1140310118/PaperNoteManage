@@ -190,12 +190,11 @@ public String paperManage() throws Exception{
 			System.out.println(paperWebFilePath);
 			insertNewPaper(paperWebFilePath);
 		}
-		
 	}
-
 	getAllPaperExistedByEmail();
 	return "success";
 } 
+
 private void updatePaper(Paper paper) {
 	try{
 		
@@ -245,25 +244,7 @@ private void getAllPaperExistedByEmail() {
 		{
 			rootFile.mkdir();
 		}
-		String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
-		File rootFile1 = new File(root1);
-		if(!rootFile1.exists())
-		{
-			rootFile1.mkdir();
-			String root2=root1+"\\note\\";
-			File rootFile2 = new File(root2);
-			if(!rootFile2.exists())
-			{
-				rootFile2.mkdir();
-				String filename2 = "note.config";
-				File path = new File(root2);
-				File dir=new File(path,filename2);
-				dir.createNewFile();
-			}
-			
-		}
-		
-		String filename = root1+"\\" + singleFile.getResumeFileName();
+		String filename = root + singleFile.getResumeFileName();
 		System.out.println("filename:"+filename);
 		FileInputStream fis = new FileInputStream(singleFile.getResume());
 		FileOutputStream fos = new FileOutputStream(filename);
