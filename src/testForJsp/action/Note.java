@@ -21,4 +21,7 @@ public class Note {
 		this.filename = noteID + ".txt";
 		this.content = content;
 	}
+	public Note(int i, String fileString) {
+		// TODO Auto-generated constructor stub
+	}
 }
