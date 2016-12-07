@@ -18,7 +18,7 @@ public class JDBCMySQL {
 		 */
 		String URL = "jdbc:mysql://localhost:3306/papermanage";
 		String USER = "root"; // 数据库用户名
-		String PASS = "112122"; // 数据库密码
+		String PASS = "123456"; // 数据库密码
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			// 2.获得数据库连接
