@@ -3,7 +3,6 @@ package com.paper.action;
 import java.sql.ResultSet;
 
 import com.paper.db.DAO;
-import com.paper.model.User;
 
 public class ReadSituationAction {
 	// 表名
