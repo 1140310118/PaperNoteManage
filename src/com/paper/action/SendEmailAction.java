@@ -1,20 +1,33 @@
 package com.paper.action;
 
 import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SendEmailAction extends ActionSupport {
+	private static final long serialVersionUID = 1L;
 	private String from;
 	private String password;
 	private String to;
 	private String subject;
 	private String body;
+	private String fileName;
+	private String affix = ""; // 附件地址
+	private String affixName = ""; // 附件名称
 	static Properties properties = new Properties();
 	static {
 		properties.put("mail.smtp.host", "smtp.163.com");
@@ -23,16 +36,27 @@ public class SendEmailAction extends ActionSupport {
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.port", "465");
 	}
-	
-	public void setSender(String from,String password){
-		this.from = from;
-		this.password = password;
+
+	/**
+	 * 根据传入的文件路径创建附件并返回
+	 */
+	public MimeBodyPart createAttachment(String fileName) throws Exception {
+		MimeBodyPart attachmentPart = new MimeBodyPart();
+		FileDataSource fds = new FileDataSource(fileName);
+		attachmentPart.setDataHandler(new DataHandler(fds));
+		attachmentPart.setFileName(fds.getName());
+		return attachmentPart;
 	}
 
+	// public void setSender(String from,String password){
+	// this.from = from;
+	// this.password = password;
+	// }
+
 	public String execute() {
-		SendEmailAction se = new SendEmailAction();
+		// SendEmailAction se = new SendEmailAction();
 		String ret = SUCCESS;
-//		se.setSender("PaperManage2333@163.com", "papermanage2333");
+		// se.setSender("PaperManage2333@163.com", "papermanage2333");
 		try {
 			Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
@@ -40,15 +64,43 @@ public class SendEmailAction extends ActionSupport {
 				}
 			});
 			Message message = new MimeMessage(session);
-			//加载发件人地址
+			// 加载发件人地址
 			message.setFrom(new InternetAddress(from));
-			//加载收件人地址
+			// 加载收件人地址
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			//加载标题
+			// 加载标题
 			message.setSubject(subject);
+			// 加载正文(原先的方法)
 			message.setText(body);
-			System.out.println(subject);
-			System.out.println(body);	
+			 // 创建附件部分
+			// MimeBodyPart attachment =
+			 createAttachment("F:\\java\\Snake.java");
+			 MimeBodyPart attachment = createAttachment(fileName);
+			 // 将邮件中各个部分组合到一个"mixed"型的 MimeMultipart 对象
+			 MimeMultipart allPart = new MimeMultipart("mixed");
+			 allPart.addBodyPart(attachment);
+			 // 将上面混合型的 MimeMultipart 对象作为邮件内容并保存
+			 message.setContent(allPart);
+
+//            //添加附件
+//            BodyPart messageBodyPart= new MimeBodyPart();
+//            DataSource source = new FileDataSource(affix);
+//            // 向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
+//            Multipart multipart = new MimeMultipart(); 
+//            //添加附件的内容
+//            messageBodyPart.setDataHandler(new DataHandler(source));
+//            //添加附件的标题
+//            //这里很重要，通过下面的Base64编码的转换可以保证你的中文附件标题名在发送时不会变成乱码
+//            sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
+//            messageBodyPart.setFileName("=?GBK?B?"+enc.encode(affixName.getBytes())+"?=");
+//            multipart.addBodyPart(messageBodyPart);        
+//          
+//            //将multipart对象放到message中
+//            message.setContent(multipart);
+            
+			System.out.println("邮件标题：" + subject);
+			System.out.println("邮件正文：" + body);
+			System.out.println("文件路径：" + fileName);
 			Transport.send(message);
 		} catch (Exception e) {
 			ret = ERROR;
@@ -57,8 +109,32 @@ public class SendEmailAction extends ActionSupport {
 		return ret;
 	}
 
+	 public String getFileName() {
+	 return fileName;
+	 }
+	
+	 public void setFileName(String fileName) {
+	 this.fileName = fileName;
+	 }
+
 	public String getFrom() {
 		return from;
+	}
+
+	public String getAffix() {
+		return affix;
+	}
+
+	public void setAffix(String affix) {
+		this.affix = affix;
+	}
+
+	public String getAffixName() {
+		return affixName;
+	}
+
+	public void setAffixName(String affixName) {
+		this.affixName = affixName;
 	}
 
 	public void setFrom(String from) {
