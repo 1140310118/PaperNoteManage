@@ -12,9 +12,9 @@
    </em>
    <form action="emailer" method="post">
    <label for="from">From</label><br/>
-   <input type="text" name="from"/><br/>
+   <input type="text" name="from" value="hit_lmf@163.com"/><br/>
    <label for="password">Password</label><br/>
-   <input type="password" name="password"/><br/>
+   <input type="password" name="password" value="4321005abc"/><br/>
    <label for="to">To</label><br/>
    <input type="text" name="to"/><br/>
    <label for="subject">Subject</label><br/>
