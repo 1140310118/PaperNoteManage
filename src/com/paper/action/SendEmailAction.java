@@ -33,8 +33,11 @@ public class SendEmailAction extends ActionSupport {
 				}
 			});
 			Message message = new MimeMessage(session);
+			//加载发件人地址
 			message.setFrom(new InternetAddress(from));
+			//加载收件人地址
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			//加载标题
 			message.setSubject(subject);
 			message.setText(body);
 			Transport.send(message);
