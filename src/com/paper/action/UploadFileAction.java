@@ -52,6 +52,8 @@ public class UploadFileAction extends ActionSupport implements
 	ActionContext actionContext = ActionContext.getContext();
 	Map session = actionContext.getSession();
 	private String userEmail = (String) session.get("USER_Email");
+	
+	 
 	private DAO dao = new DAO();
 	// panwei
 	private BookOper bo = new BookOper(); // 查询类
@@ -123,9 +125,15 @@ public class UploadFileAction extends ActionSupport implements
 
 //		System.out.println(session.get("USER_Nickname"));
 		
-		//System.out.println("userEmail:"+userEmail);
-
-		String root = "d:\\upload\\";
+		System.out.println("userEmail:"+userEmail);
+		
+		String root = "d:\\upload\\"+userEmail+"\\";
+		System.out.println("root:"+root);
+//		File rootFile = new File(root);
+//		if(!rootFile.exists())
+//		{
+//			rootFile.mkdir();
+//		}
 		if (fileUpFlag!="false"){
 			String paperWebFilePath=fileUp(root);
 			insertNewPaper(paperWebFilePath);
@@ -158,7 +166,8 @@ public String paperManage() throws Exception{
 	}
 	
 	
-	String root = "d:\\upload\\";
+	String root = "d:\\upload\\"+userEmail+"\\";
+	System.out.println("fileUpFlag="+fileUpFlag);
 	if (newPaperFlag!="false"){
 		System.out.println("新建文件");
 		if (newPaperByURLFlag!="false")
