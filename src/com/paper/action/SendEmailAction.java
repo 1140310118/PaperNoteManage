@@ -23,9 +23,16 @@ public class SendEmailAction extends ActionSupport {
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.port", "465");
 	}
+	
+	public void setSender(String from,String password){
+		this.from = from;
+		this.password = password;
+	}
 
 	public String execute() {
+		SendEmailAction se = new SendEmailAction();
 		String ret = SUCCESS;
+//		se.setSender("PaperManage2333@163.com", "papermanage2333");
 		try {
 			Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
@@ -33,10 +40,15 @@ public class SendEmailAction extends ActionSupport {
 				}
 			});
 			Message message = new MimeMessage(session);
+			//加载发件人地址
 			message.setFrom(new InternetAddress(from));
+			//加载收件人地址
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			//加载标题
 			message.setSubject(subject);
 			message.setText(body);
+			System.out.println(subject);
+			System.out.println(body);	
 			Transport.send(message);
 		} catch (Exception e) {
 			ret = ERROR;
