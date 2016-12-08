@@ -109,15 +109,16 @@ public class FileListAction extends ActionSupport
 
 	private void updatePaper(Paper paper) {
 		try{
-			String sql = "update paper set paperOrigin=?,paperWebFilePath=?,paperRemark=?,uploadDate=? where paperNickName=?";
+			String sql = "update paper set paperOrigin=?,paperRemark=?,uploadDate=?,paperExteriorURL=? where paperNickName=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1,paper.paperOrigin);
-			pStmt.setString(2,paper.paperWebFilePath);
-			pStmt.setString(3,paper.paperRemark);
-			pStmt.setString(4,paper.uploadDate);
+			//pStmt.setString(2,paper.paperWebFilePath);
+			pStmt.setString(2,paper.paperRemark);
+			pStmt.setString(3,paper.uploadDate);
+			pStmt.setString(4,paper.paperExteriorURL);
 			pStmt.setString(5,paper.paperNickName);
 			pStmt.executeUpdate();
-			System.out.println("From FileAction:"+pStmt.toString());
+			System.out.println("From FileAction>> "+pStmt.toString());
 		}
 		catch(SQLException e){
 			e.printStackTrace();

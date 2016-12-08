@@ -17,7 +17,7 @@ public class BookOper {
 		java.sql.ResultSet rs = null;
 		List<Paper> data = new ArrayList<Paper>();
 		try {
-			pstmt = conn.prepareStatement("select paperNickName, paperOrigin, paperWebFilePath, paperRemark, uploadDate, paperUserEmail, paperID, paperReadSituation  from paper where paperUserEmail=? AND (paperWebFilePath != \"\" OR paperExteriorURL != \"\")");
+			pstmt = conn.prepareStatement("select paperNickName, paperOrigin, paperWebFilePath, paperExteriorURL, paperRemark, uploadDate, paperUserEmail, paperID, paperReadSituation  from paper where paperUserEmail=? AND (paperWebFilePath != \"\" OR paperExteriorURL != \"\")");
 			pstmt.setString(1, type);
 			System.out.println(pstmt.toString());
 			
@@ -30,11 +30,12 @@ public class BookOper {
 				book.setPaperNickName(rs.getString(1));
 				book.setPaperOrigin(rs.getString(2));
 				book.setPaperWebFilePath(rs.getString(3));
-				book.setPaperRemark(rs.getString(4));
-				book.setUploadDate(rs.getString(5));
-				book.setPaperUserEmail(rs.getString(6));
-				book.setPaperID(rs.getString(7));
-				book.setPaperReadSituation(rs.getString(8));
+				book.setPaperExteriorURL(rs.getString(4));
+				book.setPaperRemark(rs.getString(5));
+				book.setUploadDate(rs.getString(6));
+				book.setPaperUserEmail(rs.getString(7));
+				book.setPaperID(rs.getString(8));
+				book.setPaperReadSituation(rs.getString(9));
 				data.add(book);	
 				//System.out.println(" :"+book.toString());
 //				book.show();

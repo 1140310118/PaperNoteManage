@@ -29,6 +29,7 @@
 
 <body>
 <!--文件列表-->
+	<br>
 <div style="float:left;">
 	<ol class="rounded-list" id="allPaperShow">
 		<c:forEach var="paper" items="${paperList}">
@@ -67,7 +68,7 @@
 					        <td class="paperOrigin">${paper.paperOrigin }</td>
 					    </tr>
 					    
-					    <tr class="paperExteriorURL_tr">
+					    <tr>
 					        <td>论文URL</td>
 					        <td class="paperExteriorURL">${paper.paperExteriorURL }</td>
 					    </tr>
@@ -105,12 +106,16 @@
 			        <td><input id="updatedPaperOrigin" name="updatedPaper.paperOrigin"/></td>
 			    </tr>
 			    <tr>
+			        <td>论文URL</td>
+			        <td><input id="updatedPaperURL" name="updatedPaper.paperExteriorURL"/></td>
+			    </tr>
+			    <tr>
 			        <td>添加日期</td>
 			        <td><input id="updatedPaperUploadDate" name="updatedPaper.uploadDate" readonly style="border: none;"/></td>
 			    </tr>
 			    <tr>
 			        <td>备注</td>
-			        <td><input id="updatedPaperRemark" name="updatedPaper.paperRemark"/></td>
+			        <td><textarea id="updatedPaperRemark" name="updatedPaper.paperRemark"></textarea></td>
 			    </tr>
 			    	<!-- <td><input name="updatePaperFlag" value="true" style="display: none;"></td> -->
 				<tr>
@@ -195,7 +200,16 @@
 			$("#updatedPaperName").val($("#paperE_"+name+" .paperDetail_window .paperName").html());
 			$("#updatedPaperOrigin").val($("#paperE_"+name+" .paperDetail_window .paperOrigin").html());
 			$("#updatedPaperUploadDate").val($("#paperE_"+name+" .paperDetail_window .paperUploadDate").html());
-			$("#updatedPaperRemark").val($("#paperE_"+name+" .paperDetail_window .paperRemark").html());
+			$("#updatedPaperRemark").html($("#paperE_"+name+" .paperDetail_window .paperRemark").html());
+			var url=$("#paperE_"+name+" .paperDetail_window .paperExteriorURL").html();
+			if (url){
+				$('#updatedPaperURL').val(url);
+			}
+			else{
+				//$("#updatedPaperURL").val();
+				$("#updatedPaperURL").attr('readonly','readonly');
+				$('#updatedPaperURL').css('border','none');
+			}
 			$("#updatePaperWindow").show();
 			$("#updatePaperWindow p").html("true");
 		}
