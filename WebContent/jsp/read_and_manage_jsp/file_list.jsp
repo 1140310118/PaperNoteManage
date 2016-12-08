@@ -29,16 +29,22 @@
 
 <body>
 <!--文件列表-->
+<script type="text/javascript">
+	$(".RC_select").each(function(){
+		alert("fs");
+	});
+</script>
 <div style="float:left;">
 	<ol class="rounded-list" id="allPaperShow">
 		<c:forEach var="paper" items="${paperList}">
 			<div id="paperE_${paper.paperID}">
 				<li>
-					<select class="RC_select" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:11px;">
+					<select class="RC_select" onload="set_readSituation()" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:11px;">
 							<option value="1">*   未阅读</option>
 							<option value="2">/   已粗读</option>
 							<option value="3">#   已精读</option>
 					</select>
+					
 					&nbsp;
 					<a class="paperID" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
 					
@@ -127,11 +133,12 @@
 		deletePaper();
 		updatePaper();
 	});
+	
 	function modifyReadSituation(){
 		$(".RC_select").change(function(){
 			var modifyPaperID=$(this).parent().parent().attr("id").substring(7);
 			var readSituation = $(this).val();
-			$.post("<%=basePath%>modifyPape",
+			$.post("<%=basePath%>modifyPaper",
 			   		{
 						modifyPaperID : modifyPaperID,
 						readSituation : readSituation

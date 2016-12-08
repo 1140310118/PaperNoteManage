@@ -156,7 +156,6 @@ public String paperManage() throws Exception{
 	System.out.println("updatePaperFlag："+updatePaperFlag);
 	if (updatePaperFlag!="false"){
 		updatePaper(updatedPaper);
-	
 	}
 	
 	
@@ -204,7 +203,7 @@ private void updatePaper(Paper paper) {
 		pStmt.setString(2,paper.paperWebFilePath);
 		pStmt.setString(3,paper.paperRemark);
 		pStmt.setString(4,paper.uploadDate);
-		pStmt.setString (5,paper.paperNickName);
+		pStmt.setString(5,paper.paperNickName);
 		pStmt.executeUpdate();
 	}
 	catch(SQLException e){

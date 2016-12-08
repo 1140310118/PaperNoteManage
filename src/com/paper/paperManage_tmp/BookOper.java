@@ -33,7 +33,10 @@ public class BookOper {
 				book.setPaperRemark(rs.getString(4));
 				book.setUploadDate(rs.getString(5));
 				book.setPaperUserEmail(rs.getString(6));
+				book.setPaperID(rs.getString(7));
+				book.setPaperReadSituation(rs.getString(8));
 				data.add(book);	
+				//System.out.println(" :"+book.toString());
 //				book.show();
 			}
 		} catch (SQLException e) {
