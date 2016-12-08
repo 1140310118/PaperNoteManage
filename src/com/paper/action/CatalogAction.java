@@ -25,8 +25,8 @@ public class CatalogAction extends ActionSupport {
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
 		String sql = "UPDATE " + paperTable + " SET paperPID = " + pid + " WHERE paperID = " + id;
 		System.out.println(sql);
-		ResultSet rS = dao.executeQuery(sql);
-		if (rS != null)
+		int rS = dao.executeUpdate(sql);
+		if (rS != 0)
 			return "changeNodesuccess";
 		return "changeNodefail";
 	}
@@ -39,8 +39,8 @@ public class CatalogAction extends ActionSupport {
 		String sql = "UPDATE " + paperTable + " SET paperPID = " + this.paper.getPaperPID() + " WHERE paperID = "
 				+ this.paper.getPaperID();
 		System.out.println(sql);
-		ResultSet rS = dao.executeQuery(sql);
-		if (rS != null)
+		int rS = dao.executeUpdate(sql);
+		if (rS != 0)
 			return "deleteNodesuccess";
 		return "deleteNodefail";
 	}
