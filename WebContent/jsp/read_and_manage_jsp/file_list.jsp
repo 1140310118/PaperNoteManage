@@ -30,8 +30,11 @@
 <body>
 <!--文件列表-->
 <script type="text/javascript">
-	$(".RC_select").each(function(){
-		alert("fs");
+	$(document).ready(function(){
+		$(".RC_select").each(function(key){
+			var rc=$(this).attr("id").substring(10);
+			$(this).val(rc);
+		});
 	});
 </script>
 <div style="float:left;">
@@ -39,10 +42,10 @@
 		<c:forEach var="paper" items="${paperList}">
 			<div id="paperE_${paper.paperID}">
 				<li>
-					<select class="RC_select" onload="set_readSituation()" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:11px;">
-							<option value="1">*   未阅读</option>
-							<option value="2">/   已粗读</option>
-							<option value="3">#   已精读</option>
+					<select class="RC_select" id="RC_select_${paper.paperReadSituation}" onload="set_readSituation()" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:11px;">
+							<option value="0">*   未阅读</option>
+							<option value="1">/   已粗读</option>
+							<option value="2">#   已精读</option>
 					</select>
 					
 					&nbsp;
