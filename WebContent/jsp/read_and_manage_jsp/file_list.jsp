@@ -77,7 +77,7 @@
 					    </tr>
 					    <tr>
 					        <td>备注</td>
-					        <td class="paperRemark_">${paper.paperRemark }</td>
+					        <td class="paperRemark">${paper.paperRemark }</td>
 					    </tr>
 					</table>
 				</div>
@@ -89,6 +89,7 @@
 <div id="updatePaperWindow" style="width:270px;float:left;display:none;">
 		<p style="display:none;">false</p>
 		<form  action="<%=basePath%>fileList" method="post">
+	   		<input value="true" name="updatePaperFlag" style="display: none;"></input>
 			<table class="bordered">
 			    <tr><th colspan="2">修改论文信息</th></tr>
 			    <tr>
@@ -151,7 +152,7 @@
 	function showPaperDetail(){
 		$(".paperDetail").click(function(){
 			var name=$(this).parent().parent().parent().attr("id").substring(7);
-			_showPaperDetail(id);
+			_showPaperDetail(name);
 		});
 	}
 	function deletePaper(){
@@ -163,7 +164,7 @@
 	function updatePaper(){
 		$(".paperUpdate").click(function(){
 			var name=$(this).parent().parent().parent().attr("id").substring(7);
-			_updatePaper(id);
+			_updatePaper(name);
 		});
 	}
 	function _deletePaper(deletePaperNickName){
@@ -192,8 +193,8 @@
 	function _updatePaper(name){
 		if ($("#updatePaperWindow p").html()=="false"){
 			$("#updatedPaperName").val($("#paperE_"+name+" .paperDetail_window .paperName").html());
-			$("#updatedPaperOrigin").val($("#paperE_"+name+" .paperDetail_window .paperOrigin_").html());
-			$("#updatedPaperUploadDate").val($("#paperE_"+name+" .paperDetail_window .paperUploadDate_").html());
+			$("#updatedPaperOrigin").val($("#paperE_"+name+" .paperDetail_window .paperOrigin").html());
+			$("#updatedPaperUploadDate").val($("#paperE_"+name+" .paperDetail_window .paperUploadDate").html());
 			$("#updatedPaperRemark").val($("#paperE_"+name+" .paperDetail_window .paperRemark").html());
 			$("#updatePaperWindow").show();
 			$("#updatePaperWindow p").html("true");

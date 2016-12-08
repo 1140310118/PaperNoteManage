@@ -88,28 +88,27 @@ public class FileListAction extends ActionSupport
 		// 删除 修改 显示所有论文
 		// 删除论文
 		if (deletePaperNickName!=null){
-			System.out.println("删除的文件："+deletePaperNickName);
+			System.out.println("FROM FileListAction>> 删除的文件："+deletePaperNickName);
 			deletePaperByNickname(deletePaperNickName);
 		}
 		// 修改论文
-		//System.out.println("updatePaperFlag："+updatePaperFlag);
 		if (updatePaperFlag!="false"){
-			System.out.println("修改论文");
+			System.out.println("FROM FileListAction>> 修改论文信息");
 			updatePaper(updatedPaper);
 		}
 		// 修改阅读情况
 		if (readSituation!=null){
 			ReadSituationAction rsa=new ReadSituationAction();
-			System.out.println("修改论文 "+modifyPaperName+" 的阅读情况为 "+readSituation);
+			System.out.println("FROM FileListAction>> 修改论文 "+modifyPaperName+" 的阅读情况为 "+readSituation);
 			rsa.changeReadSituation(modifyPaperName,readSituation);
 		}
+		// 获得所有论文
 		getAllPaperExistedByEmail();
 		return "success";
 	} 
 
 	private void updatePaper(Paper paper) {
 		try{
-			
 			String sql = "update paper set paperOrigin=?,paperWebFilePath=?,paperRemark=?,uploadDate=? where paperNickName=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1,paper.paperOrigin);
@@ -118,6 +117,7 @@ public class FileListAction extends ActionSupport
 			pStmt.setString(4,paper.uploadDate);
 			pStmt.setString(5,paper.paperNickName);
 			pStmt.executeUpdate();
+			System.out.println("From FileAction:"+pStmt.toString());
 		}
 		catch(SQLException e){
 			e.printStackTrace();
