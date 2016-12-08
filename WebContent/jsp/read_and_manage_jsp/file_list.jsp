@@ -196,7 +196,7 @@
 	}
 	
 	function _updatePaper(name){
-		if ($("#updatePaperWindow p").html()=="false"){
+		if ($("#updatePaperWindow p").html()=="false" || name!=$("#updatedPaperName").val()){
 			$("#updatedPaperName").val($("#paperE_"+name+" .paperDetail_window .paperName").html());
 			$("#updatedPaperOrigin").val($("#paperE_"+name+" .paperDetail_window .paperOrigin").html());
 			$("#updatedPaperUploadDate").val($("#paperE_"+name+" .paperDetail_window .paperUploadDate").html());
@@ -206,7 +206,6 @@
 				$('#updatedPaperURL').val(url);
 			}
 			else{
-				//$("#updatedPaperURL").val();
 				$("#updatedPaperURL").attr('readonly','readonly');
 				$('#updatedPaperURL').css('border','none');
 			}

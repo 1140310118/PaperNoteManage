@@ -124,18 +124,29 @@ public class Paper {
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
-		
-		sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
+		if(this.paperExteriorURL!=null){
+			sql = "insert into paper (paperNickName,paperOrigin,"
 				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
 				+ "values('" + this.paperNickName 
 				+ "','" +this.paperOrigin
-				+ "','" +paperWebFilePath 
 				+ "','" +this.paperExteriorURL
 				+ "','" +this.paperRemark 
 				+ "','" +date
 				+ "','" +this.paperUserEmail
 				+ "','" +0
 				+ "');";
+		}else{
+			sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
+					+ ",paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
+					+ "values('" + this.paperNickName 
+					+ "','" +this.paperOrigin
+					+ "','" +paperWebFilePath 
+					+ "','" +this.paperRemark 
+					+ "','" +date
+					+ "','" +this.paperUserEmail
+					+ "','" +0
+					+ "');";
+		}
 		
 		return sql;
 		

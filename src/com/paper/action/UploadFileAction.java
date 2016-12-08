@@ -166,6 +166,7 @@ public String paperManage() throws Exception{
 			}
 			insertNewPaper(paper.paperExteriorURL);
 			System.out.println(paper.paperExteriorURL);
+			return "newPaperSuccess";
 		}
 		if (fileUpFlag!="false"){
 			System.out.println("新建文件 从本地");
@@ -173,7 +174,7 @@ public String paperManage() throws Exception{
 			System.out.println(paperWebFilePath);
 			insertNewPaper(paperWebFilePath);
 			System.out.println("UploadFileAction>> newPaperLocalSuccess");
-			return "newPaperLocalSuccess";
+			return "newPaperSuccess";
 		}
 	}
 	return "success";

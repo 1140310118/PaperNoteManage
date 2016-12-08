@@ -47,7 +47,7 @@
 		</action>
 		<action name="newPaperLocal" class="com.paper.action.UploadFileAction" method="paperManage">
 			<result name="success">/jsp/read_and_manage_jsp/newPaperLocal.jsp</result>
-			<result name="newPaperLocalSuccess" type="redirectAction">fileList</result>
+			<result name="newPaperSuccess" type="redirectAction">fileList</result>
 		</action>
 		<action name="newPaperURL" class="com.paper.action.UploadFileAction" method="paperManage">
 			<result name="success">/jsp/read_and_manage_jsp/newPaperURL.jsp</result>
