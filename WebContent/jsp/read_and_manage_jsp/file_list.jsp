@@ -29,18 +29,10 @@
 
 <body>
 <!--文件列表-->
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".RC_select").each(function(key){
-			var rc=$(this).attr("id").substring(10);
-			$(this).val(rc);
-		});
-	});
-</script>
 <div style="float:left;">
 	<ol class="rounded-list" id="allPaperShow">
 		<c:forEach var="paper" items="${paperList}">
-			<div id="paperE_${paper.paperID}">
+			<div id="paperE_${paper.paperNickName}">
 				<li>
 					<select class="RC_select" id="RC_select_${paper.paperReadSituation}" onload="set_readSituation()" style="-webkit-appearance: none;outline: 0;-webkit-tap-highlight-color: #fff; background:#ddd;border:none;width:11px;">
 							<option value="0">*   未阅读</option>
@@ -131,20 +123,26 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		modifyReadSituation();
+		RC_init();
+		RC_change();
 		showPaperDetail();
 		deletePaper();
 		updatePaper();
 	});
-	
-	function modifyReadSituation(){
+	function RC_init(){
+		$(".RC_select").each(function(key){
+			var rc=$(this).attr("id").substring(10);
+			$(this).val(rc);
+		});
+	}
+	function RC_change(){
 		$(".RC_select").change(function(){
-			var modifyPaperID=$(this).parent().parent().attr("id").substring(7);
+			var modifyPaperName=$(this).parent().parent().attr("id").substring(7);
 			var readSituation = $(this).val();
-			$.post("<%=basePath%>modifyPaper",
+			$.post("<%=basePath%>fileList",
 			   		{
-						modifyPaperID : modifyPaperID,
-						readSituation : readSituation
+						modifyPaperName : modifyPaperName,
+						readSituation   : readSituation
 					},
 			   		function(){
 	      	}); 
@@ -152,35 +150,35 @@
 	}
 	function showPaperDetail(){
 		$(".paperDetail").click(function(){
-			var id=$(this).parent().parent().parent().attr("id").substring(7);
+			var name=$(this).parent().parent().parent().attr("id").substring(7);
 			_showPaperDetail(id);
 		});
 	}
 	function deletePaper(){
 		$(".paperDelete").click(function(){
-			var id=$(this).parent().parent().parent().attr("id").substring(7);
-			_deletePaper(id);
+			var deletePaperNickName=$(this).parent().parent().parent().attr("id").substring(7);
+			_deletePaper(deletePaperNickName);
 		});
 	}
 	function updatePaper(){
 		$(".paperUpdate").click(function(){
-			var id=$(this).parent().parent().parent().attr("id").substring(7);
+			var name=$(this).parent().parent().parent().attr("id").substring(7);
 			_updatePaper(id);
 		});
 	}
-	function _deletePaper(id){
-		$("#paperE_"+id).hide();
-		$.post("<%=basePath%>manage",
+	function _deletePaper(deletePaperNickName){
+		$("#paperE_"+deletePaperNickName).hide();
+		$.post("<%=basePath%>fileList",
 				{
-					deletePaperID :id
+					deletePaperNickName :deletePaperNickName
 				},
 				function(){alert("删除的论文将被放入回收站中。");}
 		);
 	}
-	function _showPaperDetail(id){
+	function _showPaperDetail(name){
 		//heightAdjust();
-		var w=$("#paperE_"+id+" .paperDetail_window");
-		var display=$("#paperE_"+id+" .paperDetail_window p");
+		var w=$("#paperE_"+name+" .paperDetail_window");
+		var display=$("#paperE_"+name+" .paperDetail_window p");
 		if (display.html()=="false"){
 			w.show();
 			display.html("true");
@@ -191,12 +189,12 @@
 		}
 	}
 	
-	function _updatePaper(id){
+	function _updatePaper(name){
 		if ($("#updatePaperWindow p").html()=="false"){
-			$("#updatedPaperName").val($("#paperE_"+id+" .paperDetail_window .paperName").html());
-			$("#updatedPaperOrigin").val($("#paperE_"+id+" .paperDetail_window .paperOrigin_").html());
-			$("#updatedPaperUploadDate").val($("#paperE_"+id+" .paperDetail_window .paperUploadDate_").html());
-			$("#updatedPaperRemark").val($("#paperE_"+id+" .paperDetail_window .paperRemark").html());
+			$("#updatedPaperName").val($("#paperE_"+name+" .paperDetail_window .paperName").html());
+			$("#updatedPaperOrigin").val($("#paperE_"+name+" .paperDetail_window .paperOrigin_").html());
+			$("#updatedPaperUploadDate").val($("#paperE_"+name+" .paperDetail_window .paperUploadDate_").html());
+			$("#updatedPaperRemark").val($("#paperE_"+name+" .paperDetail_window .paperRemark").html());
 			$("#updatePaperWindow").show();
 			$("#updatePaperWindow p").html("true");
 		}

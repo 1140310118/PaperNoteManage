@@ -1,5 +1,6 @@
 package com.paper.action.small;
 
+import com.paper.action.ReadSituationAction;
 import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -25,6 +26,26 @@ public class FileListAction extends ActionSupport
 
 	Connection conn = com.paper.db.DbConn.getConn();
 	private String updatePaperFlag = "false";
+	
+	// for 修改论文的阅读情况
+	private String modifyPaperName = null;
+	public String getModifyPaperName() {
+		return modifyPaperName;
+	}
+	public void setModifyPaperName(String modifyPaperName) {
+		this.modifyPaperName = modifyPaperName;
+	}
+
+	private String readSituation = null;
+	
+	
+	public String getReadSituation() {
+		return readSituation;
+	}
+	public void setReadSituation(String readSituation) {
+		this.readSituation = readSituation;
+	}
+
 	
 	public String getUpdatePaperFlag() {
 		return updatePaperFlag;
@@ -71,11 +92,17 @@ public class FileListAction extends ActionSupport
 			deletePaperByNickname(deletePaperNickName);
 		}
 		// 修改论文
-		System.out.println("updatePaperFlag："+updatePaperFlag);
+		//System.out.println("updatePaperFlag："+updatePaperFlag);
 		if (updatePaperFlag!="false"){
+			System.out.println("修改论文");
 			updatePaper(updatedPaper);
 		}
-		// 显示所有论文
+		// 修改阅读情况
+		if (readSituation!=null){
+			ReadSituationAction rsa=new ReadSituationAction();
+			System.out.println("修改论文 "+modifyPaperName+" 的阅读情况为 "+readSituation);
+			rsa.changeReadSituation(modifyPaperName,readSituation);
+		}
 		getAllPaperExistedByEmail();
 		return "success";
 	} 
