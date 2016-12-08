@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 
 import com.paper.model.file;
 
@@ -150,7 +151,22 @@ public String paperManage() throws Exception{
 	//
 	System.out.println("userEmail:"+userEmail);
 	
-	String root = "d:\\upload\\"+userEmail+"\\";
+	//String root = "d:\\upload\\"+userEmail+"\\";
+	
+	ClassLoader classLoader = Thread.currentThread()  
+            .getContextClassLoader();  
+    if (classLoader == null) {  
+        classLoader = ClassLoader.getSystemClassLoader();  
+    }  
+    java.net.URL url = classLoader.getResource("");  
+    String ROOT_CLASS_PATH = url.getPath() + "/";  
+    File rootFile = new File(ROOT_CLASS_PATH);  
+    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+    
+    String root=SERVLET_CONTEXT_PATH+"file/"+userEmail+"/";
+	System.out.println(">>>>>>>>>>>>>"+root);
 	System.out.println("fileUpFlag="+fileUpFlag);
 	if (newPaperFlag!="false"){
 		System.out.println("新建文件");
@@ -214,7 +230,8 @@ public String paperManage() throws Exception{
 			rootFile.mkdir();
 		}
 
-		String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
+		//String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
+		String root1=root+this.paper.paperNickName;
 		File rootFile1 = new File(root1);
 		if(!rootFile1.exists())
 		{

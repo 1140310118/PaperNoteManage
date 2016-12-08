@@ -137,7 +137,7 @@ public class Paper {
 				+ "');";
 		}else{
 			sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
-					+ ",paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
+					+ "paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
 					+ "values('" + this.paperNickName 
 					+ "','" +this.paperOrigin
 					+ "','" +paperWebFilePath 

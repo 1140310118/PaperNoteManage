@@ -42,8 +42,8 @@
 					</select>
 					
 					&nbsp;
-					<a class="paperID" href="${paper.paperWebFilePath}" target="_blank">${paper.paperNickName }</a>
-					
+					<a class="paperNameClick" target="_blank" style="cursor:pointer;">${paper.paperNickName}</a>
+					<div class="URL" fileURL="${paper.paperWebFilePath }" webURL="${paper.paperExteriorURL }" style="display:none;"></div>
 					<div style="float:right;">
 						
 						<a class="paperUpdate" style="cursor: pointer;">修改&nbsp;&nbsp;</a>
@@ -134,7 +134,18 @@
 		showPaperDetail();
 		deletePaper();
 		updatePaper();
+		openPaper();
 	});
+	function openPaper(){
+		$(".paperNameClick").click(function(){
+			var id=$(this).parent().parent().attr("id");
+			var fileURL = $("#"+id+" .URL").attr("fileURL");
+			var webURL  = $("#"+id+" .URL").attr("webURL");
+			//alert(fileURL+" "+webURL);
+			if(fileURL) window.open("<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+fileURL);
+			else window.open(webURL);
+		});
+	}
 	function RC_init(){
 		$(".RC_select").each(function(key){
 			var rc=$(this).attr("id").substring(10);
