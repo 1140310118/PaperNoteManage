@@ -51,6 +51,7 @@
 		</action>
 		<action name="newPaperURL" class="com.paper.action.UploadFileAction" method="paperManage">
 			<result name="success">/jsp/read_and_manage_jsp/newPaperURL.jsp</result>
+			<result name="newPaperSuccess" type="redirectAction">fileList</result>
 		</action>
 		
 

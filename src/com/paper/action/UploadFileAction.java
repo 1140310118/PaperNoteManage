@@ -161,7 +161,12 @@ public String paperManage() throws Exception{
 			//insertNewPaper(paper.paperExteriorURL);
 
 			//System.out.println(paper.paperExteriorURL.substring(0,6));
-			if( !(paper.paperExteriorURL.substring(0,7).equals("http://")) ){
+			if(paper.paperExteriorURL.length()>=7){
+				if( !(paper.paperExteriorURL.substring(0,7).equals("http://")) ){
+					paper.paperExteriorURL = "http://" + paper.paperExteriorURL;
+				}
+			}
+			else{
 				paper.paperExteriorURL = "http://" + paper.paperExteriorURL;
 			}
 			insertNewPaper(paper.paperExteriorURL);
