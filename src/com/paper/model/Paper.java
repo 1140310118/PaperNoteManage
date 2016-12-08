@@ -126,7 +126,7 @@ public class Paper {
 		String date = df.format(new Date());
 		
 		sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
-				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail) "
+				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
 				+ "values('" + this.paperNickName 
 				+ "','" +this.paperOrigin
 				+ "','" +paperWebFilePath 
@@ -134,6 +134,7 @@ public class Paper {
 				+ "','" +this.paperRemark 
 				+ "','" +date
 				+ "','" +this.paperUserEmail
+				+ "','" +0
 				+ "');";
 		
 		return sql;
@@ -150,14 +151,13 @@ public class Paper {
 			+ "','" +this.paperExteriorURL
 			+ "','" +this.paperRemark 
 			+ "','" +date
-			+ "','" +this.paperUserEmail;
-		System.out.println(s);
+			+ "','" +this.paperUserEmail
+			+ "','" +this.paperReadSituation; //论文阅读情况
+		System.out.println("From Paper>> "+s);
 	}
 	public String toString(){
 		String res="";
 		res=this.paperNickName+","+this.paperID+","+this.paperReadSituation;
 		return res;
 	}
-	
-
 }

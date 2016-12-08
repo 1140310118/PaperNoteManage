@@ -7,16 +7,12 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
 
 import com.paper.model.file;
-import com.paper.paperManage_tmp.BookOper;
 
 public class UploadFileAction extends ActionSupport implements
 		ModelDriven<file>
@@ -58,7 +54,6 @@ public class UploadFileAction extends ActionSupport implements
 	 
 	private DAO dao = new DAO();
 	// panwei
-	private BookOper bo = new BookOper(); // 查询类
 
 	
 	Connection conn = com.paper.db.DbConn.getConn();
@@ -155,18 +150,6 @@ public String paperManage() throws Exception{
 	//
 	System.out.println("userEmail:"+userEmail);
 	
-	System.out.println("updatePaperFlag："+updatePaperFlag);
-	if (updatePaperFlag!="false"){
-		updatePaper(updatedPaper);
-	}
-	
-	
-	if (deletePaperNickName!=null){
-		System.out.println("删除的文件："+deletePaperNickName);
-		deletePaperByNickname(deletePaperNickName);
-	}
-	
-	
 	String root = "d:\\upload\\"+userEmail+"\\";
 	System.out.println("fileUpFlag="+fileUpFlag);
 	if (newPaperFlag!="false"){
@@ -183,44 +166,20 @@ public String paperManage() throws Exception{
 			}
 			insertNewPaper(paper.paperExteriorURL);
 			System.out.println(paper.paperExteriorURL);
-
 		}
 		if (fileUpFlag!="false"){
 			System.out.println("新建文件 从本地");
 			String paperWebFilePath=fileUp(root);
 			System.out.println(paperWebFilePath);
 			insertNewPaper(paperWebFilePath);
+			System.out.println("UploadFileAction>> newPaperLocalSuccess");
+			return "newPaperLocalSuccess";
 		}
 	}
-	getAllPaperExistedByEmail();
 	return "success";
 } 
 
-private void updatePaper(Paper paper) {
-	try{
-		
-		String sql = "update paper set paperOrigin=?,paperWebFilePath=?,paperRemark=?,uploadDate=? where paperNickName=?";
-		PreparedStatement pStmt = conn.prepareStatement(sql);
-		pStmt.setString(1,paper.paperOrigin);
-		pStmt.setString(2,paper.paperWebFilePath);
-		pStmt.setString(3,paper.paperRemark);
-		pStmt.setString(4,paper.uploadDate);
-		pStmt.setString(5,paper.paperNickName);
-		pStmt.executeUpdate();
-	}
-	catch(SQLException e){
-		e.printStackTrace();
-	}
-}
 
-private void deletePaperByNickname(String dPaperNickName) {
-	bo.deleteByType(dPaperNickName);
-}
-
-private void getAllPaperExistedByEmail() {
-	System.out.println(userEmail);
-	ActionContext.getContext().put("paperList", bo.selectByType(userEmail));
-	}
 
 ////////////////////////////////////
 ////////////////////////////////////
