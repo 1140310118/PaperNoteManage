@@ -39,7 +39,7 @@ public class fileTreeAction extends ActionSupport
 	//-------------main_2---------------
 	// 删除节点
 	public String deleteNode(){
-		catalog.deleteNode(deletePaperID);
+		catalog.deleteNode(userEmail,deletePaperID);
 		return "success";
 	}
 
@@ -53,10 +53,9 @@ public class fileTreeAction extends ActionSupport
 	//-------------main_4---------------
 	// 改变节点
 	public String changeNode(){
-		catalog.createNode(userEmail, pID, paperNickName);
+		catalog.changeNode(userEmail, pID, paperNickName);
 		return "success";
 	}
-	
 	
 	
 	public String getzNones() {
