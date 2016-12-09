@@ -1,10 +1,8 @@
 package com.paper.action;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import com.paper.db.DAO;
-import com.paper.model.User;
 
 public class RecycleBinAction {
 	// 表名
