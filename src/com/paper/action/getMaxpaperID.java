@@ -15,7 +15,7 @@ public class getMaxpaperID {
 
 	public String getMaxpaperID(String email) throws SQLException {
 //		String sql = "SELECT MaxpaperID FROM User WHERE email = 'zorenv@163.com'";
-		String sql = "SELECT MaxpaperID FROM User WHERE email = " + email;
+		String sql = "SELECT MaxpaperID FROM User WHERE email = " + "'" + email + "'";
 		String MaxpaperID = "";
 		System.out.println(sql);
 		ResultSet rS = dao.executeQuery(sql);
@@ -28,14 +28,14 @@ public class getMaxpaperID {
 		i++;
 		MaxpaperID = i+"";
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-		String sql2 = "UPDATE User SET MaxpaperID = " + MaxpaperID + " WHERE email = " + email;
+		String sql2 = "UPDATE User SET MaxpaperID = " + MaxpaperID + " WHERE email = " + "'" + email + "'";
 		//String sql2 = "SELECT MaxpaperID FROM User WHERE email = 'zorenv@163.com'";		
 		int rS2 = dao.executeUpdate(sql2);
 		System.out.println(sql2);
 		System.out.println("新的：" + MaxpaperID);
 
-		if (rS != null)
-			return "getMaxpaperIDsuccess";
-		return "getMaxpaperIDfail";
+		if (rS2 > -1)
+			return MaxpaperID;
+		return "-1";
 	}
 }
