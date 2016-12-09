@@ -94,7 +94,7 @@
 	</li>
 	<li><div class="link"><i class="fa fa-globe"></i>文件操作记录<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a style="cursor:point;">查看我的Log</a></li>
+			<li><a style="cursor:point;" id="viewMylog">查看我的Log</a></li>
 			<li><a style="cursor:point;">导出我的Log</a></li>
 			<li><a style="cursor:point;" id="share_my_log">分享我的Log</a></li>
 		</ul>
@@ -126,11 +126,15 @@
 			$("#mainShow").attr("src","<%=basePath%>email.jsp");
 		});
 		$("#file_tree_view").click(function(){
-			$("#mainShow").attr("src","<%=basePath%>jsp/read_and_manage_jsp/fileTree.jsp");
+			$("#mainShow").attr("src","<%=basePath%>fileTreeView");
 		});
 		$("#file_tree_edit").click(function(){
-			$("#mainShow").attr("src","<%=basePath%>jsp/read_and_manage_jsp/fileTree.jsp");
+			$("#mainShow").attr("src","<%=basePath%>jsp/read_and_manage_jsp/fileTreeEditor.jsp");
 		});
+		$("#viewMylog").click(function(){
+			$("#mainShow").attr("src","<%=basePath%>logList");
+		});
+		
 	});
 	</script>
 <!---->

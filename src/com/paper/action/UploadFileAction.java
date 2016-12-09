@@ -143,6 +143,9 @@ public class UploadFileAction extends ActionSupport implements
 	} 
 	////////////////////////////////////
 	
+public String excute(){
+	return "success";
+}
 ////////////////////////////////////////	
 ///////////////////////////////////////
 public String paperManage() throws Exception{

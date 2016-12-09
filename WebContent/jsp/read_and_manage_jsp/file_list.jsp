@@ -46,9 +46,11 @@
 					<div class="URL" fileURL="${paper.paperWebFilePath }" webURL="${paper.paperExteriorURL }" style="display:none;"></div>
 					<div style="float:right;">
 						
-						<a class="paperUpdate" style="cursor: pointer;">修改&nbsp;&nbsp;</a>
-						<a class="paperDetail" style="cursor: pointer;">详情&nbsp;&nbsp;</a>
-						<a class="paperDelete" style="cursor: pointer;">删除&nbsp;&nbsp;</a>
+						<a class="paperUpdate" style="cursor: pointer;">修改</a>&nbsp;&nbsp;
+						<a class="paperDetail" style="cursor: pointer;">详情</a>&nbsp;&nbsp;
+						<a class="paperDelete" style="cursor: pointer;">删除</a>&nbsp;&nbsp;
+						<a class="viewLog" style="cursor: pointer;">查看log</a>&nbsp;&nbsp;
+						<a class="share" style="cursor: pointer;">分享</a>&nbsp;&nbsp;
 					</div>
 				</li>
 				<div style="display: none;z-index: 1000;" class="paperDetail_window">
@@ -135,7 +137,20 @@
 		deletePaper();
 		updatePaper();
 		openPaper();
+		viewLog();
 	});
+	function viewLog(){
+		$(".viewLog").click(function(){
+			var id=$(this).parent().parent().parent().attr("id");
+			var fileURL = $("#"+id+" .URL").attr("fileURL");
+			if(fileURL){
+				var index = fileURL.lastIndexOf("\/");  
+				fileURL = fileURL.substring(0,index+1)+"log.txt";
+				window.open("<%=basePath%>logViewer?filePath=<%=basePath%>file/"+fileURL);
+			}
+			else window.open(webURL);
+		});
+	}
 	function openPaper(){
 		$(".paperNameClick").click(function(){
 			var id=$(this).parent().parent().attr("id");

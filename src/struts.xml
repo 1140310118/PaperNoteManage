@@ -36,10 +36,17 @@
 			<result name="input">/uploadfile.jsp</result>
 		</action>
 
-		<action name="manage" class="com.paper.action.UploadFileAction" method="paperManage">
-			<!-- name="success" -->
+		<action name="manage" class="com.paper.action.UploadFileAction" method="excute">
 			<result name="success">/jsp/manage.jsp</result>
 			<result name="input">/jsp/manage.jsp</result>
+		</action>
+		
+		<action name="fileTreeView" class="com.paper.action.small.fileTreeAction" method="viewTree">
+			<result name="success">/jsp/read_and_manage_jsp/fileTreeViewer.jsp</result>
+		</action>
+		
+		<action name="logViewer" class="com.paper.action.small.ViewLogAction" method="showLog">
+			<result name="success">/jsp/read_and_manage_jsp/logViewer.jsp</result>
 		</action>
 		
 		<action name="fileList" class="com.paper.action.small.FileListAction" method="paperManage">

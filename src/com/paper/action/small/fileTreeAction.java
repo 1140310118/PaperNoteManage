@@ -1,5 +1,6 @@
 package com.paper.action.small;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -12,8 +13,17 @@ public class fileTreeAction extends ActionSupport
 	private static final long serialVersionUID = 1L;
 	
 	// 向后台传递的参数
-	private String zNones = null;
-	
+	private String ztreeNodes = null;
+
+
+	public String getZtreeNodes() {
+		return ztreeNodes;
+	}
+
+	public void setZtreeNodes(String ztreeNodes) {
+		this.ztreeNodes = ztreeNodes;
+	}
+
 	// 从前台接受的参数
 	private String deletePaperID = null;
 	private String pID = null;
@@ -31,8 +41,9 @@ public class fileTreeAction extends ActionSupport
 	
 	//-------------main_1---------------
 	// 显示树
-	public String viewTree(){
-		zNones=catalog.showNode(userEmail);
+	public String viewTree() throws SQLException{
+		ztreeNodes=catalog.showNode(userEmail);
+		System.out.println("FROM fileTreeAction: "+ztreeNodes);
 		return "success";
 	}
 	
@@ -45,7 +56,7 @@ public class fileTreeAction extends ActionSupport
 
 	//-------------main_3---------------
 	// 新建节点
-	public String newNode(){
+	public String newNode() throws SQLException{
 		catalog.createNode(userEmail,pID, paperNickName);
 		return "success";
 	}
@@ -58,13 +69,8 @@ public class fileTreeAction extends ActionSupport
 	}
 	
 	
-	public String getzNones() {
-		return zNones;
-	}
-
-	public void setzNones(String zNones) {
-		this.zNones = zNones;
-	}
+	
+	
 	public String getDeletePaperID() {
 		return deletePaperID;
 	}

@@ -24,7 +24,7 @@ public class FileOp {
 		}
 	}
 	//读文件
-	private static String getFileString(File file) {
+	public static String getFileString(File file) {
         try {
             String fileString = FileUtils.readFileToString(file,"utf8");
             return fileString;

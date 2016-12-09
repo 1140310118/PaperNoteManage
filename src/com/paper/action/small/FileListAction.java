@@ -83,6 +83,11 @@ public class FileListAction extends ActionSupport
 	{
 		this.paper=paper;
 	}
+    public String showLogList(){
+
+		getAllPaperExistedByEmail();
+    	return "success";
+    }
     
 	public String paperManage() throws Exception{
 		// 删除 修改 显示所有论文

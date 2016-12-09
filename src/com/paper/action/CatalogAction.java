@@ -37,12 +37,12 @@ public class CatalogAction{
 		// System.out.println(catalog.createNode("1","机器学习"));
 
 		// 4.showNode方法测试通过
-		System.out.println(catalog.showNode());
+		//System.out.println(catalog.showNode());
 
 	}
 
 	// 拖拽节点
-	public String changeNode(String id, String pid) {
+	public String changeNode(String userEmail,String id, String pid) {
 		// 更改当前节点的PID，实现拖拽功能
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
 		String sql = "UPDATE " + paperTable + " SET paperPID = " + "'" + pid + "'" + " WHERE paperID = " + "'" + id
@@ -55,7 +55,7 @@ public class CatalogAction{
 	}
 
 	// 删除节点
-	public String deleteNode(String id) {
+	public String deleteNode(String userEmail,String id) {
 		// 递归执行：
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
@@ -70,7 +70,7 @@ public class CatalogAction{
 	}
 
 	// 新增节点
-	public String createNode(String pid, String paperNickName) throws SQLException {
+	public String createNode(String userEmail,String pid, String paperNickName) throws SQLException {
 		// 1.当前节点生成一个id
 		String paperID = "";
 		// String email = "zorenv@163.com";
@@ -94,7 +94,7 @@ public class CatalogAction{
 	}
 
 	// 显示节点
-	public String showNode() throws SQLException {
+	public String showNode(String userEmail) throws SQLException {
 		// 生成zNodesList，用于前台显示分类文件目录
 		String zNodesList = "";
 		// 1.从mysql获得所有paper的paperNickName，paperID，paperPID
