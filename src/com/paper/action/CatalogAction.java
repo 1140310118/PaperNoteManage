@@ -2,7 +2,11 @@ package com.paper.action;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
+import javax.mail.Session;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.paper.db.DAO;
 import com.paper.model.Paper;
@@ -14,6 +18,8 @@ public class CatalogAction extends ActionSupport {
 	String paperTable = "paper";
 	private DAO dao = new DAO();
 	private Paper paper = new Paper();
+	ActionContext actionContext = ActionContext.getContext();
+	Map session = actionContext.getSession();
 
 	// public static void main(String[] args) {
 	// String sql = "UPDATE " + paperTable + " SET paperPID = 2 WHERE paperID =
@@ -28,6 +34,9 @@ public class CatalogAction extends ActionSupport {
 		
 		// 3.createNode方法测试通过
 		System.out.println(catalog.createNode("1","机器学习"));
+		
+		// 4.showNode方法测试
+		//System.out.println(catalog.showNode());
 		
 	}
 
@@ -62,7 +71,10 @@ public class CatalogAction extends ActionSupport {
 	public String createNode(String pid, String paperNickName) throws SQLException {
 		// 1.当前节点生成一个id
 		String paperID = "";
-		String email = "zorenv@163.com";
+//		String email = "zorenv@163.com";
+		String email = "";
+//		email = (String) session.get("USER_Email");
+		System.out.println(email);
 		getMaxpaperID maxpaperID = new getMaxpaperID();
 		paperID = maxpaperID.getMaxpaperID(email);
 		System.out.println("新生成的paperID为：" + paperID);
@@ -82,6 +94,7 @@ public class CatalogAction extends ActionSupport {
 	public String showNode(){
 		// 生成zNodesList，用于前台显示分类文件目录
 		String zNodesList = "";
+		
 		
 		return zNodesList;
 	}
