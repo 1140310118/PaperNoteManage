@@ -78,8 +78,8 @@
 	<li>
 		<div class="link"><i class="fa fa-paint-brush"></i>新建论文<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a href="#" id="newPaperFromLocal_Show">从本地上传</a></li>
-			<li><a href="#" id="newPaperByURL_Show">导入URL链接</a></li>
+			<li><a style="cursor:point;" id="newPaperFromLocal_Show">从本地上传</a></li>
+			<li><a style="cursor:point;" id="newPaperByURL_Show">导入URL链接</a></li>
 		</ul>
 	</li>
 	<li>
@@ -88,15 +88,15 @@
 	<li>
 		<div class="link"><i class="fa fa-code"></i>文件分类树<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a href="#" id="file_tree_view">查看</a></li>
-			<li><a href="#" id="file_tree_edit">编辑</a></li>
+			<li><a style="cursor:point;" id="file_tree_view">查看</a></li>
+			<li><a style="cursor:point;" id="file_tree_edit">编辑</a></li>
 		</ul>
 	</li>
 	<li><div class="link"><i class="fa fa-globe"></i>文件操作记录<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a href="#">查看我的Log</a></li>
-			<li><a href="#">导出我的Log</a></li>
-			<li><a href="#" id="share_my_log">分享我的Log</a></li>
+			<li><a style="cursor:point;">查看我的Log</a></li>
+			<li><a style="cursor:point;">导出我的Log</a></li>
+			<li><a style="cursor:point;" id="share_my_log">分享我的Log</a></li>
 		</ul>
 	</li>
 

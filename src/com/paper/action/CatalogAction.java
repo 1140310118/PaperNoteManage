@@ -1,14 +1,12 @@
 package com.paper.action;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.paper.db.DAO;
 import com.paper.model.Paper;
 import com.paper.action.getMaxpaperID;
 
-public class CatalogAction extends ActionSupport {
+public class CatalogAction{
 	// 表名
 	String userTable = "user";
 	String paperTable = "paper";
