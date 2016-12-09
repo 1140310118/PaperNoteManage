@@ -9,12 +9,7 @@ import java.io.InputStream;
 
 public class copyfile {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		copyFile("D:\\upload\\pw@163.com\\6-4 面向NFR的OO设计原则\\6-4 面向NFR的OO设计原则.pdf", "D:\\upload\\zorenv@163.com\\6-4 面向NFR的OO设计原则.pdf");
-
-		}
-	 public static void copyFile(String oldPath, String newPath) { 
+	 public void copyFile(String oldPath, String newPath) { 
 	       try { 
 	           int bytesum = 0; 
 	           int byteread = 0; 
@@ -26,7 +21,7 @@ public class copyfile {
 	               int length; 
 	               while ( (byteread = inStream.read(buffer)) != -1) { 
 	                   bytesum += byteread; //字节数 文件大小 
-	                   System.out.println(bytesum); 
+	                   //System.out.println(bytesum); 
 	                   fs.write(buffer, 0, byteread); 
 	               } 
 	               inStream.close(); 
