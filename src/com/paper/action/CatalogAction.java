@@ -1,18 +1,20 @@
 package com.paper.action;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
+<<<<<<< HEAD
 import javax.mail.Session;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+=======
+>>>>>>> branch 'master' of https://github.com/zorenv/PaperNoteManage.git
 import com.paper.db.DAO;
 import com.paper.model.Paper;
 import com.paper.action.getMaxpaperID;
 
-public class CatalogAction extends ActionSupport {
+public class CatalogAction{
 	// 表名
 	String userTable = "user";
 	String paperTable = "paper";
