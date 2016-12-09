@@ -35,9 +35,11 @@ public class ReadSituationAction {
 		
 		String sql2 = "select paperWebFilePath from paper where paperNickName = " + paperNickName;
 		ResultSet rS2 = dao.executeQuery(sql2);
+		while (rS2.next()) {
 		String path = rS2.getString(1);
 		path = path.substring(0, path.length()-4);
 		add.addreadlog (path,paperReadSituation);
+		}
 		if(rS != null)
 			return "changeReadSituationsuccess";
 		return "changeReadSituationfail";
