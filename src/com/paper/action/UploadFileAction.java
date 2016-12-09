@@ -7,8 +7,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -16,7 +14,6 @@ import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 
 import com.paper.model.file;
-import com.paper.paperManage_tmp.BookOper;
 
 public class UploadFileAction extends ActionSupport implements
 		ModelDriven<file>
@@ -58,7 +55,6 @@ public class UploadFileAction extends ActionSupport implements
 	 
 	private DAO dao = new DAO();
 	// panwei
-	private BookOper bo = new BookOper(); // 查询类
 
 	
 	Connection conn = com.paper.db.DbConn.getConn();
@@ -155,20 +151,22 @@ public String paperManage() throws Exception{
 	//
 	System.out.println("userEmail:"+userEmail);
 	
-	System.out.println("updatePaperFlag："+updatePaperFlag);
-	if (updatePaperFlag!="false"){
-		updatePaper(updatedPaper);
+	//String root = "d:\\upload\\"+userEmail+"\\";
 	
-	}
-	
-	
-	if (deletePaperNickName!=null){
-		System.out.println("删除的文件："+deletePaperNickName);
-		deletePaperByNickname(deletePaperNickName);
-	}
-	
-	
-	String root = "d:\\upload\\"+userEmail+"\\";
+	ClassLoader classLoader = Thread.currentThread()  
+            .getContextClassLoader();  
+    if (classLoader == null) {  
+        classLoader = ClassLoader.getSystemClassLoader();  
+    }  
+    java.net.URL url = classLoader.getResource("");  
+    String ROOT_CLASS_PATH = url.getPath() + "/";  
+    File rootFile = new File(ROOT_CLASS_PATH);  
+    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+    
+    String root=SERVLET_CONTEXT_PATH+"file/"+userEmail+"/";
+	System.out.println(">>>>>>>>>>>>>"+root);
 	System.out.println("fileUpFlag="+fileUpFlag);
 	if (newPaperFlag!="false"){
 		System.out.println("新建文件");
@@ -179,49 +177,31 @@ public String paperManage() throws Exception{
 			//insertNewPaper(paper.paperExteriorURL);
 
 			//System.out.println(paper.paperExteriorURL.substring(0,6));
-			if( !(paper.paperExteriorURL.substring(0,7).equals("http://")) ){
+			if(paper.paperExteriorURL.length()>=7){
+				if( !(paper.paperExteriorURL.substring(0,7).equals("http://")) ){
+					paper.paperExteriorURL = "http://" + paper.paperExteriorURL;
+				}
+			}
+			else{
 				paper.paperExteriorURL = "http://" + paper.paperExteriorURL;
 			}
 			insertNewPaper(paper.paperExteriorURL);
 			System.out.println(paper.paperExteriorURL);
-
+			return "newPaperSuccess";
 		}
 		if (fileUpFlag!="false"){
 			System.out.println("新建文件 从本地");
 			String paperWebFilePath=fileUp(root);
 			System.out.println(paperWebFilePath);
 			insertNewPaper(paperWebFilePath);
+			System.out.println("UploadFileAction>> newPaperLocalSuccess");
+			return "newPaperSuccess";
 		}
 	}
-	getAllPaperExistedByEmail();
 	return "success";
 } 
 
-private void updatePaper(Paper paper) {
-	try{
-		
-		String sql = "update paper set paperOrigin=?,paperWebFilePath=?,paperRemark=?,uploadDate=? where paperNickName=?";
-		PreparedStatement pStmt = conn.prepareStatement(sql);
-		pStmt.setString(1,paper.paperOrigin);
-		pStmt.setString(2,paper.paperWebFilePath);
-		pStmt.setString(3,paper.paperRemark);
-		pStmt.setString(4,paper.uploadDate);
-		pStmt.setString (5,paper.paperNickName);
-		pStmt.executeUpdate();
-	}
-	catch(SQLException e){
-		e.printStackTrace();
-	}
-}
 
-private void deletePaperByNickname(String dPaperNickName) {
-	bo.deleteByType(dPaperNickName);
-}
-
-private void getAllPaperExistedByEmail() {
-	System.out.println(userEmail);
-	ActionContext.getContext().put("paperList", bo.selectByType(userEmail));
-	}
 
 ////////////////////////////////////
 ////////////////////////////////////
@@ -250,7 +230,8 @@ private void getAllPaperExistedByEmail() {
 			rootFile.mkdir();
 		}
 
-		String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
+		//String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
+		String root1=root+this.paper.paperNickName;
 		File rootFile1 = new File(root1);
 		if(!rootFile1.exists())
 		{

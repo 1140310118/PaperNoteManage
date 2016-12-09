@@ -17,45 +17,40 @@ public class Paper {
 	public String paperRemark;
 	public String uploadDate;
 	public String paperUserEmail;
-	public int paperReadSituation;
-	public int paperID;
-	public int paperPID;
-	public int paperIsDeleted;
-	
-	
-	
-	
+	public String paperReadSituation;
+	public String paperID;
+	public String paperPID;
+	public String paperIsDeleted;
 
-
-	public int getPaperIsDeleted() {
+	public String getPaperIsDeleted() {
 		return paperIsDeleted;
 	}
 
-	public void setPaperIsDeleted(int paperIsDeleted) {
+	public void setPaperIsDeleted(String paperIsDeleted) {
 		this.paperIsDeleted = paperIsDeleted;
 	}
 
-	public int getPaperID() {
+	public String getPaperID() {
 		return paperID;
 	}
 
-	public void setPaperID(int paperID) {
+	public void setPaperID(String paperID) {
 		this.paperID = paperID;
 	}
 
-	public int getPaperPID() {
+	public String getPaperPID() {
 		return paperPID;
 	}
 
-	public void setPaperPID(int paperPID) {
+	public void setPaperPID(String paperPID) {
 		this.paperPID = paperPID;
 	}
 
-	public int getPaperReadSituation() {
+	public String getPaperReadSituation() {
 		return paperReadSituation;
 	}
 
-	public void setPaperReadSituation(int paperReadSituation) {
+	public void setPaperReadSituation(String paperReadSituation) {
 		this.paperReadSituation = paperReadSituation;
 	}
 
@@ -129,24 +124,35 @@ public class Paper {
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
-		
-		sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
-				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail) "
+		if(this.paperExteriorURL!=null){
+			sql = "insert into paper (paperNickName,paperOrigin,"
+				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
 				+ "values('" + this.paperNickName 
 				+ "','" +this.paperOrigin
-				+ "','" +paperWebFilePath 
 				+ "','" +this.paperExteriorURL
 				+ "','" +this.paperRemark 
 				+ "','" +date
 				+ "','" +this.paperUserEmail
+				+ "','" +0
 				+ "');";
+		}else{
+			sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
+					+ "paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
+					+ "values('" + this.paperNickName 
+					+ "','" +this.paperOrigin
+					+ "','" +paperWebFilePath 
+					+ "','" +this.paperRemark 
+					+ "','" +date
+					+ "','" +this.paperUserEmail
+					+ "','" +0
+					+ "');";
+		}
 		
 		return sql;
 		
 	}
 
 	public void show() {
-		// TODO Auto-generated method stub
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
 		String s="PAPER:"
@@ -156,9 +162,13 @@ public class Paper {
 			+ "','" +this.paperExteriorURL
 			+ "','" +this.paperRemark 
 			+ "','" +date
-			+ "','" +this.paperUserEmail;
-		System.out.println(s);
+			+ "','" +this.paperUserEmail
+			+ "','" +this.paperReadSituation; //论文阅读情况
+		System.out.println("From Paper>> "+s);
 	}
-	
-
+	public String toString(){
+		String res="";
+		res=this.paperNickName+","+this.paperID+","+this.paperReadSituation;
+		return res;
+	}
 }

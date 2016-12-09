@@ -42,14 +42,16 @@
 			<result name="input">/jsp/manage.jsp</result>
 		</action>
 		
-		<action name="fileList" class="com.paper.action.UploadFileAction" method="paperManage">
+		<action name="fileList" class="com.paper.action.small.FileListAction" method="paperManage">
 			<result name="success">/jsp/read_and_manage_jsp/file_list.jsp</result>
 		</action>
-		<action name="newPaperLocal" class="com.paper.action.UploadFileAction" method="paperManage">
+		<action name="newPaperLocal" class="com.paper.action.small.NewPaper" method="newPaper">
 			<result name="success">/jsp/read_and_manage_jsp/newPaperLocal.jsp</result>
+			<result name="newPaperSuccess" type="redirectAction">fileList</result>
 		</action>
-		<action name="newPaperURL" class="com.paper.action.UploadFileAction" method="paperManage">
+		<action name="newPaperURL" class="com.paper.action.small.NewPaper" method="newPaper">
 			<result name="success">/jsp/read_and_manage_jsp/newPaperURL.jsp</result>
+			<result name="newPaperSuccess" type="redirectAction">fileList</result>
 		</action>
 		
 
