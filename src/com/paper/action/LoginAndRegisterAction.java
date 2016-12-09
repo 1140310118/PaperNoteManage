@@ -90,8 +90,11 @@ public class LoginAndRegisterAction extends ActionSupport {
 						session.put("USER_Email", USER_Email);
 						// System.out.println(session.get(USER_Nickname));
 					}
-					System.out.println(USER_Nickname);
-					System.out.println(USER_Email);
+					if ((String) session.get("USER_Email")=="user_email"){
+						return "loginerror";
+					}
+					//System.out.println(USER_Nickname);
+					//System.out.println(USER_Email);
 					return "loginsuccess";
 					// }
 					// return "loginerror";

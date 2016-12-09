@@ -6,6 +6,7 @@ import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -196,7 +197,10 @@ public class NewPaper extends ActionSupport implements
 		//System.out.println( singleFile.getResumeContentType());
 		filename = filename.replaceAll("\\\\","/");
 		//System.out.println("反倒是"+filename);
-		return userEmail+"/"+this.paper.paperNickName+"/"+singleFile.getResumeFileName();
+		String res = userEmail+"/"+this.paper.paperNickName+"/"+singleFile.getResumeFileName();
+		//res = URLEncoder.encode(res,"utf-8");
+		System.out.print("FROM NewPaper.java>> "+res);
+		return res;
 	}
 
 	
