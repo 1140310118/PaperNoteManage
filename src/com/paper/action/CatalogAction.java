@@ -31,13 +31,13 @@ public class CatalogAction {
 	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
 		CatalogAction catalog = new CatalogAction();
-		System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
+		// System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
 
 		// 3.createNode方法测试通过
-		// System.out.println(catalog.createNode("1","机器学习"));
+		// System.out.println(catalog.createNode("zorenv@163.com","1","机器学习"));
 
 		// 4.showNode方法测试通过
-		// System.out.println(catalog.showNode());
+//		 System.out.println(catalog.showNode("zorenv@163.com"));
 
 	}
 
@@ -60,7 +60,8 @@ public class CatalogAction {
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
-		String sql = "UPDATE " + paperTable + " SET paperPID = " + this.paper.getPaperPID() + " WHERE paperID = "
+		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+		String sql = "UPDATE paper SET paperPID = " + this.paper.getPaperPID() + " WHERE paperID = "
 				+ this.paper.getPaperID();
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
@@ -74,17 +75,17 @@ public class CatalogAction {
 		// 1.当前节点生成一个id
 		String paperID = "";
 		// String email = "zorenv@163.com";
-		String email = "";
+		// String email = "";
 		// email = (String) session.get("USER_Email");
-		System.out.println(email);
+		// System.out.println(email);
 		getMaxpaperID maxpaperID = new getMaxpaperID();
-		paperID = maxpaperID.getMaxpaperID(email);
+		paperID = maxpaperID.getMaxpaperID(userEmail);
 		System.out.println("新生成的paperID为：" + paperID);
 
 		// 2.当前节点插入paper中
 		// insert into t_user(id, username) values(10, "hehehe");
-		String sql = "INSERT INTO paper(paperNickName, paperID, paperPID) VALUES(" + "'" + paperNickName + "'" + ", "
-				+ "'" + paperID + "'" + ", " + "'" + pid + "'" + ")";
+		String sql = "INSERT INTO paper(paperNickName, paperUserEmail, paperID, paperPID) VALUES(" + "'" + paperNickName
+				+ "', " + "'" + userEmail + "', '" + paperID + "', " + "'" + pid + "')";
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 		if (rS > -1)
@@ -98,17 +99,24 @@ public class CatalogAction {
 		// 生成zNodesList，用于前台显示分类文件目录
 		String zNodesList = "";
 		// 1.从mysql获得所有paper的paperNickName，paperID，paperPID
-		String sql = "SELECT paperID, paperPID, paperNickName FROM paper";
+		String sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "'";
+		System.out.println(sql);
 		ResultSet rS = dao.executeQuery(sql);
-		// System.out.println(rS);
-		// rS.last();
-		// int listLength = rS.getRow(); // 表格行数
-		// System.out.println(listLength);
 
 		// 2.用所有paper信息生成zNodesList
 		while (rS.next()) {
-			zNodesList += "{ id:" + rS.getString("paperID") + ", pId:" + rS.getString("paperPID") + ", name:" + "\""
-					+ rS.getString("paperNickName") + "\"" + "},";
+			String paperID = rS.getString("paperID");
+			String paperPID = rS.getString("paperPID");
+			String paperNickName = rS.getString("paperNickName");
+			String paperWebFilePath =rS.getString("paperWebFilePath");
+			String paperExteriorURL =rS.getString("paperExteriorURL");
+//			System.out.println("paperWebFilePath:" + paperWebFilePath);
+//			System.out.println("paperExteriorURL:" + paperExteriorURL);
+
+			if(paperWebFilePath == null && paperExteriorURL == null)
+				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName + "\"" + "},";
+			else
+				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName + "\",drop:false},";
 		}
 
 		return zNodesList;
