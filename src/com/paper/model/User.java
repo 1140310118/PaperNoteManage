@@ -58,11 +58,11 @@ public class User {
 	
 	public String ToInsertSql() {
 		String sql = "insert into user " 
-				+ "(email,password,nickname,userID) values('" 
+				+ "(email,password,nickname,MaxpaperID) values('" 
 				+ this.email + 	"','" 
 				+ this.password+"','" 
 				+ this.nickname+"','"
-				+ 1
+				+ "1"
 				+ "')";
 		return sql;
 	}
