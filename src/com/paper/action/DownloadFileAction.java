@@ -49,7 +49,7 @@ public class DownloadFileAction extends ActionSupport
 
 	public String execute()
 	{
-		System.out.println("---");
+		//System.out.println("---");
 		return "success";
 	}
 }
