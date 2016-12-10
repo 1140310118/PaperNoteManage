@@ -48,19 +48,10 @@ public class FileToZip {
 		  FileToZip t=new FileToZip();
 		  t.zip(zip,path);
 	 //  t.zip("c:\\test.zip","c:\\test");
-	//   t.unzip("c:\\test.zip","c:\\test2");
+
 	  }catch(Exception e){
 	   e.printStackTrace(System.out);
 	  }
 	 }
-//	 public static void main(String[] args)
-//	 {
-//	  try{
-//		  FileToZip t=new FileToZip();
-//	 //  t.zip("c:\\test.zip","c:\\test");
-//	//   t.unzip("c:\\test.zip","c:\\test2");
-//	  }catch(Exception e){
-//	   e.printStackTrace(System.out);
-//	  }
-//	 }
+
 }
