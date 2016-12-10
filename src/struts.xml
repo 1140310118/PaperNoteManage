@@ -60,6 +60,9 @@
 			<result name="success">/jsp/read_and_manage_jsp/newPaperURL.jsp</result>
 			<result name="newPaperSuccess" type="redirectAction">fileList</result>
 		</action>
+		<action name="recycleBin" class="com.paper.action.small.SRecycleBinAction" method="viewRB">
+			<result name="success">/jsp/read_and_manage_jsp/newPaperURL.jsp</result>
+		</action>
 		
 
 		<action name="read" class="testForJsp.action.NoteManage" method="execute">
