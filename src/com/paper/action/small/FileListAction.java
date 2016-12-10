@@ -4,6 +4,8 @@ import com.paper.action.ReadSituationAction;
 import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -83,11 +85,6 @@ public class FileListAction extends ActionSupport
 	{
 		this.paper=paper;
 	}
-    public String showLogList(){
-
-		getAllPaperExistedByEmail();
-    	return "success";
-    }
     
 	public String paperManage() throws Exception{
 		// 删除 修改 显示所有论文
@@ -137,5 +134,22 @@ public class FileListAction extends ActionSupport
 	private void getAllPaperExistedByEmail() {
 		System.out.println(userEmail);
 		ActionContext.getContext().put("paperList", bo.selectByType(userEmail));
-		}
+	}
+	
+	private String getWebrootPath(){
+		ClassLoader classLoader = Thread.currentThread()  
+	            .getContextClassLoader();  
+	    if (classLoader == null) {  
+	        classLoader = ClassLoader.getSystemClassLoader();  
+	    }  
+	    java.net.URL url = classLoader.getResource("");  
+	    String ROOT_CLASS_PATH = url.getPath() + "/";  
+	    File rootFile = new File(ROOT_CLASS_PATH);  
+	    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+	    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+	    
+	    String root=SERVLET_CONTEXT_PATH+"file/"+userEmail+"/";
+		return root;
+	}
 }

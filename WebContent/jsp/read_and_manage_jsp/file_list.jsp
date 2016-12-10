@@ -145,7 +145,9 @@
 			var fileURL = $("#"+id+" .URL").attr("fileURL");
 			if(fileURL){
 				var index = fileURL.lastIndexOf("\/");  
-				fileURL = fileURL.substring(0,index+1)+"log.txt";
+				fileURL = fileURL.substring(0,index+1);
+				index = fileURL.lastIndexOf("\/");
+				fileURL = fileURL.substring(index+1,fileURL.length);
 				window.open("<%=basePath%>logViewer?filePath=<%=basePath%>file/"+fileURL);
 			}
 			else window.open(webURL);
