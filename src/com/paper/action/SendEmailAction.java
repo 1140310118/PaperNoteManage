@@ -48,11 +48,6 @@ public class SendEmailAction extends ActionSupport {
 		return attachmentPart;
 	}
 
-	// public void setSender(String from,String password){
-	// this.from = from;
-	// this.password = password;
-	// }
-
 	public String execute() {
 		// SendEmailAction se = new SendEmailAction();
 		String ret = SUCCESS;
@@ -81,22 +76,6 @@ public class SendEmailAction extends ActionSupport {
 			 allPart.addBodyPart(attachment);
 			 // 将上面混合型的 MimeMultipart 对象作为邮件内容并保存
 			 message.setContent(allPart);
-
-//            //添加附件
-//            BodyPart messageBodyPart= new MimeBodyPart();
-//            DataSource source = new FileDataSource(affix);
-//            // 向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
-//            Multipart multipart = new MimeMultipart(); 
-//            //添加附件的内容
-//            messageBodyPart.setDataHandler(new DataHandler(source));
-//            //添加附件的标题
-//            //这里很重要，通过下面的Base64编码的转换可以保证你的中文附件标题名在发送时不会变成乱码
-//            sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
-//            messageBodyPart.setFileName("=?GBK?B?"+enc.encode(affixName.getBytes())+"?=");
-//            multipart.addBodyPart(messageBodyPart);        
-//          
-//            //将multipart对象放到message中
-//            message.setContent(multipart);
             
 			System.out.println("邮件标题：" + subject);
 			System.out.println("邮件正文：" + body);

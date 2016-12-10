@@ -3,41 +3,23 @@ package com.paper.action;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 
-import javax.mail.Session;
-
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-
 import com.paper.db.DAO;
-import com.paper.model.Paper;
 import com.paper.action.getMaxpaperID;
 
 public class CatalogAction {
-	// 表名
-	String userTable = "user";
-	String paperTable = "paper";
 	private DAO dao = new DAO();
-	private Paper paper = new Paper();
 	ActionContext actionContext = ActionContext.getContext();
-	// Map session = actionContext.getSession();
-
-	// public static void main(String[] args) {
-	// String sql = "UPDATE " + paperTable + " SET paperPID = 2 WHERE paperID =
-	// 0";
-	// System.out.println(sql);
-	// ResultSet rS = dao.executeQuery(sql);
-	// }
-	public static void main(String[] args) throws SQLException {
+//	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
-		CatalogAction catalog = new CatalogAction();
+//		CatalogAction catalog = new CatalogAction();
 		// System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
 
 		// 2.deleteNode方法测试
 		// catalog.deletePaper("zorenv@163.com", "21");
-		System.out.println(catalog.deleteNode("zorenv@163.com", "10"));
+//		System.out.println(catalog.deleteNode("zorenv@163.com", "10"));
 
 		// 3.createNode方法测试通过
 		// System.out.println(catalog.createNode("zorenv@163.com","1","机器学习"));
@@ -45,7 +27,7 @@ public class CatalogAction {
 		// 4.showNode方法测试通过
 		// System.out.println(catalog.showNode("zorenv@163.com"));
 
-	}
+//	}
 
 	// 拖拽节点
 	public String changeNode(String userEmail, String id, String pid) {
@@ -66,10 +48,6 @@ public class CatalogAction {
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
-		// String sql = "SELECT * FROM paper WHERE paperUserEmail = '" +
-		// userEmail + "'";
-		// System.out.println(sql);
-		// ResultSet rS = dao.executeQuery(sql);
 		int i = 0; // number of paper
 		String[][] paper;
 		CatalogAction catalog = new CatalogAction();
@@ -78,20 +56,6 @@ public class CatalogAction {
 		// int k = 0;
 		while (paper[i][0] != null)
 			i++;
-		// i = k;
-		// while(rS.next()){
-		// String paperID = rS.getString("paperID");
-		// String paperPID = rS.getString("paperPID");
-		// String paperWebFilePath =rS.getString("paperWebFilePath");
-		// String paperExteriorURL =rS.getString("paperExteriorURL");
-		// paper[i][0] = paperID;
-		// paper[i][1] = paperPID;
-		// paper[i][2] = paperWebFilePath;
-		// paper[i][3] = paperExteriorURL;
-		// System.out.println("paperID:" + paper[i][0] + " paperPID:" +
-		// paperPID);
-		// i++;
-		// }
 		Queue<String> pidqueue = new LinkedList<String>();
 		// 删除第一个节点
 		System.out.println("paper的数量：" + i);
@@ -152,10 +116,6 @@ public class CatalogAction {
 	public String createNode(String userEmail, String pid, String paperNickName) throws SQLException {
 		// 1.当前节点生成一个id
 		String paperID = "";
-		// String email = "zorenv@163.com";
-		// String email = "";
-		// email = (String) session.get("USER_Email");
-		// System.out.println(email);
 		getMaxpaperID maxpaperID = new getMaxpaperID();
 		paperID = maxpaperID.getMaxpaperID(userEmail);
 		System.out.println("新生成的paperID为：" + paperID);

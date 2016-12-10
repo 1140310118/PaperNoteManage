@@ -11,14 +11,14 @@ public class RecycleBinAction {
 	String paperTable = "paper";
 	private static DAO dao = new DAO();
 	
-	public static void main(String[] args) throws SQLException {
+//	public static void main(String[] args) throws SQLException {
 //		String sql = "SELECT * FROM paper WHERE paperIsDeleted = 1";
 //		System.out.println(sql);
 //		ResultSet rS = dao.executeQuery(sql);
 //		System.out.println(rS.next());
 		
 		// 2.恢复paper测试通过
-		RecycleBinAction bin = new RecycleBinAction();
+//		RecycleBinAction bin = new RecycleBinAction();
 //		System.out.println(bin.recoverPaper("test"));
 		
 		// 3.彻底删除paper测试通过
@@ -26,7 +26,7 @@ public class RecycleBinAction {
 		
 		// 1.显示删除论文
 //		System.out.println(bin.showRecycleBin());
-	}
+//	}
 	
 	// 在回收站中显示论文
 	public String showRecycleBin() throws SQLException{
@@ -34,7 +34,6 @@ public class RecycleBinAction {
 		String paper;
 		System.out.println(sql);
 		ResultSet rS = dao.executeQuery(sql);
-//		System.out.println(rS);
 		while(rS.next()){
 			paper = rS.getString("paperNickName");
 			System.out.println(paper);
