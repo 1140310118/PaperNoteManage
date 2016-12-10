@@ -13,7 +13,7 @@ import com.paper.db.DAO;
 import com.paper.model.Paper;
 import com.paper.action.getMaxpaperID;
 
-public class CatalogAction{
+public class CatalogAction {
 	// 表名
 	String userTable = "user";
 	String paperTable = "paper";
@@ -31,22 +31,22 @@ public class CatalogAction{
 	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
 		CatalogAction catalog = new CatalogAction();
-		// System.out.println(catalog.changeNode("1","21"));
+		System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
 
 		// 3.createNode方法测试通过
 		// System.out.println(catalog.createNode("1","机器学习"));
 
 		// 4.showNode方法测试通过
-		//System.out.println(catalog.showNode());
+		// System.out.println(catalog.showNode());
 
 	}
 
 	// 拖拽节点
-	public String changeNode(String userEmail,String id, String pid) {
+	public String changeNode(String userEmail, String id, String pid) {
 		// 更改当前节点的PID，实现拖拽功能
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-		String sql = "UPDATE " + paperTable + " SET paperPID = " + "'" + pid + "'" + " WHERE paperID = " + "'" + id
-				+ "'";
+		String sql = "UPDATE paper SET paperPID = " + "'" + pid + "'" + " WHERE paperID = " + "'" + id + "'"
+				+ " AND paperUserEmail = " + "'" + userEmail + "'";
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 		if (rS > -1)
@@ -55,7 +55,7 @@ public class CatalogAction{
 	}
 
 	// 删除节点
-	public String deleteNode(String userEmail,String id) {
+	public String deleteNode(String userEmail, String id) {
 		// 递归执行：
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
@@ -70,7 +70,7 @@ public class CatalogAction{
 	}
 
 	// 新增节点
-	public String createNode(String userEmail,String pid, String paperNickName) throws SQLException {
+	public String createNode(String userEmail, String pid, String paperNickName) throws SQLException {
 		// 1.当前节点生成一个id
 		String paperID = "";
 		// String email = "zorenv@163.com";
@@ -104,11 +104,11 @@ public class CatalogAction{
 		// rS.last();
 		// int listLength = rS.getRow(); // 表格行数
 		// System.out.println(listLength);
-		
+
 		// 2.用所有paper信息生成zNodesList
 		while (rS.next()) {
-			zNodesList += "{ id:" + rS.getString("paperID") + ", pId:" + rS.getString("paperPID") + ", name:"
-					+ "\"" + rS.getString("paperNickName") + "\"" + "},";
+			zNodesList += "{ id:" + rS.getString("paperID") + ", pId:" + rS.getString("paperPID") + ", name:" + "\""
+					+ rS.getString("paperNickName") + "\"" + "},";
 		}
 
 		return zNodesList;
