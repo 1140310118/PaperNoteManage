@@ -32,7 +32,6 @@ public class addlog {
 			writer.write(date +"	"+ text + "	" +"||"); 
 			 writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -46,7 +45,6 @@ public class addlog {
 			writer.write(date +"	"+ "创建笔记" + "	" +"||"); 
 			 writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -74,7 +72,6 @@ public class addlog {
 			writer.write(date +"	"+ "修改笔记" + "	" +"||"); 
 			 writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
