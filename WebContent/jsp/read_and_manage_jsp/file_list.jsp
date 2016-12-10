@@ -131,6 +131,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
+		viewLog_btn_init();
 		RC_init();
 		RC_change();
 		showPaperDetail();
@@ -145,10 +146,13 @@
 			var fileURL = $("#"+id+" .URL").attr("fileURL");
 			if(fileURL){
 				var index = fileURL.lastIndexOf("\/");  
-				fileURL = fileURL.substring(0,index+1);
+				fileURL = fileURL.substring(0,index);
 				index = fileURL.lastIndexOf("\/");
 				fileURL = fileURL.substring(index+1,fileURL.length);
-				window.open("<%=basePath%>logViewer?filePath=<%=basePath%>file/"+fileURL);
+				
+				src="<%=basePath%>logViewer?filePath=/"+fileURL;
+				var html= $(window.parent.document).find("#mainShow").attr("src",src);
+				
 			}
 			else window.open(webURL);
 		});
@@ -161,6 +165,17 @@
 			//alert(fileURL+" "+webURL);
 			if(fileURL) window.open("<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+fileURL);
 			else window.open(webURL);
+		});
+	}
+	function viewLog_btn_init(){
+		$(".viewLog").each(function(){
+			var id=$(this).parent().parent().parent().attr("id");
+			var fileURL  = $("#"+id+" .URL").attr("fileURL");
+			if(!fileURL){
+				$(this).css("cursor","default");
+				$(this).css('text-decoration',  'none');
+				$(this).html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp");
+			}
 		});
 	}
 	function RC_init(){

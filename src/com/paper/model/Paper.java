@@ -131,7 +131,7 @@ public class Paper {
 		paperID = maxpaperID.getMaxpaperID(this.paperUserEmail);
 		if(this.paperExteriorURL!=null){
 			sql = "insert into paper (paperNickName,paperOrigin,"
-				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
+				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail,paperReadSituation,paperID,paperIsDeleted) "
 				+ "values('" + this.paperNickName 
 				+ "','" +this.paperOrigin
 				+ "','" +this.paperExteriorURL
@@ -140,16 +140,19 @@ public class Paper {
 				+ "','" +this.paperUserEmail
 				+ "','" +0
 				+ "','" +paperID
+				+ "','" +0
 				+ "');";
 		}else{
 			sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
-					+ "paperRemark,uploadDate,paperUserEmail,paperReadSituation,paperID) "
+					+ "paperRemark,uploadDate,paperUserEmail,paperReadSituation,paperID,paperIsDeleted) "
 					+ "values('" + this.paperNickName 
 					+ "','" +this.paperOrigin
 					+ "','" +paperWebFilePath 
 					+ "','" +this.paperRemark 
 					+ "','" +date
 					+ "','" +this.paperUserEmail
+					+ "','" +0
+					+ "','" +paperID
 					+ "','" +0
 					+ "');";
 		}
