@@ -112,6 +112,7 @@ public class CatalogAction {
 		return "deleteNodesuccess";
 	}
 
+	
 	// 新增节点
 	public String createNode(String userEmail, String pid, String paperNickName) throws SQLException {
 		// 1.当前节点生成一个id
@@ -207,4 +208,425 @@ public class CatalogAction {
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 	}
+	
+	// 删除节点
+	public String deleteNode2(String userEmail, String id) throws SQLException {
+		// 递归执行：
+		// 1.删除当前节点
+		// 2.删除以当前节点为父节点的节点
+		// 直到当前节点没有儿子节点
+		int i = 0; // number of paper
+		String[][] paper;
+		CatalogAction catalog = new CatalogAction();
+		paper = catalog.getPaper(userEmail);
+		// i = paper.length;
+		// int k = 0;
+		while (paper[i][0] != null)
+			i++;
+		Queue<String> pidqueue = new LinkedList<String>();
+		// 删除第一个节点
+		System.out.println("paper的数量：" + i);
+		for (int j = 0; j < i; j++) {
+			// 如果是要删除的节点
+			if (paper[j][0].equals(id)) {
+				System.out.println("要删除的节点id是：" + paper[j][0]);
+				// 如果该节点是叶节点，不删除，改为未分类
+				if (paper[j][2] != null || paper[j][3] != null) {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					// catalog.changePaper(userEmail, paper[j][0]);
+				}
+				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				else {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					pidqueue.offer(paper[j][0]);
+					System.out.println("删除第一个节点后pidqueue为：" + pidqueue);
+				}
+				paper = catalog.getPaper(userEmail);
+				i = 0;
+				while (paper[i][0] != null)
+					i++;
+				System.out.println("删除第一个节点后，剩余节点数量为：" + i);
+			}
+		}
+		// 删除以pidqueue中id为pid的节点
+		String pid = pidqueue.poll();
+		System.out.println("第一个pid为：" + pid);
+		while (pid != null) {
+			System.out.println("开始进行pidqueue中的删除，此时pid为：" + pid);
+			for (int j = 0; j < i; j++) {
+				// 如果该节点的pid为pid，删除该节点，并把该节点添加到pidqueue中
+				System.out.println("paperPID:" + paper[j][1]);
+				if (paper[j][1].equals(pid)) {
+					// 如果是叶节点，成为未分类
+					if (paper[j][2] != null || paper[j][3] != null) {
+						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
+						catalog.changePaper(userEmail, paper[j][0]);
+					} else {// 否则，删除
+						catalog.deletePaper2(userEmail, paper[j][1]);
+						pidqueue.offer(paper[j][0]);
+						System.out.println("新加入的pid为：" + pid);
+						paper = catalog.getPaper(userEmail);
+						i = 0;
+						while (paper[i][0] != null)
+							i++;
+						System.out.println("剩余节点数量为：" + i);
+					}
+				}
+			}
+			// 更新pid
+			pid = pidqueue.poll();
+		}
+		return "deleteNodesuccess";
+	}
+
+	// 删除节点
+	public String deleteNode3(String userEmail, String id) throws SQLException {
+		// 递归执行：
+		// 1.删除当前节点
+		// 2.删除以当前节点为父节点的节点
+		// 直到当前节点没有儿子节点
+		int i = 0; // number of paper
+		String[][] paper;
+		CatalogAction catalog = new CatalogAction();
+		paper = catalog.getPaper(userEmail);
+		// i = paper.length;
+		// int k = 0;
+		while (paper[i][0] != null)
+			i++;
+		Queue<String> pidqueue = new LinkedList<String>();
+		// 删除第一个节点
+		System.out.println("paper的数量：" + i);
+		for (int j = 0; j < i; j++) {
+			// 如果是要删除的节点
+			if (paper[j][0].equals(id)) {
+				System.out.println("要删除的节点id是：" + paper[j][0]);
+				// 如果该节点是叶节点，不删除，改为未分类
+				if (paper[j][2] != null || paper[j][3] != null) {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					// catalog.changePaper(userEmail, paper[j][0]);
+				}
+				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				else {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					pidqueue.offer(paper[j][0]);
+					System.out.println("删除第一个节点后pidqueue为：" + pidqueue);
+				}
+				paper = catalog.getPaper(userEmail);
+				i = 0;
+				while (paper[i][0] != null)
+					i++;
+				System.out.println("删除第一个节点后，剩余节点数量为：" + i);
+			}
+		}
+		// 删除以pidqueue中id为pid的节点
+		String pid = pidqueue.poll();
+		System.out.println("第一个pid为：" + pid);
+		while (pid != null) {
+			System.out.println("开始进行pidqueue中的删除，此时pid为：" + pid);
+			for (int j = 0; j < i; j++) {
+				// 如果该节点的pid为pid，删除该节点，并把该节点添加到pidqueue中
+				System.out.println("paperPID:" + paper[j][1]);
+				if (paper[j][1].equals(pid)) {
+					// 如果是叶节点，成为未分类
+					if (paper[j][2] != null || paper[j][3] != null) {
+						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
+						catalog.changePaper(userEmail, paper[j][0]);
+					} else {// 否则，删除
+						catalog.deletePaper2(userEmail, paper[j][1]);
+						pidqueue.offer(paper[j][0]);
+						System.out.println("新加入的pid为：" + pid);
+						paper = catalog.getPaper(userEmail);
+						i = 0;
+						while (paper[i][0] != null)
+							i++;
+						System.out.println("剩余节点数量为：" + i);
+					}
+				}
+			}
+			// 更新pid
+			pid = pidqueue.poll();
+		}
+		return "deleteNodesuccess";
+	}
+
+	// 删除节点
+	public String deleteNode4(String userEmail, String id) throws SQLException {
+		// 递归执行：
+		// 1.删除当前节点
+		// 2.删除以当前节点为父节点的节点
+		// 直到当前节点没有儿子节点
+		int i = 0; // number of paper
+		String[][] paper;
+		CatalogAction catalog = new CatalogAction();
+		paper = catalog.getPaper(userEmail);
+		// i = paper.length;
+		// int k = 0;
+		while (paper[i][0] != null)
+			i++;
+		Queue<String> pidqueue = new LinkedList<String>();
+		// 删除第一个节点
+		System.out.println("paper的数量：" + i);
+		for (int j = 0; j < i; j++) {
+			// 如果是要删除的节点
+			if (paper[j][0].equals(id)) {
+				System.out.println("要删除的节点id是：" + paper[j][0]);
+				// 如果该节点是叶节点，不删除，改为未分类
+				if (paper[j][2] != null || paper[j][3] != null) {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					// catalog.changePaper(userEmail, paper[j][0]);
+				}
+				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				else {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					pidqueue.offer(paper[j][0]);
+					System.out.println("删除第一个节点后pidqueue为：" + pidqueue);
+				}
+				paper = catalog.getPaper(userEmail);
+				i = 0;
+				while (paper[i][0] != null)
+					i++;
+				System.out.println("删除第一个节点后，剩余节点数量为：" + i);
+			}
+		}
+		// 删除以pidqueue中id为pid的节点
+		String pid = pidqueue.poll();
+		System.out.println("第一个pid为：" + pid);
+		while (pid != null) {
+			System.out.println("开始进行pidqueue中的删除，此时pid为：" + pid);
+			for (int j = 0; j < i; j++) {
+				// 如果该节点的pid为pid，删除该节点，并把该节点添加到pidqueue中
+				System.out.println("paperPID:" + paper[j][1]);
+				if (paper[j][1].equals(pid)) {
+					// 如果是叶节点，成为未分类
+					if (paper[j][2] != null || paper[j][3] != null) {
+						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
+						catalog.changePaper(userEmail, paper[j][0]);
+					} else {// 否则，删除
+						catalog.deletePaper2(userEmail, paper[j][1]);
+						pidqueue.offer(paper[j][0]);
+						System.out.println("新加入的pid为：" + pid);
+						paper = catalog.getPaper(userEmail);
+						i = 0;
+						while (paper[i][0] != null)
+							i++;
+						System.out.println("剩余节点数量为：" + i);
+					}
+				}
+			}
+			// 更新pid
+			pid = pidqueue.poll();
+		}
+		return "deleteNodesuccess";
+	}
+
+	// 删除节点
+	public String deleteNode5(String userEmail, String id) throws SQLException {
+		// 递归执行：
+		// 1.删除当前节点
+		// 2.删除以当前节点为父节点的节点
+		// 直到当前节点没有儿子节点
+		int i = 0; // number of paper
+		String[][] paper;
+		CatalogAction catalog = new CatalogAction();
+		paper = catalog.getPaper(userEmail);
+		// i = paper.length;
+		// int k = 0;
+		while (paper[i][0] != null)
+			i++;
+		Queue<String> pidqueue = new LinkedList<String>();
+		// 删除第一个节点
+		System.out.println("paper的数量：" + i);
+		for (int j = 0; j < i; j++) {
+			// 如果是要删除的节点
+			if (paper[j][0].equals(id)) {
+				System.out.println("要删除的节点id是：" + paper[j][0]);
+				// 如果该节点是叶节点，不删除，改为未分类
+				if (paper[j][2] != null || paper[j][3] != null) {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					// catalog.changePaper(userEmail, paper[j][0]);
+				}
+				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				else {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					pidqueue.offer(paper[j][0]);
+					System.out.println("删除第一个节点后pidqueue为：" + pidqueue);
+				}
+				paper = catalog.getPaper(userEmail);
+				i = 0;
+				while (paper[i][0] != null)
+					i++;
+				System.out.println("删除第一个节点后，剩余节点数量为：" + i);
+			}
+		}
+		// 删除以pidqueue中id为pid的节点
+		String pid = pidqueue.poll();
+		System.out.println("第一个pid为：" + pid);
+		while (pid != null) {
+			System.out.println("开始进行pidqueue中的删除，此时pid为：" + pid);
+			for (int j = 0; j < i; j++) {
+				// 如果该节点的pid为pid，删除该节点，并把该节点添加到pidqueue中
+				System.out.println("paperPID:" + paper[j][1]);
+				if (paper[j][1].equals(pid)) {
+					// 如果是叶节点，成为未分类
+					if (paper[j][2] != null || paper[j][3] != null) {
+						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
+						catalog.changePaper(userEmail, paper[j][0]);
+					} else {// 否则，删除
+						catalog.deletePaper2(userEmail, paper[j][1]);
+						pidqueue.offer(paper[j][0]);
+						System.out.println("新加入的pid为：" + pid);
+						paper = catalog.getPaper(userEmail);
+						i = 0;
+						while (paper[i][0] != null)
+							i++;
+						System.out.println("剩余节点数量为：" + i);
+					}
+				}
+			}
+			// 更新pid
+			pid = pidqueue.poll();
+		}
+		return "deleteNodesuccess";
+	}
+
+	// 删除节点
+	public String deleteNode6(String userEmail, String id) throws SQLException {
+		// 递归执行：
+		// 1.删除当前节点
+		// 2.删除以当前节点为父节点的节点
+		// 直到当前节点没有儿子节点
+		int i = 0; // number of paper
+		String[][] paper;
+		CatalogAction catalog = new CatalogAction();
+		paper = catalog.getPaper(userEmail);
+		// i = paper.length;
+		// int k = 0;
+		while (paper[i][0] != null)
+			i++;
+		Queue<String> pidqueue = new LinkedList<String>();
+		// 删除第一个节点
+		System.out.println("paper的数量：" + i);
+		for (int j = 0; j < i; j++) {
+			// 如果是要删除的节点
+			if (paper[j][0].equals(id)) {
+				System.out.println("要删除的节点id是：" + paper[j][0]);
+				// 如果该节点是叶节点，不删除，改为未分类
+				if (paper[j][2] != null || paper[j][3] != null) {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					// catalog.changePaper(userEmail, paper[j][0]);
+				}
+				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				else {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					pidqueue.offer(paper[j][0]);
+					System.out.println("删除第一个节点后pidqueue为：" + pidqueue);
+				}
+				paper = catalog.getPaper(userEmail);
+				i = 0;
+				while (paper[i][0] != null)
+					i++;
+				System.out.println("删除第一个节点后，剩余节点数量为：" + i);
+			}
+		}
+		// 删除以pidqueue中id为pid的节点
+		String pid = pidqueue.poll();
+		System.out.println("第一个pid为：" + pid);
+		while (pid != null) {
+			System.out.println("开始进行pidqueue中的删除，此时pid为：" + pid);
+			for (int j = 0; j < i; j++) {
+				// 如果该节点的pid为pid，删除该节点，并把该节点添加到pidqueue中
+				System.out.println("paperPID:" + paper[j][1]);
+				if (paper[j][1].equals(pid)) {
+					// 如果是叶节点，成为未分类
+					if (paper[j][2] != null || paper[j][3] != null) {
+						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
+						catalog.changePaper(userEmail, paper[j][0]);
+					} else {// 否则，删除
+						catalog.deletePaper2(userEmail, paper[j][1]);
+						pidqueue.offer(paper[j][0]);
+						System.out.println("新加入的pid为：" + pid);
+						paper = catalog.getPaper(userEmail);
+						i = 0;
+						while (paper[i][0] != null)
+							i++;
+						System.out.println("剩余节点数量为：" + i);
+					}
+				}
+			}
+			// 更新pid
+			pid = pidqueue.poll();
+		}
+		return "deleteNodesuccess";
+	}
+
+	// 删除节点
+	public String deleteNode7(String userEmail, String id) throws SQLException {
+		// 递归执行：
+		// 1.删除当前节点
+		// 2.删除以当前节点为父节点的节点
+		// 直到当前节点没有儿子节点
+		int i = 0; // number of paper
+		String[][] paper;
+		CatalogAction catalog = new CatalogAction();
+		paper = catalog.getPaper(userEmail);
+		// i = paper.length;
+		// int k = 0;
+		while (paper[i][0] != null)
+			i++;
+		Queue<String> pidqueue = new LinkedList<String>();
+		// 删除第一个节点
+		System.out.println("paper的数量：" + i);
+		for (int j = 0; j < i; j++) {
+			// 如果是要删除的节点
+			if (paper[j][0].equals(id)) {
+				System.out.println("要删除的节点id是：" + paper[j][0]);
+				// 如果该节点是叶节点，不删除，改为未分类
+				if (paper[j][2] != null || paper[j][3] != null) {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					// catalog.changePaper(userEmail, paper[j][0]);
+				}
+				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				else {
+					catalog.deletePaper(userEmail, paper[j][0]);
+					pidqueue.offer(paper[j][0]);
+					System.out.println("删除第一个节点后pidqueue为：" + pidqueue);
+				}
+				paper = catalog.getPaper(userEmail);
+				i = 0;
+				while (paper[i][0] != null)
+					i++;
+				System.out.println("删除第一个节点后，剩余节点数量为：" + i);
+			}
+		}
+		// 删除以pidqueue中id为pid的节点
+		String pid = pidqueue.poll();
+		System.out.println("第一个pid为：" + pid);
+		while (pid != null) {
+			System.out.println("开始进行pidqueue中的删除，此时pid为：" + pid);
+			for (int j = 0; j < i; j++) {
+				// 如果该节点的pid为pid，删除该节点，并把该节点添加到pidqueue中
+				System.out.println("paperPID:" + paper[j][1]);
+				if (paper[j][1].equals(pid)) {
+					// 如果是叶节点，成为未分类
+					if (paper[j][2] != null || paper[j][3] != null) {
+						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
+						catalog.changePaper(userEmail, paper[j][0]);
+					} else {// 否则，删除
+						catalog.deletePaper2(userEmail, paper[j][1]);
+						pidqueue.offer(paper[j][0]);
+						System.out.println("新加入的pid为：" + pid);
+						paper = catalog.getPaper(userEmail);
+						i = 0;
+						while (paper[i][0] != null)
+							i++;
+						System.out.println("剩余节点数量为：" + i);
+					}
+				}
+			}
+			// 更新pid
+			pid = pidqueue.poll();
+		}
+		return "deleteNodesuccess";
+	}
+
 }
