@@ -6,8 +6,8 @@ import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
-import java.net.URLEncoder;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -132,7 +132,7 @@ public class NewPaper extends ActionSupport implements
 	}
 	
 	// 向数据库中插入 paper 对象	
-	private void insertNewPaper(String paperWebFilePath) {
+	private void insertNewPaper(String paperWebFilePath) throws SQLException {
 		String sql=this.paper.toInsertSql(paperWebFilePath);
 		System.out.println(sql);
 		//sql += " "

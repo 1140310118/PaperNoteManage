@@ -17,7 +17,7 @@ public class BookOper {
 		java.sql.ResultSet rs = null;
 		List<Paper> data = new ArrayList<Paper>();
 		try {
-			pstmt = conn.prepareStatement("select paperNickName, paperOrigin, paperWebFilePath, paperExteriorURL, paperRemark, uploadDate, paperUserEmail, paperID, paperReadSituation  from paper where paperUserEmail=? AND (paperWebFilePath != \"\" OR paperExteriorURL != \"\")");
+			pstmt = conn.prepareStatement("select paperNickName, paperOrigin, paperWebFilePath, paperExteriorURL, paperRemark, uploadDate, paperUserEmail, paperID, paperReadSituation  from paper where paperUserEmail=? AND (paperWebFilePath != \"\" OR paperExteriorURL != \"\") AND paperIsDeleted = 0");
 			pstmt.setString(1, type);
 			System.out.println(pstmt.toString());
 			

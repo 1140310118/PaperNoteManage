@@ -1,7 +1,10 @@
 package com.paper.model;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.paper.action.getMaxpaperID;
 
 //import com.sun.java.util.jar.pack.Package.File;
 
@@ -109,7 +112,7 @@ public class Paper {
 		this.uploadDate = uploadDate;
 	}
 	
-	public String toInsertSql(String paperWebFilePath){
+	public String toInsertSql(String paperWebFilePath) throws SQLException{
 		String sql = new String();
 //		sql ="insert into paper (paperNickName,paperOrigin,paperWebFilePath,paperExteriorURL,paperRemark,uploadDate)"
 //				+ " values";
@@ -124,6 +127,8 @@ public class Paper {
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
+		getMaxpaperID maxpaperID = new getMaxpaperID();
+		paperID = maxpaperID.getMaxpaperID(this.paperUserEmail);
 		if(this.paperExteriorURL!=null){
 			sql = "insert into paper (paperNickName,paperOrigin,"
 				+ "paperExteriorURL,paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
@@ -134,10 +139,11 @@ public class Paper {
 				+ "','" +date
 				+ "','" +this.paperUserEmail
 				+ "','" +0
+				+ "','" +paperID
 				+ "');";
 		}else{
 			sql = "insert into paper (paperNickName,paperOrigin,paperWebFilePath,"
-					+ "paperRemark,uploadDate,paperUserEmail,paperReadSituation) "
+					+ "paperRemark,uploadDate,paperUserEmail,paperReadSituation,paperID) "
 					+ "values('" + this.paperNickName 
 					+ "','" +this.paperOrigin
 					+ "','" +paperWebFilePath 
@@ -163,7 +169,8 @@ public class Paper {
 			+ "','" +this.paperRemark 
 			+ "','" +date
 			+ "','" +this.paperUserEmail
-			+ "','" +this.paperReadSituation; //论文阅读情况
+			+ "','" +this.paperReadSituation //论文阅读情况
+			+ "','" +this.paperID; // 论文ID
 		System.out.println("From Paper>> "+s);
 	}
 	public String toString(){
