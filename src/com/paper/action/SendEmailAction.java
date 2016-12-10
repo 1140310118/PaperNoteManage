@@ -3,11 +3,8 @@ package com.paper.action;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
-import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -88,32 +85,8 @@ public class SendEmailAction extends ActionSupport {
 		return ret;
 	}
 
-	 public String getFileName() {
-	 return fileName;
-	 }
-	
-	 public void setFileName(String fileName) {
-	 this.fileName = fileName;
-	 }
-
 	public String getFrom() {
 		return from;
-	}
-
-	public String getAffix() {
-		return affix;
-	}
-
-	public void setAffix(String affix) {
-		this.affix = affix;
-	}
-
-	public String getAffixName() {
-		return affixName;
-	}
-
-	public void setAffixName(String affixName) {
-		this.affixName = affixName;
 	}
 
 	public void setFrom(String from) {
@@ -152,11 +125,28 @@ public class SendEmailAction extends ActionSupport {
 		this.body = body;
 	}
 
-	public static Properties getProperties() {
-		return properties;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public static void setProperties(Properties properties) {
-		SendEmailAction.properties = properties;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
+
+	public String getAffix() {
+		return affix;
+	}
+
+	public void setAffix(String affix) {
+		this.affix = affix;
+	}
+
+	public String getAffixName() {
+		return affixName;
+	}
+
+	public void setAffixName(String affixName) {
+		this.affixName = affixName;
+	}
+
 }

@@ -14,20 +14,12 @@ public class LoginAndRegisterAction extends ActionSupport {
 	String userTable = "user";
 	String paperTable = "paper";
 	private static final long serialVersionUID = 1L;
-	private User user = new User();
+	private User user = new User(); //
 	private DAO dao = new DAO();
-	private String registeringFlag = "0";
+	private String registeringFlag = "0"; //
 	ActionContext actionContext = ActionContext.getContext();
 	Map session = actionContext.getSession();
-	private String relogin = "false";
-
-	public String getRelogin() {
-		return relogin;
-	}
-
-	public void setRelogin(String relogin) {
-		this.relogin = relogin;
-	}
+	private String relogin = "false"; //
 
 	public String login() {
 		String sql = this.user.ToSelectSql();
@@ -111,5 +103,15 @@ public class LoginAndRegisterAction extends ActionSupport {
 	public void setRegisteringFlag(String registeringFlag) {
 		this.registeringFlag = registeringFlag;
 	}
+
+	public String getRelogin() {
+		return relogin;
+	}
+
+	public void setRelogin(String relogin) {
+		this.relogin = relogin;
+	}
+
+
 
 }
