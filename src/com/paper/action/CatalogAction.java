@@ -128,7 +128,7 @@ public class CatalogAction {
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 		if (rS > -1)
-			return "createNodesuccess";
+			return paperID;
 		return "createNodefail";
 
 	}
