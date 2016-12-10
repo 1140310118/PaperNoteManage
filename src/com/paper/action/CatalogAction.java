@@ -2,7 +2,9 @@ package com.paper.action;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
 import javax.mail.Session;
 
@@ -32,6 +34,10 @@ public class CatalogAction {
 		// 1.changeNode方法测试通过
 		CatalogAction catalog = new CatalogAction();
 		// System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
+		
+		// 2.deleteNode方法测试
+//		catalog.deletePaper("zorenv@163.com", "21");
+		System.out.println(catalog.deleteNode("zorenv@163.com", "1"));
 
 		// 3.createNode方法测试通过
 		// System.out.println(catalog.createNode("zorenv@163.com","1","机器学习"));
@@ -55,19 +61,50 @@ public class CatalogAction {
 	}
 
 	// 删除节点
-	public String deleteNode(String userEmail, String id) {
+	public String deleteNode(String userEmail, String id) throws SQLException {
 		// 递归执行：
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
-		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-		String sql = "UPDATE paper SET paperPID = " + this.paper.getPaperPID() + " WHERE paperID = "
-				+ this.paper.getPaperID();
+		String sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "'";
 		System.out.println(sql);
-		int rS = dao.executeUpdate(sql);
-		if (rS != 0)
-			return "deleteNodesuccess";
-		return "deleteNodefail";
+		ResultSet rS = dao.executeQuery(sql);
+		int i = 0;
+		String[][] paper = new String[50][4];
+		while(rS.next()){
+			String paperID = rS.getString("paperID");
+			String paperPID = rS.getString("paperPID");
+			String paperWebFilePath =rS.getString("paperWebFilePath");
+			String paperExteriorURL =rS.getString("paperExteriorURL");
+			paper[i][0] = paperID;
+			paper[i][1] = paperPID;
+			paper[i][2] = paperWebFilePath;
+			paper[i][3] = paperExteriorURL;
+			System.out.println("paperID:" + paper[i][0] + " paperPID:" + paperPID);
+			i++;		
+		}
+		Queue<String> pidqueue = new LinkedList<String>();
+//		pidqueue.offer(id);
+//		System.out.println(pidqueue);
+		for(int j = 0; j < i; j++){
+			// 如果是要删除的节点
+			if(paper[j][0].equals(id)){
+				// 如果该节点是叶节点，直接删除
+				if(paper[j][2] != null || paper[j][3] != null){
+					
+				}
+				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				else{
+					
+				}
+					
+			}
+		}
+//		if("叶节点")
+//			
+//		else
+			
+		return "deleteNodesuccess";
 	}
 
 	// 新增节点
@@ -120,5 +157,13 @@ public class CatalogAction {
 		}
 
 		return zNodesList;
+	}
+	
+	// 删除一个paper
+	public void deletePaper(String userEmail, String paperID){
+		// delete from 表名 where id=1;
+		String sql = "DELETE FROM paper WHERE paperUserEmail = '" + userEmail + "' AND paperID = '" + paperID + "'";
+		System.out.println(sql);
+		int rS = dao.executeUpdate(sql);
 	}
 }
