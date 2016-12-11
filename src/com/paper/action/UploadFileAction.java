@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -213,11 +214,18 @@ public String paperManage() throws Exception{
 	
 	// 向数据库中插入 paper 对象	
 	private void insertNewPaper(String paperWebFilePath) {
-		String sql=this.paper.toInsertSql(paperWebFilePath);
-		System.out.println(sql);
-		//sql += " "
-		int rs=dao.executeUpdate(sql);//"insert into paper values('fasfsdf','','null','null','null','null')");
-		System.out.println(rs);
+		String sql;
+		try {
+			sql = this.paper.toInsertSql(paperWebFilePath);
+			System.out.println(sql);
+			//sql += " "
+			int rs=dao.executeUpdate(sql);//"insert into paper values('fasfsdf','','null','null','null','null')");
+			System.out.println(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	// 将文件上传到 root 目录	
