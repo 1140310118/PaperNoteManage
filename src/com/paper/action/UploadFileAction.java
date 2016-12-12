@@ -254,9 +254,9 @@ public String paperManage() throws Exception{
 			dir1.createNewFile();
 			String shangchuan = root1+"\\"+"log.txt";
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(shangchuan,"utf8", true);
-			String testtext=date +"	"+ "上传系统" + "	" +"||";
 			//org.apache.commons.io.FileUtils.w writeStringToFile(shangchuan, testtext, "utf8");
-			writer.write(date +"	"+ "上传系统" + "	" +"||"); 
+			writer.write(date +"	"+ "上传系统"); 
+			writer.write("\r\n");
 			 writer.close();
 			 String filename4 = "Readtime.txt";
 			 File path2 = new File(root1);
