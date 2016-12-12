@@ -15,7 +15,7 @@ public class SRecycleBinAction extends ActionSupport
 	private static final long serialVersionUID = 1L;
 	
 	// 向后台传递的参数
-	private ArrayList<Paper> papers = new ArrayList<Paper>();
+	private ArrayList<String> papers = new ArrayList<String>();
 	
 	// 从前台接受的参数
 	private String paperNickName = null;
@@ -40,14 +40,14 @@ public class SRecycleBinAction extends ActionSupport
 	//-------------main_2---------------
 	// 恢复回收站中的文件 --恢复到未分类中
 	public String restorePaper(){
-		rb.recoverPaper(paperNickName);
+		rb.recoverPaper(userEmail,paperNickName);
 		return "success";
 	}
 
 	//-------------main_3---------------
 	// 彻底删除回收站中的文件
 	public String deletePaperAbsolutely(){
-		rb.completelyRemovePaper(paperNickName);
+		rb.completelyRemovePaper(userEmail,paperNickName);
 		return "success";
 	}
 	
@@ -59,11 +59,11 @@ public class SRecycleBinAction extends ActionSupport
 		this.paperNickName = paperNickName;
 	}
 	
-	public ArrayList<Paper> getPapers() {
+	public ArrayList<String> getPapers() {
 		return papers;
 	}
 
-	public void setPapers(ArrayList<Paper> papers) {
+	public void setPapers(ArrayList<String> papers) {
 		this.papers = papers;
 	}
 	

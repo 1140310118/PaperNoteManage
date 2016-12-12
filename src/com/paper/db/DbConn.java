@@ -6,17 +6,9 @@ public class DbConn {
 	public static Connection getConn() {
 
 		Connection conn = null;
-//		try {
-//			Class.forName("com.mysql.jdbc.Driver");
-//
-//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanage", "root", "123456");
-
-
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanage", "root", "Aa123456");
-
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanage", "root", "112122");
 		} catch (ClassNotFoundException e) {
 			System.out.println("11111");
 			// TODO Auto-generated catch block e.printStackTrace();

@@ -10,12 +10,13 @@ public class FindLocationAction {
 	
 //	public static void main(String[] args) throws SQLException {
 //		FindLocationAction find = new FindLocationAction();
-//		System.out.println(find.findLocation("Lab1"));
+//		// 测试通过
+//		System.out.println("FindLocationAction: "+find.findLocation("zorenv@163.com","Lab1"));
 //	}
 	
-	public String findLocation(String paperNickName) throws SQLException{
+	public String findLocation(String userEmail, String paperNickName) throws SQLException{
 		String paperWebFilePath = "";
-		String sql = "SELECT paperWebFilePath FROM paper WHERE paperNickName = " + "'" + paperNickName + "'";
+		String sql = "SELECT paperWebFilePath FROM paper WHERE paperNickName = " + "'" + paperNickName + "' AND paperUserEmail = '" + userEmail + "'";
 		System.out.println(sql); 
 		ResultSet rS = dao.executeQuery(sql);
 		System.out.println(rS);

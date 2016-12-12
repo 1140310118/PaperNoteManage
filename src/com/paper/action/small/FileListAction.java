@@ -102,7 +102,7 @@ public class FileListAction extends ActionSupport
 		if (readSituation!=null){
 			ReadSituationAction rsa=new ReadSituationAction();
 			System.out.println("FROM FileListAction>> 修改论文 "+modifyPaperName+" 的阅读情况为 "+readSituation);
-			rsa.changeReadSituation(modifyPaperName,readSituation);
+			rsa.changeReadSituation(userEmail,modifyPaperName,readSituation);
 		}
 		// 获得所有论文
 		getAllPaperExistedByEmail();
