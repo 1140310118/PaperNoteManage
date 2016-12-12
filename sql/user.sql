@@ -1,9 +1,0 @@
-INSERT INTO `user` VALUES ('zorenv@163.com', '4321005', 'zorenv');
-INSERT INTO `user` VALUES ('test@test.com', 'testpassword', 'testnickname');
-INSERT INTO `user` VALUES ('null', 'null', 'null');
-INSERT INTO `user` VALUES ('null', 'null', 'null');
-INSERT INTO `user` VALUES ('zz@qq.com', '1', 'null');
-INSERT INTO `user` VALUES ('zzh@qq.com', '1', 'null');
-INSERT INTO `user` VALUES ('zzhp@qq.com', '1', 'null');
-INSERT INTO `user` VALUES ('zzz@qq.com', '1', 'null');
-INSERT INTO `user` VALUES ('z@qq.com', '1', 'null');
