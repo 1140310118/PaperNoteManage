@@ -88,15 +88,6 @@ public class treetozip {
 			repath=path;
 			}while(paperWebFilePath2==null);
 			
-//			System.out.println(path+"+"+paperWebFilePath2);
-//			ppath=paperWebFilePath2.split("/");
-//			pdfname=ppath[ppath.length-1];
-//			System.out.println("pdfname="+pdfname);
-//			path=path+"\\"+pdfname;
-//			paperWebFilePath2=paperWebFilePath2.replace('/', '\\');
-//			System.out.println(path+"+"+paperWebFilePath2);
-//			copy.copyFile(paperWebFilePath2,path);
-			//System.out.println(rootpath);
 			try {
 				Z.filezip(rootpath+".zip",rootpath );
 			} catch (Exception e) {
