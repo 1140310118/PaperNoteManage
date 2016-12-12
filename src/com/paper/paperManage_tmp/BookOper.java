@@ -166,6 +166,7 @@ public class BookOper {
 		pstmt = conn.prepareStatement("update paper set paperIsDeleted=1 where paperNickName=? and paperUserEmail=?");
 	pstmt.setString(1, paperNickName);
 	pstmt.setString(2, paperUserEmail);
+	System.out.println(pstmt.toString());
 	jg = pstmt.executeUpdate();
 	}
 	catch (SQLException e) {

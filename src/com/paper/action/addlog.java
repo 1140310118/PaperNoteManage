@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.io.output.FileWriterWithEncoding;
+
 import com.opensymphony.xwork2.ActionContext;
 
 public class addlog {
@@ -28,7 +30,7 @@ public class addlog {
 			text="已精读";
 		}
 		try {
-			FileWriter writer = new FileWriter(path, true);
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
 			writer.write(date +"	"+ text + "	" +"||"); 
 			 writer.close();
 		} catch (IOException e) {
@@ -41,7 +43,7 @@ public class addlog {
 		String date = df.format(new Date());
 		path = path+"\\"+"log.txt";
 		try {
-			FileWriter writer = new FileWriter(path, true);
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
 			writer.write(date +"	"+ "创建笔记" + "	" +"||"); 
 			 writer.close();
 		} catch (IOException e) {
@@ -54,7 +56,7 @@ public class addlog {
 		String date = df.format(new Date());
 		path = path+"\\"+"log.txt";
 		try {
-			FileWriter writer = new FileWriter(path, true);
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
 			writer.write(date +"	"+ "删除笔记" + "	" +"||"); 
 			 writer.close();
 		} catch (IOException e) {
@@ -68,7 +70,7 @@ public class addlog {
 		String date = df.format(new Date());
 		path = path+"\\"+"log.txt";
 		try {
-			FileWriter writer = new FileWriter(path, true);
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
 			writer.write(date +"	"+ "修改笔记" + "	" +"||"); 
 			 writer.close();
 		} catch (IOException e) {

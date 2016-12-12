@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.struts2.ServletActionContext;
 
 import com.paper.model.file;
@@ -252,9 +253,15 @@ public String paperManage() throws Exception{
 			File dir1=new File(path1,filename3);
 			dir1.createNewFile();
 			String shangchuan = root1+"\\"+"log.txt";
-			FileWriter writer = new FileWriter(shangchuan, true);
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(shangchuan,"utf8", true);
+			String testtext=date +"	"+ "上传系统" + "	" +"||";
+			//org.apache.commons.io.FileUtils.w writeStringToFile(shangchuan, testtext, "utf8");
 			writer.write(date +"	"+ "上传系统" + "	" +"||"); 
 			 writer.close();
+			 String filename4 = "Readtime.txt";
+			 File path2 = new File(root1);
+			 File dir2=new File(path2,filename4);
+			 dir2.createNewFile();
 			String root2=root1+"\\note\\";
 			File rootFile2 = new File(root2);
 			if(!rootFile2.exists())
