@@ -2,6 +2,8 @@ package com.paper.action;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.paper.db.DAO;
 
@@ -31,18 +33,20 @@ public class RecycleBinAction {
 //	}
 	
 	// 在回收站中显示论文
-	public String showRecycleBin(String userEmail) throws SQLException{
+	public List<String> getRecycleBin(String userEmail) throws SQLException{
 		String sql = "SELECT * FROM paper WHERE paperIsDeleted = 1 AND paperUserEmail = '" + userEmail + "'";
 		String paper;
 		System.out.println(sql);
 		ResultSet rS = dao.executeQuery(sql);
+		List<String> papers = new ArrayList<String>();
 		while(rS.next()){
 			paper = rS.getString("paperNickName");
 			System.out.println(paper);
+			papers.add(paper);
 		}
 		if (rS != null)
-			return "showRecycleBinsuccess";
-		return "showRecycleBinfail";
+			return papers;
+		return papers;
 	}
 	
 	// 恢复论文
