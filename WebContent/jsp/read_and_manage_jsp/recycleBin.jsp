@@ -32,26 +32,27 @@
 	<br>
 <div style="float:left;">
 	<ol class="rounded-list" id="allPaperShow">
-		<s:forEach var="paper" items="${papers}">
-			<div id="paperE_${paper}">
+	<c:set var="i" value="0"></c:set>
+		<s:iterator value="papers" id="paper">
+			<div id="_${papers[i]}">
+				<c:set var="i" value="${i+1}"></c:set>
 				<li>
 					&nbsp;
-					<a class="paperNameClick" target="_blank" style="cursor:pointer;">${paper.paperNickName}</a>
+					<a class="paperName" target="_blank" style="cursor:pointer;"><s:property value="paper"/></a>
 					<div style="float:right;">
-						<a class="paperReStore" style="cursor: pointer;">恢复</a>&nbsp;&nbsp;
-						<a class="paperDeleteAbsolutely" style="cursor: pointer;">彻底删除</a>&nbsp;&nbsp;]
+						<a class="paperReStore" style="cursor: pointer;">恢复论文</a>&nbsp;&nbsp;
+						<a class="paperDeleteAbsolutely" style="cursor: pointer;">彻底删除</a>&nbsp;&nbsp;
 					</div>
 				</li>
-				
 			</div>
-		</c:forEach>
+		</s:iterator>
 	</ol>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#paperReStore").click(function(){
+		$(".paperReStore").click(function(){
 			$(this).parent().parent().parent().hide();
-			var paperNickName=$(this).parent().parent().parent().attr("id").substring(7);
+			var paperNickName=$(this).parent().parent().parent().attr("id").substring(1);
 			$.post("<%=basePath%>recycleBin_restore",
 			   		{
 						paperNickName : paperNickName
@@ -59,9 +60,9 @@
 			   		function(){
 	      	}); 
 		});
-		$("#paperDeleteAbsolutely").click(function(){
+		$(".paperDeleteAbsolutely").click(function(){
 			$(this).parent().parent().parent().hide();
-			var paperNickName=$(this).parent().parent().parent().attr("id").substring(7);
+			var paperNickName=$(this).parent().parent().parent().attr("id").substring(1);
 			$.post("<%=basePath%>recycleBin_delete",
 			   		{
 						paperNickName : paperNickName
