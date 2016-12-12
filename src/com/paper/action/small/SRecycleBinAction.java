@@ -18,7 +18,7 @@ public class SRecycleBinAction extends ActionSupport
 	private ArrayList<Paper> papers = new ArrayList<Paper>();
 	
 	// 从前台接受的参数
-	private String paperID = null;
+	private String paperNickName = null;
 	
 	// 获得用户email
 	ActionContext actionContext = ActionContext.getContext();
@@ -40,23 +40,23 @@ public class SRecycleBinAction extends ActionSupport
 	//-------------main_2---------------
 	// 恢复回收站中的文件 --恢复到未分类中
 	public String restorePaper(){
-		rb.restorePaper(userEmail,paperID);
+		rb.recoverPaper(paperNickName);
 		return "success";
 	}
 
 	//-------------main_3---------------
 	// 彻底删除回收站中的文件
 	public String deletePaperAbsolutely(){
-		rb.deleteAbsolutely(userEmail,paperID);
+		rb.completelyRemovePaper(paperNickName);
 		return "success";
 	}
 	
-	public String getPaperID() {
-		return paperID;
+	public String getPaperNickName() {
+		return paperNickName;
 	}
 
-	public void setPaperID(String paperID) {
-		this.paperID = paperID;
+	public void setPaperNickName(String paperNickName) {
+		this.paperNickName = paperNickName;
 	}
 	
 	public ArrayList<Paper> getPapers() {

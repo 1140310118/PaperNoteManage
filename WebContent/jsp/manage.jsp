@@ -94,7 +94,7 @@
 	</li>
 
 	<li>
-		<div class="link"><i class="fa fa-mobile"></i>回收站</div>
+		<div class="link" id="viewRB"><i class="fa fa-mobile"></i>回收站</div>
 	</li>
 	<li>
 		<div class="link"><i class="fa fa-globe"></i>阅读时间线</div>
@@ -119,7 +119,10 @@
 			$("#mainShow").attr("src","<%=basePath%>fileTreeView");
 		});
 		$("#file_tree_edit").click(function(){
-			$("#mainShow").attr("src","<%=basePath%>jsp/read_and_manage_jsp/fileTreeEditor.jsp");
+			$("#mainShow").attr("src","<%=basePath%>fileTreeEdit");
+		});
+		$("#viewRB").click(function(){
+			$("#mainShow").attr("src","<%=basePath%>recycleBin");
 		});
 		
 		

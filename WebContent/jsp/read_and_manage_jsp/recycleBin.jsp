@@ -49,7 +49,26 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		$("#paperReStore").click(function(){
+			$(this).parent().parent().parent().hide();
+			var paperNickName=$(this).parent().parent().parent().attr("id").substring(7);
+			$.post("<%=basePath%>recycleBin_restore",
+			   		{
+						paperNickName : paperNickName
+					},
+			   		function(){
+	      	}); 
+		});
+		$("#paperDeleteAbsolutely").click(function(){
+			$(this).parent().parent().parent().hide();
+			var paperNickName=$(this).parent().parent().parent().attr("id").substring(7);
+			$.post("<%=basePath%>recycleBin_delete",
+			   		{
+						paperNickName : paperNickName
+					},
+			   		function(){
+	      	}); 
+		});
 	});
 </script>
 </body>
