@@ -12,10 +12,14 @@ public class ReadSituationAction {
 
 //	private addlog add = new addlog();
 
-//	public static void main(String[] args) throws SQLException {
-//		ReadSituationAction read = new ReadSituationAction();
+	public static void main(String[] args) throws SQLException {
+		ReadSituationAction read = new ReadSituationAction();
 //		System.out.println("ReadSituationAction: " + read.changeReadSituation("zorenv@163.com", "Lab1", "99"));
-//	}
+		// updateLastPaper测试通过
+//		read.updateLastPaper("zorenv@163.com", "L");
+		// 
+		System.out.println(read.getLastPaper("zorenv@163.com"));
+	}
 
 	public String changeReadSituation(String userEmail, String paperNickName, String paperReadSituation)
 			throws SQLException {
@@ -44,4 +48,21 @@ public class ReadSituationAction {
 		return "changeReadSituationfail";
 	}
 
+	public void updateLastPaper(String userEmail, String paperNickName){
+		String sql = "UPDATE user SET lastReadPaper = '" + paperNickName + "' WHERE email = '" + userEmail + "'";
+		System.out.println("ReadSituationAction: "+sql);
+		int rS = dao.executeUpdate(sql);
+	}
+	
+	public String getLastPaper(String userEmail) throws SQLException{
+		String sql = "SELECT lastReadPaper FROM user WHERE email = '" + userEmail + "'";
+		System.out.println("ReadSituationAction: "+sql);
+		ResultSet rS = dao.executeQuery(sql);
+		String lastReadPaper = null;
+		while (rS.next()) {
+			lastReadPaper = rS.getString(1);
+			System.out.println("ReadSituationAction: " + lastReadPaper);
+		}
+		return lastReadPaper;
+	}
 }
