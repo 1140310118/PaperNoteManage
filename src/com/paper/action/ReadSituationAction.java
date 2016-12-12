@@ -12,14 +12,14 @@ public class ReadSituationAction {
 
 //	private addlog add = new addlog();
 
-	public static void main(String[] args) throws SQLException {
-		ReadSituationAction read = new ReadSituationAction();
+//	public static void main(String[] args) throws SQLException {
+//		ReadSituationAction read = new ReadSituationAction();
 //		System.out.println("ReadSituationAction: " + read.changeReadSituation("zorenv@163.com", "Lab1", "99"));
 		// updateLastPaper测试通过
 //		read.updateLastPaper("zorenv@163.com", "L");
 		// 
-		System.out.println(read.getLastPaper("zorenv@163.com"));
-	}
+//		System.out.println(read.getLastPaper("zorenv@163.com"));
+//	}
 
 	public String changeReadSituation(String userEmail, String paperNickName, String paperReadSituation)
 			throws SQLException {
