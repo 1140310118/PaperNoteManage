@@ -106,7 +106,7 @@
 		function add(e) {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			isParent = e.data.isParent;
-			$.post("<%=basePath%>fileTreeEdit_newNode",
+			$.post("<%=basePath%>fileTreeEdit_addNode",
 			   		{
 						pID : 0,
 						paperNickName : "new node" + (newCount++)
