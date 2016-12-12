@@ -42,11 +42,6 @@ public class NoteManage{
 	ReadSituationAction rsa = new ReadSituationAction();
 	FindLocationAction fla = new FindLocationAction();
 
-//根据情况修改
-//	private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
-//	private String con="D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
-//	private String tmpPath = "M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
-//	private String con="M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
 	private String root = getWebrootPath(); 
 	private String paperNickName = null;
 	private String paperWebFilePath = null;
@@ -56,11 +51,13 @@ public class NoteManage{
 	
 	private void init() throws SQLException{
 		paperNickName = rsa.getLastPaper(userEmail);
+		System.out.println("FROM NMA>> "+paperNickName);
 		paperWebFilePath = fla.findLocation(userEmail, paperNickName);
 		tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
 		con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";	
 	}
 	
+
 	public String execute() throws IOException, SQLException{
 		
 		// 笔记的各种操作
@@ -85,7 +82,6 @@ public class NoteManage{
 		if(modifyNoteID!=null){
 			writeFile(modifyNoteContent,modifyNoteID+".txt",tmpPath);
 			System.out.println("被修改的笔记:"+modifyNoteID);
-//			System.out.println(modifyNoteContent);
 		}
 	}
 	private String getWebrootPath(){
@@ -104,6 +100,7 @@ public class NoteManage{
 	    String root=SERVLET_CONTEXT_PATH+"file/";
 		return root;
 	}
+	
 	
 	public void newNote() throws IOException{
 		// 新建笔记 

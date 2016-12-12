@@ -60,20 +60,27 @@ public class ReadSituationAction {
 		System.out.println("ReadSituationAction: " + sql);
 		ResultSet rS = dao.executeQuery(sql);
 		String lastReadPaper = null;
-		// if (rS != null) {
-		while (rS.next()) {
-			lastReadPaper = rS.getString(1);
-			System.out.println("ReadSituationAction: lastReadPaper: " + lastReadPaper);
+		if (rS != null) {
+			while (rS.next()) {
+				lastReadPaper = rS.getString(1);
+				System.out.println("ReadSituationAction: lastReadPaper: " + lastReadPaper);
+			}
 		}
-		// } else {
+
+		System.out.println("FROM RSA>> 72");
 		if (lastReadPaper == null || lastReadPaper.equals("")) {
 			sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "'";
 			System.out.println(sql);
 			ResultSet rS2 = dao.executeQuery(sql);
-			rS2.next();
-			lastReadPaper = rS2.getString("paperNickName");
+			System.out.println("FROM RSA>> "+rS2.toString());
+			if (rS2!=null){
+				rS2.next();
+				
+				lastReadPaper = rS2.getString("paperNickName");
+				return lastReadPaper;
+			}
 		}
+		return null;
 		// }
-		return lastReadPaper;
 	}
 }
