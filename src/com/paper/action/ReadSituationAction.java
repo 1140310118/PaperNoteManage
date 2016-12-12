@@ -69,15 +69,15 @@ public class ReadSituationAction {
 
 		System.out.println("FROM RSA>> 72");
 		if (lastReadPaper == null || lastReadPaper.equals("")) {
-			sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "'";
+			sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "' AND (paperWebFilePath != \"\" OR paperExteriorURL != \"\")";
 			System.out.println(sql);
 			ResultSet rS2 = dao.executeQuery(sql);
 			System.out.println("FROM RSA>> "+rS2.toString());
 			if (rS2!=null){
-				rS2.next();
-				
-				lastReadPaper = rS2.getString("paperNickName");
-				return lastReadPaper;
+				while(rS2.next()){
+					lastReadPaper = rS2.getString("paperNickName");
+					return lastReadPaper;
+				}
 			}
 		}
 		return null;
