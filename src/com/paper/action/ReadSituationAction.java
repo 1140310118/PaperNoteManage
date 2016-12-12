@@ -59,9 +59,11 @@ public class ReadSituationAction {
 		System.out.println("ReadSituationAction: "+sql);
 		ResultSet rS = dao.executeQuery(sql);
 		String lastReadPaper = null;
-		while (rS.next()) {
-			lastReadPaper = rS.getString(1);
-			System.out.println("ReadSituationAction: " + lastReadPaper);
+		if (rS!=null){
+			while (rS.next()) {
+				lastReadPaper = rS.getString(1);
+				System.out.println("ReadSituationAction: " + lastReadPaper);
+			}
 		}
 		return lastReadPaper;
 	}

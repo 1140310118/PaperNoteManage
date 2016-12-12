@@ -91,7 +91,7 @@ public class NewPaper extends ActionSupport implements
 			}
 		}
 		return "success";
-	} 
+	}
 	private String getWebrootPath(){
 		ClassLoader classLoader = Thread.currentThread()  
 	            .getContextClassLoader();  
