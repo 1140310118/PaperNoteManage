@@ -18,7 +18,7 @@ public class RecycleBinAction {
 //		System.out.println(sql);
 //		ResultSet rS = dao.executeQuery(sql);
 //		System.out.println(rS.next());
-		RecycleBinAction bin = new RecycleBinAction();
+//		RecycleBinAction bin = new RecycleBinAction();
 		// 1.显示回收站中论文测试通过
 //		System.out.println("RecycleBinAction:" + bin.showRecycleBin("zorenv@163.com"));
 		// 2.恢复paper测试通过

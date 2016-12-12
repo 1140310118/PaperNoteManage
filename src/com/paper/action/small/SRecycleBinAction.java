@@ -1,5 +1,6 @@
 package com.paper.action.small;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -32,8 +33,8 @@ public class SRecycleBinAction extends ActionSupport
 	
 	//-------------main_1---------------
 	// 显示回收站
-	public String viewRB(){
-		papers=rb.getRecycleBin(userEmail);
+	public String viewRB() throws SQLException{
+		papers=(ArrayList<String>) rb.getRecycleBin(userEmail);
 		return "success";
 	}
 	
