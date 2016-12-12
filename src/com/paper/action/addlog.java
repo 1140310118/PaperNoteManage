@@ -31,7 +31,8 @@ public class addlog {
 		}
 		try {
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
-			writer.write(date +"	"+ text + "	" +"||"); 
+			writer.write(date +"	"+ text );
+			writer.write("\r\n");
 			 writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -44,7 +45,8 @@ public class addlog {
 		path = path+"\\"+"log.txt";
 		try {
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
-			writer.write(date +"	"+ "创建笔记" + "	" +"||"); 
+			writer.write(date +"	"+ "创建笔记" ); 
+			writer.write("\r\n");
 			 writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,7 +59,8 @@ public class addlog {
 		path = path+"\\"+"log.txt";
 		try {
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
-			writer.write(date +"	"+ "删除笔记" + "	" +"||"); 
+			writer.write(date +"	"+ "删除笔记" ); 
+			writer.write("\r\n");
 			 writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -71,7 +74,8 @@ public class addlog {
 		path = path+"\\"+"log.txt";
 		try {
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
-			writer.write(date +"	"+ "修改笔记" + "	" +"||"); 
+			writer.write(date +"	"+ "修改笔记"); 
+			writer.write("\r\n");
 			 writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();

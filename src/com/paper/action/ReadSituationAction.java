@@ -10,14 +10,15 @@ public class ReadSituationAction {
 	String paperTable = "paper";
 	private DAO dao = new DAO();
 
-//	private addlog add = new addlog();
+	// private addlog add = new addlog();
 
 	public static void main(String[] args) throws SQLException {
 		ReadSituationAction read = new ReadSituationAction();
-//		System.out.println("ReadSituationAction: " + read.changeReadSituation("zorenv@163.com", "Lab1", "99"));
+		// System.out.println("ReadSituationAction: " +
+		// read.changeReadSituation("zorenv@163.com", "Lab1", "99"));
 		// updateLastPaper测试通过
-//		read.updateLastPaper("zorenv@163.com", "L");
-		// 
+		// read.updateLastPaper("zorenv@163.com", "L");
+		//
 		System.out.println(read.getLastPaper("zorenv@163.com"));
 	}
 
@@ -48,23 +49,31 @@ public class ReadSituationAction {
 		return "changeReadSituationfail";
 	}
 
-	public void updateLastPaper(String userEmail, String paperNickName){
+	public void updateLastPaper(String userEmail, String paperNickName) {
 		String sql = "UPDATE user SET lastReadPaper = '" + paperNickName + "' WHERE email = '" + userEmail + "'";
-		System.out.println("ReadSituationAction: "+sql);
+		System.out.println("ReadSituationAction: " + sql);
 		int rS = dao.executeUpdate(sql);
 	}
-	
-	public String getLastPaper(String userEmail) throws SQLException{
+
+	public String getLastPaper(String userEmail) throws SQLException {
 		String sql = "SELECT lastReadPaper FROM user WHERE email = '" + userEmail + "'";
-		System.out.println("ReadSituationAction: "+sql);
+		System.out.println("ReadSituationAction: " + sql);
 		ResultSet rS = dao.executeQuery(sql);
 		String lastReadPaper = null;
-		if (rS!=null){
-			while (rS.next()) {
-				lastReadPaper = rS.getString(1);
-				System.out.println("ReadSituationAction: " + lastReadPaper);
-			}
+		// if (rS != null) {
+		while (rS.next()) {
+			lastReadPaper = rS.getString(1);
+			System.out.println("ReadSituationAction: lastReadPaper: " + lastReadPaper);
 		}
+		// } else {
+		if (lastReadPaper == null || lastReadPaper.equals("")) {
+			sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "'";
+			System.out.println(sql);
+			ResultSet rS2 = dao.executeQuery(sql);
+			rS2.next();
+			lastReadPaper = rS2.getString("paperNickName");
+		}
+		// }
 		return lastReadPaper;
 	}
 }
