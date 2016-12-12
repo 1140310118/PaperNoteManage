@@ -156,7 +156,7 @@ public class CatalogAction {
 			// System.out.println("paperExteriorURL:" + paperExteriorURL);
 
 			if (paperWebFilePath == null && paperExteriorURL == null)
-				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName + "\"" + "},";
+				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName + "\"" + ",isParent:true},";
 			else
 				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName
 						+ "\",drop:false},";

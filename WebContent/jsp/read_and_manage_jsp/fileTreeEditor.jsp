@@ -108,7 +108,7 @@
 			isParent = e.data.isParent;
 			$.post("<%=basePath%>fileTreeEdit_addNode",
 			   		{
-						pID : 0,
+						parentID : 0,
 						paperNickName : "new node" + (newCount++)
 					},
 			   		function(id){
@@ -155,12 +155,8 @@
 		<br><br><br>
 		<input type="checkbox" id="delete_option" class="checkbox first"  /><span>删除</span>
 		<input type="checkbox" id="rename_option" class="checkbox first"  /><span>重命名</span>
-		<input type="checkbox" id="move" class="checkbox first"  /><span>拖拽</span>
+		<input type="checkbox" id="move" class="checkbox first"  checked/><span>拖拽</span>
 		<a id="addParent" style="cursor:pointer;" title="增加父节点" onclick="return false;">新建分类</a>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
-	</script>
+	
 </BODY>
 </HTML>

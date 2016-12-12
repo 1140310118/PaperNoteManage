@@ -34,7 +34,7 @@ public class fileTreeAction extends ActionSupport
 
 	// 从前台接受的参数
 	private String paperID = null;
-	private String pID = null;
+	private String parentID = null;
 	private String paperNickName = null;
 	
 	// 获得用户email
@@ -64,7 +64,7 @@ public class fileTreeAction extends ActionSupport
 	// 新建节点
 	// 返回值
 	public void newNode() throws IOException, SQLException{
-		String id = catalog.createNode(userEmail,pID, paperNickName);
+		String id = catalog.createNode(userEmail,parentID, paperNickName);
 		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 
@@ -86,7 +86,7 @@ public class fileTreeAction extends ActionSupport
 	//-------------main_4---------------
 	// 改变节点
 	public String changeNode(){
-		catalog.changeNode(userEmail, paperID, pID);
+		catalog.changeNode(userEmail, paperID, parentID);
 		return "success";
 	}
 	public String renameNode(){
@@ -105,12 +105,14 @@ public class fileTreeAction extends ActionSupport
 		this.paperID = paperID;
 	}
 	
-	public String getpID() {
-		return pID;
+	
+
+	public String getParentID() {
+		return parentID;
 	}
 
-	public void setpID(String pID) {
-		this.pID = pID;
+	public void setParentID(String parentID) {
+		this.parentID = parentID;
 	}
 
 	public String getPaperNickName() {
