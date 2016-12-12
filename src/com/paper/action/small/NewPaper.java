@@ -1,6 +1,7 @@
 package com.paper.action.small;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.paper.action.StringandACSII;
 import com.paper.db.DAO;
 import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
@@ -146,7 +147,6 @@ public class NewPaper extends ActionSupport implements
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
 		
-		System.out.println("194");
 		File rootFile = new File(root);
 		if(!rootFile.exists())
 		{
@@ -154,7 +154,9 @@ public class NewPaper extends ActionSupport implements
 		}
 
 		//String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
-		String root1=root+this.paper.paperNickName;
+		String nickName=str2ascii(this.paper.paperNickName);
+		String root1=root+nickName;
+		// 
 		File rootFile1 = new File(root1);
 		if(!rootFile1.exists())
 		{
@@ -179,10 +181,14 @@ public class NewPaper extends ActionSupport implements
 			}
 			
 		}
+		String pdfName=singleFile.getResumeFileName();
+		pdfName=pdfName.substring(0,pdfName.length()-4);
+		System.out.println("FROM NP.java>> pdfName:"+pdfName);
+		pdfName=str2ascii(pdfName)+".pdf";
 		
-		String filename = root1+"\\" + singleFile.getResumeFileName();
-
-		//System.out.println("filename:"+filename);
+		String filename = root1+"\\" + pdfName;
+		
+		System.out.println("FROM NP.java>> filename:"+filename);
 		FileInputStream fis = new FileInputStream(singleFile.getResume());
 		FileOutputStream fos = new FileOutputStream(filename);
 		byte[] buffer = new byte[8192];
@@ -197,10 +203,14 @@ public class NewPaper extends ActionSupport implements
 		//System.out.println( singleFile.getResumeContentType());
 		filename = filename.replaceAll("\\\\","/");
 		//System.out.println("反倒是"+filename);
-		String res = userEmail+"/"+this.paper.paperNickName+"/"+singleFile.getResumeFileName();
+		String res = userEmail+"/"+nickName+"/"+pdfName;
 		//res = URLEncoder.encode(res,"utf-8");
-		System.out.print("FROM NewPaper.java>> "+res);
+		System.out.println("FROM NewPaper.java>> "+res);
 		return res;
+	}
+	
+	private String str2ascii(String s){
+		return StringandACSII.showIntArray(StringandACSII.string2ASCII(s), "H");
 	}
 
 	

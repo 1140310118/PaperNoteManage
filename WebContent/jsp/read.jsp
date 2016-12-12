@@ -111,8 +111,6 @@
 <!-- embed width="800" height="600" src="./test.pdf">
 <iframe width="800" height="600" src="./test.pdf"></iframe-->
  <div style="float:left;margin-left:230px;margin-top: 60px;">
-<%--  <iframe width="800" height="600" src="<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe> --%>
-<!-- <iframe width="800" height="600" src="<%=basePath%>jsp/read_and_manage_lib\pdfjs-1.5.188-dist\web\viewer.html?file=<%=basePath%>file/zzh19971968@foxmail.com/test/test.pdf"></iframe> -->
 <iframe width="800" height="600" src="<%=basePath%>jsp/read_and_manage_lib\pdfjs-1.5.188-dist\web\viewer.html?file=<%=basePath%>file/zorenv@163.com\Vpthon-1\VPython_Intro.pdf"></iframe>
 </div>
 

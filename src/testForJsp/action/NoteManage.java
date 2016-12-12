@@ -42,28 +42,27 @@ public class NoteManage{
 	ReadSituationAction rsa = new ReadSituationAction();
 	FindLocationAction fla = new FindLocationAction();
 
-	private String root = getWebrootPath(); 
-	private String paperNickName = null;
+	
 	private String paperWebFilePath = null;
 	private String tmpPath = null;
 	private String con = null;
-	
-	
-	private void init() throws SQLException{
-		paperNickName = rsa.getLastPaper(userEmail);
-		System.out.println("FROM NMA>> "+paperNickName);
-		paperWebFilePath = fla.findLocation(userEmail, paperNickName);
-		tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
-		con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";	
-	}
 	
 
 	public String execute() throws IOException, SQLException{
 		
 		// 笔记的各种操作
 		// 包括        从磁盘中获得用户的所有笔记，新建笔记，删除笔记，修改笔记
-		init();
-		NoteOpeartion();
+		String root = getWebrootPath(); 
+		String paperNickName = rsa.getLastPaper(userEmail);
+		System.out.println("FROM NMA>> "+paperNickName);
+		if (paperNickName!=null){
+			paperWebFilePath = fla.findLocation(userEmail, paperNickName);
+			tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+			con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+			NoteOpeartion();
+		}
+		else{
+		}
 		
 		return "success";
 	}
@@ -170,6 +169,7 @@ public class NoteManage{
 	private void addconfig(String con) {
 		// TODO Auto-generated method stub
 		try {   
+			
 			FileWriter writer = new FileWriter(con, true); 
 			 writer.write("a"); 
 			 writer.close();  
