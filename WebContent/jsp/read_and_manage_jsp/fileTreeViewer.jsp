@@ -103,11 +103,13 @@
 		function zTreeOnClick(e,treeId,treeNode){
 			if(downloadEnable){
 				//alert(treeNode.id);
+				$("#loading").show();
 				$.post("<%=basePath%>fileTreeView_download",
 				   		{
 							paperID : treeNode.id,
 						},
 				   		function(url){
+							$("#loading").hide();
 							url = "<%=basePath%>file/"+url;
 							window.open(url);		
 				});
@@ -163,7 +165,13 @@
 		<a id="addParent" style="cursor:pointer;" title="增加父节点" onclick="return false;">新建分类</a>
 	
 	</div>
-		<input type="checkbox" id="download_option" class="checkbox first"  /><span>下载</span>
-	
+		<input type="checkbox" id="download_option" class="checkbox first"  /><span>点击节点下载</span>
+	<div id="loading" style="display:none;z-index:10000; width:100%; height:100%;  background:#000;  position:absolute;  top:0;  left:0;opacity:0.4;filter:alpha(opacity =40); ">
+		<div style="text-align: center;">
+			<br><br><br><br><br><br><br><br>
+			<img style="text-align:center;" src="<%=basePath%>jsp/read_and_manage_lib/img/waiting.gif">
+			<font color="white">加载中，请稍后......</font>
+		</div>
+	</div>
 </BODY>
 </HTML>
