@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -47,17 +48,24 @@ public class NoteManage{
 //	private String tmpPath = "M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
 //	private String con="M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
 	private String root = getWebrootPath(); 
-	private String paperNickName = rsa.getLastPaper(userEmail);
-	private String paperWebFilePath = fla.findLocation(userEmail, paperNickName);
+	private String paperNickName = null;
+	private String paperWebFilePath = null;
+	private String tmpPath = null;
+	private String con = null;
 	
-
-	private String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
-	private String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
 	
-	public String execute() throws IOException{
+	private void init() throws SQLException{
+		paperNickName = rsa.getLastPaper(userEmail);
+		paperWebFilePath = fla.findLocation(userEmail, paperNickName);
+		tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+		con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";	
+	}
+	
+	public String execute() throws IOException, SQLException{
 		
 		// 笔记的各种操作
 		// 包括        从磁盘中获得用户的所有笔记，新建笔记，删除笔记，修改笔记
+		init();
 		NoteOpeartion();
 		
 		return "success";
