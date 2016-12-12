@@ -5,11 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.paper.action.FindLocationAction;
+import com.paper.action.ReadSituationAction;
 
 import base.translate;
 
@@ -29,13 +34,25 @@ public class NoteManage{
 	//要翻译的单词
 	private String wordT = null;
 	
+	ActionContext actionContext = ActionContext.getContext();
+	Map session = actionContext.getSession();
+	private String userEmail = (String) session.get("USER_Email");
+	
+	ReadSituationAction rsa = new ReadSituationAction();
+	FindLocationAction fla = new FindLocationAction();
 
 //根据情况修改
 //	private String tmpPath = "D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
 //	private String con="D:/ecllipse/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
 //	private String tmpPath = "M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note";
 //	private String con="M:/myGitHub/SE/PaperNoteManage/WebContent/file/zzh19971968@foxmail.com/test/note/note.config";
+	private String root = getWebrootPath(); 
+	private String paperNickName = rsa.getLastPaper(userEmail);
+	private String paperWebFilePath = fla.findLocation(userEmail, paperNickName);
 	
+
+	private String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+	private String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
 	
 	public String execute() throws IOException{
 		
@@ -63,6 +80,23 @@ public class NoteManage{
 //			System.out.println(modifyNoteContent);
 		}
 	}
+	private String getWebrootPath(){
+		ClassLoader classLoader = Thread.currentThread()  
+	            .getContextClassLoader();  
+	    if (classLoader == null) {  
+	        classLoader = ClassLoader.getSystemClassLoader();  
+	    }  
+	    java.net.URL url = classLoader.getResource("");  
+	    String ROOT_CLASS_PATH = url.getPath() + "/";  
+	    File rootFile = new File(ROOT_CLASS_PATH);  
+	    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+	    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+	    
+	    String root=SERVLET_CONTEXT_PATH+"file/";
+		return root;
+	}
+	
 	public void newNote() throws IOException{
 		// 新建笔记 
 		String addNoteID=addNoteFile();
@@ -253,6 +287,13 @@ public class NoteManage{
 
 	public String getDeleteNoteID() {
 		return deleteNoteID;
+	}
+	public String getPaperWebFilePath() {
+		return paperWebFilePath;
+	}
+
+	public void setPaperWebFilePath(String paperWebFilePath) {
+		this.paperWebFilePath = paperWebFilePath;
 	}
 
 
