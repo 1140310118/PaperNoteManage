@@ -49,7 +49,7 @@ public class fileTreeAction extends ActionSupport
 	
 	//-------------main_2---------------
 	// 删除节点
-	public String deleteNode(){
+	public String deleteNode() throws SQLException{
 		catalog.deleteNode(userEmail,deletePaperID);
 		return "success";
 	}
