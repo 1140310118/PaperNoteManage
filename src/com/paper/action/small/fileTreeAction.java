@@ -130,7 +130,7 @@ public class fileTreeAction extends ActionSupport
 	    //response.setCharacterEncoding("UTF-8");  
 	    PrintWriter out = response.getWriter();  
 	    //JSON在传递过程中是普通字符串形式传递的，这里简单拼接一个做测试  
-	    String jsonString=url;  
+	    String jsonString=url;
 	    out.println(jsonString);  
 	    out.flush();  
 	    out.close();  

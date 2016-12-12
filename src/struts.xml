@@ -138,6 +138,10 @@
 			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
 		</action>
 		<action name="fileTreeView_download" class="com.paper.action.small.fileTreeAction" method="download"/>
+		<action name="get_share" class="com.paper.action.small.shareAction" method="get_share"/>
+		<action name="share" class="com.paper.action.small.shareAction" method="share">
+			<result name="success">/jsp/read_and_manage_jsp/sendEmail.jsp</result>
+		</action>
 		
 	</package>
 </struts>

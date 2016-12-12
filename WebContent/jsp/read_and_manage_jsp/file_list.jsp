@@ -139,6 +139,7 @@
 		updatePaper();
 		openPaper();
 		viewLog();
+		share();
 	});
 	function viewLog(){
 		$(".viewLog").click(function(){
@@ -155,6 +156,20 @@
 				
 			}
 			else window.open(webURL);
+		});
+	}
+	function share(){
+		$(".share").click(function(){
+			var id=$(this).parent().parent().parent().attr("id");
+			var paperName=$(this).parent().parent().parent().attr("id").substring(7);
+			$.post("<%=basePath%>get_share",
+			   		{
+						paperName : paperName
+					},
+			   		function(url){
+						url = "<%=basePath%>share?file=<%=basePath%>file/"+url;
+						window.open(url);	
+	      	}); 
 		});
 	}
 	function openPaper(){

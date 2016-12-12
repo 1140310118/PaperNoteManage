@@ -52,13 +52,13 @@
 		   <input type="text" name="to" placeholder="*收件人邮箱"/><br/>
 	    </fieldset>
 	    <fieldset>
-			<input type="text" name="subject" placeholder="主题： 应该：默认为某个值"/><br/>
+			<input type="text" name="subject" placeholder="主题" value="2333论文阅读管理系统 论文分享"/><br/>
 	    </fieldset>
 	    
 	    <fieldset>
-	        <input type="text" style="float: left;width: 270px;" placeholder="附件">
+	        <input type="text" style="float: left;width: 270px;" placeholder="附件" value="${file}">
 	        &nbsp;
-	   		<input type="file" id="filename" name="fileName" style="outline: 0px;width:70px;"/><br/> 
+	   		<input type="file" id="filename" name="fileName" style="outline: 0px;width:70px;" value="${file}"/><br/> 
 	    </fieldset>
 
 	    <fieldset>
