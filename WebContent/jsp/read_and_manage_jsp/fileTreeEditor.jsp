@@ -53,7 +53,17 @@
 		}
 		function beforeDrop(treeId, treeNodes, targetNode, moveType) {
 			if (targetNode.drop !== false){
+				var parentID = targetNode.id;
+				var paperID = treeNodes[0].id;
 				//alert(targetNode.id + " " + treeNodes[0].id);
+				$.post("<%=basePath%>fileTreeEdit_moveNode",
+				   		{
+							parentID : parentID,
+							paperID : paperID
+						},
+				   		function(){
+							return true;
+				   	});
 			}
 			return targetNode ? targetNode.drop !== false : true;
 		}
@@ -68,7 +78,7 @@
 						paperID : treeNode.id,
 						paperNickName : newName
 					},
-			   		function(newNoteID){
+			   		function(){
 			   	}); 
 	        alert(treeNode.id+":"+newName);
 	        return true;

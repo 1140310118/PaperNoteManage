@@ -102,6 +102,7 @@ public class fileTreeAction extends ActionSupport
 	//-------------main_4---------------
 	// 改变节点
 	public String changeNode(){
+		System.out.println("FROM fTA>> 拖拽节点:paperID"+paperID+"to"+parentID);
 		catalog.changeNode(userEmail, paperID, parentID);
 		return "success";
 	}
