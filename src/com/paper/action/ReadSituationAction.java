@@ -22,18 +22,18 @@ public class ReadSituationAction {
 
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
 		// 0 未阅读；1 已粗读；2已精读。
-		// addlog add = new addlog();
+		addlog add = new addlog();
 		String sql = "UPDATE paper SET paperReadSituation = " + paperReadSituation + " WHERE paperNickName = '"
 				+ paperNickName + "' AND paperUserEmail = '" + userEmail + "'";
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 		String sql2 = "select paperWebFilePath from paper where paperNickName = '" + paperNickName + "'";
 		ResultSet rS2 = dao.executeQuery(sql2);
-//		while (rS2.next()) {
-//			String path = rS2.getString(1);
-//			path = path.substring(0, path.length() - 4);
-//			add.addreadlog(path, paperReadSituation);
-//		}
+		while (rS2.next()) {
+			String path = rS2.getString(1);
+			path = path.substring(0, path.length() - 4);
+			add.addreadlog(path, paperReadSituation);
+		}
 
 		if (rS != -1) {
 			System.out.println("FROM ReadSituation: 修改论文阅读情况成功！");
