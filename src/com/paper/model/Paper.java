@@ -111,7 +111,18 @@ public class Paper {
 	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
 	}
-	
+	public String toInsertSql(){
+		String sql = new String();
+		sql = "insert into paper (paperNickName,"
+				+ "paperUserEmail,paperID,paperPID,paperIsDeleted) "
+				+ "values('" + this.paperNickName 
+				+ "','" +this.paperUserEmail
+				+ "','" +paperID
+				+ "','" +0
+				+ "','" +0
+				+ "')";
+		return sql;
+	}
 	public String toInsertSql(String paperWebFilePath) throws SQLException{
 		String sql = new String();
 //		sql ="insert into paper (paperNickName,paperOrigin,paperWebFilePath,paperExteriorURL,paperRemark,uploadDate)"

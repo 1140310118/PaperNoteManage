@@ -72,6 +72,11 @@ public class LoginAndRegisterAction extends ActionSupport {
 			System.out.println(sql);
 			int i = dao.executeUpdate(sql);
 			if (i > -1) {
+				Paper paper=new Paper();
+				paper.paperNickName="未分类";
+				paper.paperID="1";
+				sql=paper.toInsertSql();
+				dao.executeUpdate(sql);
 				return "registersuccess";
 			}
 		}
