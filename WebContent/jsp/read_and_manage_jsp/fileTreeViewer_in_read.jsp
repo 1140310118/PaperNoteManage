@@ -15,7 +15,6 @@
 	</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%-- 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/ztree/zTreeStyle.css" type="text/css"> --%>
 	<link rel="stylesheet" href="<%=basePath%>jsp/read_and_manage_lib/css/zTreeStyle.css" type="text/css">
 	<script type="text/javascript" src="<%=basePath%>jsp/read_and_manage_lib/ztree/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>jsp/read_and_manage_lib/ztree/jquery.ztree.core.js"></script>
@@ -43,91 +42,25 @@
 
 		var zNodes =[];
 
-		function beforeDrag(treeId, treeNodes) {
-			for (var i=0,l=treeNodes.length; i<l; i++) {
-				if (treeNodes[i].drag === false) {
-					return false;
-				}
-			}
-			return true;
-		}
-		function beforeDrop(treeId, treeNodes, targetNode, moveType) {
-			if (targetNode.drop !== false){
-				//alert(targetNode.id + " " + treeNodes[0].id);
-			}
-			return targetNode ? targetNode.drop !== false : true;
-		}
-		function beforeRename(treeId, treeNode, newName) {  
-	        if (newName.length == 0) {  
-	            alert("节点名称不能为空.");  
-	            return false;  
-	        }  
-	        var param = "id=" + treeNode.id + "&name=" + newName;  
-	        // $.post(encodeURI(encodeURI("/peTreeDemo2/jsondata?method=updatePp&"  
-	        //         + param)));  
-	        alert(treeNode.id+":"+newName);
-	        return true;
-	    }
-	    function beforeRemove(treeId, treeNode) {  
-	        // return true;
-	    	if (confirm("确认删除节点--" + treeNode.name + "--吗?")) {  
-	            var param = "id=" + treeNode.id;  
-	            
-	        } else {  
-	            return false;  
-	        }  
-	    }
 		function setCheck() {
-			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-			isMove = $("#move").attr("checked"),
-			delete_option = $("#delete_option").attr("checked");
-			rename_option = $("#rename_option").attr("checked");
-			zTree.setting.edit.showRemoveBtn = delete_option;
-			zTree.setting.edit.showRenameBtn = rename_option;
-			//alert(isMove);
-			zTree.setting.edit.drag.isMove = isMove;
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.setting.edit.drag.isMove = false;
 			zTree.setting.edit.drag.isCopy = false;
 			
 			zTree.setting.edit.drag.prev = true;
 			zTree.setting.edit.drag.inner= true;
 			zTree.setting.edit.drag.next = true;
 		}
-		var newCount = 1;
-		function add(e) {
-			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-			isParent = e.data.isParent;
-			treeNode = zTree.addNodes(null, {id:(100 + newCount), pId:0, isParent:isParent, name:"new node" + (newCount++)});	
-		};
 		
-		function setUndropable(){
-			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-			var treeNodes = zTree.getNodes();
-    		treeNodes = zTree.transformToArray(treeNodes);
-			for(var i=0;i<treeNodes.length;i++){
-			 	if(treeNodes[i].isParent!== true){
-			 		treeNodes[i].drop = false;
-			 	}
-			}
-		}
 		function getZNodes(){
-			<%-- <%  
-			  String s2 = (String)request.getParameter("ztreeNodes");
-			%>
-			var s = '<%=s2%>';//输出s2给js变量s
-			alert(s); --%>
-			var s = $("#ztreeNodes").html();
-			//alert(s);
+			var s = $("#ztreeNodes").html();		
 			zNodes = eval("["+s+"]");
 		}
+		
 		$(document).ready(function(){
 			getZNodes();
 			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-			setUndropable();
 			setCheck();
-			$("#delete_option").bind("change",setCheck);
-			$("#rename_option").bind("change",setCheck);
-			$("#move").bind("change",setCheck);
-			$("#addParent").bind("click", {isParent:true}, add);
 		});
 	</SCRIPT>
 </head>
@@ -139,10 +72,6 @@
 	<ul id="treeDemo" class="ztree"></ul>
 	<div style="display:none">
 		<p id="ztreeNodes">${ztreeNodes}</p>
-		<input type="checkbox" id="delete_option" class="checkbox first"  /><span>删除</span>
-		<input type="checkbox" id="rename_option" class="checkbox first"  /><span>重命名</span>
-		<input type="checkbox" id="move" class="checkbox first"  /><span>拖拽</span>
-		<a id="addParent" href="#" title="增加父节点" onclick="return false;">新建分类</a>
 	</div>
 </BODY>
 </HTML>
