@@ -16,21 +16,23 @@ public class RecycleBinAction {
 //		System.out.println(sql);
 //		ResultSet rS = dao.executeQuery(sql);
 //		System.out.println(rS.next());
-		
+		RecycleBinAction bin = new RecycleBinAction();
+		// 1.显示回收站中论文测试通过
+//		System.out.println("RecycleBinAction:" + bin.showRecycleBin("zorenv@163.com"));
 		// 2.恢复paper测试通过
-//		RecycleBinAction bin = new RecycleBinAction();
-//		System.out.println(bin.recoverPaper("test"));
+		
+//		System.out.println("RecycleBinAction:" + bin.recoverPaper("zorenv@163.com","delete"));
 		
 		// 3.彻底删除paper测试通过
-//		System.out.println(bin.completelyRemovePaper("delete"));
+//		System.out.println("RecycleBinAction:" + bin.completelyRemovePaper("zorenv@163.com", "delete"));
 		
 		// 1.显示删除论文
 //		System.out.println(bin.showRecycleBin());
 //	}
 	
 	// 在回收站中显示论文
-	public String showRecycleBin() throws SQLException{
-		String sql = "SELECT * FROM paper WHERE paperIsDeleted = 1";
+	public String showRecycleBin(String userEmail) throws SQLException{
+		String sql = "SELECT * FROM paper WHERE paperIsDeleted = 1 AND paperUserEmail = '" + userEmail + "'";
 		String paper;
 		System.out.println(sql);
 		ResultSet rS = dao.executeQuery(sql);
@@ -44,9 +46,9 @@ public class RecycleBinAction {
 	}
 	
 	// 恢复论文
-	public String recoverPaper(String paperNickName){
+	public String recoverPaper(String userEmail, String paperNickName){
 		// UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-		String sql = "UPDATE paper SET paperIsDeleted = 0 WHERE paperNickName = " + "'" + paperNickName + "'";
+		String sql = "UPDATE paper SET paperIsDeleted = 0 WHERE paperNickName = " + "'" + paperNickName + "' AND paperUserEmail = '" + userEmail + "'";
 		System.out.println(sql);
 		int i = dao.executeUpdate(sql);
 		if(i > -1)
@@ -55,9 +57,9 @@ public class RecycleBinAction {
 	}
 
 	// 彻底删除论文
-	public String completelyRemovePaper(String paperNickName){
+	public String completelyRemovePaper(String userEmail, String paperNickName){
 		// delete from 表名 where id=1;
-		String sql = "DELETE FROM paper WHERE paperNickName = " + "'" + paperNickName + "'";
+		String sql = "DELETE FROM paper WHERE paperNickName = " + "'" + paperNickName + "' AND paperUserEmail = '" + userEmail + "'";
 		System.out.println(sql);
 		int i = dao.executeUpdate(sql);
 		if(i > -1)
