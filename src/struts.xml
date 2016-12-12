@@ -137,5 +137,7 @@
 		<action name="fileTreeEdit_renameNode" class="com.paper.action.small.fileTreeAction" method="renameNode">
 			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
 		</action>
+		<action name="fileTreeView_download" class="com.paper.action.small.fileTreeAction" method="download"/>
+		
 	</package>
 </struts>

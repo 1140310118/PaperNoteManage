@@ -37,7 +37,8 @@
 				beforeDrag: beforeDrag,
 				beforeDrop: beforeDrop,
 				beforeRemove : beforeRemove,  
-            	beforeRename : beforeRename
+            	beforeRename : beforeRename,
+            	onClick: zTreeOnClick
 			}
 		};
 
@@ -80,7 +81,7 @@
 		function setCheck() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 			isMove = $("#move").attr("checked"),
-			delete_option = $("#delete_option").attr("checked");
+			delete_option = $("#delete_option").attr("checked"),
 			rename_option = $("#rename_option").attr("checked");
 			zTree.setting.edit.showRemoveBtn = delete_option;
 			zTree.setting.edit.showRenameBtn = rename_option;
@@ -93,12 +94,25 @@
 			zTree.setting.edit.drag.next = true;
 		}
 		var newCount = 1;
+		var downloadEnable = $("#download_option").attr("checked");
 		function add(e) {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			isParent = e.data.isParent;
 			treeNode = zTree.addNodes(null, {id:(100 + newCount), pId:0, isParent:isParent, name:"new node" + (newCount++)});	
 		};
-		
+		function zTreeOnClick(e,treeId,treeNode){
+			if(downloadEnable){
+				//alert(treeNode.id);
+				$.post("<%=basePath%>fileTreeView_download",
+				   		{
+							paperID : treeNode.id,
+						},
+				   		function(url){
+							url = "<%=basePath%>file/"+url;
+							window.open(url);		
+				});
+			}
+		}
 		function setUndropable(){
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			var treeNodes = zTree.getNodes();
@@ -128,7 +142,11 @@
 			$("#rename_option").bind("change",setCheck);
 			$("#move").bind("change",setCheck);
 			$("#addParent").bind("click", {isParent:true}, add);
+			$("#download_option").change(function(){
+				downloadEnable = $("#download_option").attr("checked");
+			});
 		});
+
 	</SCRIPT>
 </head>
 
@@ -141,8 +159,11 @@
 		<p id="ztreeNodes">${ztreeNodes}</p>
 		<input type="checkbox" id="delete_option" class="checkbox first"  /><span>删除</span>
 		<input type="checkbox" id="rename_option" class="checkbox first"  /><span>重命名</span>
-		<input type="checkbox" id="move" class="checkbox first"  /><span>拖拽</span>
-		<a id="addParent" href="#" title="增加父节点" onclick="return false;">新建分类</a>
+		<input type="checkbox" id="move" class="checkbox first" /><span>拖拽</span>
+		<a id="addParent" style="cursor:pointer;" title="增加父节点" onclick="return false;">新建分类</a>
+	
 	</div>
+		<input type="checkbox" id="download_option" class="checkbox first"  /><span>下载</span>
+	
 </BODY>
 </HTML>

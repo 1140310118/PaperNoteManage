@@ -101,7 +101,7 @@
 		function setCheck() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 			isMove = $("#move").attr("checked"),
-			delete_option = $("#delete_option").attr("checked");
+			delete_option = $("#delete_option").attr("checked"),
 			rename_option = $("#rename_option").attr("checked");
 			zTree.setting.edit.showRemoveBtn = delete_option;
 			zTree.setting.edit.showRenameBtn = rename_option;

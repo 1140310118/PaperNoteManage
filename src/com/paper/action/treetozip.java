@@ -35,16 +35,20 @@ public class treetozip {
 		while (rs.next()) {
 			paperNickName1 = rs.getString(1);
 			System.out.println("pathpaperNickName1="+paperNickName1);
+			// paperWebFilePath1 为当前节点的地址
 		    paperWebFilePath1 = rs.getString(2);
 			System.out.println("paperWebFilePath1="+paperWebFilePath1);
 			}
-		 rootpath ="d:\\upload\\"+paperNickName1;
+		// rootpath为文件拷贝的目的地址
+		// --add by zyc
+		 rootpath =getWebrootPath()+"zip/"+paperNickName1;
+		 String res = "zip/"+paperNickName1;
 		 path=rootpath;
 		File rootFile1 = new File(rootpath);
 		if(!rootFile1.exists())
 		{
-			rootFile1.mkdir();
-			System.out.println("创建文件夹");
+			rootFile1.mkdirs();
+			System.out.println("创建文件夹:"+rootFile1.toString()+"|");
 		}
 		repath=rootpath;
 		if(paperWebFilePath1==null){
@@ -56,6 +60,7 @@ public class treetozip {
 			while (rs2.next()) {
 				System.out.println("11111111111");
 			paperNickName=rs2 .getString(1);
+			// path 为文件拷贝的目的地址
 			path=repath+"\\"+paperNickName;
 			//System.out.println(path);
 			File rootFile2 = new File(path);
@@ -79,6 +84,7 @@ public class treetozip {
 				System.out.println("pdfname="+pdfname);
 				path=path+"\\"+pdfname;
 				paperWebFilePath2=paperWebFilePath2.replace('/', '\\');
+				paperWebFilePath2=getWebrootPath()+paperWebFilePath2;
 				//System.out.println(path+"+"+paperWebFilePath2);
 				copy.copyFile(paperWebFilePath2,path);
 		    	
@@ -89,7 +95,9 @@ public class treetozip {
 			}while(paperWebFilePath2==null);
 			
 			try {
+				System.out.println("FROM treetozip>> "+rootpath);
 				Z.filezip(rootpath+".zip",rootpath );
+				return res+".zip";
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -103,9 +111,24 @@ public class treetozip {
 			e.printStackTrace();
 			// TODO Auto-generated catch block e.printStackTrace();
 		}
+		return null;
 		
-		return "";
-		
+	}
+	private static String getWebrootPath(){
+		ClassLoader classLoader = Thread.currentThread()  
+	            .getContextClassLoader();  
+	    if (classLoader == null) {  
+	        classLoader = ClassLoader.getSystemClassLoader();  
+	    }  
+	    java.net.URL url = classLoader.getResource("");  
+	    String ROOT_CLASS_PATH = url.getPath() + "/";  
+	    File rootFile = new File(ROOT_CLASS_PATH);  
+	    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+	    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+	    
+	    String root=SERVLET_CONTEXT_PATH+"file/";
+		return root;
 	}
 
 }

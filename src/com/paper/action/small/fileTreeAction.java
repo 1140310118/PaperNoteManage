@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.paper.action.CatalogAction;
+import com.paper.action.treetozip;
 
 import base.translate;
 
@@ -106,9 +107,33 @@ public class fileTreeAction extends ActionSupport
 		catalog.changeNode(userEmail, paperID, parentID);
 		return "success";
 	}
+	
+	//-------------main_5---------------
+	// 改变节点
 	public String renameNode(){
 		catalog.rename(userEmail, paperID, paperNickName);
 		return "success";
+	}
+	
+	//-------------main_6---------------
+	// 打包下载
+	public void download() throws IOException{
+		String url = treetozip.ttp(paperID);
+		
+		HttpServletResponse response=ServletActionContext.getResponse();
+		/* 
+	     * 在调用getWriter之前未设置编码(既调用setContentType或者setCharacterEncoding方法设置编码), 
+	     * HttpServletResponse则会返回一个用默认的编码(既ISO-8859-1)编码的PrintWriter实例。这样就会 
+	     * 造成中文乱码。而且设置编码时必须在调用getWriter之前设置,不然是无效的。 
+	     * */  
+		response.setContentType("text/html;charset=utf-8");  
+	    //response.setCharacterEncoding("UTF-8");  
+	    PrintWriter out = response.getWriter();  
+	    //JSON在传递过程中是普通字符串形式传递的，这里简单拼接一个做测试  
+	    String jsonString=url;  
+	    out.println(jsonString);  
+	    out.flush();  
+	    out.close();  
 	}
 	
 	
