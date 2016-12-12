@@ -12,9 +12,9 @@ import com.paper.action.getMaxpaperID;
 public class CatalogAction {
 	private DAO dao = new DAO();
 	ActionContext actionContext = ActionContext.getContext();
-//	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
-//		CatalogAction catalog = new CatalogAction();
+		CatalogAction catalog = new CatalogAction();
 		// System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
 
 		// 2.deleteNode方法测试
@@ -26,8 +26,11 @@ public class CatalogAction {
 
 		// 4.showNode方法测试通过
 		// System.out.println(catalog.showNode("zorenv@163.com"));
+		
+		// 5.rename方法测试
+		catalog.rename("zorenv@163.com", "2", "Lab1");
 
-//	}
+	}
 
 	// 拖拽节点
 	public String changeNode(String userEmail, String id, String pid) {
@@ -207,6 +210,12 @@ public class CatalogAction {
 				+ userEmail + "'";
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
+	}
+	
+	public void rename(String userEmail, String paperID, String paperNickName){
+		String sql = "UPDATE paper SET paperNickName = '" + paperNickName + "' WHERE paperUserEmail = '" + userEmail + "' AND paperID = '" + paperID + "'";
+		System.out.println(sql);
+		int rS = dao.executeUpdate(sql);		
 	}
 	
 }
