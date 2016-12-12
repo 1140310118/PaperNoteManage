@@ -126,7 +126,7 @@
 	<c:set var="i" value="0"></c:set>
 	<div id="noteArea">
 		<s:iterator value="notes">
-			<div id="note_${notes[i].noteID}">	
+			<div id="note_${notes[i].noteID}">
 				<c:set var="i" value="${i+1}"></c:set>
 				<textarea placeholder="笔记" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea>
 				<button class="note_delete_button_class">删除笔记</button>

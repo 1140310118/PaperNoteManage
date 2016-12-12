@@ -92,19 +92,12 @@
 			<li><a style="cursor:point;" id="file_tree_edit">编辑</a></li>
 		</ul>
 	</li>
-	<li><div class="link"><i class="fa fa-globe"></i>文件操作记录<i class="fa fa-chevron-down"></i></div>
-		<ul class="submenu">
-			<li><a style="cursor:point;" id="viewMylog">查看我的Log</a></li>
-			<li><a style="cursor:point;">导出我的Log</a></li>
-			<li><a style="cursor:point;" id="share_my_log">分享我的Log</a></li>
-		</ul>
-	</li>
 
 	<li>
-		<div class="link"><i class="fa fa-mobile"></i>回收站</div>
+		<div class="link" id="viewRB"><i class="fa fa-mobile"></i>回收站</div>
 	</li>
 	<li>
-		<div class="link"><i class="fa fa-mobile"></i>阅读时间线</div>
+		<div class="link"><i class="fa fa-globe"></i>阅读时间线</div>
 	</li>
 	</ul>
 	<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
@@ -122,18 +115,16 @@
 		$("#newPaperByURL_Show").click(function(){
 			$("#mainShow").attr("src","<%=basePath%>newPaperURL");
 		});
-		$("#share_my_log").click(function(){
-			$("#mainShow").attr("src","<%=basePath%>email.jsp");
-		});
 		$("#file_tree_view").click(function(){
 			$("#mainShow").attr("src","<%=basePath%>fileTreeView");
 		});
 		$("#file_tree_edit").click(function(){
-			$("#mainShow").attr("src","<%=basePath%>jsp/read_and_manage_jsp/fileTreeEditor.jsp");
+			$("#mainShow").attr("src","<%=basePath%>fileTreeEdit");
 		});
-		$("#viewMylog").click(function(){
-			$("#mainShow").attr("src","<%=basePath%>logList");
+		$("#viewRB").click(function(){
+			$("#mainShow").attr("src","<%=basePath%>recycleBin");
 		});
+		
 		
 	});
 	</script>

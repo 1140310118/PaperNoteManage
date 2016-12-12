@@ -4,6 +4,8 @@ import com.paper.action.ReadSituationAction;
 import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -83,23 +85,18 @@ public class FileListAction extends ActionSupport
 	{
 		this.paper=paper;
 	}
-    public String showLogList(){
-
-		getAllPaperExistedByEmail();
-    	return "success";
-    }
     
 	public String paperManage() throws Exception{
 		// 删除 修改 显示所有论文
 		// 删除论文
 		if (deletePaperNickName!=null){
 			System.out.println("FROM FileListAction>> 删除的文件："+deletePaperNickName);
-			deletePaperByNickname(deletePaperNickName);
+			deletePaperByNickname(deletePaperNickName,userEmail);
 		}
 		// 修改论文
 		if (updatePaperFlag!="false"){
 			System.out.println("FROM FileListAction>> 修改论文信息");
-			updatePaper(updatedPaper);
+			updatePaper(updatedPaper,userEmail);
 		}
 		// 修改阅读情况
 		if (readSituation!=null){
@@ -112,9 +109,9 @@ public class FileListAction extends ActionSupport
 		return "success";
 	} 
 
-	private void updatePaper(Paper paper) {
+	private void updatePaper(Paper paper,String userEmail) {
 		try{
-			String sql = "update paper set paperOrigin=?,paperRemark=?,uploadDate=?,paperExteriorURL=? where paperNickName=?";
+			String sql = "update paper set paperOrigin=?,paperRemark=?,uploadDate=?,paperExteriorURL=? where paperNickName=? and paperUserEmail=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1,paper.paperOrigin);
 			//pStmt.setString(2,paper.paperWebFilePath);
@@ -122,6 +119,7 @@ public class FileListAction extends ActionSupport
 			pStmt.setString(3,paper.uploadDate);
 			pStmt.setString(4,paper.paperExteriorURL);
 			pStmt.setString(5,paper.paperNickName);
+			pStmt.setString(6,userEmail);
 			pStmt.executeUpdate();
 			System.out.println("From FileAction>> "+pStmt.toString());
 		}
@@ -130,12 +128,30 @@ public class FileListAction extends ActionSupport
 		}
 	}
 	
-	private void deletePaperByNickname(String dPaperNickName) {
-		bo.deleteByType(dPaperNickName);
+	private void deletePaperByNickname(String dPaperNickName,String userEmail) {
+		//移到回收站
+		bo.deleteByType(dPaperNickName,userEmail);
 	}
 	
 	private void getAllPaperExistedByEmail() {
 		System.out.println(userEmail);
 		ActionContext.getContext().put("paperList", bo.selectByType(userEmail));
-		}
+	}
+	
+	private String getWebrootPath(){
+		ClassLoader classLoader = Thread.currentThread()  
+	            .getContextClassLoader();  
+	    if (classLoader == null) {  
+	        classLoader = ClassLoader.getSystemClassLoader();  
+	    }  
+	    java.net.URL url = classLoader.getResource("");  
+	    String ROOT_CLASS_PATH = url.getPath() + "/";  
+	    File rootFile = new File(ROOT_CLASS_PATH);  
+	    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+	    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+	    
+	    String root=SERVLET_CONTEXT_PATH+"file/"+userEmail+"/";
+		return root;
+	}
 }

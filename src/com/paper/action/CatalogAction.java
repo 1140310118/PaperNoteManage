@@ -161,7 +161,6 @@ public class CatalogAction {
 				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName
 						+ "\",drop:false},";
 		}
-
 		return zNodesList;
 	}
 

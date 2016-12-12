@@ -1,5 +1,6 @@
 package com.paper.action.small;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -15,10 +16,10 @@ public class SRecycleBinAction extends ActionSupport
 	private static final long serialVersionUID = 1L;
 	
 	// 向后台传递的参数
-	private ArrayList<Paper> papers = new ArrayList<Paper>();
+	private ArrayList<String> papers = new ArrayList<String>();
 	
 	// 从前台接受的参数
-	private String paperID = null;
+	private String paperNickName = null;
 	
 	// 获得用户email
 	ActionContext actionContext = ActionContext.getContext();
@@ -32,38 +33,38 @@ public class SRecycleBinAction extends ActionSupport
 	
 	//-------------main_1---------------
 	// 显示回收站
-	public String viewRB(){
-		papers=rb.getRecycleBin(userEmail);
+	public String viewRB() throws SQLException{
+		papers=(ArrayList<String>) rb.getRecycleBin(userEmail);
 		return "success";
 	}
 	
 	//-------------main_2---------------
 	// 恢复回收站中的文件 --恢复到未分类中
 	public String restorePaper(){
-		rb.restorePaper(userEmail,paperID);
+		rb.recoverPaper(userEmail,paperNickName);
 		return "success";
 	}
 
 	//-------------main_3---------------
 	// 彻底删除回收站中的文件
 	public String deletePaperAbsolutely(){
-		rb.deleteAbsolutely(userEmail,paperID);
+		rb.completelyRemovePaper(userEmail,paperNickName);
 		return "success";
 	}
 	
-	public String getPaperID() {
-		return paperID;
+	public String getPaperNickName() {
+		return paperNickName;
 	}
 
-	public void setPaperID(String paperID) {
-		this.paperID = paperID;
+	public void setPaperNickName(String paperNickName) {
+		this.paperNickName = paperNickName;
 	}
 	
-	public ArrayList<Paper> getPapers() {
+	public ArrayList<String> getPapers() {
 		return papers;
 	}
 
-	public void setPapers(ArrayList<Paper> papers) {
+	public void setPapers(ArrayList<String> papers) {
 		this.papers = papers;
 	}
 	

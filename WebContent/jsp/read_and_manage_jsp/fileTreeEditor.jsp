@@ -41,7 +41,7 @@
 			}
 		};
 
-		var zNodes =;
+		var zNodes =[];
 
 		function beforeDrag(treeId, treeNodes) {
 			for (var i=0,l=treeNodes.length; i<l; i++) {
@@ -63,16 +63,26 @@
 	            return false;  
 	        }  
 	        var param = "id=" + treeNode.id + "&name=" + newName;  
-	        // $.post(encodeURI(encodeURI("/peTreeDemo2/jsondata?method=updatePp&"  
-	        //         + param)));  
+	        $.post("<%=basePath%>fileTreeEdit_renameNode",
+			   		{
+						paperID : treeNode.id,
+						paperNickName : newName
+					},
+			   		function(newNoteID){
+			   	}); 
 	        alert(treeNode.id+":"+newName);
 	        return true;
 	    }
 	    function beforeRemove(treeId, treeNode) {  
-	        return true;
+	        // return true;
 	    	if (confirm("确认删除节点--" + treeNode.name + "--吗?")) {  
-	            var param = "id=" + treeNode.id;  
-	            
+	            //var param = "id=" + treeNode.id;  
+	            $.post("<%=basePath%>fileTreeEdit_deleteNode",
+			   		{
+						deletePaperID : treeNode.id
+					},
+			   		function(newNoteID){
+			   	});
 	        } else {  
 	            return false;  
 	        }  
@@ -96,7 +106,14 @@
 		function add(e) {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			isParent = e.data.isParent;
-			treeNode = zTree.addNodes(null, {id:(100 + newCount), pId:0, isParent:isParent, name:"new node" + (newCount++)});	
+			$.post("<%=basePath%>fileTreeEdit_newNode",
+			   		{
+						pID : 0,
+						paperNickName : "new node" + (newCount++)
+					},
+			   		function(id){
+						treeNode = zTree.addNodes(null, {id:id, pId:0, isParent:isParent, name:"new node" + (newCount++)});	
+			});
 		};
 		
 		function setUndropable(){
@@ -109,8 +126,13 @@
 			 	}
 			}
 		}
-
+		function getZNodes(){
+			var s = $("#ztreeNodes").html();
+			//alert(s);
+			zNodes = eval("["+s+"]");
+		}
 		$(document).ready(function(){
+			getZNodes();
 			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 			setUndropable();
 			setCheck();
@@ -127,10 +149,18 @@
 
 <BODY>
 	<ul id="treeDemo" class="ztree"></ul>
-	<input type="checkbox" id="delete_option" class="checkbox first"  /><span>删除</span>
-	<input type="checkbox" id="rename_option" class="checkbox first"  /><span>重命名</span>
-	<input type="checkbox" id="move" class="checkbox first"  checked /><span>拖拽</span>
-	<a id="addParent" href="#" title="增加父节点" onclick="return false;">新建分类</a>
-						
+	<div>
+		<p id="ztreeNodes" style="display:none;">${ztreeNodes}</p>
+	</div>
+		<br><br><br>
+		<input type="checkbox" id="delete_option" class="checkbox first"  /><span>删除</span>
+		<input type="checkbox" id="rename_option" class="checkbox first"  /><span>重命名</span>
+		<input type="checkbox" id="move" class="checkbox first"  /><span>拖拽</span>
+		<a id="addParent" style="cursor:pointer;" title="增加父节点" onclick="return false;">新建分类</a>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+	</script>
 </BODY>
 </HTML>

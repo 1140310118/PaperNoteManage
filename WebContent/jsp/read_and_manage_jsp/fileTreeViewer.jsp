@@ -69,7 +69,7 @@
 	        return true;
 	    }
 	    function beforeRemove(treeId, treeNode) {  
-	        return true;
+	        // return true;
 	    	if (confirm("确认删除节点--" + treeNode.name + "--吗?")) {  
 	            var param = "id=" + treeNode.id;  
 	            
