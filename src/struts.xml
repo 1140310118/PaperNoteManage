@@ -47,15 +47,7 @@
 		<action name="fileTreeEdit" class="com.paper.action.small.fileTreeAction" method="viewTree">
 			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
 		</action>
-		<action name="fileTreeEdit_deleteNode" class="com.paper.action.small.fileTreeAction" method="deleteNode">
-			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
-		</action>
-		<action name="fileTreeEdit_moveNode" class="com.paper.action.small.fileTreeAction" method="changeNode">
-			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
-		</action>
-		<action name="fileTreeEdit_renameNode" class="com.paper.action.small.fileTreeAction" method="renameNode">
-			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
-		</action>
+		
 		
 		<action name="logViewer" class="com.paper.action.small.ViewLogAction" method="showLog">
 			<result name="success">/jsp/read_and_manage_jsp/logViewer.jsp</result>
@@ -138,6 +130,12 @@
 		<action name="newNote" class="testForJsp.action.NoteManage" method="newNote"/>
 		<action name="wordTranslate" class="testForJsp.action.NoteManage" method="wordTranslate"/>
 		<action name="fileTreeEdit_addNode" class="com.paper.action.small.fileTreeAction" method="newNode"/>
-			
+		<action name="fileTreeEdit_deleteNode" class="com.paper.action.small.fileTreeAction" method="deleteNode"/>
+		<action name="fileTreeEdit_moveNode" class="com.paper.action.small.fileTreeAction" method="changeNode">
+			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
+		</action>
+		<action name="fileTreeEdit_renameNode" class="com.paper.action.small.fileTreeAction" method="renameNode">
+			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -3,6 +3,7 @@ package com.paper.action.small;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -55,9 +56,24 @@ public class fileTreeAction extends ActionSupport
 	
 	//-------------main_2---------------
 	// 删除节点
-	public String deleteNode() throws SQLException{
-		catalog.deleteNode(userEmail,paperID);
-		return "success";
+	public void deleteNode() throws IOException, SQLException{
+		System.out.println("FROM fTA>> 删除节为的ID为"+paperID);
+		ArrayList<String> paperIDS=catalog.deleteNode(userEmail,paperID);
+		
+		HttpServletResponse response=ServletActionContext.getResponse();
+		/* 
+	     * 在调用getWriter之前未设置编码(既调用setContentType或者setCharacterEncoding方法设置编码), 
+	     * HttpServletResponse则会返回一个用默认的编码(既ISO-8859-1)编码的PrintWriter实例。这样就会 
+	     * 造成中文乱码。而且设置编码时必须在调用getWriter之前设置,不然是无效的。 
+	     * */  
+		response.setContentType("text/html;charset=utf-8");  
+	    //response.setCharacterEncoding("UTF-8");  
+	    PrintWriter out = response.getWriter();  
+	    //JSON在传递过程中是普通字符串形式传递的，这里简单拼接一个做测试  
+	    String jsonString=paperIDS.toString();  
+	    out.println(jsonString);  
+	    out.flush();  
+	    out.close();  
 	}
 
 	//-------------main_3---------------

@@ -79,9 +79,10 @@
 	            //var param = "id=" + treeNode.id;  
 	            $.post("<%=basePath%>fileTreeEdit_deleteNode",
 			   		{
-						deletePaperID : treeNode.id
+						paperID : treeNode.id
 					},
-			   		function(newNoteID){
+			   		function(IDs){
+						alert(IDs);
 			   	});
 	        } else {  
 	            return false;  

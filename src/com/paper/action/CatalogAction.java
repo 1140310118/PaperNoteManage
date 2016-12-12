@@ -2,6 +2,7 @@ package com.paper.action;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -46,12 +47,14 @@ public class CatalogAction {
 	}
 
 	// 删除节点
-	public String deleteNode(String userEmail, String id) throws SQLException {
+	// 返回加入未分类的节点
+	public ArrayList<String> deleteNode(String userEmail, String id) throws SQLException {
 		// 递归执行：
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
 		int i = 0; // number of paper
+		ArrayList<String> res= new ArrayList<String>();
 		String[][] paper;
 		CatalogAction catalog = new CatalogAction();
 		paper = catalog.getPaper(userEmail);
@@ -97,6 +100,11 @@ public class CatalogAction {
 					if (paper[j][2] != null || paper[j][3] != null) {
 						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
 						catalog.changePaper(userEmail, paper[j][0]);
+						//System.out.println("FROM clA>> paperID:"+paper[j][0]);
+						String a = paper[j][0];
+						res.add(a);
+						//System.out.println("FROM clA>> paperID:"+res.toString());
+						System.out.println(res);
 					} else {// 否则，删除
 						catalog.deletePaper2(userEmail, paper[j][1]);
 						pidqueue.offer(paper[j][0]);
@@ -112,7 +120,8 @@ public class CatalogAction {
 			// 更新pid
 			pid = pidqueue.poll();
 		}
-		return "deleteNodesuccess";
+		System.out.println("FROM clA>> res:"+res.toString());
+		return res;
 	}
 
 	
