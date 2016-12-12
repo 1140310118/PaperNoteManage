@@ -32,8 +32,8 @@
 	<br>
 <div style="float:left;">
 	<ol class="rounded-list" id="allPaperShow">
-		<c:forEach var="paper" items="${paperList}">
-			<div id="paperE_${paper.paperNickName}">
+		<s:forEach var="paper" items="${papers}">
+			<div id="paperE_${paper}">
 				<li>
 					&nbsp;
 					<a class="paperNameClick" target="_blank" style="cursor:pointer;">${paper.paperNickName}</a>

@@ -44,8 +44,11 @@ public class RecycleBinAction {
 			System.out.println(paper);
 			papers.add(paper);
 		}
-		if (rS != null)
+		if (rS != null){
+			System.out.println("FROM RecycleBin>> "+rS);
+			System.out.println("FROM RecycleBin>> "+papers.toString());
 			return papers;
+		}
 		return papers;
 	}
 	

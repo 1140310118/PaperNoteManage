@@ -59,7 +59,7 @@ public class BookAction extends ActionSupport {
 	{
 
 		//System.out.println(text+"***");
-		if(bo.deleteByType(type)==1){
+		if(bo.deleteByType(type,"")==1){
 			//System.out.println("del111");
 			return "delete";
 		}
