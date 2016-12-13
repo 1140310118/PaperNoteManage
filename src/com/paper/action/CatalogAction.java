@@ -50,7 +50,7 @@ public class CatalogAction {
 	// 删除节点
 	// 返回加入未分类的节点
 	public ArrayList<String> deleteNode(String userEmail, String id) throws SQLException {
-		// 递归执行：
+		// 非递归：
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
