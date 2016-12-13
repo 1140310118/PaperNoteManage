@@ -192,6 +192,15 @@
 				$(this).html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp");
 			}
 		});
+		$(".share").each(function(){
+			var id=$(this).parent().parent().parent().attr("id");
+			var fileURL  = $("#"+id+" .URL").attr("fileURL");
+			if(!fileURL){
+				$(this).css("cursor","default");
+				$(this).css('text-decoration',  'none');
+				$(this).html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp");
+			}
+		});
 	}
 	function RC_init(){
 		$(".RC_select").each(function(key){
