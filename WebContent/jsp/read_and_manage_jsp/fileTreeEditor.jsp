@@ -90,21 +90,22 @@
 	    function beforeRemove(treeId, treeNode) {  
 	        // return true;
 	    	if (confirm("确认删除节点--" + treeNode.name + "--吗?")) {  
-	            //var param = "id=" + treeNode.id;  
-	            $.post("<%=basePath%>fileTreeEdit_deleteNode",
-			   		{
-						paperID : treeNode.id
-					},
-			   		function(IDs){
-						IDs=eval(IDs);
-						var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-				    	var targetNode = zTree.getNodeByParam("id", 1);
-				    	zTree.addNodes(targetNode,IDs[i]);
-						return true;
-			   	});
-	        } else {  
-	            return false;  
-	        }  
+	            //var param = "id=" + treeNode.id;
+	            if (treeNode.isParent!=true){
+		            $.post("<%=basePath%>fileTreeEdit_deleteNode",
+				   		{
+							paperID : treeNode.id
+						},
+				   		function(IDs){
+							IDs=eval(IDs);
+							var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+					    	var targetNode = zTree.getNodeByParam("id", 1);
+					    	zTree.addNodes(targetNode,IDs[i]);
+							return true;
+				   	});
+	            }
+	        }   
+	        return false;  
 	    }
 	    /* function moveToUC(name){
 	    	alert(name);

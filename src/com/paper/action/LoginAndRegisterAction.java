@@ -75,6 +75,7 @@ public class LoginAndRegisterAction extends ActionSupport {
 				Paper paper=new Paper();
 				paper.paperNickName="未分类";
 				paper.paperID="1";
+				paper.paperIsDeleted="0";
 				paper.paperUserEmail = user.email;
 				sql=paper.toInsertSql();
 				dao.executeUpdate(sql);
