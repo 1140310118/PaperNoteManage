@@ -1,5 +1,6 @@
 package com.paper.action;
 
+import java.io.File;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -23,6 +24,15 @@ public class SendEmailAction extends ActionSupport {
 	private String subject;
 	private String body;
 	private String fileName = "";
+	private String filePath = "";
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	// private String affix = ""; // 附件地址
 	// private String affixName = ""; // 附件名称
 	static Properties properties = new Properties();
@@ -65,7 +75,12 @@ public class SendEmailAction extends ActionSupport {
 			// 加载正文(原先的方法)
 			message.setText(body);
 			// 创建附件部分
-			 MimeBodyPart attachment = createAttachment("D:\\course\\大三上\\软件工程\\项目\\lab5.ppt");
+			String root = getWebrootPath();
+			root = root + filePath;
+			if (filePath==""){
+				return "error";
+			}
+			 MimeBodyPart attachment = createAttachment(root);
 //			MimeBodyPart attachment = createAttachment(fileName);
 			// 将邮件中各个部分组合到一个"mixed"型的 MimeMultipart 对象
 			MimeMultipart allPart = new MimeMultipart("mixed");
@@ -82,6 +97,23 @@ public class SendEmailAction extends ActionSupport {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+	
+	private String getWebrootPath(){
+		ClassLoader classLoader = Thread.currentThread()  
+	            .getContextClassLoader();  
+	    if (classLoader == null) {  
+	        classLoader = ClassLoader.getSystemClassLoader();  
+	    }  
+	    java.net.URL url = classLoader.getResource("");  
+	    String ROOT_CLASS_PATH = url.getPath() + "/";  
+	    File rootFile = new File(ROOT_CLASS_PATH);  
+	    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+	    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+	    
+	    String root=SERVLET_CONTEXT_PATH+"file/";
+		return root;
 	}
 
 	public String getFrom() {
