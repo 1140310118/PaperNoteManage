@@ -163,10 +163,10 @@ public class BookOper {
 	try{
 		//System.out.println(title_id+"***");
 	//pstmt = conn.prepareStatement("delete from paper where paperNickName=?");
-		pstmt = conn.prepareStatement("update paper set paperIsDeleted=1 where paperNickName=? and paperUserEmail=?");
+		pstmt = conn.prepareStatement("update paper set paperPID=1,paperIsDeleted=1 where paperNickName=? and paperUserEmail=?");
 	pstmt.setString(1, paperNickName);
 	pstmt.setString(2, paperUserEmail);
-	System.out.println(pstmt.toString());
+	System.out.println("BookOper: "+pstmt.toString());
 	jg = pstmt.executeUpdate();
 	}
 	catch (SQLException e) {
