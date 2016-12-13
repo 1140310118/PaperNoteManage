@@ -22,9 +22,9 @@ public class SendEmailAction extends ActionSupport {
 	private String to;
 	private String subject;
 	private String body;
-	private String fileName;
-	private String affix = ""; // 附件地址
-	private String affixName = ""; // 附件名称
+	private String fileName = "";
+	// private String affix = ""; // 附件地址
+	// private String affixName = ""; // 附件名称
 	static Properties properties = new Properties();
 	static {
 		properties.put("mail.smtp.host", "smtp.163.com");
@@ -64,16 +64,15 @@ public class SendEmailAction extends ActionSupport {
 			message.setSubject(subject);
 			// 加载正文(原先的方法)
 			message.setText(body);
-			 // 创建附件部分
-			// MimeBodyPart attachment =
-			 createAttachment("F:\\java\\Snake.java");
-			 MimeBodyPart attachment = createAttachment(fileName);
-			 // 将邮件中各个部分组合到一个"mixed"型的 MimeMultipart 对象
-			 MimeMultipart allPart = new MimeMultipart("mixed");
-			 allPart.addBodyPart(attachment);
-			 // 将上面混合型的 MimeMultipart 对象作为邮件内容并保存
-			 message.setContent(allPart);
-            
+			// 创建附件部分
+			 MimeBodyPart attachment = createAttachment("D:\\course\\大三上\\软件工程\\项目\\lab5.ppt");
+//			MimeBodyPart attachment = createAttachment(fileName);
+			// 将邮件中各个部分组合到一个"mixed"型的 MimeMultipart 对象
+			MimeMultipart allPart = new MimeMultipart("mixed");
+			allPart.addBodyPart(attachment);
+			// 将上面混合型的 MimeMultipart 对象作为邮件内容并保存
+			message.setContent(allPart);
+
 			System.out.println("邮件标题：" + subject);
 			System.out.println("邮件正文：" + body);
 			System.out.println("文件路径：" + fileName);
@@ -133,20 +132,20 @@ public class SendEmailAction extends ActionSupport {
 		this.fileName = fileName;
 	}
 
-	public String getAffix() {
-		return affix;
-	}
-
-	public void setAffix(String affix) {
-		this.affix = affix;
-	}
-
-	public String getAffixName() {
-		return affixName;
-	}
-
-	public void setAffixName(String affixName) {
-		this.affixName = affixName;
-	}
+	// public String getAffix() {
+	// return affix;
+	// }
+	//
+	// public void setAffix(String affix) {
+	// this.affix = affix;
+	// }
+	//
+	// public String getAffixName() {
+	// return affixName;
+	// }
+	//
+	// public void setAffixName(String affixName) {
+	// this.affixName = affixName;
+	// }
 
 }
