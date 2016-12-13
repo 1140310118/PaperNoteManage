@@ -1,6 +1,7 @@
 package com.paper.action;
 
 import java.io.File;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -14,6 +15,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SendEmailAction extends ActionSupport {
@@ -25,6 +27,9 @@ public class SendEmailAction extends ActionSupport {
 	private String body;
 	private String fileName = "";
 	private String filePath = "";
+	ActionContext actionContext = ActionContext.getContext();
+	Map<String, Object> session = actionContext.getSession();
+	private String userEmail = (String) session.get("USER_Email");
 	public String getFilePath() {
 		return filePath;
 	}
@@ -76,7 +81,8 @@ public class SendEmailAction extends ActionSupport {
 			message.setText(body);
 			// 创建附件部分
 			String root = getWebrootPath();
-			root = root + filePath;
+			root = root + userEmail+"/"+ filePath;
+			System.out.println("FROM SendEmailA>> root:"+root);
 			if (filePath==""){
 				return "error";
 			}

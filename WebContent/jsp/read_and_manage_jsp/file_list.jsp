@@ -167,6 +167,7 @@
 						paperName : paperName
 					},
 			   		function(url){
+						//alert(url);
 						url = "<%=basePath%>share?filePath="+url;
 						window.open(url);	
 	      	}); 

@@ -30,7 +30,7 @@ public class Readtime {
 //			writer.close();
 			writer = new FileWriterWithEncoding(addreadtime,"utf8", true);
 			writer.write("\n"+date +"	"+ pickname ); 
-			writer.write("\r\n");
+			//writer.write("\r\n");
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

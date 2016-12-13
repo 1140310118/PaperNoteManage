@@ -97,7 +97,7 @@
 		<div class="link" id="viewRB"><i class="fa fa-mobile"></i>回收站</div>
 	</li>
 	<li>
-		<div class="link"><i class="fa fa-globe"></i>阅读时间线</div>
+		<div class="link" id="viewRead"><i class="fa fa-globe"></i>阅读时间线</div>
 	</li>
 	</ul>
 	<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
@@ -123,6 +123,11 @@
 		});
 		$("#viewRB").click(function(){
 			$("#mainShow").attr("src","<%=basePath%>recycleBin");
+		});
+		$("#viewRead").click(function(){		
+			var src="<%=basePath%>readtimeViewer";
+			$("#mainShow").attr("src",src);
+					
 		});
 		
 		

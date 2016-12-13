@@ -52,6 +52,9 @@
 		<action name="logViewer" class="com.paper.action.small.ViewLogAction" method="showLog">
 			<result name="success">/jsp/read_and_manage_jsp/logViewer.jsp</result>
 		</action>
+		<action name="readtimeViewer" class="com.paper.action.small.ViewReadtimeAction" method="showReadtime">
+			<result name="success">/jsp/read_and_manage_jsp/readtimeViewer.jsp</result>
+		</action>
 		
 		<action name="fileList" class="com.paper.action.small.FileListAction" method="paperManage">
 			<result name="success">/jsp/read_and_manage_jsp/file_list.jsp</result>

@@ -22,8 +22,17 @@ public class shareAction extends ActionSupport
 	private static final long serialVersionUID = 1L;
 	private String paperName=null;
 	private String file = null;
+	private String filePath = null;
+	
 	
 
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 	private FindLocationAction fla = new FindLocationAction();
 	
 	// 获得用户email
@@ -39,8 +48,8 @@ public class shareAction extends ActionSupport
 		path = path.substring(0,path.lastIndexOf("/"));
 		String root = getWebrootPath();
 		FileToZip ftz = new FileToZip();
-		ftz.filezip(root+userEmail+"/"+paperName+".zip",root+path);
-		String url = userEmail+"/"+paperName+".zip";
+		ftz.filezip(root+userEmail+"/"+"sharePaper.zip",root+path);
+		String url = "sharePaper.zip";
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 
 	     * 在调用getWriter之前未设置编码(既调用setContentType或者setCharacterEncoding方法设置编码), 
