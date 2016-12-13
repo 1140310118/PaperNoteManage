@@ -130,8 +130,14 @@ public class NewPaper extends ActionSupport implements
 		else{
 			paper.paperExteriorURL = "http://" + paper.paperExteriorURL;
 		}
+		
 		insertNewPaper(paper.paperExteriorURL);
+		
 		System.out.println(paper.paperExteriorURL);
+		
+		
+		String nickName=str2ascii(this.paper.paperNickName);
+		String rootnull=createInitFile(root,nickName);
 	}
 	
 	// 向数据库中插入 paper 对象	
@@ -184,9 +190,10 @@ public class NewPaper extends ActionSupport implements
 //			
 //		}
 		String root1= createInitFile(root,nickName);
+		
 		String pdfName=singleFile.getResumeFileName();
 		pdfName=pdfName.substring(0,pdfName.length()-4);
-		System.out.println("FROM NP.java>> pdfName:"+pdfName);
+		//System.out.println("FROM NP.java>> pdfName:"+pdfName);
 		pdfName=str2ascii(pdfName)+".pdf";
 		
 		String filename = root1+"\\" + pdfName;
@@ -211,7 +218,7 @@ public class NewPaper extends ActionSupport implements
 		System.out.println("FROM NewPaper.java>> "+res);
 		return res;
 	}
-	
+	//
 	private String createInitFile(String root,String nickName) throws IOException{
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());

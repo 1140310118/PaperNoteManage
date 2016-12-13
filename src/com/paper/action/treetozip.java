@@ -20,7 +20,7 @@ public class treetozip {
 	}
 	public static String ttp (String id){
 		DAO dao = new DAO();
-		String paperNickName1 = null,paperNickName=null;
+		String paperNickName1 = null,paperNickName=null,paperExteriorURL1=null,paperExteriorURL2=null;
 		String paperWebFilePath1 = null;
 		String paperWebFilePath2 = null;
 		String rootpath=null,path=null,paperID=null,pdfname=null,zipname=null,repath=null;
@@ -29,7 +29,7 @@ public class treetozip {
 		FileToZip Z = new FileToZip();
 		
 		try {
-		String sql ="select paperNickName, paperWebFilePath from paper where paperID="+id;
+		String sql ="select paperNickName, paperWebFilePath,paperExteriorURL from paper where paperID="+id;
 		
 		ResultSet rs = dao.executeQuery(sql);
 		while (rs.next()) {
@@ -38,6 +38,7 @@ public class treetozip {
 			// paperWebFilePath1 为当前节点的地址
 		    paperWebFilePath1 = rs.getString(2);
 			System.out.println("paperWebFilePath1="+paperWebFilePath1);
+			paperExteriorURL1=rs.getString(3);
 			}
 		// rootpath为文件拷贝的目的地址
 		// --add by zyc
@@ -51,15 +52,16 @@ public class treetozip {
 			System.out.println("创建文件夹:"+rootFile1.toString()+"|");
 		}
 		repath=rootpath;
-		if(paperWebFilePath1==null){
+		if(paperWebFilePath1==null&&paperExteriorURL1==null){
 			do{
-			String sql2 ="select paperNickName, paperWebFilePath, paperID  from paper where paperPID="+id;
+			String sql2 ="select paperNickName, paperWebFilePath, paperID,paperExteriorURL  from paper where paperPID="+id;
 			System.out.println(sql2);
 			ResultSet rs2 = dao.executeQuery(sql2);
 			
 			while (rs2.next()) {
 				System.out.println("11111111111");
 			paperNickName=rs2 .getString(1);
+			paperExteriorURL2=rs2 .getString(4);
 			// path 为文件拷贝的目的地址
 			path=repath+"\\"+paperNickName;
 			//System.out.println(path);
@@ -71,12 +73,12 @@ public class treetozip {
 			}
 		    paperWebFilePath2 = rs2 .getString(2);
 		    paperID=rs2 .getString(3);
-		    if(paperWebFilePath2==null){
+		    if(paperWebFilePath2==null&&paperExteriorURL2==null){
 		    	
 		    	id=paperID;
 		    	System.out.println("新ID"+id);
 		    	}
-		    if(paperWebFilePath2!=null){
+		    if(paperWebFilePath2!=null||paperExteriorURL2!=null){
 		    	System.out.println("路径不空");
 		    	//System.out.println(path+"+"+paperWebFilePath2);
 				ppath=paperWebFilePath2.split("/");
