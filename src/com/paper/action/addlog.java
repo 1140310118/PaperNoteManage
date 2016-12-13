@@ -72,13 +72,13 @@ public class addlog {
 	
 
 	// for notemanage
-	public void addcreatelog (String path){
+	public void addcreatelog (String path ,String noteID){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
 		path = path+"\\"+"log.txt";
 		try {
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
-			writer.write(date +"	"+ "创建笔记" ); 
+			writer.write(date +"	"+ "创建笔记 "+noteID ); 
 			writer.write("\r\n");
 			 writer.close();
 		} catch (IOException e) {
@@ -88,13 +88,13 @@ public class addlog {
 	}
 	
 	// for notemanage
-	public void adddeletelog (String path){
+	public void adddeletelog (String path, String deleteNoteID){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
 		path = path+"\\"+"log.txt";
 		try {
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
-			writer.write(date +"	"+ "删除笔记" ); 
+			writer.write(date +"	"+ "删除笔记 "+deleteNoteID ); 
 			writer.write("\r\n");
 			 writer.close();
 		} catch (IOException e) {
@@ -103,13 +103,13 @@ public class addlog {
 		} 
 	}
 	
-	public void addmonidfylog (String path){
+	public void addmonidfylog (String path,String noteID){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
 		path = path+"\\"+"log.txt";
 		try {
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
-			writer.write(date +"	"+ "修改笔记"); 
+			writer.write(date +"	"+ "修改笔记 "+noteID); 
 			writer.write("\r\n");
 			 writer.close();
 		} catch (IOException e) {

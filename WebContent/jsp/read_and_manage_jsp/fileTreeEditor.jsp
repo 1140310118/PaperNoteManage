@@ -93,7 +93,6 @@
 					},
 			   		function(IDs){
 						alert("|"+IDs+"|");
-						alert(IDs.length)
 						//IDs = eval(IDs);
 // 						for(var i;i<IDs.length;i++){
 // 							alert(IDs[i]);

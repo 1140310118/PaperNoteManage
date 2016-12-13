@@ -16,6 +16,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.paper.action.FindLocationAction;
 import com.paper.action.ReadSituationAction;
+import com.paper.action.addlog;
 
 import base.translate;
 
@@ -92,12 +93,30 @@ public class NoteManage{
 		
 		// 删除笔记
 		if(deleteNoteID!=null){
+			
+			FindLocationAction fla = new FindLocationAction();
+			addlog ag = new addlog();
+			String paperPath = fla.findLocation(userEmail, paperNickName);
+			paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+			String path = getWebrootPath() + paperPath;
+			System.out.println("FROM FLA>> "+path+" "+paperPath);
+			ag.adddeletelog(path,deleteNoteID);
+			
 			deleteFile(deleteNoteID,tmpPath,con);
 			System.out.println("被删除的笔记:"+deleteNoteID);
 		}
 		
 		// 修改笔记
 		if(modifyNoteID!=null){
+			
+			FindLocationAction fla = new FindLocationAction();
+			addlog ag = new addlog();
+			String paperPath = fla.findLocation(userEmail, paperNickName);
+			paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+			String path = getWebrootPath() + paperPath;
+			System.out.println("FROM FLA>> "+path+" "+paperPath);
+			ag.addmonidfylog(path,modifyNoteID);
+			
 			writeFile(modifyNoteContent,modifyNoteID+".txt",tmpPath);
 			System.out.println("被修改的笔记:"+modifyNoteID);
 		}
@@ -129,6 +148,15 @@ public class NoteManage{
 		
 		// 新建笔记 
 		String addNoteID=addNoteFile(tmpPath,con);
+		
+
+		FindLocationAction fla = new FindLocationAction();
+		addlog ag = new addlog();
+		String paperPath = fla.findLocation(userEmail, paperNickName);
+		paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+		String path = getWebrootPath() + paperPath;
+		System.out.println("FROM FLA>> "+path+" "+paperPath);
+		ag.addcreatelog(path,addNoteID);
 		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 
