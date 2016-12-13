@@ -124,7 +124,7 @@ public class Paper {
 		return sql;
 	}
 	public String toInsertSql(String paperWebFilePath) throws SQLException{
-		String sql = new String();
+		String sql = new String(); 
 //		sql ="insert into paper (paperNickName,paperOrigin,paperWebFilePath,paperExteriorURL,paperRemark,uploadDate)"
 //				+ " values";
 //		sql+="(";
