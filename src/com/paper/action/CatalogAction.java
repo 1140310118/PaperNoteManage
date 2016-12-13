@@ -160,7 +160,7 @@ public class CatalogAction {
 		// 生成zNodesList，用于前台显示分类文件目录
 		String zNodesList = "";
 		// 1.从mysql获得所有paper的paperNickName，paperID，paperPID
-		String sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "'";
+		String sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "' AND paperIsDeleted = 0";
 		System.out.println(sql);
 		ResultSet rS = dao.executeQuery(sql);
 
