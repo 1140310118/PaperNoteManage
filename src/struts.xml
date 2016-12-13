@@ -39,6 +39,7 @@
 		<action name="manage" class="com.paper.action.UploadFileAction" method="excute">
 			<result name="success">/jsp/manage.jsp</result>
 			<result name="input">/jsp/manage.jsp</result>
+			<result name="unLogin">/jsp/unLogin.jsp</result>
 		</action>
 		
 		<action name="fileTreeView" class="com.paper.action.small.fileTreeAction" method="viewTree">
@@ -80,6 +81,7 @@
 
 		<action name="read" class="testForJsp.action.NoteManage" method="execute">
 			<result name="success">/jsp/read.jsp</result>
+			<result name="unLogin">/jsp/unLogin.jsp</result>
 		</action>
 		<action name="treeForRead" class="testForJsp.action.NoteManage" method="getFilePath">
 			<result name="success">/jsp/read.jsp</result>

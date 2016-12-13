@@ -80,7 +80,9 @@ public class NoteManage{
 	
 
 	public String execute() throws IOException, SQLException{
-		
+		if(userEmail=="user_email" || userEmail=="" || userEmail==null){
+			return "unLogin";
+		}
 		// 笔记的各种操作
 		// 包括        从磁盘中获得用户的所有笔记，新建笔记，删除笔记，修改笔记
 		paperNickName = rsa.getLastPaper(userEmail);

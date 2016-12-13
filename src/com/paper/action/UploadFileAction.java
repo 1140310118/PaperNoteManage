@@ -124,6 +124,10 @@ public class UploadFileAction extends ActionSupport implements
 		//
 
 //		System.out.println(session.get("USER_Nickname"));
+		if(userEmail=="user_email" || userEmail=="" || userEmail==null){
+			System.out.println("FROM UploadFA>> 尚未登录");
+			return "unLogin";
+		}
 		
 		System.out.println("userEmail:"+userEmail);
 		
@@ -146,6 +150,10 @@ public class UploadFileAction extends ActionSupport implements
 	////////////////////////////////////
 	
 public String excute(){
+	if(userEmail=="user_email" || userEmail=="" || userEmail==null){
+		System.out.println("FROM UploadFA>> 尚未登录");
+		return "unLogin";
+	}
 	return "success";
 }
 ////////////////////////////////////////	
