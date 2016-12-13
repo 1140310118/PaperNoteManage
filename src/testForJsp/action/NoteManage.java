@@ -33,6 +33,15 @@ public class NoteManage{
 	private String modifyNoteID = null;//待修改的笔记id
 	//删除笔记
 	private String deleteNoteID = null;
+	private String paperID = null;
+	public String getPaperID() {
+		return paperID;
+	}
+
+	public void setPaperID(String paperID) {
+		this.paperID = paperID;
+	}
+
 	//要翻译的单词
 	private String wordT = null;
 	
@@ -83,11 +92,12 @@ public class NoteManage{
 	public String NoteOpeartion() throws IOException, SQLException {
 		
 		String root = getWebrootPath(); 
-		paperWebFilePath = fla.findLocation(userEmail, paperNickName);
+		paperWebFilePath = fla.findLocation2(userEmail, paperID);
 		String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
 		String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
-		
-		System.out.println("FROM NM>> "+tmpPath+" "+con);
+
+		System.out.println("FROM NM>> "+paperWebFilePath);
+		//System.out.println("FROM NM>> "+tmpPath+" "+con);
 		// 获得所有笔记
 		getAllExistedNotes(tmpPath,con);
 		

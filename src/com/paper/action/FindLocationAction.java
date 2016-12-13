@@ -30,9 +30,9 @@ public class FindLocationAction {
 	public String findLocation2(String userEmail, String paperID) throws SQLException{
 		String paperWebFilePath = "";
 		String sql = "SELECT paperWebFilePath FROM paper WHERE paperID = " + "'" + paperID + "' AND paperUserEmail = '" + userEmail + "'";
-		System.out.println(sql); 
+		System.out.println("FLA>> sql:"+sql); 
 		ResultSet rS = dao.executeQuery(sql);
-		System.out.println(rS);
+		System.out.println("FROM FLA>> "+sql);
 		while (rS.next()) {
 			paperWebFilePath = rS.getString(1);
 		}

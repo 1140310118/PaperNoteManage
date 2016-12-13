@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.paper.action.CatalogAction;
 import com.paper.action.FindLocationAction;
+import com.paper.action.Readtime;
 import com.paper.action.addlog;
 import com.paper.action.treetozip;
 
@@ -168,7 +169,11 @@ public class fileTreeAction extends ActionSupport
 	//----------------main_7-----------------------
 	public void getURLbyID() throws IOException, SQLException{
 		FindLocationAction fla = new FindLocationAction();
-		String url = fla.findLocation2(userEmail,paperID);
+		String url = fla.findLocation(userEmail,paperNickName);
+		System.out.println("fTA>> url:"+url);
+		
+		// for 阅读时间线
+		Readtime.addreadtim(paperNickName, userEmail);
 		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 
