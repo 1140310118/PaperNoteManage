@@ -1,6 +1,7 @@
 package com.paper.action;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import com.paper.db.DbConn;
 public class treetozip {
 	
 
+	private static int a;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String id ="1";
@@ -78,7 +80,7 @@ public class treetozip {
 		    	id=paperID;
 		    	System.out.println("新ID"+id);
 		    	}
-		    if(paperWebFilePath2!=null||paperExteriorURL2!=null){
+		    if(paperWebFilePath2!=null){
 		    	System.out.println("路径不空");
 		    	//System.out.println(path+"+"+paperWebFilePath2);
 				ppath=paperWebFilePath2.split("/");
@@ -91,10 +93,21 @@ public class treetozip {
 				copy.copyFile(paperWebFilePath2,path);
 		    	
 		    }
-			
+		    if(paperExteriorURL2!=null)
+		    	 {
+		    	String filename4 = "url.txt";
+				 File path2 = new File(path+"\\");
+				 File dir2=new File(path2,filename4);
+				 try {
+					dir2.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	 }
 			}
 			repath=path;
-			}while(paperWebFilePath2==null);
+			}while(paperWebFilePath2==null&&paperExteriorURL2==null);
 			
 			try {
 				System.out.println("FROM treetozip>> "+rootpath);
