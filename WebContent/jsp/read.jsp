@@ -115,9 +115,11 @@
  <div style="float:left;margin-left:230px;margin-top: 60px;">
 	<iframe style="border:none;" id="paperArea" width="800" height="600" src="<%=basePath%>jsp/read_and_manage_lib\pdfjs-1.5.188-dist\web\viewer.html?file=<%=basePath%>file/zorenv@163.com\Vpthon-1\VPython_Intro.pdf"></iframe>
 </div>
+
 <div style="magrin-top:300px;float:left;margin-left:1030px;margin-top:100px;position: absolute;background:#fff;">
 	<iframe style="border:none;" src="<%=basePath%>note" id="noteArea" height="600"></iframe>
 </div>
+
 <div id="paperNickName_ID" style="display:none;"><s:property value="paperNickName"/></div>
 <div id="paperURL_ID" style="display:none;"><s:property value="paperURL"/></div>
 

@@ -104,16 +104,18 @@ public class fileTreeAction extends ActionSupport
 	
 
 	//-------------main_4---------------
-	// 改变节点
+	// 改变节点：拖拽
 	public String changeNode() throws SQLException{
-		
+		System.out.println("FROM fTA>> 拖拽节点");
 		FindLocationAction fla = new FindLocationAction();
 		addlog ag = new addlog();
 		String paperPath = fla.findLocation2(userEmail, paperID);
-		paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
-		String path = getWebrootPath() + paperPath;
-		System.out.println("FROM FLA>> "+path+" "+paperPath);
-		ag.addModifyClasslog(path,fla.findNamebyID(userEmail,parentID));
+		if(paperPath!=null){
+			paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+			String path = getWebrootPath() + paperPath;
+			System.out.println("FROM FLA>> "+path+" "+paperPath);
+			ag.addModifyClasslog(path,fla.findNamebyID(userEmail,parentID));
+		}
 		
 		System.out.println("FROM fTA>> 拖拽节点:paperID"+paperID+"to"+parentID);
 		catalog.changeNode(userEmail, paperID, parentID);
@@ -121,7 +123,7 @@ public class fileTreeAction extends ActionSupport
 	}
 	
 	//-------------main_5---------------
-	// 改变节点
+	// 改变节点:重命名
 	public String renameNode(){
 		catalog.rename(userEmail, paperID, paperNickName);
 		return "success";
