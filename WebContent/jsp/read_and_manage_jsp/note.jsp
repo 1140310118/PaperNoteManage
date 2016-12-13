@@ -29,8 +29,8 @@
 </head>
 
 <body>  
-<div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
-<div style="magrin-top:300px;float:left;margin-left:1030px;margin-top:100px;position: absolute;background:#fff;">
+<div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:10%">已经保存</div>
+<div>
 	<input type="text" style="width: 210px;" id="wordT"/>
 	<button id="dictS_button">查询</button>
 	<div id="translateResult"></div>
@@ -47,7 +47,7 @@
 		</s:iterator>
 	</div>
 </div>
-
+<div id="paperNickName_ID" style="display:none;"><s:property value="paperNickName"/></div>
 <script type="text/javascript">
 	$(document).ready(function(){
 		dictSearch();
@@ -83,7 +83,7 @@
 													+"</div>");
 						translateDetail(wordT);
 						hideTranslationR();
-	      	}); 
+	      	});
     	});
     }
 	function hideTranslationR(){
@@ -101,7 +101,8 @@
     
 	function addNote(){
 		$("#addNoteButton").click(function(){
-			$.post("<%=basePath%>newNote",
+			var paperNickName = $("#paperNickName_ID").html();
+			$.post("<%=basePath%>newNote?paperNickName="+paperNickName,
 			   		{
 						addNoteFlag : true
 					},
@@ -132,7 +133,9 @@
 		});
 	}
 	function _modifyNote(id){
-		$.post("<%=basePath%>read",
+		var paperNickName = $("#paperNickName_ID").html();
+		//alert(paperNickName);
+		$.post("<%=basePath%>note?paperNickName="+paperNickName,
 		   		{
 				 	modifyNoteID: id.substring(5),
 					modifyNoteContent:$("#"+id+" textarea").val()
@@ -149,7 +152,8 @@
 		});
 	}
 	function _deleteNote(id){
-		$.post("<%=basePath%>read",
+		var paperNickName = $("#paperNickName_ID").html();
+		$.post("<%=basePath%>note?paperNickName="+paperNickName,
 		   		{
 				 	deleteNoteID: id.substring(5)
 				},

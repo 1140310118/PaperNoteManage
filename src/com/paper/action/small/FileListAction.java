@@ -1,6 +1,8 @@
 package com.paper.action.small;
 
+import com.paper.action.FindLocationAction;
 import com.paper.action.ReadSituationAction;
+import com.paper.action.addlog;
 import com.paper.model.Paper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -100,6 +102,15 @@ public class FileListAction extends ActionSupport
 		}
 		// 修改阅读情况
 		if (readSituation!=null){
+			
+			FindLocationAction fla = new FindLocationAction();
+			addlog ag = new addlog();
+			String paperPath = fla.findLocation(userEmail, modifyPaperName);
+			paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+			String path = getWebrootPath2() + paperPath;
+			System.out.println("FROM FLA>> "+path+" "+paperPath);
+			ag.addreadlog(path,readSituation);
+			
 			ReadSituationAction rsa=new ReadSituationAction();
 			System.out.println("FROM FileListAction>> 修改论文 "+modifyPaperName+" 的阅读情况为 "+readSituation);
 			rsa.changeReadSituation(userEmail,modifyPaperName,readSituation);
@@ -152,6 +163,23 @@ public class FileListAction extends ActionSupport
 	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
 	    
 	    String root=SERVLET_CONTEXT_PATH+"file/"+userEmail+"/";
+		return root;
+	}
+	
+	private String getWebrootPath2(){
+		ClassLoader classLoader = Thread.currentThread()  
+	            .getContextClassLoader();  
+	    if (classLoader == null) {  
+	        classLoader = ClassLoader.getSystemClassLoader();  
+	    }  
+	    java.net.URL url = classLoader.getResource("");  
+	    String ROOT_CLASS_PATH = url.getPath() + "/";  
+	    File rootFile = new File(ROOT_CLASS_PATH);  
+	    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+	    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+	    
+	    String root=SERVLET_CONTEXT_PATH+"file/";
 		return root;
 	}
 }

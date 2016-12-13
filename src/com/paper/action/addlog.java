@@ -15,6 +15,36 @@ public class addlog {
 	Map session = actionContext.getSession();
 	private String userEmail = (String) session.get("USER_Email");
 	
+	// tree
+	public void addModifyClasslog(String path,String oldC,String newC){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
+		path = path+"\\"+"log.txt";
+		try {
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
+			writer.write(date +"	"+ "更改分类:" + oldC +" ->" + newC ); 
+			writer.write("\r\n");
+			 writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	public void addModifyClasslog(String path,String newC){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
+		path = path+"\\"+"log.txt";
+		try {
+			FileWriterWithEncoding writer = new FileWriterWithEncoding(path,"utf8", true);
+			writer.write(date +"	"+ "更改分类为 " + newC ); 
+			writer.write("\r\n");
+			 writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+
+	// for fileListAction
 	public void addreadlog (String path,String flag){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
@@ -39,6 +69,9 @@ public class addlog {
 		} 
 		
 	}
+	
+
+	// for notemanage
 	public void addcreatelog (String path){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
@@ -53,6 +86,8 @@ public class addlog {
 		} 
 		
 	}
+	
+	// for notemanage
 	public void adddeletelog (String path){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
@@ -66,8 +101,8 @@ public class addlog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		
 	}
+	
 	public void addmonidfylog (String path){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());

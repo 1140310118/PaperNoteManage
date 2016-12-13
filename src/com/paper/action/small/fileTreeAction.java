@@ -1,5 +1,6 @@
 package com.paper.action.small;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -13,6 +14,8 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.paper.action.CatalogAction;
+import com.paper.action.FindLocationAction;
+import com.paper.action.addlog;
 import com.paper.action.treetozip;
 
 import base.translate;
@@ -102,7 +105,16 @@ public class fileTreeAction extends ActionSupport
 
 	//-------------main_4---------------
 	// 改变节点
-	public String changeNode(){
+	public String changeNode() throws SQLException{
+		
+		FindLocationAction fla = new FindLocationAction();
+		addlog ag = new addlog();
+		String paperPath = fla.findLocation2(userEmail, paperID);
+		paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+		String path = getWebrootPath() + paperPath;
+		System.out.println("FROM FLA>> "+path+" "+paperPath);
+		ag.addModifyClasslog(path,fla.findNamebyID(userEmail,parentID));
+		
 		System.out.println("FROM fTA>> 拖拽节点:paperID"+paperID+"to"+parentID);
 		catalog.changeNode(userEmail, paperID, parentID);
 		return "success";
@@ -135,9 +147,44 @@ public class fileTreeAction extends ActionSupport
 	    out.flush();  
 	    out.close();  
 	}
+	//----------------main_7-----------------------
+	public void getURLbyID() throws IOException, SQLException{
+		FindLocationAction fla = new FindLocationAction();
+		String url = fla.findLocation2(userEmail,paperID);
+		
+		HttpServletResponse response=ServletActionContext.getResponse();
+		/* 
+	     * 在调用getWriter之前未设置编码(既调用setContentType或者setCharacterEncoding方法设置编码), 
+	     * HttpServletResponse则会返回一个用默认的编码(既ISO-8859-1)编码的PrintWriter实例。这样就会 
+	     * 造成中文乱码。而且设置编码时必须在调用getWriter之前设置,不然是无效的。 
+	     * */  
+		response.setContentType("text/html;charset=utf-8");  
+	    //response.setCharacterEncoding("UTF-8");  
+	    PrintWriter out = response.getWriter();  
+	    //JSON在传递过程中是普通字符串形式传递的，这里简单拼接一个做测试  
+	    String jsonString=url;
+	    out.println(jsonString);  
+	    out.flush();  
+	    out.close();  
+	}
 	
 	
-	
+	private String getWebrootPath(){
+		ClassLoader classLoader = Thread.currentThread()  
+	            .getContextClassLoader();  
+	    if (classLoader == null) {  
+	        classLoader = ClassLoader.getSystemClassLoader();  
+	    }  
+	    java.net.URL url = classLoader.getResource("");  
+	    String ROOT_CLASS_PATH = url.getPath() + "/";  
+	    File rootFile = new File(ROOT_CLASS_PATH);  
+	    String WEB_INFO_DIRECTORY_PATH = rootFile.getParent() + "/";  
+	    File webInfoDir = new File(WEB_INFO_DIRECTORY_PATH);  
+	    String SERVLET_CONTEXT_PATH = webInfoDir.getParent() + "/"; 
+	    
+	    String root=SERVLET_CONTEXT_PATH+"file/";
+		return root;
+	}
 	
 	public String getPaperID() {
 		return paperID;

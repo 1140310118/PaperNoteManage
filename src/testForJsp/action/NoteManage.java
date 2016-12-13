@@ -35,6 +35,27 @@ public class NoteManage{
 	//要翻译的单词
 	private String wordT = null;
 	
+
+	//paperNickName
+	private String paperNickName = null;
+	// paperURL
+	private String paperURL = null;
+	public String getPaperURL() {
+		return paperURL;
+	}
+
+	public void setPaperURL(String paperURL) {
+		this.paperURL = paperURL;
+	}
+
+	public String getPaperNickName() {
+		return paperNickName;
+	}
+
+	public void setPaperNickName(String paperNickName) {
+		this.paperNickName = paperNickName;
+	}
+
 	ActionContext actionContext = ActionContext.getContext();
 	Map session = actionContext.getSession();
 	private String userEmail = (String) session.get("USER_Email");
@@ -44,36 +65,34 @@ public class NoteManage{
 
 	
 	private String paperWebFilePath = null;
-	private String tmpPath = null;
-	private String con = null;
+	//private String tmpPath = null;
+	//private String con = null;
 	
 
 	public String execute() throws IOException, SQLException{
 		
 		// 笔记的各种操作
 		// 包括        从磁盘中获得用户的所有笔记，新建笔记，删除笔记，修改笔记
-		String root = getWebrootPath(); 
-		String paperNickName = rsa.getLastPaper(userEmail);
-		System.out.println("FROM NMA>> "+paperNickName);
-		if (paperNickName!=null){
-			paperWebFilePath = fla.findLocation(userEmail, paperNickName);
-			tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
-			con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
-			NoteOpeartion();
-		}
-		else{
-		}
-		
+		paperNickName = rsa.getLastPaper(userEmail);
+		FindLocationAction fla= new FindLocationAction();
+		paperURL = fla.findLocation(userEmail, paperNickName);
 		return "success";
 	}
 
-	private void NoteOpeartion() throws IOException {
+	public String NoteOpeartion() throws IOException, SQLException {
+		
+		String root = getWebrootPath(); 
+		paperWebFilePath = fla.findLocation(userEmail, paperNickName);
+		String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+		String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+		
+		System.out.println("FROM NM>> "+tmpPath+" "+con);
 		// 获得所有笔记
-		getAllExistedNotes();
+		getAllExistedNotes(tmpPath,con);
 		
 		// 删除笔记
 		if(deleteNoteID!=null){
-			deleteFile(deleteNoteID,tmpPath);
+			deleteFile(deleteNoteID,tmpPath,con);
 			System.out.println("被删除的笔记:"+deleteNoteID);
 		}
 		
@@ -82,6 +101,7 @@ public class NoteManage{
 			writeFile(modifyNoteContent,modifyNoteID+".txt",tmpPath);
 			System.out.println("被修改的笔记:"+modifyNoteID);
 		}
+		return "success";
 	}
 	private String getWebrootPath(){
 		ClassLoader classLoader = Thread.currentThread()  
@@ -101,9 +121,14 @@ public class NoteManage{
 	}
 	
 	
-	public void newNote() throws IOException{
+	public void newNote() throws IOException, SQLException{
+		String root = getWebrootPath(); 
+		paperWebFilePath = fla.findLocation(userEmail, paperNickName);
+		String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+		String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+		
 		// 新建笔记 
-		String addNoteID=addNoteFile();
+		String addNoteID=addNoteFile(tmpPath,con);
 		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 
@@ -140,7 +165,7 @@ public class NoteManage{
 	    out.close();  
 	}
 
-	private int nextNoteID() {
+	private int nextNoteID(String con) {
 		int num;
 		addconfig(con);
 		num=readconfig(con);
@@ -179,26 +204,26 @@ public class NoteManage{
 	}
 
 
-	private void deleteFile(String noteID, String tmpPath) throws IOException {
+	private void deleteFile(String noteID, String tmpPath , String con) throws IOException {
 		// TODO Auto-generated method stub
 		String filename = noteID +".txt"; 
 		File file = new File(tmpPath+"/"+filename);
 		if(file.exists()){
 		    file.delete();
-		    //modifyCon_when_deleteFile(noteID);
+		    modifyCon_when_deleteFile(noteID,tmpPath, con);
 		}
 	}
 	
 	// 例如 config aaaaa -> aabaa 删除笔记3
-//	private void modifyCon_when_deleteFile(String noteID) throws IOException{
-//		File file = new File(con);
-//		String filecontent = org.apache.commons.io.FileUtils.readFileToString(file, "utf8");
-//		System.out.println(filecontent);
-//		int pos = Integer.parseInt(noteID)-1;
-//		filecontent=  filecontent.substring(0,pos)+"b"+filecontent.substring(pos+1);
-//		System.out.println(filecontent);
-//		writeFile(filecontent,"note.config",tmpPath);
-//	}
+	private void modifyCon_when_deleteFile(String noteID,String tmpPath,String con) throws IOException{
+		File file = new File(con);
+		String filecontent = org.apache.commons.io.FileUtils.readFileToString(file, "utf8");
+		System.out.println(filecontent);
+		int pos = Integer.parseInt(noteID)-1;
+		filecontent=  filecontent.substring(0,pos)+"b"+filecontent.substring(pos+1);
+		System.out.println(filecontent);
+		writeFile(filecontent,"note.config",tmpPath);
+	}
 
 	private void writeFile(String testtext, String filename, String tmpPath) {
 		File file = new File(tmpPath+"/"+filename);
@@ -211,8 +236,8 @@ public class NoteManage{
 	}
 
 
-	private String addNoteFile() {
-		int NoteID = nextNoteID();
+	private String addNoteFile(String tmpPath,String con) {
+		int NoteID = nextNoteID(con);
 		String filename = NoteID + ".txt";
 		File path = new File(tmpPath);
 		File dir=new File(path,filename);
@@ -228,19 +253,22 @@ public class NoteManage{
 	}
 
 	// 获得所有笔记
-	private void getAllExistedNotes() throws IOException {
+	private void getAllExistedNotes(String tmpPath,String con) throws IOException {
 		File file = new File(tmpPath);
 		File[] tempList = file.listFiles();
 		File confile = new File(con);
-		char[] confilecontent = org.apache.commons.io.FileUtils.readFileToString(confile, "utf8").toCharArray();
+		System.out.println("FROM NM>> "+con);
+		char[] confilecontent = org.apache.commons.io.FileUtils.readFileToString(confile, "utf8").toCharArray();	
+		System.out.println("FROM NM>> "+confilecontent.toString());
+		System.out.println("FROM NM>> "+tempList.length);
 		String filename = null;
 		for (int i=0;i<tempList.length-1;i++){
-			if (confilecontent[i]=='a'){
+//			if (confilecontent[i]=='a'){
 				String fileString=getFileString(tempList[i]);
 				filename=tempList[i].toString().substring(tempList[i].toString().lastIndexOf("\\")+1);
 				Note note = new Note(filename.substring(0,filename.length()-4),fileString);
 				notes.add(note);
-			}
+//			}
 		}
 	}
 	public static String getFileString(File file) {

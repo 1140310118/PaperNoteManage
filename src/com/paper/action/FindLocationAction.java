@@ -26,4 +26,30 @@ public class FindLocationAction {
 		System.out.println(paperWebFilePath);
 		return paperWebFilePath;
 	}
+	
+	public String findLocation2(String userEmail, String paperID) throws SQLException{
+		String paperWebFilePath = "";
+		String sql = "SELECT paperWebFilePath FROM paper WHERE paperID = " + "'" + paperID + "' AND paperUserEmail = '" + userEmail + "'";
+		System.out.println(sql); 
+		ResultSet rS = dao.executeQuery(sql);
+		System.out.println(rS);
+		while (rS.next()) {
+			paperWebFilePath = rS.getString(1);
+		}
+		System.out.println(paperWebFilePath);
+		return paperWebFilePath;
+	}
+	
+	public String findNamebyID(String userEmail, String paperID) throws SQLException{
+		String paperNickName = "";
+		String sql = "SELECT paperNickName FROM paper WHERE paperID = " + "'" + paperID + "' AND paperUserEmail = '" + userEmail + "'";
+		System.out.println(sql); 
+		ResultSet rS = dao.executeQuery(sql);
+		System.out.println(rS);
+		while (rS.next()) {
+			paperNickName = rS.getString(1);
+		}
+		System.out.println(paperNickName);
+		return paperNickName;
+	}
 }

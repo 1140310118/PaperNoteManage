@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.io.output.FileWriterWithEncoding;
+
 import com.paper.model.file;
 
 public class NewPaper extends ActionSupport implements
@@ -144,43 +146,44 @@ public class NewPaper extends ActionSupport implements
 	// 将文件上传到 root 目录	
 	public String fileUp(String root) throws Exception
 	{
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-		String date = df.format(new Date());
-		
-		File rootFile = new File(root);
-		if(!rootFile.exists())
-		{
-			rootFile.mkdir();
-		}
-
-		//String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//		String date = df.format(new Date());
+//		
+//		File rootFile = new File(root);
+//		if(!rootFile.exists())
+//		{
+//			rootFile.mkdir();
+//		}
+//
+//		//String root1 = root+(singleFile.getResumeFileName()).substring(0,(singleFile.getResumeFileName()).length()-4);
 		String nickName=str2ascii(this.paper.paperNickName);
-		String root1=root+nickName;
-		// 
-		File rootFile1 = new File(root1);
-		if(!rootFile1.exists())
-		{
-			rootFile1.mkdir();
-			String filename3 = "log.txt";
-			File path1 = new File(root1);
-			File dir1=new File(path1,filename3);
-			dir1.createNewFile();
-			String shangchuan = root1+"\\"+"log.txt";
-			FileWriter writer = new FileWriter(shangchuan, true);
-			writer.write(date +"	"+ "上传系统" + "	" +"||"); 
-			 writer.close();
-			String root2=root1+"\\note\\";
-			File rootFile2 = new File(root2);
-			if(!rootFile2.exists())
-			{
-				rootFile2.mkdir();
-				String filename2 = "note.config";
-				File path = new File(root2);
-				File dir=new File(path,filename2);
-				dir.createNewFile();
-			}
-			
-		}
+//		String root1=root+nickName;
+//		// 
+//		File rootFile1 = new File(root1);
+//		if(!rootFile1.exists())
+//		{
+//			rootFile1.mkdir();
+//			String filename3 = "log.txt";
+//			File path1 = new File(root1);
+//			File dir1=new File(path1,filename3);
+//			dir1.createNewFile();
+//			String shangchuan = root1+"\\"+"log.txt";
+//			FileWriter writer = new FileWriter(shangchuan, true);
+//			writer.write(date +"	"+ "上传系统" + "	" +"||"); 
+//			 writer.close();
+//			String root2=root1+"\\note\\";
+//			File rootFile2 = new File(root2);
+//			if(!rootFile2.exists())
+//			{
+//				rootFile2.mkdir();
+//				String filename2 = "note.config";
+//				File path = new File(root2);
+//				File dir=new File(path,filename2);
+//				dir.createNewFile();
+//			}
+//			
+//		}
+		String root1= createInitFile(root,nickName);
 		String pdfName=singleFile.getResumeFileName();
 		pdfName=pdfName.substring(0,pdfName.length()-4);
 		System.out.println("FROM NP.java>> pdfName:"+pdfName);
@@ -207,6 +210,86 @@ public class NewPaper extends ActionSupport implements
 		//res = URLEncoder.encode(res,"utf-8");
 		System.out.println("FROM NewPaper.java>> "+res);
 		return res;
+	}
+	
+	private String createInitFile(String root,String nickName) throws IOException{
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());
+		
+		System.out.println("194");
+		File rootFile = new File(root);
+		if(!rootFile.exists())
+		{
+			rootFile.mkdir();
+		}
+		String root1=root+nickName;
+		File rootFile1 = new File(root1);
+		if(!rootFile1.exists())
+		{
+			rootFile1.mkdir();
+			String filename3 = "log.txt";
+			File path1 = new File(root1);
+			File dir1=new File(path1,filename3);
+			try {
+				dir1.createNewFile();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String shangchuan = root1+"\\"+"log.txt";
+			FileWriterWithEncoding writer = null;
+			try {
+				writer = new FileWriterWithEncoding(shangchuan,"utf8", true);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//org.apache.commons.io.FileUtils.w writeStringToFile(shangchuan, testtext, "utf8");
+			try {
+				writer.write(date +"	"+ "上传系统");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			try {
+				writer.write("\r\n");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 try {
+				writer.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 String filename4 = "Readtime.txt";
+			 File path2 = new File(root);
+			 File dir2=new File(path2,filename4);
+			 try {
+				dir2.createNewFile();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String root2=root1+"\\note\\";
+			File rootFile2 = new File(root2);
+			if(!rootFile2.exists())
+			{
+				rootFile2.mkdir();
+				String filename2 = "note.config";
+				File path = new File(root2);
+				File dir=new File(path,filename2);
+				try {
+					dir.createNewFile();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		return root1;
 	}
 	
 	private String str2ascii(String s){

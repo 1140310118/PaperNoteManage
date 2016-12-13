@@ -104,34 +104,41 @@
     </div>
 
 
-<div style="width: 200px;height: 400px;overflow-y: auto;overflow-x: auto;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
-	<ul id="treeDemo" class="ztree"></ul>
+
+<div style="width: 220px;height: 500px;overflow-y: auto;overflow-x: auto;float:left;margin-left:10px;margin-top:100px;position: absolute;background:#FFF;">
+	<iframe width="200" height="480" src="<%=basePath%>fileTreeView_for_read" style="border:none;"></iframe>
 </div>
+
 <!--pdf-->
 <!-- embed width="800" height="600" src="./test.pdf">
 <iframe width="800" height="600" src="./test.pdf"></iframe-->
  <div style="float:left;margin-left:230px;margin-top: 60px;">
-<iframe width="800" height="600" src="<%=basePath%>jsp/read_and_manage_lib\pdfjs-1.5.188-dist\web\viewer.html?file=<%=basePath%>file/zorenv@163.com\Vpthon-1\VPython_Intro.pdf"></iframe>
+	<iframe style="border:none;" id="paperArea" width="800" height="600" src="<%=basePath%>jsp/read_and_manage_lib\pdfjs-1.5.188-dist\web\viewer.html?file=<%=basePath%>file/zorenv@163.com\Vpthon-1\VPython_Intro.pdf"></iframe>
 </div>
-
-<div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div>
 <div style="magrin-top:300px;float:left;margin-left:1030px;margin-top:100px;position: absolute;background:#fff;">
-	<input type="text" style="width: 210px;" id="wordT"/>
-	<button id="dictS_button">查询</button>
-	<div id="translateResult"></div>
-	<br>
-	<button id="addNoteButton" name="addNoteFlag">添加笔记</button>
-	<c:set var="i" value="0"></c:set>
-	<div id="noteArea">
-		<s:iterator value="notes">
-			<div id="note_${notes[i].noteID}">
-				<c:set var="i" value="${i+1}"></c:set>
-				<textarea placeholder="笔记" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea>
-				<button class="note_delete_button_class">删除笔记</button>
-			</div>
-		</s:iterator>
-	</div>
+	<iframe style="border:none;" src="<%=basePath%>note" id="noteArea" height="600"></iframe>
 </div>
+<div id="paperNickName_ID" style="display:none;"><s:property value="paperNickName"/></div>
+<div id="paperURL_ID" style="display:none;"><s:property value="paperURL"/></div>
+
+<!-- <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div> -->
+<!-- <div style="magrin-top:300px;float:left;margin-left:1030px;margin-top:100px;position: absolute;background:#fff;"> -->
+<!-- 	<input type="text" style="width: 210px;" id="wordT"/> -->
+<!-- 	<button id="dictS_button">查询</button> -->
+<!-- 	<div id="translateResult"></div> -->
+<!-- 	<br> -->
+<!-- 	<button id="addNoteButton" name="addNoteFlag">添加笔记</button> -->
+<%-- 	<c:set var="i" value="0"></c:set> --%>
+<!-- 	<div id="noteArea"> -->
+<%-- 		<s:iterator value="notes"> --%>
+<%-- 			<div id="note_${notes[i].noteID}"> --%>
+<%-- 				<c:set var="i" value="${i+1}"></c:set> --%>
+<%-- 				<textarea placeholder="笔记" class="note_class" spellcheck="false" style="font-size:12px;width:200px;height:100px;line-height:18px;"><s:property value="content"/></textarea> --%>
+<!-- 				<button class="note_delete_button_class">删除笔记</button> -->
+<!-- 			</div> -->
+<%-- 		</s:iterator> --%>
+<!-- 	</div> -->
+<!-- </div> -->
 
 
 <br><br><br><br><br><br><br><br><br>
@@ -140,15 +147,24 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		init();
 		dictSearch();
         addNote();
         modifyNote();
         deleteNote();
     });
+	function init(){
+		var paperNickName = $("#paperNickName_ID").html();
+		$("#noteArea").attr("src","<%=basePath%>note?paperNickName="+paperNickName);
+		var paperURL = $("#paperURL_ID").html();
+		//alert("<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+paperURL);
+		$("#paperArea").attr("src","<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+paperURL);
+	}
+	
 	function strToJson(str){ 
 		var json = eval('(' + str + ')'); 
 		return json; 
-		} 
+	} 
 	
 	function dictSearch(){
     	$("#dictS_button").click(function(){

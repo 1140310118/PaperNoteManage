@@ -29,5 +29,14 @@
 
 <body>
 	<h3>log</h3>
-	<p>${logContent}</p>
+	<p id="logContent">${logContent}</p>
+	<script type="text/javascript">
+		var a=$("#logContent").html();
+		$("#logContent").html("");
+		var as = a.split("\n");
+		for(var i=0;i<as.length;i++){
+			$("#logContent").append((as[i]));
+			$("#logContent").append("<br>");
+		}
+	</script>
 </body>

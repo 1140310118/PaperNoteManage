@@ -32,13 +32,15 @@ public class ReadSituationAction {
 				+ paperNickName + "' AND paperUserEmail = '" + userEmail + "'";
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
-		String sql2 = "select paperWebFilePath from paper where paperNickName = '" + paperNickName + "'";
-		ResultSet rS2 = dao.executeQuery(sql2);
-		while (rS2.next()) {
-			String path = rS2.getString(1);
-			path = path.substring(0, path.length() - 4);
-			add.addreadlog(path, paperReadSituation);
-		}
+		
+		// log操作移至FistListAction
+//		String sql2 = "select paperWebFilePath from paper where paperNickName = '" + paperNickName + "'";
+//		ResultSet rS2 = dao.executeQuery(sql2);
+//		while (rS2.next()) {
+//			String path = rS2.getString(1);
+//			path = path.substring(0, path.length() - 4);
+//			add.addreadlog(path, paperReadSituation);
+//		}
 
 		if (rS != -1) {
 			System.out.println("FROM ReadSituation: 修改论文阅读情况成功！");

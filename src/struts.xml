@@ -81,7 +81,7 @@
 		<action name="treeForRead" class="testForJsp.action.NoteManage" method="getFilePath">
 			<result name="success">/jsp/read.jsp</result>
 		</action>
-		<action name="note" class="testForJsp.action.NoteManage" method="excute">
+		<action name="note" class="testForJsp.action.NoteManage" method="NoteOpeartion">
 			<result name="success">/jsp/read_and_manage_jsp/note.jsp</result>
 		</action>
 
@@ -142,6 +142,10 @@
 		<action name="share" class="com.paper.action.small.shareAction" method="share">
 			<result name="success">/jsp/read_and_manage_jsp/sendEmail.jsp</result>
 		</action>
+		<action name="fileTreeView_for_read" class="com.paper.action.small.fileTreeAction" method="viewTree">
+			<result name="success">/jsp/read_and_manage_jsp/fileTreeViewer_in_read.jsp</result>
+		</action>
+		<action name="getURLbyID" class="com.paper.action.small.fileTreeAction" method="getURLbyID"/>
 		
 	</package>
 </struts>
