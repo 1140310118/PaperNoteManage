@@ -14,14 +14,14 @@ public class CatalogAction {
 	private DAO dao = new DAO();
 	ActionContext actionContext = ActionContext.getContext();
 
-	public static void main(String[] args) throws SQLException {
+//	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
-		CatalogAction catalog = new CatalogAction();
+//		CatalogAction catalog = new CatalogAction();
 		// System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
 
 		// 2.deleteNode方法测试
 		// catalog.deletePaper("zorenv@163.com", "21");
-		System.out.println("CatalogAction: deleteNode返回的列表: " + catalog.deleteNode("zorenv@163.com", "43"));
+//		System.out.println("CatalogAction: deleteNode返回的列表: " + catalog.deleteNode("zorenv@163.com", "43"));
 
 		// 3.createNode方法测试通过
 		// System.out.println(catalog.createNode("zorenv@163.com","1","机器学习"));
@@ -32,7 +32,7 @@ public class CatalogAction {
 		// 5.rename方法测试
 		// catalog.rename("zorenv@163.com", "2", "Lab1");
 		//
-	}
+//	}
 
 	// 拖拽节点
 	public String changeNode(String userEmail, String id, String pid) {
@@ -148,8 +148,8 @@ public class CatalogAction {
 
 		// 2.当前节点插入paper中
 		// insert into t_user(id, username) values(10, "hehehe");
-		String sql = "INSERT INTO paper(paperNickName, paperUserEmail, paperID, paperPID) VALUES(" + "'" + paperNickName
-				+ "', " + "'" + userEmail + "', '" + paperID + "', " + "'" + pid + "')";
+		String sql = "INSERT INTO paper(paperNickName, paperUserEmail, paperID, paperPID, paperIsDeleted) VALUES(" + "'" + paperNickName
+				+ "', " + "'" + userEmail + "', '" + paperID + "', " + "'" + pid + "' ,'0')";
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 		if (rS > -1)
