@@ -218,7 +218,7 @@ public class NewPaper extends ActionSupport implements
 		System.out.println("FROM NewPaper.java>> "+res);
 		return res;
 	}
-	
+	//
 	private String createInitFile(String root,String nickName) throws IOException{
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
