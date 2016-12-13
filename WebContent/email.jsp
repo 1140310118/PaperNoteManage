@@ -26,14 +26,16 @@
    <input type="text" name="subject" placeholder="论文标题"/><br/>
    <label for="body">正文</label><br/>
    <input type="text" name="body" placeholder="论文正文"/><br/>
-   <label for="fileName">附件</label><br/>
-   <input type="file" id="filename" name="fileName"/><br/> 
-   <button id="file">点我</button>
-   <script type="text/javascript">
-   $("#file").click(function(){
-	   alert($("#filename").val());
-   });
-   </script>
+<!--    <label for="fileName">附件</label><br/> -->
+<!--    <input type="file" name="fileName"/><br/>  -->
+<!-- 
+   <button id="file">点我</button> 
+<%--    <script type="text/javascript"> --%>
+//    $("#file").click(function(){
+// 	   alert($("#filename").val());
+//    });
+<%--    </script> --%>
+-->
    <input type="submit" value="Send Email" />
    
    </form>

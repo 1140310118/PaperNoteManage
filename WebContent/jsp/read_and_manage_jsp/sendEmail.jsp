@@ -44,6 +44,7 @@
 	    <h4>和朋友分享你的论文</h4>
 	    <fieldset>
 	    	<input type="text" name="from" value="hit_lmf@163.com" style="display:none"/>
+	    	<input type="text" name="filePath" style="display:none" id="filePath"><s:property value="filePath"/></input>
 	   	</fieldset>
 	    <fieldset>
 	   		<input type="password" name="password" value="4321005abc" style="display:none"/>
@@ -55,11 +56,11 @@
 			<input type="text" name="subject" placeholder="主题" value="2333论文阅读管理系统 论文分享"/><br/>
 	    </fieldset>
 	    
-	    <fieldset>
-	        <input type="text" style="float: left;width: 270px;" placeholder="附件" value="${file}">
-	        &nbsp;
-	   		<input type="file" id="filename" name="fileName" style="outline: 0px;width:70px;" value="${file}"/><br/> 
-	    </fieldset>
+<!-- 	    <fieldset> -->
+<%-- 	        <input type="text" style="float: left;width: 270px;" placeholder="附件" value="${file}"> --%>
+<!-- 	        &nbsp; -->
+<%-- 	   		<input type="file" id="filename" name="fileName" style="outline: 0px;width:70px;" value="${file}"/><br/>  --%>
+<!-- 	    </fieldset> -->
 
 	    <fieldset>
 	      <textarea placeholder="正文"  name="body"></textarea>
@@ -69,6 +70,11 @@
 	      	<button name="submit" type="submit" id="newPaperFromLocal_Submit" data-submit="...Sending" >Submit</button>
 	    </fieldset>
 	</form>
+<%-- 	<script type="text/javascript"> --%>
+// 	$(document).ready(function(){
+// 		$("#filePath")
+// 	});
+<%-- 	</script> --%>
 </div> 
 
 </body>
