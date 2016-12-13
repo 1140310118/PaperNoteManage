@@ -13,14 +13,14 @@ import com.paper.action.getMaxpaperID;
 public class CatalogAction {
 	private DAO dao = new DAO();
 	ActionContext actionContext = ActionContext.getContext();
-//	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
-//		CatalogAction catalog = new CatalogAction();
+		CatalogAction catalog = new CatalogAction();
 		// System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
 
 		// 2.deleteNode方法测试
 		// catalog.deletePaper("zorenv@163.com", "21");
-//		System.out.println(catalog.deleteNode("zorenv@163.com", "10"));
+		System.out.println("CatalogAction: deleteNode返回的列表: " + catalog.deleteNode("zorenv@163.com", "10"));
 
 		// 3.createNode方法测试通过
 		// System.out.println(catalog.createNode("zorenv@163.com","1","机器学习"));
@@ -31,7 +31,7 @@ public class CatalogAction {
 		// 5.rename方法测试
 //		catalog.rename("zorenv@163.com", "2", "Lab1");
 //
-//	}
+	}
 
 	// 拖拽节点
 	public String changeNode(String userEmail, String id, String pid) {
@@ -54,7 +54,7 @@ public class CatalogAction {
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
 		int i = 0; // number of paper
-		ArrayList<String> res= new ArrayList<String>();
+		ArrayList<String> papernodes= new ArrayList<String>(); // 用来返回叶节点
 		String[][] paper;
 		CatalogAction catalog = new CatalogAction();
 		paper = catalog.getPaper(userEmail);
@@ -71,7 +71,9 @@ public class CatalogAction {
 				System.out.println("要删除的节点id是：" + paper[j][0]);
 				// 如果该节点是叶节点，不删除，改为未分类
 				if (paper[j][2] != null || paper[j][3] != null) {
-					catalog.deletePaper(userEmail, paper[j][0]);
+					catalog.changePaper(userEmail, paper[j][0]);
+					System.out.println("CatalogAction: 叶节点论文名称是:" + paper[j][4]);
+					papernodes.add(paper[j][4]);
 					// catalog.changePaper(userEmail, paper[j][0]);
 				}
 				// 如果是非叶节点，删除该节点，并添加到pidqueue中
@@ -100,11 +102,9 @@ public class CatalogAction {
 					if (paper[j][2] != null || paper[j][3] != null) {
 						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
 						catalog.changePaper(userEmail, paper[j][0]);
+						papernodes.add(paper[j][4]);
 						//System.out.println("FROM clA>> paperID:"+paper[j][0]);
-						String a = paper[j][0];
-						res.add(a);
-						//System.out.println("FROM clA>> paperID:"+res.toString());
-						System.out.println(res);
+						
 					} else {// 否则，删除
 						catalog.deletePaper2(userEmail, paper[j][1]);
 						pidqueue.offer(paper[j][0]);
@@ -120,8 +120,8 @@ public class CatalogAction {
 			// 更新pid
 			pid = pidqueue.poll();
 		}
-		System.out.println("FROM clA>> res:"+res.toString());
-		return res;
+		
+		return papernodes;
 	}
 
 	
@@ -191,7 +191,7 @@ public class CatalogAction {
 
 	// 获取所有paper
 	public String[][] getPaper(String userEmail) throws SQLException {
-		String paper[][] = new String[50][4];
+		String paper[][] = new String[50][5];
 		int i = 0;
 		String sql = "SELECT * FROM paper WHERE paperUserEmail = '" + userEmail + "'";
 		System.out.println(sql);
@@ -201,11 +201,13 @@ public class CatalogAction {
 			String paperPID = rS.getString("paperPID");
 			String paperWebFilePath = rS.getString("paperWebFilePath");
 			String paperExteriorURL = rS.getString("paperExteriorURL");
+			String paperNickName = rS.getString("paperNickName");
 			paper[i][0] = paperID;
 			paper[i][1] = paperPID;
 			paper[i][2] = paperWebFilePath;
 			paper[i][3] = paperExteriorURL;
-			System.out.println("paperID:" + paper[i][0] + " paperPID:" + paperPID);
+			paper[i][4] = paperNickName;
+			System.out.println("paperID:" + paper[i][0] + " paperPID:" + paperPID + " paperNickName:" + paperNickName);
 			i++;
 		}
 		return paper;
