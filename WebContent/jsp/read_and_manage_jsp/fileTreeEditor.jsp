@@ -180,8 +180,8 @@
 		<p id="ztreeNodes" style="display:none;">${ztreeNodes}</p>
 	</div>
 		<br><br><br>
-		<input type="checkbox" id="delete_option" class="checkbox first"  /><span>删除</span>
-		<input type="checkbox" id="rename_option" class="checkbox first"  /><span>重命名</span>
+		<input type="checkbox" id="delete_option" class="checkbox first"  checked/><span>删除</span>
+		<input type="checkbox" id="rename_option" class="checkbox first"  checked/><span>重命名</span>
 		<input type="checkbox" id="move" class="checkbox first"  checked/><span>拖拽</span>
 		<a id="addParent" style="cursor:pointer;" title="增加父节点" onclick="return false;">新建分类</a>
 	
