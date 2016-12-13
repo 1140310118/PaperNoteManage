@@ -92,12 +92,25 @@
 						paperID : treeNode.id
 					},
 			   		function(IDs){
-						alert(IDs);
+						alert("|"+IDs+"|");
+						alert(IDs.length)
+						//IDs = eval(IDs);
+// 						for(var i;i<IDs.length;i++){
+// 							alert(IDs[i]);
+// 							moveToUC(IDs[i]);
+// 						}
 			   	});
 	        } else {  
 	            return false;  
 	        }  
 	    }
+	    function moveToUC(name){
+	    	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+	    	var node = treeObj.getNodeByParam("name", name);
+	    	var targetNode = treeObj.getNodeByParam("id", 1);
+	    	zTree.moveNode(targetNode,node,"inner");
+	    }
+	    
 		function setCheck() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 			isMove = $("#move").attr("checked"),
