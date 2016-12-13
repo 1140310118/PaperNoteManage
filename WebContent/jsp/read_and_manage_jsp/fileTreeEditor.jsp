@@ -96,23 +96,26 @@
 						paperID : treeNode.id
 					},
 			   		function(IDs){
-						alert("|"+IDs+"|");
-						//IDs = eval(IDs);
-// 						for(var i;i<IDs.length;i++){
-// 							alert(IDs[i]);
-// 							moveToUC(IDs[i]);
-// 						}
+						IDs=eval(IDs);
+						var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				    	var targetNode = zTree.getNodeByParam("id", 1);
+				    	zTree.addNodes(targetNode,IDs[i]);
+						return true;
 			   	});
 	        } else {  
 	            return false;  
 	        }  
 	    }
-	    function moveToUC(name){
-	    	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-	    	var node = treeObj.getNodeByParam("name", name);
-	    	var targetNode = treeObj.getNodeByParam("id", 1);
+	    /* function moveToUC(name){
+	    	alert(name);
+	    	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	    	alert(zTree);
+	    	var node = zTree.getNodeByParam("name", name);
+	    	alert(nodes);
+	    	var targetNode = zTree.getNodeByParam("id", 1);
+	    	alert(targetNode.id+" "+node.id);
 	    	zTree.moveNode(targetNode,node,"inner");
-	    }
+	    } */
 	    
 		function setCheck() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
