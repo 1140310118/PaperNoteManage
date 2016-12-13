@@ -222,10 +222,14 @@ public class CatalogAction {
 		int rS = dao.executeUpdate(sql);
 	}
 	
-	public void rename(String userEmail, String paperID, String paperNickName){
+	public String rename(String userEmail, String paperID, String paperNickName){
 		String sql = "UPDATE paper SET paperNickName = '" + paperNickName + "' WHERE paperUserEmail = '" + userEmail + "' AND paperID = '" + paperID + "'";
 		System.out.println(sql);
-		int rS = dao.executeUpdate(sql);		
+		int rS = dao.executeUpdate(sql);	
+		if(rS > -1){
+			return "renamesuccess";
+		}
+		return null;
 	}
 	
 }
