@@ -78,8 +78,8 @@
 	<li>
 		<div class="link"><i class="fa fa-paint-brush"></i>新建论文<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a style="cursor:point;" id="newPaperFromLocal_Show">从本地上传</a></li>
-			<li><a style="cursor:point;" id="newPaperByURL_Show">导入URL链接</a></li>
+			<li><a style="cursor:pointer;" id="newPaperFromLocal_Show">从本地上传</a></li>
+			<li><a style="cursor:pointer;" id="newPaperByURL_Show">导入URL链接</a></li>
 		</ul>
 	</li>
 	<li>
@@ -88,8 +88,8 @@
 	<li>
 		<div class="link"><i class="fa fa-code"></i>文件分类树<i class="fa fa-chevron-down"></i></div>
 		<ul class="submenu">
-			<li><a style="cursor:point;" id="file_tree_view">查看</a></li>
-			<li><a style="cursor:point;" id="file_tree_edit">编辑</a></li>
+			<li><a style="cursor:pointer;" id="file_tree_view">查看</a></li>
+			<li><a style="cursor:pointer;" id="file_tree_edit">编辑</a></li>
 		</ul>
 	</li>
 
