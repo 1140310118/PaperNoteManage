@@ -63,7 +63,7 @@ public class fileTreeAction extends ActionSupport
 	// 删除节点
 	public void deleteNode() throws IOException, SQLException{
 		System.out.println("FROM fTA>> 删除节为的ID为"+paperID);
-		ArrayList<String> paperIDS=catalog.deleteNode(userEmail,paperID);
+		String paperIDS=catalog.deleteNode(userEmail,paperID);
 		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 

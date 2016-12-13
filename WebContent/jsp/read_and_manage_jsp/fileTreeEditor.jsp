@@ -91,19 +91,26 @@
 	        // return true;
 	    	if (confirm("确认删除节点--" + treeNode.name + "--吗?")) {  
 	            //var param = "id=" + treeNode.id;
-	            if (treeNode.isParent!=true){
-		            $.post("<%=basePath%>fileTreeEdit_deleteNode",
-				   		{
-							paperID : treeNode.id
-						},
-				   		function(IDs){
-							IDs=eval(IDs);
-							var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-					    	var targetNode = zTree.getNodeByParam("id", 1);
-					    	zTree.addNodes(targetNode,IDs[i]);
-							return true;
-				   	});
+	            //alert("FROM fTA>> drop:"+treeNode.drop);
+	            if (treeNode.drop==false){
+	            	return false;
 	            }
+	            if (treeNode.id==1){
+	            	return false;
+	            }
+	            $.post("<%=basePath%>fileTreeEdit_deleteNode",
+			   		{
+						paperID : treeNode.id
+					},
+			   		function(IDs){
+						alert(IDs);
+						IDs=eval(IDs);
+						var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				    	var targetNode = zTree.getNodeByParam("id", 1);
+				    	zTree.addNodes(targetNode,IDs);
+						return true;
+			   	});
+	            return true;
 	        }   
 	        return false;  
 	    }
