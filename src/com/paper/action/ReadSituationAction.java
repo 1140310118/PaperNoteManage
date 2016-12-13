@@ -19,7 +19,7 @@ public class ReadSituationAction {
 		// updateLastPaper测试通过
 		// read.updateLastPaper("zorenv@163.com", "L");
 		//
-		System.out.println(read.getLastPaper("zorenv@163.com"));
+		read.setLastReadPaper("zorenv@163.com", "last");
 	}
 
 	public String changeReadSituation(String userEmail, String paperNickName, String paperReadSituation)
@@ -51,7 +51,7 @@ public class ReadSituationAction {
 		return "changeReadSituationfail";
 	}
 
-	public void updateLastPaper(String userEmail, String paperNickName) {
+	public void setLastReadPaper(String userEmail, String paperNickName) {
 		String sql = "UPDATE user SET lastReadPaper = '" + paperNickName + "' WHERE email = '" + userEmail + "'";
 		System.out.println("ReadSituationAction: " + sql);
 		int rS = dao.executeUpdate(sql);
