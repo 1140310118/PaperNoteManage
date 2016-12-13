@@ -134,9 +134,7 @@
 		<action name="fileTreeEdit_moveNode" class="com.paper.action.small.fileTreeAction" method="changeNode">
 			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
 		</action>
-		<action name="fileTreeEdit_renameNode" class="com.paper.action.small.fileTreeAction" method="renameNode">
-			<result name="success">/jsp/read_and_manage_jsp/fileTreeEditor.jsp</result>
-		</action>
+		<action name="fileTreeEdit_renameNode" class="com.paper.action.small.fileTreeAction" method="renameNode"/>
 		<action name="fileTreeView_download" class="com.paper.action.small.fileTreeAction" method="download"/>
 		<action name="get_share" class="com.paper.action.small.shareAction" method="get_share"/>
 		<action name="share" class="com.paper.action.small.shareAction" method="share">

@@ -73,12 +73,16 @@
 	            return false;  
 	        }  
 	        var param = "id=" + treeNode.id + "&name=" + newName;  
-	        $.post("<%=basePath%>fileTreeEdit_renameNode",
+	        return $.post("<%=basePath%>fileTreeEdit_renameNode",
 			   		{
 						paperID : treeNode.id,
 						paperNickName : newName
 					},
-			   		function(){
+			   		function(s){
+						if(s==null){
+							return false;
+						}
+						return true;
 			   	}); 
 	        alert(treeNode.id+":"+newName);
 	        return true;
