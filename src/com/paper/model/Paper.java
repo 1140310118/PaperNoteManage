@@ -119,7 +119,7 @@ public class Paper {
 				+ "','" +this.paperUserEmail
 				+ "','" +paperID
 				+ "','" +0
-				+ "','" +0
+				+ "','" +paperIsDeleted
 				+ "')";
 		return sql;
 	}

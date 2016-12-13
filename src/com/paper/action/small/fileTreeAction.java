@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.paper.action.CatalogAction;
 import com.paper.action.FindLocationAction;
+import com.paper.action.Readtime;
 import com.paper.action.addlog;
 import com.paper.action.treetozip;
 
@@ -62,7 +63,7 @@ public class fileTreeAction extends ActionSupport
 	// 删除节点
 	public void deleteNode() throws IOException, SQLException{
 		System.out.println("FROM fTA>> 删除节为的ID为"+paperID);
-		ArrayList<String> paperIDS=catalog.deleteNode(userEmail,paperID);
+		String paperIDS=catalog.deleteNode(userEmail,paperID);
 		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 
@@ -168,7 +169,11 @@ public class fileTreeAction extends ActionSupport
 	//----------------main_7-----------------------
 	public void getURLbyID() throws IOException, SQLException{
 		FindLocationAction fla = new FindLocationAction();
-		String url = fla.findLocation2(userEmail,paperID);
+		String url = fla.findLocation(userEmail,paperNickName);
+		System.out.println("fTA>> url:"+url);
+		
+		// for 阅读时间线
+		Readtime.addreadtim(paperNickName, userEmail);
 		
 		HttpServletResponse response=ServletActionContext.getResponse();
 		/* 

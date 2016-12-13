@@ -90,29 +90,40 @@
 	    function beforeRemove(treeId, treeNode) {  
 	        // return true;
 	    	if (confirm("确认删除节点--" + treeNode.name + "--吗?")) {  
-	            //var param = "id=" + treeNode.id;  
+	            //var param = "id=" + treeNode.id;
+	            //alert("FROM fTA>> drop:"+treeNode.drop);
+	            if (treeNode.drop==false){
+	            	return false;
+	            }
+	            if (treeNode.id==1){
+	            	return false;
+	            }
 	            $.post("<%=basePath%>fileTreeEdit_deleteNode",
 			   		{
 						paperID : treeNode.id
 					},
 			   		function(IDs){
-						alert("|"+IDs+"|");
-						//IDs = eval(IDs);
-// 						for(var i;i<IDs.length;i++){
-// 							alert(IDs[i]);
-// 							moveToUC(IDs[i]);
-// 						}
+						alert(IDs);
+						IDs=eval(IDs);
+						var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				    	var targetNode = zTree.getNodeByParam("id", 1);
+				    	zTree.addNodes(targetNode,IDs);
+						return true;
 			   	});
-	        } else {  
-	            return false;  
-	        }  
+	            return true;
+	        }   
+	        return false;  
 	    }
-	    function moveToUC(name){
-	    	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-	    	var node = treeObj.getNodeByParam("name", name);
-	    	var targetNode = treeObj.getNodeByParam("id", 1);
+	    /* function moveToUC(name){
+	    	alert(name);
+	    	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	    	alert(zTree);
+	    	var node = zTree.getNodeByParam("name", name);
+	    	alert(nodes);
+	    	var targetNode = zTree.getNodeByParam("id", 1);
+	    	alert(targetNode.id+" "+node.id);
 	    	zTree.moveNode(targetNode,node,"inner");
-	    }
+	    } */
 	    
 		function setCheck() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
