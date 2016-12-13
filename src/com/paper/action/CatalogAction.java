@@ -13,6 +13,7 @@ import com.paper.action.getMaxpaperID;
 public class CatalogAction {
 	private DAO dao = new DAO();
 	ActionContext actionContext = ActionContext.getContext();
+
 	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
 		CatalogAction catalog = new CatalogAction();
@@ -27,10 +28,10 @@ public class CatalogAction {
 
 		// 4.showNode方法测试通过
 		// System.out.println(catalog.showNode("zorenv@163.com"));
-		
+
 		// 5.rename方法测试
-//		catalog.rename("zorenv@163.com", "2", "Lab1");
-//
+		// catalog.rename("zorenv@163.com", "2", "Lab1");
+		//
 	}
 
 	// 拖拽节点
@@ -54,7 +55,7 @@ public class CatalogAction {
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
 		int i = 0; // number of paper
-		ArrayList<String> papernodes= new ArrayList<String>(); // 用来返回叶节点
+		ArrayList<String> papernodes = new ArrayList<String>(); // 用来返回叶节点
 		String[][] paper;
 		CatalogAction catalog = new CatalogAction();
 		paper = catalog.getPaper(userEmail);
@@ -76,7 +77,7 @@ public class CatalogAction {
 					papernodes.add(paper[j][4]);
 					// catalog.changePaper(userEmail, paper[j][0]);
 				}
-				// 如果是非叶节点，删除该节点，并添加到pidqueue中
+				// 如果是非叶节点，直接删除该节点，并添加到pidqueue中
 				else {
 					catalog.deletePaper(userEmail, paper[j][0]);
 					pidqueue.offer(paper[j][0]);
@@ -98,33 +99,42 @@ public class CatalogAction {
 				// 如果该节点的pid为pid，删除该节点，并把该节点添加到pidqueue中
 				System.out.println("paperPID:" + paper[j][1]);
 				if (paper[j][1].equals(pid)) {
+					System.out.println("开始进行删除");
 					// 如果是叶节点，成为未分类
 					if (paper[j][2] != null || paper[j][3] != null) {
 						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
 						catalog.changePaper(userEmail, paper[j][0]);
 						papernodes.add(paper[j][4]);
-						//System.out.println("FROM clA>> paperID:"+paper[j][0]);
-						
+//						break;
+						// System.out.println("FROM clA>>
+						// paperID:"+paper[j][0]);
+
 					} else {// 否则，删除
 						catalog.deletePaper2(userEmail, paper[j][1]);
 						pidqueue.offer(paper[j][0]);
-						System.out.println("新加入的pid为：" + pid);
-						paper = catalog.getPaper(userEmail);
-						i = 0;
-						while (paper[i][0] != null)
-							i++;
-						System.out.println("剩余节点数量为：" + i);
+						System.out.println("新加入的pid为：" + paper[j][0]);
+//						paper = catalog.getPaper(userEmail);
+//						i = 0;
+//						while (paper[i][0] != null)
+//							i++;
+//						System.out.println("剩余节点数量为：" + i);
 					}
 				}
+
 			}
 			// 更新pid
 			pid = pidqueue.poll();
+			paper = catalog.getPaper(userEmail);
+			i = 0;
+			while (paper[i][0] != null)
+				i++;
+			System.out.println("剩余节点数量为：" + i);
+
 		}
-		
+
 		return papernodes;
 	}
 
-	
 	// 新增节点
 	public String createNode(String userEmail, String pid, String paperNickName) throws SQLException {
 		// 1.当前节点生成一个id
@@ -165,7 +175,8 @@ public class CatalogAction {
 			// System.out.println("paperExteriorURL:" + paperExteriorURL);
 
 			if (paperWebFilePath == null && paperExteriorURL == null)
-				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName + "\"" + ",isParent:true},";
+				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName + "\""
+						+ ",isParent:true},";
 			else
 				zNodesList += "{ id:" + paperID + ", pId:" + paperPID + ", name:" + "\"" + paperNickName
 						+ "\",drop:false},";
@@ -221,15 +232,16 @@ public class CatalogAction {
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 	}
-	
-	public String rename(String userEmail, String paperID, String paperNickName){
-		String sql = "UPDATE paper SET paperNickName = '" + paperNickName + "' WHERE paperUserEmail = '" + userEmail + "' AND paperID = '" + paperID + "'";
+
+	public String rename(String userEmail, String paperID, String paperNickName) {
+		String sql = "UPDATE paper SET paperNickName = '" + paperNickName + "' WHERE paperUserEmail = '" + userEmail
+				+ "' AND paperID = '" + paperID + "'";
 		System.out.println(sql);
-		int rS = dao.executeUpdate(sql);	
-		if(rS > -1){
+		int rS = dao.executeUpdate(sql);
+		if (rS > -1) {
 			return "renamesuccess";
 		}
 		return null;
 	}
-	
+
 }
