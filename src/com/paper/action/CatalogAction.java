@@ -14,14 +14,14 @@ public class CatalogAction {
 	private DAO dao = new DAO();
 	ActionContext actionContext = ActionContext.getContext();
 
-	public static void main(String[] args) throws SQLException {
+//	public static void main(String[] args) throws SQLException {
 		// 1.changeNode方法测试通过
-		CatalogAction catalog = new CatalogAction();
+//		CatalogAction catalog = new CatalogAction();
 		// System.out.println(catalog.changeNode("zorenv@163.com","5","21"));
 
 		// 2.deleteNode方法测试
 		// catalog.deletePaper("zorenv@163.com", "21");
-		System.out.println("CatalogAction: deleteNode返回的列表: " + catalog.deleteNode("zorenv@163.com", "10"));
+//		System.out.println("CatalogAction: deleteNode返回的列表: " + catalog.deleteNode("zorenv@163.com", "43"));
 
 		// 3.createNode方法测试通过
 		// System.out.println(catalog.createNode("zorenv@163.com","1","机器学习"));
@@ -32,7 +32,7 @@ public class CatalogAction {
 		// 5.rename方法测试
 		// catalog.rename("zorenv@163.com", "2", "Lab1");
 		//
-	}
+//	}
 
 	// 拖拽节点
 	public String changeNode(String userEmail, String id, String pid) {
@@ -49,13 +49,13 @@ public class CatalogAction {
 
 	// 删除节点
 	// 返回加入未分类的节点
-	public ArrayList<String> deleteNode(String userEmail, String id) throws SQLException {
-		// 递归执行：
+	public String deleteNode(String userEmail, String id) throws SQLException {
+		// 非递归：
 		// 1.删除当前节点
 		// 2.删除以当前节点为父节点的节点
 		// 直到当前节点没有儿子节点
 		int i = 0; // number of paper
-		ArrayList<String> papernodes = new ArrayList<String>(); // 用来返回叶节点
+		String papernodes = "["; // 用来返回叶节点
 		String[][] paper;
 		CatalogAction catalog = new CatalogAction();
 		paper = catalog.getPaper(userEmail);
@@ -74,7 +74,8 @@ public class CatalogAction {
 				if (paper[j][2] != null || paper[j][3] != null) {
 					catalog.changePaper(userEmail, paper[j][0]);
 					System.out.println("CatalogAction: 叶节点论文名称是:" + paper[j][4]);
-					papernodes.add(paper[j][4]);
+//					papernodes.add(paper[j][4]);
+					papernodes += "{name:\"" + paper[j][4] + "\",id:\"" + paper[j][0] + "\"},";
 					// catalog.changePaper(userEmail, paper[j][0]);
 				}
 				// 如果是非叶节点，直接删除该节点，并添加到pidqueue中
@@ -104,7 +105,8 @@ public class CatalogAction {
 					if (paper[j][2] != null || paper[j][3] != null) {
 						System.out.println("CatalogAction 要设置成未分类的叶节点：" + paper[j][0]);
 						catalog.changePaper(userEmail, paper[j][0]);
-						papernodes.add(paper[j][4]);
+//						papernodes.add(paper[j][4]);
+						papernodes += "{name:\"" + paper[j][4] + "\",id:\"" + paper[j][0] + "\"},";
 //						break;
 						// System.out.println("FROM clA>>
 						// paperID:"+paper[j][0]);
@@ -131,7 +133,8 @@ public class CatalogAction {
 			System.out.println("剩余节点数量为：" + i);
 
 		}
-
+		papernodes += "]";
+		System.out.println("CatalogAction : DeleteNode : " + papernodes);
 		return papernodes;
 	}
 
@@ -145,8 +148,8 @@ public class CatalogAction {
 
 		// 2.当前节点插入paper中
 		// insert into t_user(id, username) values(10, "hehehe");
-		String sql = "INSERT INTO paper(paperNickName, paperUserEmail, paperID, paperPID) VALUES(" + "'" + paperNickName
-				+ "', " + "'" + userEmail + "', '" + paperID + "', " + "'" + pid + "')";
+		String sql = "INSERT INTO paper(paperNickName, paperUserEmail, paperID, paperPID, paperIsDeleted) VALUES(" + "'" + paperNickName
+				+ "', " + "'" + userEmail + "', '" + paperID + "', " + "'" + pid + "' ,'0')";
 		System.out.println(sql);
 		int rS = dao.executeUpdate(sql);
 		if (rS > -1)
