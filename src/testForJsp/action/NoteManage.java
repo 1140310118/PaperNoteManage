@@ -86,9 +86,19 @@ public class NoteManage{
 		// 笔记的各种操作
 		// 包括        从磁盘中获得用户的所有笔记，新建笔记，删除笔记，修改笔记
 		paperNickName = rsa.getLastPaper(userEmail);
-		
 		FindLocationAction fla= new FindLocationAction();
 		paperURL = fla.findLocation(userEmail, paperNickName);
+		
+		String url = fla.findLocation(userEmail,paperNickName);
+		if (url=="" || url==null){
+			url = 1+fla.findLocation3(userEmail,paperNickName);
+		}else{
+			url=0+url;
+		}
+		paperURL=url;
+
+		System.out.println("NMA>> paperURL:"+paperURL);
+		System.out.println("NMA>> lastPaper:"+paperNickName);
 		paperID = fla.findIDbyName(userEmail, paperNickName);
 		return "success";
 	}

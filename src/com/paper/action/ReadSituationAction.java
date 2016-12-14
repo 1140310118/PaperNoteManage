@@ -66,6 +66,7 @@ public class ReadSituationAction {
 			while (rS.next()) {
 				lastReadPaper = rS.getString(1);
 				System.out.println("ReadSituationAction: lastReadPaper: " + lastReadPaper);
+				return lastReadPaper;
 			}
 		}
 

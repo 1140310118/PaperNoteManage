@@ -143,19 +143,38 @@
 <!-- 	</div> -->
 <!-- </div> -->
 
+<p id="paperURL_ID" style="display:none;"><s:property value="paperURL"/></p>
+<p id="paperID_ID" style="display:none;"><s:property value="paperID"/></p>
 
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 
 <script type="text/javascript">
+
+	
 	$(document).ready(function(){
 		init();
+		src_init();
 		dictSearch();
         addNote();
         modifyNote();
         deleteNote();
     });
+	function src_init(){
+		var url = $("#paperURL_ID").html();
+		var paperID = $("#paperID_ID").html();
+		//alert(url);
+		//alert(paperID);
+		if (url[0]=="0"){
+			var src="<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+url.substring(1,url.length);
+		}else{
+			var src=url.substring(1,url.length);
+		}
+		$("#paperArea").attr("src",src);
+		src="<%=basePath%>note?paperID="+paperID;
+		$("#noteArea").attr("src",src);
+	}
 	function init(){
 		var paperID = $("#paperID_ID").html();
 		$("#noteArea").attr("src","<%=basePath%>note?paperID="+paperID);
