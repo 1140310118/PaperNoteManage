@@ -108,8 +108,13 @@
 							paperNickName:treeNode.name,
 						},
 						function(url){
-							var src="<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+url;
+							if (url[0]=="0"){
+								var src="<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+url;
+							}else{
+								var src=url.substring(1,url.length);
+							}
 							$(window.parent.document).find("#paperArea").attr("src",src);
+							
 							src="<%=basePath%>note?paperID="+treeNode.id;
 							$(window.parent.document).find("#noteArea").attr("src",src);
 				});

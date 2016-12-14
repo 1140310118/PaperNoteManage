@@ -65,4 +65,25 @@ public class FindLocationAction {
 		System.out.println(paperID);
 		return paperID;
 	}
+
+	public String findLocation3(String userEmail, String paperNickName) throws SQLException {
+		String paperExteriorURL = "";
+		String sql = "SELECT paperExteriorURL FROM paper WHERE paperNickName = " + "'" + paperNickName + "' AND paperUserEmail = '" + userEmail + "'";
+		System.out.println(sql); 
+		ResultSet rS = dao.executeQuery(sql);
+		System.out.println(rS);
+		while (rS.next()) {
+			paperExteriorURL = rS.getString(1);
+		}
+		System.out.println(paperExteriorURL);
+		return paperExteriorURL;
+	}
+
+	public String findLocation4(String userEmail, String paperID) throws SQLException {
+		String paperNickName = findNamebyID(userEmail,paperID);
+		return str2ascii(paperNickName)+"/url";
+	}
+	private String str2ascii(String s){
+		return StringandACSII.showIntArray(StringandACSII.string2ASCII(s), "H");
+	}
 }

@@ -98,9 +98,15 @@ public class NoteManage{
 		String root = getWebrootPath(); 
 		paperWebFilePath = fla.findLocation2(userEmail, paperID);
 		paperNickName = fla.findNamebyID(userEmail, paperID);
-		String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
-		String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
-
+		String tmpPath="",con="";
+		if(paperWebFilePath=="" || paperWebFilePath==null){
+			paperWebFilePath = fla.findLocation4(userEmail, paperID);
+			tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+			con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+		}else{
+			tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+			con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+		}
 		System.out.println("FROM NM>> paperWebFilePath:"+paperWebFilePath);
 		//System.out.println("FROM NM>> "+tmpPath+" "+con);
 		// 获得所有笔记

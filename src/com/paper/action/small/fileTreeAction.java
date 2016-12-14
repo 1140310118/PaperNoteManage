@@ -170,6 +170,11 @@ public class fileTreeAction extends ActionSupport
 	public void getURLbyID() throws IOException, SQLException{
 		FindLocationAction fla = new FindLocationAction();
 		String url = fla.findLocation(userEmail,paperNickName);
+		if (url=="" || url==null){
+			url = 1+fla.findLocation3(userEmail,paperNickName);
+		}else{
+			url=0+url;
+		}
 		System.out.println("fTA>> url:"+url);
 		
 		// for 阅读时间线
