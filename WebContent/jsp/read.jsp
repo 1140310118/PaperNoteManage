@@ -151,8 +151,6 @@
 <br><br><br><br><br><br><br><br><br>
 
 <script type="text/javascript">
-
-	
 	$(document).ready(function(){
 		init();
 		src_init();

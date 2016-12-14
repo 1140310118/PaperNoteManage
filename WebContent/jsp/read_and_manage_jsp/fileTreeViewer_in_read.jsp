@@ -140,9 +140,20 @@
 			//alert(s);
 			zNodes = eval("["+s+"]");
 		}
+		
+		function expand(){
+			var zTree=$.fn.zTree.getZTreeObj("treeDemo");
+			var id = $(window.parent.document).find("#paperID_ID").html()
+	        var node=zTree.getNodeByParam("id",id,null);
+			alert(node.id);
+	        //zTree.expandNode(node,true,true,true);
+	        zTree.expandAll(true);
+	       
+		}
 		$(document).ready(function(){
 			getZNodes();
 			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			
 			setUndropable();
 			setCheck();
 			$("#delete_option").bind("change",setCheck);
@@ -152,7 +163,10 @@
 			$("#download_option").change(function(){
 				downloadEnable = $("#download_option").attr("checked");
 			});
+			expand();
 		});
+		
+		
 
 	</SCRIPT>
 </head>
