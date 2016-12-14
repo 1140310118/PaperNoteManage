@@ -101,7 +101,7 @@
 			treeNode = zTree.addNodes(null, {id:(100 + newCount), pId:0, isParent:isParent, name:"new node" + (newCount++)});	
 		};
 		function zTreeOnClick(e,treeId,treeNode){
-			if(downloadEnable){
+			if(downloadEnable && treeNode.isParent==false){
 				//alert(treeNode.id);
 				$("#loading").show();
 				$.post("<%=basePath%>fileTreeView_download",

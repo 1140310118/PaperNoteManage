@@ -121,6 +121,7 @@
 </div>
 
 <div id="paperNickName_ID" style="display:none;"><s:property value="paperNickName"/></div>
+<div id="paperID_ID" style="display:none;"><s:property value="paperID"/></div>
 <div id="paperURL_ID" style="display:none;"><s:property value="paperURL"/></div>
 
 <!-- <div id="already_saved" style="display: none;z-index: 9999;position: absolute;left:80%">已经保存</div> -->
@@ -156,8 +157,8 @@
         deleteNote();
     });
 	function init(){
-		var paperNickName = $("#paperNickName_ID").html();
-		$("#noteArea").attr("src","<%=basePath%>note?paperNickName="+paperNickName);
+		var paperID = $("#paperID_ID").html();
+		$("#noteArea").attr("src","<%=basePath%>note?paperID="+paperID);
 		var paperURL = $("#paperURL_ID").html();
 		//alert("<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+paperURL);
 		$("#paperArea").attr("src","<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+paperURL);

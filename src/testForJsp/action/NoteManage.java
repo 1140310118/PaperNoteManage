@@ -86,8 +86,10 @@ public class NoteManage{
 		// 笔记的各种操作
 		// 包括        从磁盘中获得用户的所有笔记，新建笔记，删除笔记，修改笔记
 		paperNickName = rsa.getLastPaper(userEmail);
+		
 		FindLocationAction fla= new FindLocationAction();
 		paperURL = fla.findLocation(userEmail, paperNickName);
+		paperID = fla.findIDbyName(userEmail, paperNickName);
 		return "success";
 	}
 
@@ -95,10 +97,11 @@ public class NoteManage{
 		
 		String root = getWebrootPath(); 
 		paperWebFilePath = fla.findLocation2(userEmail, paperID);
+		paperNickName = fla.findNamebyID(userEmail, paperID);
 		String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
 		String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
 
-		System.out.println("FROM NM>> "+paperWebFilePath);
+		System.out.println("FROM NM>> paperWebFilePath:"+paperWebFilePath);
 		//System.out.println("FROM NM>> "+tmpPath+" "+con);
 		// 获得所有笔记
 		getAllExistedNotes(tmpPath,con);
@@ -154,7 +157,7 @@ public class NoteManage{
 	
 	public void newNote() throws IOException, SQLException{
 		String root = getWebrootPath(); 
-		paperWebFilePath = fla.findLocation(userEmail, paperNickName);
+		paperWebFilePath = fla.findLocation2(userEmail, paperID);
 		String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
 		String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
 		

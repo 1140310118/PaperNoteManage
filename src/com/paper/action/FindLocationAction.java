@@ -52,4 +52,17 @@ public class FindLocationAction {
 		System.out.println(paperNickName);
 		return paperNickName;
 	}
+
+	public String findIDbyName(String userEmail, String paperNickName) throws SQLException {
+		String paperID = "";
+		String sql = "SELECT paperID FROM paper WHERE paperNickName = " + "'" + paperNickName + "' AND paperUserEmail = '" + userEmail + "'";
+		System.out.println(sql); 
+		ResultSet rS = dao.executeQuery(sql);
+		System.out.println(rS);
+		while (rS.next()) {
+			paperID = rS.getString(1);
+		}
+		System.out.println(paperID);
+		return paperID;
+	}
 }

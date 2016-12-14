@@ -48,6 +48,7 @@
 	</div>
 </div>
 <div id="paperNickName_ID" style="display:none;"><s:property value="paperNickName"/></div>
+<div id="paperID_ID" style="display:none;"><s:property value="paperID"/></div>
 <script type="text/javascript">
 	$(document).ready(function(){
 		dictSearch();
@@ -101,8 +102,8 @@
     
 	function addNote(){
 		$("#addNoteButton").click(function(){
-			var paperNickName = $("#paperNickName_ID").html();
-			$.post("<%=basePath%>newNote?paperNickName="+paperNickName,
+			var paperID = $("#paperID_ID").html();
+			$.post("<%=basePath%>newNote?paperID="+paperID,
 			   		{
 						addNoteFlag : true
 					},
@@ -135,7 +136,8 @@
 	function _modifyNote(id){
 		var paperNickName = $("#paperNickName_ID").html();
 		//alert(paperNickName);
-		$.post("<%=basePath%>note?paperNickName="+paperNickName,
+		var paperID = $("#paperID_ID").html();
+		$.post("<%=basePath%>note?paperID="+paperID,
 		   		{
 				 	modifyNoteID: id.substring(5),
 					modifyNoteContent:$("#"+id+" textarea").val()
@@ -152,8 +154,8 @@
 		});
 	}
 	function _deleteNote(id){
-		var paperNickName = $("#paperNickName_ID").html();
-		$.post("<%=basePath%>note?paperNickName="+paperNickName,
+		var paperID = $("#paperID_ID").html();
+		$.post("<%=basePath%>note?paperID="+paperID,
 		   		{
 				 	deleteNoteID: id.substring(5)
 				},

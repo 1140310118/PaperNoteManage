@@ -111,7 +111,9 @@ public class treetozip {
 			
 			try {
 				System.out.println("FROM treetozip>> "+rootpath);
-				Z.filezip(rootpath+".zip",rootpath );
+				String rootpath2 =getWebrootPath()+"zip/papers";
+				Z.filezip(rootpath2+".zip",rootpath );
+				res = "zip/papers";
 				return res+".zip";
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
