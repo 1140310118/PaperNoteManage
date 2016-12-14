@@ -108,17 +108,25 @@ public class NoteManage{
 			con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
 		}
 		System.out.println("FROM NM>> paperWebFilePath:"+paperWebFilePath);
+		
+		
+		//路径
+		String paperPath = fla.findLocation(userEmail, paperNickName);
+		if(paperPath!="" || paperPath==null){
+			paperPath = fla.findLocation4(userEmail, paperID);
+		}
+		paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+		
 		//System.out.println("FROM NM>> "+tmpPath+" "+con);
 		// 获得所有笔记
 		getAllExistedNotes(tmpPath,con);
+		
 		
 		// 删除笔记
 		if(deleteNoteID!=null){
 			
 			FindLocationAction fla = new FindLocationAction();
 			addlog ag = new addlog();
-			String paperPath = fla.findLocation(userEmail, paperNickName);
-			paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
 			String path = getWebrootPath() + paperPath;
 			System.out.println("FROM FLA>> "+path+" "+paperPath);
 			ag.adddeletelog(path,deleteNoteID);
@@ -128,12 +136,11 @@ public class NoteManage{
 		}
 		
 		// 修改笔记
+		System.out.println("修改笔记>> "+modifyNoteID);
 		if(modifyNoteID!=null){
 			
 			FindLocationAction fla = new FindLocationAction();
 			addlog ag = new addlog();
-			String paperPath = fla.findLocation(userEmail, paperNickName);
-			paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
 			String path = getWebrootPath() + paperPath;
 			System.out.println("FROM FLA>> "+path+" "+paperPath);
 			ag.addmonidfylog(path,modifyNoteID);
@@ -163,18 +170,30 @@ public class NoteManage{
 	
 	public void newNote() throws IOException, SQLException{
 		String root = getWebrootPath(); 
-		paperWebFilePath = fla.findLocation2(userEmail, paperID);
-		String tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
-		String con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+		paperNickName = fla.findNamebyID(userEmail, paperID);
+		String tmpPath="",con="";
+		if(paperWebFilePath=="" || paperWebFilePath==null){
+			paperWebFilePath = fla.findLocation4(userEmail, paperID);
+			tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+			con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+		}else{
+			tmpPath = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note";
+			con = root + paperWebFilePath.substring(0,paperWebFilePath.lastIndexOf('/')+1)+"note/note.config";
+		}
 		
 		// 新建笔记 
 		String addNoteID=addNoteFile(tmpPath,con);
 		
-
+		//路径
+		String paperPath = fla.findLocation(userEmail, paperNickName);
+		if(paperPath!="" || paperPath==null){
+			paperPath = fla.findLocation4(userEmail, paperID);
+		}
+		paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
+		
+		
 		FindLocationAction fla = new FindLocationAction();
 		addlog ag = new addlog();
-		String paperPath = fla.findLocation(userEmail, paperNickName);
-		paperPath  = paperPath.substring(0,paperPath.lastIndexOf("/"));
 		String path = getWebrootPath() + paperPath;
 		System.out.println("FROM FLA>> "+path+" "+paperPath);
 		ag.addcreatelog(path,addNoteID);

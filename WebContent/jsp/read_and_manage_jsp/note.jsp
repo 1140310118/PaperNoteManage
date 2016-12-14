@@ -108,6 +108,7 @@
 						addNoteFlag : true
 					},
 			   		function(newNoteID){
+						//alert(newNoteID);
 						newNoteID=newNoteID.substring(0,newNoteID.length-2);
 						$("#noteArea").append("");
 						$("#noteArea").append("<div id=\"note_"+newNoteID+"\">"
@@ -137,6 +138,7 @@
 		var paperNickName = $("#paperNickName_ID").html();
 		//alert(paperNickName);
 		var paperID = $("#paperID_ID").html();
+		//alert( id.substring(5));
 		$.post("<%=basePath%>note?paperID="+paperID,
 		   		{
 				 	modifyNoteID: id.substring(5),

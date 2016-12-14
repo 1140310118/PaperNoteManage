@@ -78,10 +78,9 @@ public class FindLocationAction {
 		System.out.println(paperExteriorURL);
 		return paperExteriorURL;
 	}
-
 	public String findLocation4(String userEmail, String paperID) throws SQLException {
 		String paperNickName = findNamebyID(userEmail,paperID);
-		return str2ascii(paperNickName)+"/url";
+		return userEmail+"/"+str2ascii(paperNickName)+"/url";
 	}
 	private String str2ascii(String s){
 		return StringandACSII.showIntArray(StringandACSII.string2ASCII(s), "H");

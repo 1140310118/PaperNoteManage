@@ -109,7 +109,7 @@
 						},
 						function(url){
 							if (url[0]=="0"){
-								var src="<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+url;
+								var src="<%=basePath%>jsp/read_and_manage_lib/pdfjs-1.5.188-dist/web/viewer.html?file=<%=basePath%>file/"+url.substring(1,url.length);
 							}else{
 								var src=url.substring(1,url.length);
 							}
