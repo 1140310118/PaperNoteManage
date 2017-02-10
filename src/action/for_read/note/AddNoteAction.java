@@ -1,4 +1,4 @@
-package com.paper.action.for_read.note;
+package action.for_read.note;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

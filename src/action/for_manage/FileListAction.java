@@ -1,4 +1,4 @@
-package com.paper.action.for_manage;
+package action.for_manage;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -8,12 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
-import com.paper.paperManage_tmp.BookOper;
 
 import base.model.Paper;
 import method.general.FindLocationAction;
 import method.general.ReadSituationAction;
 import method.general.addlog;
+import tmp.BookOper;
 
 public class FileListAction extends ActionSupport
 {

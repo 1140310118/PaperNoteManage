@@ -1,4 +1,4 @@
-package com.paper.action.for_read.note;
+package action.for_read.note;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

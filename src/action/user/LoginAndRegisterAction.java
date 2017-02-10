@@ -1,4 +1,4 @@
-package com.paper.action.user;
+package action.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,22 +25,26 @@ public class LoginAndRegisterAction extends ActionSupport {
 
 	ActionContext actionContext = ActionContext.getContext();
 	Map<String, Object> session = actionContext.getSession();
-	private String relogin = "false"; //
+	private String relogin = "false";
 
 	public void login() throws SQLException, IOException {
-//		if (relogin!="false"){
-//			return logout();
-//		}
 		User _user = new User(email,password);
-		boolean isExisted = _user.isExisted();
-		if (isExisted){
-			session.put("USER_Nickname", _user.getNickname());
-			session.put("USER_Email", _user.getEmail());
+		String nickName = _user.isExisted();
+		if (nickName!=null){
+			session.put("USER_Nickname", nickName);
+			session.put("USER_Email", email);
 			sendJson("1");
+			System.out.println("action.user.java>> 登录密码正确。用户名："+ nickName);
 		}
 		else{
 			sendJson("");
+			System.out.println("action.user.java>> 登录密码错误。");
 		}
+	}
+	
+	public void logout(){
+		session.remove("USER_Nickname");
+		session.remove("USER_Email");
 	}
 	
 	public String excute(){
@@ -88,14 +92,6 @@ public class LoginAndRegisterAction extends ActionSupport {
 	    out.println(jsonString);  
 	    out.flush();  
 	    out.close();
-	}
-
-	public String logout() {
-		
-		session.remove("USER_Nickname");
-		session.remove("USER_Email"); 
-		System.out.println("退出成功");
-		return "logoutsuccess";
 	}
 
 	public String getNickName() {

@@ -8,6 +8,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>登录</title>
     <link href="<%=basePath%>jsp/login_and_register_lib/login.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<%=basePath %>jsp/ssslogin_and_register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=basePath %>jsp/login_and_register_lib/login.js" charset="utf-8"></script>
+    <script src="<%=basePath%>jsp/read_and_manage_lib/src/jquery.js"></script>
     <style type="text/css">
     .HINT{
 		background-color: #efefef;
@@ -21,46 +24,7 @@
 		opacity: 0.9;
 	}
 	</style>
-    <script type="text/javascript">
-    	//http://www.jb51.net/article/64974.htm
-	    $(document).ready(function(){
-	    	if ($.cookie("rmbUser")=="true"){
-	    		$("#ck_rmbUser").attr("checked",true);
-	    		$("#userEmail").val($.cookie("useEmail"));
-	    		$("#userPassword").val($cookie("password"));
-	    	}
-
-	    });
-
-	    // 记住用户名 密码
-	    function Save(){
-	    	// alert("something");
-	    	alert($("#ck_rmbUser").val());
-	    	// alert("something2");
-	    	/////////////////此处有bug
-	    	if($("#ck_rmbUser").attr("checked")){
-	    		var str_userEmail = $("#userEmail").val();
-	    		var str_password  = $("#userPassword").val();
-	    		$.cookie("rmbUser","true",{expires:7});
-	    		//存储一个带7天期限的cookie
-	    		$.cookie("userEmail",str_userEmail,{expires:7});
-	    		$.cookie("password" ,str_password ,{expires:7});
-
-	    		alert("dsfsdf");
-	    	}
-	    	else{
-				$.cookie("rmbUser", "false", { expire: -1 });
-				$.cookie("userEmail", "", { expires: -1 });
-				$.cookie("password", "", { expires: -1 });
-	    	}
-	    }
-    </script>
-    
-
   </head>
-	  <script type="text/javascript" src="<%=basePath%>jsp/login_and_register_lib/jquery-1.8.2.min.js" charset="utf-8"></script>
-	  <script type="text/javascript" src="<%=basePath%>jsp/login_and_register_lib/jquery.cookie.js" charset="utf-8"></script>
-	  <script type="text/javascript" src="<%=basePath%>jsp/login_and_register_lib/login.js" charset="utf-8"></script>
     
 	<body style="padding-top : 30px;">
 	<div class="Head">
@@ -105,9 +69,9 @@
 
 	            <div class="inpB">
 	                <div>
-	                    <button name="action:login" type="submit" class="Button">
-	                     	 登录
-	                  </button>
+	                    <button id="loginButton" class="Button">
+	                     	 登 录
+	                	</button>
 	                </div>
 	            </div>
 	              
@@ -130,7 +94,7 @@
 	</div>
 	</div>
 	<script type="text/javascript">
-    $("#registerButton").click(function(event){
+    $("#loginButton").click(function(event){
         event.preventDefault();
         var userEmail=$("#userEmail").val();
         var userPassword=$("#userPassword").val();
@@ -153,6 +117,8 @@
 	  	   		function(success_flag){
 	  				if (success_flag.indexOf("1")!=-1){
 	  			   		window.location.href="<%=basePath%>manage";
+	  			  	}else{
+	  			  		alert("用户名或者密码错误");
 	  			  	}
 	  			}
 		);

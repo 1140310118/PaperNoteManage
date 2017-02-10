@@ -1,4 +1,4 @@
-package com.paper.action.tree;
+package action.tree;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,6 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.paper.paperManage_tmp.translate;
 
 import method.general.CatalogAction;
 import method.general.FindLocationAction;
@@ -21,6 +20,7 @@ import method.general.ReadSituationAction;
 import method.general.Readtime;
 import method.general.addlog;
 import method.general.treetozip;
+import tmp.translate;
 
 
 public class fileTreeAction extends ActionSupport

@@ -7,30 +7,25 @@
 	<constant name="struts.i18n.reload" value="true" />
 	
 	<package name="user" extends="struts-default">
-		<action name="login" class="com.paper.action.user.LoginAndRegisterAction"		method="excute">
+		<action name="login" class="action.user.LoginAndRegisterAction"		method="excute">
 			<result name="success">/jsp/user/login.jsp</result>
 		</action>
-		
-		<action name="login_result" class="com.paper.action.user.LoginAndRegisterAction" method="login"/>
+		<action name="login_result" class="action.user.LoginAndRegisterAction" method="login"/>
+		<action name="logout" class="action.user.LoginAndRegisterAction" method="logout"/>
 					
-		<action name="register" class="com.paper.action.user.LoginAndRegisterAction"	method="excute">
+		<action name="register" class="action.user.LoginAndRegisterAction"	method="excute">
 			<result name="success">/jsp/user/register.jsp</result>
 		</action>
-		
-		<action name="register_result" class="com.paper.action.user.LoginAndRegisterAction"	method="register">
+		<action name="register_result" class="action.user.LoginAndRegisterAction"	method="register">
 			<result name="registersuccess">/jsp/user/register_success.jsp</result>
 			<result name="registererror">  /jsp/user/register_error.jsp  </result>
 		</action>
+		<action name="register_isEmailExisted" class="action.user.LoginAndRegisterAction" method="isEmailExisted"/>
 		
-		<action name="register_isEmailExisted" class="com.paper.action.user.LoginAndRegisterAction" method="isEmailExisted"/>
-		
-		<action name="logout" class="com.paper.action.user.LoginAndRegisterAction"		method="logout">
-			<result name="logoutsuccess">/jsp/login.jsp</result>
-		</action>
 	</package>
 	
 	<package name="manage" extends="struts-default">
-		<action name="manage" class="com.paper.action.for_manage.manageAction" method="excute">
+		<action name="manage" class="action.for_manage.manageAction" method="excute">
 			<result name="success">/jsp/manage.jsp</result>
 		</action>
 	</package>

@@ -1,4 +1,4 @@
-package com.paper.paperManage_tmp;
+package tmp;
 
 import java.sql.Connection;
 import java.sql.SQLException;

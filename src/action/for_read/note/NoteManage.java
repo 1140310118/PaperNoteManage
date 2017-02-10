@@ -1,4 +1,4 @@
-package com.paper.action.for_read.note;
+package action.for_read.note;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,12 +14,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.paper.paperManage_tmp.translate;
 
 import base.model.Note;
 import method.general.FindLocationAction;
 import method.general.ReadSituationAction;
 import method.general.addlog;
+import tmp.translate;
 
 public class NoteManage{
 	

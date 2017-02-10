@@ -1,4 +1,4 @@
-package com.paper.action.for_manage;
+package action.for_manage;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

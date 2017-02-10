@@ -48,13 +48,13 @@ public class User {
 		return sql;
 	}
 	
-	public boolean isExisted() throws SQLException{
+	public String isExisted() throws SQLException{
 		String sql=this.ToSelectSql();
 		ResultSet rS = this.dao.executeQuery(sql);
 		while (rS.next()) {
-			return true;
+			return rS.getString("nickname");
 		}
-		return false;
+		return null;
 	}
 	
 	public boolean isEmailExisted() throws SQLException{

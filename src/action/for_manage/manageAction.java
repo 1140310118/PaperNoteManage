@@ -1,4 +1,4 @@
-package com.paper.action.for_manage;
+package action.for_manage;
 
 import com.opensymphony.xwork2.ActionSupport;
 

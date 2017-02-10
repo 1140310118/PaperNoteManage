@@ -58,7 +58,7 @@
                 </ul>
             </nav>
              <div style="float: right;font-size: 14px;margin-right: 50px;">
-            	<celin id="userName"><s:property value="#session.USER_Nickname"/></celin> | <celin id="ID_logout"><a href="<%=basePath%>login?relogin=true">退出登录</a></celin>
+            	<celin id="userName"><s:property value="#session.USER_Nickname"/></celin> | <celin id="ID_logout"><a id="logout_a" style="cursor:pointer;">退出登录</a></celin>
             </div>
              <script type="text/javascript">
     	     	$(document).ready(function(){
@@ -70,6 +70,13 @@
 	    				$("#accordion").hide();
 	    				$("#footer").hide();
 	    	     	}
+    	     	});
+    	     	$("#logout_a").click(function(){
+    	     		$.post("<%=basePath%>logout",
+    	    	  	   		{},
+    	    	  	   		function(){}
+    	    		);
+    	     		window.location.href="<%=basePath%>login";
     	     	});
             </script> 
         </div>
