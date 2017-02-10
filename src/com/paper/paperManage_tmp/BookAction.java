@@ -1,12 +1,12 @@
 package com.paper.paperManage_tmp;
 
-import com.paper.model.Book;
-
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
+import base.model.Book;
 
 public class BookAction extends ActionSupport {
 	private String type; 

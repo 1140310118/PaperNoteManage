@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import com.paper.model.Paper;
+
+import base.model.Paper;
 
 
 public class BookOper {
 	public List<Paper> selectByType(String type) {
 	
-		Connection conn = com.paper.db.DbConn.getConn();
+		Connection conn = base.db.DbConn.getConn();
 		System.out.println(conn);
 		java.sql.PreparedStatement pstmt = null;
 
@@ -69,7 +70,7 @@ public class BookOper {
 	
 	public List<Paper> selectByid(String type) {
 		
-		Connection conn = com.paper.db.DbConn.getConn();
+		Connection conn = base.db.DbConn.getConn();
 		java.sql.PreparedStatement pstmt = null;
 
 		java.sql.ResultSet rs = null;
@@ -157,7 +158,7 @@ public class BookOper {
 	public int deleteByType(String paperNickName,String paperUserEmail){
 	int jg=0;
 	//Connection conn = DB.createConn();
-	Connection conn = com.paper.db.DbConn.getConn();
+	Connection conn = base.db.DbConn.getConn();
 	java.sql.PreparedStatement pstmt = null;
 	//java.sql.ResultSet rs = null;
 	try{

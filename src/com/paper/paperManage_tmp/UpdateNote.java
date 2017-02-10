@@ -8,7 +8,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateNote extends ActionSupport {
 	String update=null;
-	Connection conn = com.paper.db.DbConn.getConn();
+	Connection conn = base.db.DbConn.getConn();
 
 	public String getType() {
 		return update;
